@@ -9,3 +9,5 @@ coverage/
 playwright-report/
 test-results/
 .DS_Store
+static/capability-probe/dist/
+.openclaw-audit.json

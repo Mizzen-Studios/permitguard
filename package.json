@@ -10,6 +10,20 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "check": "node --check static/permit-panel/app.js",
-    "test:ui": "node static/permit-panel/smoke.cjs"
+    "test:ui": "node static/permit-panel/smoke.cjs",
+    "build:probe": "node src/forge/build-probe.cjs"
+  },
+  "dependencies": {
+    "@forge/api": "^8.5.0",
+    "@forge/bridge": "^7.3.0",
+    "@forge/resolver": "^2.0.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "overrides": {
+    "prosemirror-view": "1.42.9",
+    "glob": "14.0.6",
+    "minimatch": "11.0.8"
   }
 }
