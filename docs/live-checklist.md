@@ -1,6 +1,6 @@
 # Demo-site live acceptance checklist
 
-Status at 15 November 2026: **BLOCKED — awaiting owner-provided Forge API token**. No demo site URL exists in this report. Documentation feasibility is not tenant acceptance. Read platform-feasibility.md for the Connect-only delete endpoint issue.
+Status at 15 November 2026: demo site **active** at https://one-atlas-xitr.atlassian.net (expires 2027-02-13); Assets workspace discovery HTTP 200, 1 workspace. App registration/deployment **BLOCKED by overage-billing agreement**, declined under the zero-cost rule. Interactive checks also require browser sign-in. See [dated check results](demo-site-checks-2026-11-15.md). Read platform-feasibility.md for the Connect-only delete endpoint issue.
 
 ## Credential and site handoff
 
@@ -12,7 +12,7 @@ Status at 15 November 2026: **BLOCKED — awaiting owner-provided Forge API toke
 
 ## Report early: capability matrix
 
-All rows currently **NOT RUN / token blocked**. Replace each with PASS, PARTIAL or BLOCKED and dated evidence on the actual site.
+Refer to the dated results above: Assets workspace discovery is PARTIAL; app-level live checks remain blocked by registration/billing terms. This checklist defines remaining acceptance, not completed features.
 
 | Capability | Minimum live proof |
 | --- | --- |
