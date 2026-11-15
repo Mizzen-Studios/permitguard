@@ -1,6 +1,6 @@
 # Private credential and demo-site handoff
 
-Status: BLOCKED pending token supplied by Olly. Account email: ollymcbride4@gmail.com (Google sign-in). Do not request a Google password.
+Status: BLOCKED pending token supplied by Olly. Use the account email supplied privately by the owner (Google sign-in). Do not request a Google password.
 
 1. Receive owner-supplied Atlassian API token privately, never in project Discord. Do not include token in logs, commits, screenshots or progress messages.
 2. Store FORGE_EMAIL and FORGE_API_TOKEN in a private environment file outside every repository, using the OpenClaw private secrets area where available; chmod 600. Only variable names belong in documentation. Do not persist actual values in shell command history.

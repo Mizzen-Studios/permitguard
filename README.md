@@ -4,6 +4,14 @@ Human-confirmed lockout/tagout (LOTO) permit **decision support** for Jira work 
 
 **Scaffold in development — not deployed or ready for operational use.** The site's own permit procedure remains the authority. This app does not establish that equipment is physically safe.
 
+## Local scaffold
+
+Requires Node 22+. Run `npm test` (12 pure-domain tests) and `npm run check`. Open `static/permit-panel/index.html` for the dependency-free local tablet sample. Optional `npm run test:ui` requires a locally available Playwright installation and Chromium; it checks the simulated judge path and 1024/768/520/360 widths. No Playwright or browser is bundled as an app runtime dependency.
+
+The domain and UI are deliberately separate at this stage: client-side demo controls are not authorization. Server authentication, atomic persistence, trusted evidence validation and full site-wide shared-equipment lock queries are still required. Project boundaries must not hide another crew's lock.
+
+See [platform feasibility](docs/platform-feasibility.md), [live acceptance checklist](docs/live-checklist.md), and the draft admin-enabled [planning-agent contract](skill.md). There is deliberately no deployable manifest or fake app ID yet: minimum modules/scopes will be added with their handlers and validated by Forge, not declared as implemented features.
+
 ## Planned experience
 Plan → Lock → Verify → Active → Release → Closed. Select equipment and isolation points from Jira Assets, with a built-in equipment register fallback. Workers record personal locks; named humans verify. A remaining lock from another crew blocks release. Agent-requested activations remain PENDING until an assigned verifier confirms at the equipment.
 
@@ -15,7 +23,7 @@ Judges are expected to install as site administrators on their own Atlassian sit
 The local frontend and pure domain tests are scaffolds, not proof of Forge permissions, physical isolation, real-time concurrency, camera access, or workflow enforcement. Setup and verification instructions will be added alongside working implementations.
 
 ## Preview modules and uninstall caution
-Planned Preview modules: jira:workflowValidator and rovo:mcp. Validator lifecycle and fail-closed-after-uninstall behavior must be verified before use. The app must provide administrators with list/disable/delete controls for its own transition rules and require rule cleanup before uninstall. The panel Start action is the non-admin fallback; it cannot install workflow rules.
+Planned Preview modules: jira:workflowValidator and rovo:mcp. Official docs warn that expression validators fail closed after uninstall. Forge list/disable is documented, but rule deletion currently remains documented Connect-only: **automatic delete is unresolved**, with admin manual removal as a recovery path. Validator lifecycle must be tested on a disposable workflow before use. The app must provide administrators with list/disable/delete controls for its own transition rules and require rule cleanup before uninstall. The panel Start action is the non-admin fallback; it cannot install workflow rules.
 
 ## Scopes and footprint
 No Forge manifest or scopes are enabled yet. The exact manifest scope list and per-scope justification will be recorded before deployment; intended access is limited to permits, equipment/isolation points, selected work-item permit state, own workflow rules, and an admin-selected restricted Confluence register. No graph connector, Teamwork Graph, external runtime APIs, or egress.
