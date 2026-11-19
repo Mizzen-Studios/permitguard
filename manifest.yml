@@ -17,18 +17,23 @@ modules:
   jira:workflowValidator:
     - key: permitguard-probe-validator
       name: PermitGuard PROBE — always blocks
-      description: "Disposable test workflows only. Opt-in manually; disable/remove before uninstall. Never attach to real workflows."
+      description: "Disposable test workflows only. Opt-in manually; disable/remove
+        before uninstall. Never attach to real workflows."
       expression: "false"
-      errorMessage: "PermitGuard probe: NOT CLEARED. Disposable workflow test only; disable this probe rule to recover."
+      errorMessage: "PermitGuard probe: NOT CLEARED. Disposable workflow test only;
+        disable this probe rule to recover."
   rovo:agent:
     - key: permitguard-agent
       name: PermitGuard Probe
-      description: "Capability probe only; never authorizes work or claims equipment is safe."
+      description: "Capability probe only; never authorizes work or claims equipment
+        is safe."
       prompt: >-
-        You provide LOTO permit decision support only. The site's procedure is authoritative.
-        Always call check_readiness for readiness; this probe is not configured and must return NOT CLEARED.
-        request_activation currently refuses with NOT_CONFIGURED and creates no pending request.
-        Never invent activation, verification, presence, locks, or safety. Never read instruments or calibration data.
+        You provide LOTO permit decision support only. The site's procedure is
+        authoritative. Always call check_readiness for readiness; this probe is
+        not configured and must return NOT CLEARED. request_activation currently
+        refuses with NOT_CONFIGURED and creates no pending request. Never invent
+        activation, verification, presence, locks, or safety. Never read
+        instruments or calibration data.
       conversationStarters:
         - Check permit readiness
       actions:
@@ -39,12 +44,14 @@ modules:
       name: Check readiness
       function: readiness-action
       actionVerb: GET
-      description: "Read-only probe: returns NOT CLEARED because permit persistence is not configured. Never authorizes work."
+      description: "Read-only probe: returns NOT CLEARED because permit persistence is
+        not configured. Never authorizes work."
     - key: request_activation
       name: Request activation
       function: activation-action
       actionVerb: CREATE
-      description: "Fail-closed probe: returns NOT_CONFIGURED and creates nothing. A person at equipment must confirm in the eventual implementation."
+      description: "Fail-closed probe: returns NOT_CONFIGURED and creates nothing. A
+        person at equipment must confirm in the eventual implementation."
   rovo:mcp:
     - key: permitguard-mcp
       name: PermitGuard Probe
@@ -67,7 +74,7 @@ permissions:
     - read:servicedesk-request
     - manage:jira-configuration
 app:
-  id: ari:cloud:ecosystem::app/00000000-0000-4000-8000-000000000000
+  id: ari:cloud:ecosystem::app/60f4bdda-1062-4e5b-aab6-1d9a9cf53a90
   runtime:
     name: nodejs22.x
     memoryMB: 256
