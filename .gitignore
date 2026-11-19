@@ -11,3 +11,4 @@ test-results/
 .DS_Store
 static/capability-probe/dist/
 .openclaw-audit.json
+static/permit-app/dist/
