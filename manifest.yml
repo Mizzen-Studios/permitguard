@@ -78,9 +78,6 @@ modules:
     tools:
     - check_readiness
     - request_activation
-  webtrigger:
-  - key: permitguard-maintenance
-    function: maintenance
   macro:
   - key: permitguard-lockboard
     title: PermitGuard lock-board snapshot
@@ -89,8 +86,6 @@ modules:
       function: probe-resolver
     description: PermitGuard lock-board snapshot setup; no live safety claims.
   function:
-  - key: maintenance
-    handler: forge/maintenance.handler
   - key: probe-resolver
     handler: forge/index.handler
   - key: readiness-action

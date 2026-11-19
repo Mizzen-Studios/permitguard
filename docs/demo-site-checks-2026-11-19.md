@@ -42,3 +42,11 @@ See browser-handoff.md for exact clicks. No browser acceptance was performed, pe
 ## Cost / artifacts
 
 No SQL provisioned or invoked (0 SQL calls; compute measurement not applicable), no scheduled triggers, LLM API, Containers, paid service or external fetch permission. Conditional writes are batched and logs minimal. Free allowance is not a hard spending cap; monitor usage before repeating demos. Retained synthetic artifacts are explicitly documented in README. No Marketplace publication, promotion or Devpost submission.
+
+## Final deployment and diagnostic retirement
+
+- Development deployment **5.1.0** completed successfully after removing the diagnostic webtrigger and its function registration from manifest.yml. Forge lint found no issues. Jira and Confluence installations both report up-to-date major version 5.
+- The temporary webtrigger URL was deleted successfully. A subsequent unauthenticated HTTP request returned **404**; the deployed manifest exposes no maintenance webtrigger. The source-only diagnostic helper is retained for audit, not registered as an executable module.
+- Final regression: **69/69 backend/integration tests**, **7/7 UI contract tests**, and connected UI build passed.
+- Tracked-source and final UI-artifact scan for privately loaded credential/debug-key values passed; no values printed. Final local UI artifact SHA-256: app.js 8b07c044689d9c2c5d4e2d9006a57b9f297c7727855a95629b29b6a0f9490b77; index.html 532e4f6c5aa5bcb1131bdfa7581881725bd0b362c07faef18b74ce015daa19f0; styles.css 571fcfec77153e860194be7c0ec1e7f9286d25ed730475c3bcc06c28c9332ba9.
+- Forge deployment receipt verifies packaging/deployment, not a byte-for-byte remote bundle readback or browser rendering. Browser acceptance remains explicitly unrun.
