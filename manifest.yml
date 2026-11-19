@@ -1,81 +1,150 @@
-# Capability probe only. Register a genuine app ID before deploy.
 modules:
   jira:issuePanel:
-    - key: permitguard-panel
-      resource: capability-probe
-      resolver:
-        function: probe-resolver
-      viewportSize: large
-      title: PermitGuard capability probe
-      icon: resource:capability-probe;icon.svg
+  - key: permitguard-panel
+    resource: permit-app
+    resolver:
+      function: probe-resolver
+    viewportSize: large
+    title: PermitGuard
+    icon: resource:capability-probe;icon.svg
   jira:adminPage:
-    - key: permitguard-admin
-      resource: capability-probe
-      resolver:
-        function: probe-resolver
-      title: PermitGuard capability probe
+  - key: permitguard-admin
+    resource: permit-app
+    resolver:
+      function: probe-resolver
+    title: PermitGuard
   jira:workflowValidator:
-    - key: permitguard-probe-validator
-      name: PermitGuard PROBE — always blocks
-      description: "Disposable test workflows only. Opt-in manually; disable/remove
-        before uninstall. Never attach to real workflows."
-      expression: "false"
-      errorMessage: "PermitGuard probe: NOT CLEARED. Disposable workflow test only;
-        disable this probe rule to recover."
+  - key: permitguard-start-validator
+    name: PermitGuard start work gate
+    description: Opt-in decision-support gate. List and disable before uninstall.
+      Project Warn-only is the install default.
+    function: gate-start
+  - key: permitguard-release-validator
+    name: PermitGuard release work gate
+    description: Opt-in decision-support gate. List and disable before uninstall.
+      Project Warn-only is the install default.
+    function: gate-release
   rovo:agent:
-    - key: permitguard-agent
-      name: PermitGuard Probe
-      description: "Capability probe only; never authorizes work or claims equipment
-        is safe."
-      prompt: >-
-        You provide LOTO permit decision support only. The site's procedure is
-        authoritative. Always call check_readiness for readiness; this probe is
-        not configured and must return NOT CLEARED. request_activation currently
-        refuses with NOT_CONFIGURED and creates no pending request. Never invent
-        activation, verification, presence, locks, or safety. Never read
-        instruments or calibration data.
-      conversationStarters:
-        - Check permit readiness
-      actions:
-        - check_readiness
-        - request_activation
+  - key: permitguard-agent
+    name: PermitGuard
+    description: LOTO permit decision support. Proposes activation; a named person
+      at equipment must confirm.
+    prompt: Provide LOTO permit decision support only. The site procedure remains
+      authoritative. Always call check_readiness; report NOT CLEARED and its blockers
+      verbatim. request_activation proposes PENDING only, assigned to a named verifier.
+      A human at equipment confirms using QR and tablet. Never invent clearance, locks,
+      verification, presence or activation. Never read instruments or calibration
+      data. Never claim QR proves presence. Do not bypass other crews' personal locks.
+    conversationStarters:
+    - Check permit readiness
+    actions:
+    - check_readiness
+    - request_activation
   action:
-    - key: check_readiness
-      name: Check readiness
-      function: readiness-action
-      actionVerb: GET
-      description: "Read-only probe: returns NOT CLEARED because permit persistence is
-        not configured. Never authorizes work."
-    - key: request_activation
-      name: Request activation
-      function: activation-action
-      actionVerb: CREATE
-      description: "Fail-closed probe: returns NOT_CONFIGURED and creates nothing. A
-        person at equipment must confirm in the eventual implementation."
+  - key: check_readiness
+    name: Check readiness
+    function: readiness-action
+    actionVerb: GET
+    description: Read current deterministic readiness and blockers. Decision support
+      only; never authorizes work.
+    inputs:
+      issueKey:
+        title: Jira work item key
+        type: string
+        required: true
+        description: Work item containing the PermitGuard permit. Caller access is
+          checked.
+  - key: request_activation
+    name: Request activation
+    function: activation-action
+    actionVerb: CREATE
+    description: Propose a PENDING activation assigned to a named verifier. Cannot
+      activate; the person at equipment must confirm on tablet.
+    inputs:
+      issueKey:
+        title: Jira work item key
+        type: string
+        required: true
+        description: Work item containing the PermitGuard permit. Caller access is
+          checked.
+      verifierId:
+        title: Named verifier account ID
+        type: string
+        required: true
+        description: Must already be a named human verifier on this permit.
   rovo:mcp:
-    - key: permitguard-mcp
-      name: PermitGuard Probe
-      tools:
-        - check_readiness
-        - request_activation
+  - key: permitguard-mcp
+    name: PermitGuard
+    tools:
+    - check_readiness
+    - request_activation
+  webtrigger:
+  - key: permitguard-maintenance
+    function: maintenance
+  macro:
+  - key: permitguard-lockboard
+    title: PermitGuard lock-board snapshot
+    resource: permit-app
+    resolver:
+      function: probe-resolver
+    description: PermitGuard lock-board snapshot setup; no live safety claims.
   function:
-    - key: probe-resolver
-      handler: forge/index.handler
-    - key: readiness-action
-      handler: forge/index.checkReadiness
-    - key: activation-action
-      handler: forge/index.requestActivation
+  - key: maintenance
+    handler: forge/maintenance.handler
+  - key: probe-resolver
+    handler: forge/index.handler
+  - key: readiness-action
+    handler: forge/index.checkReadiness
+  - key: activation-action
+    handler: forge/index.requestActivation
+  - key: gate-start
+    handler: forge/validator.start
+  - key: gate-release
+    handler: forge/validator.release
+  jira:entityProperty:
+  - key: permitguard-property
+    entityType: issue
+    propertyKey: permitguard.snapshot
+    values:
+    - path: state
+      type: string
+      searchAlias: permitguardState
+    - path: mode
+      type: string
+      searchAlias: permitguardMode
+    - path: updatedAt
+      type: date
+      searchAlias: permitguardUpdatedAt
 resources:
-  - key: capability-probe
-    path: static/capability-probe/dist
+- key: capability-probe
+  path: static/capability-probe/dist
+- key: permit-app
+  path: static/permit-app/dist
 permissions:
   scopes:
-    - read:jira-work
-    - read:servicedesk-request
-    - manage:jira-configuration
+  - read:jira-work
+  - read:cmdb-object:jira
+  - read:servicedesk-request
+  - manage:jira-configuration
+  - storage:app
+  - write:jira-work
+  - read:jira-user
+  - read:space:confluence
+  - read:space.permission:confluence
+  - read:page:confluence
+  - write:page:confluence
+  - read:cmdb-type:jira
 app:
   id: ari:cloud:ecosystem::app/60f4bdda-1062-4e5b-aab6-1d9a9cf53a90
   runtime:
     name: nodejs22.x
     memoryMB: 256
     architecture: arm64
+  storage:
+    entities:
+    - name: permitguard-site
+      attributes:
+        revision:
+          type: integer
+        data:
+          type: any

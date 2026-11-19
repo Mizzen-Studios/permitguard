@@ -1,0 +1,1 @@
+export const CONSENT_SCOPES = ["read:jira-work", "read:cmdb-object:jira", "read:servicedesk-request", "manage:jira-configuration", "storage:app", "write:jira-work", "read:jira-user", "read:space:confluence", "read:space.permission:confluence", "read:page:confluence", "write:page:confluence", "read:cmdb-type:jira"];

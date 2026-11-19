@@ -2,7 +2,7 @@
   "name": "permitguard",
   "version": "0.1.0",
   "private": true,
-  "description": "Local PermitGuard safety-domain and Custom UI scaffold; Forge integration pending",
+  "description": "Human-confirmed LOTO permit decision support for Atlassian Forge",
   "license": "MIT",
   "engines": {
     "node": ">=22"
@@ -11,11 +11,15 @@
     "test": "node --test tests/*.test.mjs",
     "check": "node --check static/permit-panel/app.js",
     "test:ui": "node static/permit-panel/smoke.cjs",
-    "build:probe": "node src/forge/build-probe.cjs"
+    "build:probe": "node src/forge/build-probe.cjs",
+    "build": "node src/forge/build-probe.cjs && node src/ui-build.cjs",
+    "test:contracts": "node --test static/permit-app/static.test.cjs"
   },
   "dependencies": {
     "@forge/api": "^8.5.0",
     "@forge/bridge": "^7.3.0",
+    "@forge/kvs": "^2.1.2",
+    "@forge/realtime": "^1.0.3",
     "@forge/resolver": "^2.0.2"
   },
   "devDependencies": {

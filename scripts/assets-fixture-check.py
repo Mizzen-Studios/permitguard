@@ -35,4 +35,16 @@ for name,label in [('Equipment','PG-REST-EQ-1'),('Isolation points','PG-REST-V-3
  obj=found[0] if found else call('POST',a+'/object/create',{'objectTypeId':tid,'attributes':[{'objectTypeAttributeId':str(attr['id']),'objectAttributeValues':[{'value':label}]}]})
  fetched=call('GET',a+'/object/'+str(obj['id']))
  objects.append({'type':name,'id':str(obj['id']),'key':fetched.get('objectKey'),'readback':fetched.get('label')==label})
-print(json.dumps({'workspaceId':w,'schemaId':sid,'schemaKey':'PGTEST','types':ids,'objects':objects,'enforceEnabled':False,'sampleLoaderCalled':False,'instrumentDataRead':False},indent=2))
+# Add only PermitGuard LOTO metadata, never operational telemetry.
+point_type=ids['Isolation points']
+attrs=call('GET',a+'/objecttype/'+point_type+'/attributes')
+fields=[('Equipment key',0,objects[0]['key']),('Energy type',0,'HYDRAULIC'),('Lock state',0,'ISOLATION_REQUIRED'),('High energy',2,False)]
+values=[]
+for name,kind,value in fields:
+ attr=next((x for x in attrs if x.get('name')==name),None)
+ if not attr:attr=call('POST',a+'/objecttypeattribute/'+point_type,{'name':name,'type':0,'defaultTypeId':kind})
+ values.append({'objectTypeAttributeId':str(attr['id']),'objectAttributeValues':[{'value':value}]})
+call('PUT',a+'/object/'+objects[1]['id'],{'objectTypeId':point_type,'attributes':values})
+point=call('GET',a+'/object/'+objects[1]['id'])
+metadata={x.get('objectTypeAttribute',{}).get('name'):x.get('objectAttributeValues',[{}])[0].get('value') for x in point['attributes'] if x.get('objectAttributeValues')}
+print(json.dumps({'isolationMetadata':metadata,'workspaceId':w,'schemaId':sid,'schemaKey':'PGTEST','types':ids,'objects':objects,'enforceEnabled':False,'sampleLoaderCalled':False,'instrumentDataRead':False},indent=2))

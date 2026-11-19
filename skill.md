@@ -1,22 +1,28 @@
-# PermitGuard planning-agent contract
+# PermitGuard planning-agent skill
 
-**ADMIN-ENABLED ONLY — draft interface, not a deployed MCP endpoint.**
+**ADMIN-ENABLED ONLY.** This file does not enable an integration. A site/org administrator must enable PermitGuard tools in Connected apps, and each external client must complete Atlassian OAuth consent. No anonymous readiness endpoint. No instruments/calibration queries, physical-safety inference or schedule-edit authority.
 
-A site/project administrator must enable and authorize this integration. No public unauthenticated endpoint is provided. Do not scrape Jira or infer physical safety. No instruments or calibration data may be requested.
+Modules: rovo:agent + action + Preview rovo:mcp. Atlassian-hosted MCP endpoint pattern: https://mcp.atlassian.com/forge/<registered-app-UUID>. Maintainer development app UUID: 60f4bdda-1062-4e5b-aab6-1d9a9cf53a90. Another site's separately registered clone uses its own UUID. Studio/custom-agent and external-client acceptance remain owner browser tests, not claimed passed.
 
-## check_readiness (read-only)
-Intended input: work-item identifier and permit identifier in the authorized project.
-Output contract: CLEARED or NOT_CLEARED, explicit reasons, permit revision, policy mode, observation timestamp. Missing/stale data or unavailable backing services returns NOT_CLEARED/unknown, never an inferred clearance. CLEARED means recorded prerequisites are satisfied, not that equipment is physically safe. Warn-only mode must remain visible.
+## check_readiness — GET / read-only
 
-If NOT_CLEARED, a planning agent may propose rescheduling a crew through its separately authorized planning workflow. PermitGuard does not grant permission to edit schedules or call external services. Preserve the blocking reason, such as “Crew B's lock L-07 is still on V-3”. Do not remove locks, override policy, or request release to resolve a schedule conflict.
+Input: {"issueKey":"PGSAMPLE-1"}. Caller identity comes from the trusted Forge principal; issue access is independently checked as that caller. No actor/project override inputs.
 
-## request_activation (human confirmation required)
-Intended input: permit identifier, expected revision, named verifier, proposal reason and idempotency key. The server must derive requester identity and project permissions from authenticated context, not agent-provided roles.
-Output: PENDING activation assigned to the named verifier, or denial with reasons. This tool MUST NOT activate work. Assigned verifier must scan the equipment QR and confirm on the tablet; high-energy requirements still require two distinct human verifiers. Keep the proposal and confirmation audit trail.
+Output: status "CLEARED" or "NOT CLEARED", reasons, phase, permitId, revision, policy, observedAt, operational:false. Missing authorization/unsupported invocation returns an explicit ERROR, never clearance. In Release, reasons report release blockers; otherwise this is activation-readiness support. CLEARED means recorded prerequisites satisfy the model, **not physical safety or permission to work**. Warn-only advisory transitionAllowed:true is not CLEARED.
 
-## Example planning exchange (illustrative, not live evidence)
-Agent: check_readiness for permit PG-DEMO-1.
-Tool: NOT_CLEARED — Crew B's lock L-07 is still on V-3.
-Agent: propose moving Crew A's work slot; ask the authorized scheduler to apply it. Do not claim the reschedule occurred without that tool's confirmed result.
+If NOT CLEARED, report the reason and propose rescheduling through a separately authorized scheduler. Do not remove locks or change policy to resolve a schedule conflict. A simulated sample reason can be: "Crew B (SIMULATED)'s lock L-07 is still on V-3". Private other-issue details can be redacted. Never invent a successful reschedule without that scheduler's receipt.
 
-Actual schemas, MCP registration, Rovo Studio compatibility and live verification will be published after the Forge demo-site checks. This file does not itself enable an integration.
+## request_activation — CREATE / proposal only
+
+Input: {"issueKey":"PGSAMPLE-1","verifierId":"<named human account ID>"}. The caller must be a permit participant and the verifier already named on the permit. It proposes PENDING activation; it does not activate, verify, or remove locks.
+
+The assigned human scans the equipment QR and confirms on the tablet. All personal locks and one/two-person point verification must already satisfy the model; advisory policy never bypasses this. The server records proposal/confirmation actors and timestamps in the audit trail. QR and explicit user attestation are not independent location proof.
+
+No confirm_activation tool is exposed to agents. No agent override. Do not blindly retry uncertain CREATE calls: inspect the permit/PENDING request first. No arbitrary idempotency-key or scheduling input is currently implemented. CREATE invocation from Rovo Automation triggers is not promised; use supported chat/Studio/MCP invocation.
+
+## Planning example — illustrative, not live evidence
+
+1. Planner calls check_readiness for PGSAMPLE-1 during Release.
+2. Tool reports NOT CLEARED with the simulated Crew B lock blocker.
+3. Planner proposes moving Crew A's slot through its separately authorized scheduling workflow, preserving the blocking reason.
+4. A human deals with locks through the site's procedure. The planner never treats a calendar change as isolation clearance.
