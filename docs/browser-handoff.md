@@ -1,15 +1,15 @@
 # Owner browser acceptance — 19 November 2026
 
-Development app installed on https://one-atlas-xitr.atlassian.net in Jira and Confluence. Browser-only acceptance was intentionally NOT run at the owner's request. Installation and CLI/API success do not prove rendering, user consent, device access, Studio or Realtime.
+Development app installed on https://one-atlas-xitr.atlassian.net in Jira and Confluence. Owner browser results at ~21:00 UK: PGSAMPLE-1 and issue panel rendered; Warn-only / FAIL_CLOSED and empty equipment were correct; no per-user consent prompt appeared; Rovo returned NOT CLEARED / NO_PERMIT. The sample loader was blocked by the prior site-admin permission bug. Remaining physical/device, Studio and Realtime acceptance is still unrun.
 
 ## First open
 
 1. Sign in as the site administrator on the demo site.
-2. Open https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-1 . From the issue's Apps / app-panel menu, choose **PermitGuard**. Accept the app's per-user access consent if Jira asks.
+2. Open https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-1 . Use the issue toolbar **View app actions → PermitGuard** (DEV badge). Accept the app's per-user access consent if Jira asks.
 3. The connected clipboard should show Warn-only / FAIL_CLOSED and no permit or equipment yet. If it cannot confirm state, use Refresh; do not treat a blank/stale view as clearance.
-4. Under **Project administration → Load a dedicated sample plant**, read and tick the confirmation, then Load confirmed sample. This creates six built-in sample equipment records and enables Enforce ONLY in PGSAMPLE. The provisioning script did not do this for you. Do not enable real-project gates as part of this test.
+4. For a server-verified Jira site administrator OR project administrator, **Project administration** is now expanded directly in the empty issue panel, before the planning form. **Load a dedicated sample plant** is also expanded. Read and tick the confirmation, then Load confirmed sample. This creates six built-in sample equipment records and enables Enforce ONLY in PGSAMPLE. The provisioning script did not do this for you. Do not enable real-project gates as part of this test.
 
-Admin page: https://one-atlas-xitr.atlassian.net/jira/settings/apps/60f4bdda-1062-4e5b-aab6-1d9a9cf53a90/0961c77d-9025-4a19-bf3e-10a64e3cb7ff . It lists declared scopes and uninstall footprint. Own-rule recovery is also exposed in issue-panel administration; server requires site-admin permission.
+Secondary entry points: `jira:adminPage` remains declared and `jira:projectSettingsPage` is now declared (it was absent before this fix). Both use the dedicated administration view with scopes/uninstall guidance; actual permit/project configuration lives in the issue panel, not an issue-less settings page. Do not rely on `/jira/settings/apps` or the previously supplied deep link: the owner observed 404. Business-space sidebar placement and page rendering still need signed-in UI verification; manifest validation/deployment is not rendering proof. Own-rule recovery remains available from issue-panel administration with server-verified site-admin permission.
 
 ## One-person judge path
 
@@ -35,7 +35,7 @@ Open the SAME work item / PermitGuard panel in two supported browsers. Record a 
 
 ## Rovo, Studio and external MCP
 
-- In Rovo Chat choose **PermitGuard**. Ask it to check PGSAMPLE-1, then request activation with a named verifier only when the permit is in Verify. It must call deterministic tools, never invent clearance or activate work.
+- In Rovo Chat choose **PermitGuard — Demo LOTO**. The current installed agent has been renamed to distinguish it from the other reported PermitGuard entry; the unidentified other agent was not deleted. Ask it to check PGSAMPLE-1, then request activation with a named verifier only when the permit is in Verify. It must call deterministic tools, never invent clearance or activate work.
 - In **Rovo Studio**, create/select a custom agent and add the installed PermitGuard check_readiness and request_activation tools. Repeat the same checks. Tool selection visibility and execution remain unverified until you try them.
 - For an external planner, a site/org admin must enable the app's tools in **Connected apps**. Use Atlassian OAuth consent and the skill.md contract. Request_activation only proposes PENDING; there is deliberately no agent confirmation endpoint.
 - During Release with seeded Crew B, check_readiness should return NOT CLEARED. A planning agent may propose rescheduling through its own authorized scheduler, never remove another crew's lock.
@@ -51,3 +51,9 @@ No archive destination is selected. Choose a restricted space as administrator; 
 In Confluence insert the **PermitGuard lock-board snapshot** macro, enter an authorized Jira work item key and Load authorized snapshot. It must print Snapshot at <time>, never imply live clearance. Snapshot is a derived observation, not workflow authority. Page publication and macro rendering have not been live-accepted.
 
 After creating a permit, test JQL **permitguardState = "ACTIVE"** and Automation reading issue.properties["permitguard.snapshot"]. Indexing/Automation outcomes have not been live-accepted. Dry-run reports the open work item's current start/release app-state decisions plus the nonauthoritative projection, not a site-wide report.
+
+## Re-test after the 21:00 blocker fix
+
+Reload the Jira work item (not only the in-panel Refresh) so the new Custom UI bundle loads. The account label should read **Olly**, not an account ID. While equipment is empty, sample setup is expanded above Plan. Tick confirmation and click **Load confirmed sample** once; expect six equipment and Enforce only in PGSAMPLE. No loader invocation was made during this fix, preserving the first-run test. Continue the one-person judge path above.
+
+The UI now says **Live updates connected** only when subscribed; that is connection state, not evidence of two-browser acceptance. Test-status notes are documentation-only. Initial authorization now fetches issue, permissions and display name concurrently; there is no artificial skeleton timer. Forge/Jira cold-start duration remains unmeasured after deployment.

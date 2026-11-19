@@ -26,7 +26,7 @@ modules:
     function: gate-release
   rovo:agent:
   - key: permitguard-agent
-    name: PermitGuard
+    name: PermitGuard — Demo LOTO
     description: LOTO permit decision support. Proposes activation; a named person
       at equipment must confirm.
     prompt: Provide LOTO permit decision support only. The site procedure remains
@@ -110,6 +110,12 @@ modules:
     - path: updatedAt
       type: date
       searchAlias: permitguardUpdatedAt
+  jira:projectSettingsPage:
+  - key: permitguard-project-settings
+    resource: permit-app
+    resolver:
+      function: probe-resolver
+    title: PermitGuard
 resources:
 - key: capability-probe
   path: static/capability-probe/dist

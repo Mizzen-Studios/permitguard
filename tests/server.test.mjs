@@ -70,8 +70,17 @@ test('Jira denies missing trusted context and inaccessible issue before storage'
  const route=(parts,...args)=>parts.reduce((s,p,i)=>s+p+(args[i]??''),''); let requests=0;
  const a=jiraAdapters({asUser:()=>({requestJira:async()=>{ requests++; return {ok:false,status:403}; }})},route);
  await assert.rejects(a.authorize({accountId:'alice'}),/trusted issue/); assert.equal(requests,0);
- await assert.rejects(a.authorize({accountId:'alice',extension:{issue:{id:'1'}}}),/403/); assert.equal(requests,1);
+ await assert.rejects(a.authorize({accountId:'alice',extension:{issue:{id:'1'}}}),/403/); assert.equal(requests,3);
 });
 test('realtime carries only invalidation and revision',async()=>{
  let args; await issueInvalidationPublisher(async(...a)=>{args=a;return {errors:[]};})({revision:4,secret:'no'}); assert.deepEqual(args,['permitguard',{invalidated:true,revision:4}]);
+});
+
+test('site administrator can configure a business-space project; ordinary viewer cannot',async()=>{
+ const route=(parts,...args)=>parts.reduce((s,p,i)=>s+p+(args[i]??''),'');
+ for(const siteAdmin of [true,false]) {
+  const api={asUser:()=>({requestJira:async path=>({ok:true,status:200,json:async()=>path.includes('mypermissions')?{permissions:{ADMINISTER:{havePermission:siteAdmin},ADMINISTER_PROJECTS:{havePermission:false},EDIT_ISSUES:{havePermission:true}}}:path.includes('myself')?{accountId:'alice',displayName:'Alice Admin'}:{id:'1',fields:{project:{id:'10'}}}})})};
+  const auth=await jiraAdapters(api,route).authorize({accountId:'alice',issueId:'1'});
+  assert.equal(auth.isProjectAdmin,siteAdmin);assert.equal(auth.displayName,'Alice Admin');assert.equal(auth.actorId,'alice');
+ }
 });

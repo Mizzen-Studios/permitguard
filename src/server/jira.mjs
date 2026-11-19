@@ -5,11 +5,14 @@ export function jiraAdapters(api, route) {
       const actorId = context.accountId;
       const issueId = context.extension?.issue?.id || context.issueId;
       if (typeof actorId !== 'string' || !actorId || typeof issueId !== 'string' || !/^[0-9]+$/.test(issueId)) throw new Error('Authenticated account and trusted issue context required');
-      const issue = await requireOk(await api.asUser().requestJira(route`/rest/api/3/issue/${issueId}?fields=project`), 'Issue');
+      const [issue, body, profile] = await Promise.all([
+        api.asUser().requestJira(route`/rest/api/3/issue/${issueId}?fields=project`).then(r => requireOk(r, 'Issue')),
+        api.asUser().requestJira(route`/rest/api/3/mypermissions?issueId=${issueId}&permissions=ADMINISTER_PROJECTS,ADMINISTER,EDIT_ISSUES`).then(r => requireOk(r, 'Permissions')),
+        api.asUser().requestJira(route`/rest/api/3/myself`).then(r => requireOk(r, 'Profile')).catch(() => null)
+      ]);
       const projectId = String(issue.fields?.project?.id || '');
       if (!projectId) throw new Error('Trusted issue project unavailable');
-      const body = await requireOk(await api.asUser().requestJira(route`/rest/api/3/mypermissions?issueId=${issueId}&permissions=ADMINISTER_PROJECTS,EDIT_ISSUES`), 'Permissions');
-      return { actorId, issueId: String(issue.id), projectId, isProjectAdmin: body.permissions?.ADMINISTER_PROJECTS?.havePermission === true, canEdit: body.permissions?.EDIT_ISSUES?.havePermission === true };
+      return { actorId, displayName: profile?.accountId === actorId ? profile.displayName : undefined, issueId: String(issue.id), projectId, isSiteAdmin: body.permissions?.ADMINISTER?.havePermission === true, isProjectAdmin: body.permissions?.ADMINISTER_PROJECTS?.havePermission === true || body.permissions?.ADMINISTER?.havePermission === true, canEdit: body.permissions?.EDIT_ISSUES?.havePermission === true };
     },
     async projectIsSample(projectId) {
       const project = await requireOk(await api.asUser().requestJira(route`/rest/api/3/project/${projectId}`), 'Sample project');
