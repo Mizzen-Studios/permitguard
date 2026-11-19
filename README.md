@@ -7,13 +7,13 @@ Human-confirmed lockout/tagout (LOTO) permit **decision support** for Jira work 
 - [Public MIT repository](https://github.com/Mizzen-Studios/permitguard)
 - [Development site](https://one-atlas-xitr.atlassian.net), provisioned 15 November 2026, expires 13 February 2027.
 - [Judge work item PGSAMPLE-1](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-1)
-- [Dated CLI/API evidence](docs/demo-site-checks-2026-11-19.md), [browser guide](docs/browser-handoff.md), [admin-enabled planning contract](skill.md).
+- [Dated CLI/API evidence](docs/demo-site-checks-2026-11-19.md), [browser guide](docs/browser-handoff.md), [site-admin fix and owner browser results](docs/admin-access-fix-2026-11-19.md), [admin-enabled planning contract](skill.md).
 
 ## Connected development features
 
 Plan → Lock → Verify → Active → Release → Closed in a Custom UI tablet clipboard. Workers apply their own personal locks to every point. Enforce requires bounded inline photo evidence. Named human verification requires two distinct people for high-energy points. Agent requests remain **PENDING** until the assigned person confirms using an actor/issue-bound QR challenge and explicit at-equipment attestation.
 
-Warn-only is the installation default. A project administrator opts into Enforce, with fail-closed default or explicit fail-open-with-alert. Advisory allowance never means CLEARED or activation authority. The confirmed six-equipment sample loader checks PGSAMPLE and its project-description marker, then enables Enforce **only in that sample project**. Provisioning did not load equipment or enable enforcement automatically.
+Warn-only is the installation default. A server-verified Jira site or project administrator opts into Enforce, with fail-closed default or explicit fail-open-with-alert. Advisory allowance never means CLEARED or activation authority. The confirmed six-equipment sample loader checks PGSAMPLE and its project-description marker, then enables Enforce **only in that sample project**. Provisioning did not load equipment or enable enforcement automatically.
 
 Assets imports use an explicitly configured workspace/schema/type pair. Exact type names Equipment and Isolation points and schema IDs are checked before object queries. AQL is generated server-side. Isolation point attributes: Equipment key (text), Energy type, Lock state, High energy (boolean). The demo default is PGTEST schema 16 / types 147 and 148; judges enter their own IDs. Import is bounded to six equipment and fewer than 100 objects/type; incomplete results fail explicitly. Changed/unavailable connected metadata blocks planning, activation and close. A built-in register is available, but does not detect physical changes. No instruments, calibration data, graph:connector or Teamwork Graph.
 

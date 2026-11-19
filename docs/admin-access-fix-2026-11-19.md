@@ -25,3 +25,9 @@ Live browser checks in both available managed profiles (capture and openclaw) re
 ## Regression
 
 70 backend/integration tests and 8 UI contract tests passed; build and diff checks passed. Includes site-admin-without-project-admin and ordinary-viewer denial regressions, plus expanded first-run setup and display-name/copy assertions. Source and built UI scans for private credential/debug-key values passed. No card, paid resource, promotion, Marketplace or Devpost action.
+
+## Deployment receipt
+
+Code commit **5e7aa121e1565dead452e1d138258bba0b1302e5** was pushed and remote parity verified. Final deployment **5.3.0** succeeded with Forge lint and manifest validation; Jira and Confluence upgrades both reported already at latest. A transient Agent not allowed validation failure on the preceding attempt was recovered by normal lint/deploy retry without disabling validation or changing permissions. No pending publication effect was resubmitted.
+
+Final local UI artifact SHA-256: app.js de0489f1d561c6197288f82a62e3b2db9170671b6c9e90072a7b98ddc8b1ecfa; index.html 532e4f6c5aa5bcb1131bdfa7581881725bd0b362c07faef18b74ce015daa19f0; styles.css 571fcfec77153e860194be7c0ec1e7f9286d25ed730475c3bcc06c28c9332ba9. Forge deployment receipt is not remote byte-for-byte artifact readback. Post-fix signed-in UI verification remains blocked as described above.
