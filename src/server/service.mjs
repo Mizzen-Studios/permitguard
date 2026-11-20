@@ -14,7 +14,7 @@ function sampleEquipment(projectId) {
 function projection(p, readiness, release, policy) {
   return { ...domain.permitEntityProperty(p), activeLockCount:p.locks.filter(l => !l.removedAt).length, mode: policy.mode, failMode: policy.failMode, start: { cleared: readiness.status === 'CLEARED' }, release: { cleared: release.status === 'CLEARED' }, dryRun: { startBlocked: readiness.status !== 'CLEARED', releaseBlocked: release.status !== 'CLEARED' }, authoritative: false };
 }
-export function createService({ store, authorize, projectIsSample, validatePeople, projectProperty, publish, readAssets, now = () => new Date().toISOString(), uuid = randomUUID }) {
+export function createService({ store, challenges, authorize, projectIsSample, validatePeople, projectProperty, publish, readAssets, now = () => new Date().toISOString(), uuid = randomUUID }) {
   need(store?.atomic === true, 'ATOMIC_STORAGE_UNAVAILABLE');
   return async function dispatch(operation, payload = {}, context = {}) {
     const auth = await authorize(context);
@@ -35,14 +35,22 @@ export function createService({ store, authorize, projectIsSample, validatePeopl
       } catch { registerAvailable = false; }
     }
     const all = () => Object.values(site.permits);
-    const readiness = () => permit ? domain.checkReadiness(permit, { policy: project.policy, registerAvailable }) : absent('NO_PERMIT');
+    const isolationReadiness = () => permit ? domain.checkReadiness({...permit,state:permit.state==='ACTIVE'?'VERIFY':permit.state}, { policy: project.policy, registerAvailable }) : absent('NO_PERMIT');
+    const readiness = () => {
+      if(!permit)return absent('NO_PERMIT');
+      const isolation=isolationReadiness();
+      const confirmed=permit.state==='ACTIVE'&&permit.activations.some(a=>a.status==='CONFIRMED'&&permit.verifierIds.includes(a.confirmedBy));
+      const reasons=[...isolation.reasons];
+      if(!confirmed)reasons.push({code:'HUMAN_ACTIVATION_REQUIRED',message:permit.activations.some(a=>a.status==='PENDING')?'Activation is pending. The assigned human must confirm at the equipment.':'Work is not active with confirmed named-human activation.'});
+      return {status:confirmed&&isolation.status==='CLEARED'?'CLEARED':'NOT CLEARED',reasons,transitionAllowed:confirmed&&isolation.status==='CLEARED',scope:'WORK_START',humanConfirmationRequired:!confirmed,operational:false};
+    };
     const release = () => {
       if (!permit) return absent('NO_PERMIT');
       const checked = domain.checkRelease(permit, all(), { registerAvailable });
       // Site-wide locks are checked, but details from unreadable other issues never leave server.
       return { ...checked, reasons: checked.reasons.map(r => r.code === 'LOCK_REMAINS' && !(project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner === actorId && r.crewId === 'Crew B (SIMULATED)') ? { code: 'LOCK_REMAINS', message: 'A personal lock remains on shared equipment; check the site lock board.' } : r) };
     };
-    const result = () => ({ permit, sampleCrewB: project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner===actorId ? { exists:true, active:site.permits['sample-crew-b:'+issueId].locks.some(l=>!l.removedAt) } : {exists:false}, policy: project.policy, equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus, source: project.source || 'BUILT_IN_REGISTER' }, realtime: { channel: 'permitguard' }, capabilities: { assetsImport: true }, actorId, actorDisplayName: auth.displayName || "Signed-in worker", isProjectAdmin: auth.isProjectAdmin === true, readiness: readiness(), release: release(), revision: row.revision,
+    const result = () => ({ permit, sampleCrewB: project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner===actorId ? { exists:true, active:site.permits['sample-crew-b:'+issueId].locks.some(l=>!l.removedAt), locks:site.permits['sample-crew-b:'+issueId].locks.filter(l=>!l.removedAt).map(l=>({...l,simulated:true,name:'Crew B (simulated)'})) } : {exists:false}, policy: project.policy, equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus, source: project.source || 'BUILT_IN_REGISTER' }, realtime: { channel: 'permitguard' }, capabilities: { assetsImport: true }, actorId, actorDisplayName: auth.displayName || "Signed-in worker", isProjectAdmin: auth.isProjectAdmin === true, readiness: readiness(), isolationReadiness: isolationReadiness(), release: release(), revision: row.revision,
       // Never leak another issue/project, actor or crew through the site-wide aggregate.
       board: permit ? permit.equipment.map(e => ({ equipmentId: e.id, activeLockCount: all().reduce((count, p) => count + p.locks.filter(l => !l.removedAt && p.equipment.some(pe => pe.id === e.id && pe.isolationPoints.some(pt => pt.id === l.pointId))).length, 0) })) : [],
       limitations: ['Decision support only; site procedure authoritative.', 'QR challenge and human attestation are not independent proof of physical presence.', ...(project.source === 'ASSETS' ? [registerAvailable ? 'Assets checked as connected user; metadata is not physical isolation evidence.' : 'Assets unavailable or changed: reimport required; no clearance authority.'] : ['Built-in register only; no Assets authority; external changes are not detected.'])] });
@@ -52,16 +60,17 @@ export function createService({ store, authorize, projectIsSample, validatePeopl
     }
     if (operation === 'list_equipment') return { equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus }, operational: false };
     if (operation === 'get_state') return result();
-    if (operation === 'check_readiness') return { ...(permit?.state==='RELEASE'?release():readiness()), phase:permit?.state || 'NO_PERMIT', permitId: permit?.id ?? null, revision:row.revision, policy:project.policy, observedAt:now(), operational:false };
+    if (operation === 'check_readiness') return { ...(permit?.state==='RELEASE'?release():readiness()), scope:permit?.state==='RELEASE'?'RELEASE':'WORK_START', activationPending:!!permit?.activations.some(a=>a.status==='PENDING'), releaseStatus:release().status, phase:permit?.state || 'NO_PERMIT', permitId: permit?.id ?? null, revision:row.revision, siteRevision:row.revision, permitRevision:permit?.revision??null, policy:project.policy, observedAt:now(), operational:false };
     need(auth.canEdit === true, 'EDIT_ISSUES permission required');
     if (payload.expectedRevision !== undefined) need(payload.expectedRevision === row.revision, 'CONFLICT: refresh before retrying');
     const at = now();
     const requirePermit = () => need(permit, 'Create permit first');
-    const consumeQR = target => {
-      const token = str(payload.challengeToken), c = site.challenges[token];
-      need(c && c.actorId === actorId && c.issueId === issueId && c.target === target && c.expires > Date.parse(at), 'Fresh actor/issue-bound QR challenge required');
-      need(payload.qrValue === 'permitguard:' + target && payload.confirmedAtEquipment === true, 'Scan correct QR and explicitly attest at equipment');
-      delete site.challenges[token];
+    const consumeQR = async target => {
+      need(payload.confirmedAtEquipment===true,'AT_EQUIPMENT_CONFIRMATION_REQUIRED');
+      need(payload.qrValue==='permitguard:'+target,'QR_VALUE_MISMATCH');
+      need(challenges,'QR_CHALLENGE_UNAVAILABLE');
+      const c=await challenges.get(actorId,issueId);
+      need(c&&c.token===payload.challengeToken&&c.actorId===actorId&&c.issueId===issueId&&c.target===target&&c.expires>Date.parse(at)&&c.revision===row.revision,'QR_CHALLENGE_EXPIRED');
     };
     const photo = () => {
       if (!payload.photoData) return null;
@@ -112,17 +121,17 @@ export function createService({ store, authorize, projectIsSample, validatePeopl
         requirePermit(); const target = str(payload.target);
         need(permit.verifierIds.includes(actorId), 'Named verifier required');
         need(permit.equipment.some(e => e.id === target || e.isolationPoints.some(p => p.id === target)), 'Unknown QR target');
-        for (const [k,c] of Object.entries(site.challenges)) if (c.expires <= Date.parse(at) || (c.actorId === actorId && c.issueId === issueId)) delete site.challenges[k];
-        need(Object.keys(site.challenges).length < 100, 'CHALLENGE_CAPACITY_REACHED');
-        const challengeToken = uuid(); site.challenges[challengeToken] = { actorId, issueId, target, expires: Date.parse(at) + 120000 };
-        await store.commit(row.revision, site); return { challengeToken, qrValue: 'permitguard:' + target, expiresAt: new Date(Date.parse(at) + 120000).toISOString(), physicalPresenceProven: false };
+        need(challenges,'QR_CHALLENGE_UNAVAILABLE');
+        const challengeToken=uuid(),expires=Date.parse(at)+120000;
+        await challenges.put({token:challengeToken,actorId,issueId,target,revision:row.revision,expires});
+        return {challengeToken,qrValue:'permitguard:'+target,expiresAt:new Date(expires).toISOString(),revision:row.revision,physicalPresenceProven:false};
       }
       case 'begin_lock': requirePermit(); permit = domain.beginLocking(permit, actorId, at); break;
       case 'apply_lock': requirePermit(); permit = domain.applyLock(permit, { pointId: str(payload.pointId), lockId: str(payload.lockId), actorId, name: auth.displayName || actorId, at, photoRef: photo() }, project.policy); break;
       case 'begin_verify': requirePermit(); permit = domain.beginVerification(permit, actorId, at, project.policy); break;
-      case 'verify_point': requirePermit(); consumeQR(str(payload.pointId)); permit = domain.verifyPoint(permit, { pointId: payload.pointId, actorId, at, qrPointId: payload.pointId, confirmedAtEquipment: true }); break;
+      case 'verify_point': requirePermit(); await consumeQR(str(payload.pointId)); permit = domain.verifyPoint(permit, { pointId: payload.pointId, actorId, at, qrPointId: payload.pointId, confirmedAtEquipment: true }); break;
       case 'request_activation': requirePermit(); need(permit.workers.includes(actorId) || permit.verifierIds.includes(actorId), 'Permit participant required'); permit = domain.requestActivation(permit, { actorId, verifierId: str(payload.verifierId), at }); break;
-      case 'confirm_activation': requirePermit(); need(registerAvailable, 'ASSETS_UNAVAILABLE: activation denied'); consumeQR(str(payload.equipmentId)); permit = domain.confirmActivation(permit, { activationId: str(payload.activationId), actorId, at, qrEquipmentId: payload.equipmentId, confirmedAtEquipment: true }, { policy: project.policy }); break;
+      case 'confirm_activation': requirePermit(); need(registerAvailable, 'ASSETS_UNAVAILABLE: activation denied'); need(permit.equipment.some(e=>e.id===payload.equipmentId),'ACTIVATION_EQUIPMENT_REQUIRED'); await consumeQR(str(payload.equipmentId)); permit = domain.confirmActivation(permit, { activationId: str(payload.activationId), actorId, at, qrEquipmentId: payload.equipmentId, confirmedAtEquipment: true }, { policy: project.policy }); break;
       case 'begin_release': requirePermit(); permit = domain.beginRelease(permit, actorId, at); break;
       case 'remove_lock': requirePermit(); permit = domain.removePersonalLock(permit, { lockId: str(payload.lockId), actorId, at }); break;
       case 'close_permit': requirePermit(); permit = domain.closePermit(permit, { actorId, at, otherPermits: all(), registerAvailable }); break;

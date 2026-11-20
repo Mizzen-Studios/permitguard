@@ -81,3 +81,8 @@ test('Rovo uses trusted function principal; numeric platform issue IDs canonical
  const denied=await w.checkReadiness({issueKey:'PG-1',context:{principal:{accountId:'fake'}}},{});
  assert.equal(denied.code,'AUTHENTICATED_ACTOR_REQUIRED');
 });
+
+test('QR validation errors are specific and safe; opaque SDK errors remain redacted',async()=>{
+ for(const code of ['QR_VALUE_MISMATCH','ACTIVATION_EQUIPMENT_REQUIRED','QR_CHALLENGE_EXPIRED']){const w=setup({dispatch:async()=>{throw new Error(code);}});const r=await w.call('confirm_activation');assert.equal(r.code,code);assert.notEqual(r.code,'PERMITGUARD_UNAVAILABLE');assert.ok(r.message.length>20);assert.equal(r.requiresRefresh,code==='QR_CHALLENGE_EXPIRED');}
+ const w=setup({dispatch:async()=>{throw new Error('private account secret endpoint');}});assert.equal((await w.call('confirm_activation')).requiresRefresh,true);
+});

@@ -10,10 +10,23 @@ const operations = new Set(['get_state', 'check_readiness', 'list_equipment', 'i
 const aliases = { list_rules: 'list_rules', list_own_rules: 'list_rules', disable_rule: 'disable_rule', disable_own_rule: 'disable_rule', delete_rule: 'delete_rule', delete_own_rule: 'delete_rule', dry_run: 'dry_run', dry_run_transition: 'dry_run' };
 
 // Only explicit adapter errors cross the boundary. SDK/domain exceptions can contain private data.
+const validationErrors = {
+ QR_VALUE_MISMATCH:'Wrong QR. Verification uses permitguard: followed by the isolation-point ID; activation uses the selected equipment ID. Use the exact hint shown.',
+ ACTIVATION_EQUIPMENT_REQUIRED:'Activation requires an equipment QR, not an isolation-point QR. Select the equipment and use its exact QR hint.',
+ QR_CHALLENGE_EXPIRED:'The QR confirmation expired or the permit changed. Refresh and scan the correct tag again.',
+ AT_EQUIPMENT_CONFIRMATION_REQUIRED:'Confirm that you are at the equipment and have followed the site procedure.',
+ 'An activation is already pending':'A human activation proposal is already pending. Use its confirmation form instead of requesting another.',
+ 'Activation can only be proposed in Verify':'Activation can only be proposed while the permit is in Verify.',
+ 'Named verifier required':'Only a named verifier may record this confirmation.',
+ 'Verifier already confirmed this point':'Your verification for this point is already recorded; do not submit it again.',
+ 'Assigned named verifier must confirm pending activation':'Only the assigned named verifier can confirm this pending activation.',
+ 'NOT CLEARED: resolve readiness issues; advisory policy does not authorize activation':'Isolation checks are incomplete. Resolve the displayed lock, photo and verification requirements before activation.'
+};
 export function safeError(error) {
+  if(Object.hasOwn(validationErrors,error?.message)) return {ok:false,status:'ERROR',code:error.message in validationErrors && /^[A-Z_]+$/.test(error.message)?error.message:'VALIDATION_REJECTED',error:'VALIDATION_REJECTED',message:validationErrors[error.message],requiresRefresh:error.message==='QR_CHALLENGE_EXPIRED',operational:false};
   const allowed = new Set(['AUTHENTICATED_ACTOR_REQUIRED', 'ISSUE_CONTEXT_REQUIRED', 'INVALID_ISSUE', 'ISSUE_ACCESS_REQUIRED', 'INVALID_OPERATION', 'INVALID_PAYLOAD', 'INVALID_RULE_SELECTION', 'INVALID_ACTION', 'ARCHIVE_CONFIG_PENDING', 'SITE_ADMIN_REQUIRED']);
   const code = allowed.has(error?.message) ? error.message : 'PERMITGUARD_UNAVAILABLE';
-  return { ok: false, status: 'ERROR', code, error: code, message: code === 'PERMITGUARD_UNAVAILABLE' ? 'PermitGuard could not confirm the operation. Refresh current state before retrying; follow the site procedure.' : code, operational: false };
+  return { ok: false, status: 'ERROR', code, error: code, requiresRefresh:true, message: code === 'PERMITGUARD_UNAVAILABLE' ? 'PermitGuard could not confirm the operation. Refresh current state before retrying; follow the site procedure.' : code, operational: false };
 }
 
 /** All context arguments here must come from Forge invocation arguments, never event.payload. */

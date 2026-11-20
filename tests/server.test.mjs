@@ -1,17 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createService } from '../src/server/service.mjs';
-import { emptySite, forgeStore } from '../src/server/store.mjs';
+import { emptySite, forgeStore, forgeChallenges } from '../src/server/store.mjs';
 import { jiraAdapters } from '../src/server/jira.mjs';
+import { createForgeWiring } from '../src/forge/actions.mjs';
 import { issueInvalidationPublisher } from '../src/server/realtime.mjs';
 // All storage/Jira checks below are local mocks, NOT Forge/site acceptance.
 function fixture() {
   let row = { revision: null, data: emptySite() }, seq = 0;
   const store = { atomic: true, async read() { return structuredClone(row); }, async commit(expected, data) { assert.equal(expected, row.revision, 'CONFLICT'); row = { revision: row.revision === null ? 0 : row.revision + 1, data: structuredClone(data) }; return row.revision; } };
-  const dispatch = createService({ store, authorize: async c => { if (!c.accountId) throw new Error('AUTH'); return { actorId: c.accountId, issueId: c.issueId || '1', projectId: c.projectId || '10', isProjectAdmin: c.admin !== false, canEdit: c.edit !== false }; }, projectIsSample: async p => p === '10', validatePeople: async people => assert.ok(people.every(x => ['alice','bob'].includes(x))), now: () => '2026-11-19T18:00:00Z', uuid: () => 'token-' + ++seq });
+  const challengeRows=new Map();
+  const dispatch = createService({ challenges:{put:async c=>challengeRows.set(c.actorId+':'+c.issueId,structuredClone(c)),get:async(a,i)=>structuredClone(challengeRows.get(a+':'+i))}, store, authorize: async c => { if (!c.accountId) throw new Error('AUTH'); return { actorId: c.accountId, issueId: c.issueId || '1', projectId: c.projectId || '10', isProjectAdmin: c.admin !== false, canEdit: c.edit !== false }; }, projectIsSample: async p => p === '10', validatePeople: async people => assert.ok(people.every(x => ['alice','bob'].includes(x))), now: () => '2026-11-19T18:00:00Z', uuid: () => 'token-' + ++seq });
   const ctx = { accountId: 'alice' };
   const call = (op,p = {},c = ctx) => dispatch(op,p,c);
-  return { call, store, get row() { return row; } };
+  return { call, store, dispatch, challengeRows, get row() { return row; } };
 }
 async function created(f, equipmentIds) { await f.call('load_sample',{ confirmed: true }); return f.call('create_permit', { equipmentIds }); }
 async function verified(f) {
@@ -34,7 +36,7 @@ test('defaults, authenticated actor, sample requires confirmation and real-proje
 test('full pending activation, human challenge, sample Crew B release blocks then clears',async () => {
   const f = fixture(); const {equipmentId} = await verified(f);
   let s = await f.call('request_activation',{verifierId:'alice'}); assert.equal(s.permit.state,'VERIFY'); assert.equal(s.permit.activations[0].status,'PENDING');
-  await assert.rejects(f.call('confirm_activation',{activationId:s.permit.activations[0].id,equipmentId,confirmedAtEquipment:true}),/Invalid text/);
+  await assert.rejects(f.call('confirm_activation',{activationId:s.permit.activations[0].id,equipmentId,confirmedAtEquipment:true}),/QR_VALUE_MISMATCH/);
   const challenge = await f.call('qr_challenge',{target:equipmentId});
   s = await f.call('confirm_activation',{activationId:s.permit.activations[0].id,equipmentId,...challenge,confirmedAtEquipment:true}); assert.equal(s.permit.state,'ACTIVE');
   await f.call('play_crew_b',{confirmed:true}); await f.call('begin_release'); s = await f.call('remove_lock',{lockId:'A'}); assert.equal(s.release.status,'NOT CLEARED');
@@ -51,10 +53,10 @@ test('high energy needs distinct named verifiers; spoofed verification rejected'
  const f = fixture(); await f.call('load_sample',{confirmed:true});
  await assert.rejects(f.call('create_permit',{equipmentIds:['register:10:EQ-2']}),/two named/);
  await f.call('create_permit',{equipmentIds:['register:10:EQ-2'],verifierIds:['alice','bob']}); await f.call('begin_lock'); await f.call('apply_lock',{pointId:'E-2',lockId:'a',photoData:'data:image/png;base64,YQ=='}); await f.call('begin_verify');
- await assert.rejects(f.call('verify_point',{pointId:'E-2',qrPointId:'E-2',confirmedAtEquipment:true}),/Invalid text/);
+ await assert.rejects(f.call('verify_point',{pointId:'E-2',qrPointId:'E-2',confirmedAtEquipment:true}),/QR_VALUE_MISMATCH/);
  const c=await f.call('qr_challenge',{target:'E-2'}); let s=await f.call('verify_point',{pointId:'E-2',...c,confirmedAtEquipment:true}); assert.equal(s.readiness.status,'NOT CLEARED');
- await assert.rejects(f.call('verify_point',{pointId:'E-2',...c,confirmedAtEquipment:true}),/Fresh/);
- const b=await f.call('qr_challenge',{target:'E-2'},{accountId:'bob'}); s=await f.call('verify_point',{pointId:'E-2',...b,confirmedAtEquipment:true},{accountId:'bob'}); assert.equal(s.readiness.status,'CLEARED');
+ await assert.rejects(f.call('verify_point',{pointId:'E-2',...c,confirmedAtEquipment:true}),/QR_CHALLENGE_EXPIRED/);
+ const b=await f.call('qr_challenge',{target:'E-2'},{accountId:'bob'}); s=await f.call('verify_point',{pointId:'E-2',...b,confirmedAtEquipment:true},{accountId:'bob'}); assert.equal(s.isolationReadiness.status,'CLEARED');assert.equal(s.readiness.status,'NOT CLEARED');
 });
 test('concurrent operations cannot overwrite; stale revision rejects',async () => {
  const f = fixture(); await created(f); const results=await Promise.allSettled([f.call('begin_lock'),f.call('begin_lock')]); assert.equal(results.filter(r=>r.status==='fulfilled').length,1);
@@ -113,4 +115,37 @@ test('participant validation rejects inactive, inaccessible or mismatched canoni
   await assert.rejects(jiraAdapters(api,route).validatePeople(['alice'],'66400'),/Named person|PARTICIPANT_ISSUE_INVALID/);
   assert.equal(searches,scenario==='mismatch'?0:1);
  }
+});
+
+test('wrong point/equipment QR never changes operational revision; same-person low-energy activation succeeds',async()=>{
+ const f=fixture();await verified(f);await f.call('play_crew_b',{confirmed:true});let state=await f.call('request_activation',{verifierId:'alice'});
+ const baseline=structuredClone(f.row), equipmentId=state.permit.equipment[0].id, activationId=state.permit.activations[0].id;
+ const wrong=await f.call('qr_challenge',{target:'V-3',expectedRevision:baseline.revision});assert.deepEqual(f.row,baseline);
+ await assert.rejects(f.call('confirm_activation',{equipmentId:'V-3',activationId,...wrong,confirmedAtEquipment:true,expectedRevision:baseline.revision}),/ACTIVATION_EQUIPMENT_REQUIRED/);assert.deepEqual(f.row,baseline);
+ const good=await f.call('qr_challenge',{target:equipmentId,expectedRevision:baseline.revision});assert.deepEqual(f.row,baseline);
+ await assert.rejects(f.call('confirm_activation',{equipmentId,activationId,...good,qrValue:'permitguard:V-3',confirmedAtEquipment:true,expectedRevision:baseline.revision}),/QR_VALUE_MISMATCH/);assert.deepEqual(f.row,baseline);
+ const ctx={accountId:'alice'}, wiring=createForgeWiring({dispatch:f.dispatch,requestJira:async()=>({ok:true,json:async()=>({id:'1',fields:{project:{id:'10'}}})})});
+ const pending=await wiring.checkReadiness({issueId:'1'},ctx);assert.equal(pending.status,'NOT CLEARED');assert.equal(pending.transitionAllowed,false);assert.equal(pending.phase,'VERIFY');assert.ok(pending.reasons.some(r=>r.code==='HUMAN_ACTIVATION_REQUIRED'));assert.equal(pending.siteRevision,baseline.revision);assert.deepEqual(f.row,baseline);
+ state=await f.call('confirm_activation',{equipmentId,activationId,...good,confirmedAtEquipment:true,expectedRevision:baseline.revision});assert.equal(state.permit.state,'ACTIVE');assert.equal(state.revision,baseline.revision+1);assert.equal(state.permit.activations[0].confirmedBy,'alice');
+ await assert.rejects(f.call('confirm_activation',{equipmentId,activationId,...good,confirmedAtEquipment:true}),/QR_CHALLENGE_EXPIRED/);assert.equal(f.row.revision,state.revision);
+ await f.call('begin_release');state=await f.call('remove_lock',{lockId:'A'});assert.equal(state.release.status,'NOT CLEARED');assert.ok(state.release.reasons.some(r=>r.lockId==='L-07'&&r.pointId==='V-3'));
+ const release=await wiring.checkReadiness({issueId:'1'},ctx);assert.equal(release.status,'NOT CLEARED');assert.equal(release.transitionAllowed,false);assert.ok(release.reasons.some(r=>r.lockId==='L-07'));await f.call('remove_sample_lock',{confirmed:true});assert.equal((await f.call('close_permit')).permit.state,'CLOSED');
+});
+test('bad verification QR, expired/revision-changed/cross-actor challenge never advances revision',async()=>{
+ const f=fixture();await created(f);await f.call('begin_lock');await f.call('apply_lock',{pointId:'V-3',lockId:'A',photoData:'data:image/png;base64,YQ=='});await f.call('begin_verify');
+ let baseline=structuredClone(f.row);const challenge=await f.call('qr_challenge',{target:'V-3'});assert.deepEqual(f.row,baseline);
+ await assert.rejects(f.call('verify_point',{pointId:'V-3',...challenge,qrValue:'permitguard:register:10:EQ-1',confirmedAtEquipment:true}),/QR_VALUE_MISMATCH/);assert.deepEqual(f.row,baseline);
+ await assert.rejects(f.call('verify_point',{pointId:'V-3',...challenge,confirmedAtEquipment:false}),/AT_EQUIPMENT_CONFIRMATION_REQUIRED/);assert.deepEqual(f.row,baseline);
+ await assert.rejects(f.call('verify_point',{pointId:'V-3',...challenge,confirmedAtEquipment:true},{accountId:'bob'}),/QR_CHALLENGE_EXPIRED/);assert.deepEqual(f.row,baseline);
+ f.challengeRows.get('alice:1').expires=0;await assert.rejects(f.call('verify_point',{pointId:'V-3',...challenge,confirmedAtEquipment:true}),/QR_CHALLENGE_EXPIRED/);assert.deepEqual(f.row,baseline);
+ const fresh=await f.call('qr_challenge',{target:'V-3'});await f.call('play_crew_b',{confirmed:true});baseline=structuredClone(f.row);await assert.rejects(f.call('verify_point',{pointId:'V-3',...fresh,confirmedAtEquipment:true}),/QR_CHALLENGE_EXPIRED/);assert.deepEqual(f.row,baseline);
+ const current=await f.call('qr_challenge',{target:'V-3'});const results=await Promise.allSettled([f.call('verify_point',{pointId:'V-3',...current,confirmedAtEquipment:true}),f.call('verify_point',{pointId:'V-3',...current,confirmedAtEquipment:true})]);assert.equal(results.filter(r=>r.status==='fulfilled').length,1);assert.equal(f.row.revision,baseline.revision+1);
+});
+test('dedicated Forge challenge records are bounded per actor/issue and never use site transaction',async()=>{
+ const rows=new Map();const kvs={set:async(k,v)=>rows.set(k,structuredClone(v)),get:async k=>structuredClone(rows.get(k))};const c=forgeChallenges(kvs);
+ await c.put({token:'one',actorId:'alice',issueId:'1',revision:9,expires:100});await c.put({token:'two',actorId:'alice',issueId:'1',revision:9,expires:200});assert.equal(rows.size,1);assert.equal((await c.get('alice','1')).token,'two');assert.equal(await c.get('bob','1'),undefined);assert.ok(![...rows.keys()][0].includes('alice'));
+});
+test('sample lock details are returned only to the synthetic owner',async()=>{
+ const f=fixture();await created(f);await f.call('play_crew_b',{confirmed:true});const mine=await f.call('get_state');assert.equal(mine.sampleCrewB.locks[0].lockId,'L-07');assert.equal(mine.sampleCrewB.locks[0].simulated,true);
+ const other=await f.call('get_state',{}, {accountId:'bob'});assert.equal(other.sampleCrewB.exists,false);assert.equal(other.sampleCrewB.locks,undefined);assert.ok(other.board[0].activeLockCount>0);
 });

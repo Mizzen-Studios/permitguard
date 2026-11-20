@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 /** Documented conditional CES transaction; no ordinary kvs.set fallback. */
 export const ENTITY = 'permitguard-site';
 export const SITE_KEY = 'site-v1';
@@ -47,4 +48,13 @@ export async function storageHealth({ kvs, Filter, FilterConditions, key = 'heal
   }
   if (!staleRejected) throw new Error('ATOMIC_STORAGE_PROBE_FAILED');
   return { synthetic: true, operationalPermitsRead: false, conditionalWrite: true, readback: true, staleWriteRejected: true };
+}
+
+/** Bounded latest challenge per authenticated actor/issue. Not an operational revision.
+ * Final authorization is bound to the site's CAS revision; any successful site write
+ * invalidates the token, so replay/concurrent consumption cannot authorize another write.
+ */
+export function forgeChallenges(kvs) {
+ const key=(actorId,issueId)=>'pg-qr-v2:'+createHash('sha256').update(JSON.stringify([actorId,issueId])).digest('hex');
+ return {put: c=>kvs.set(key(c.actorId,c.issueId),c),get:(actorId,issueId)=>kvs.get(key(actorId,issueId))};
 }
