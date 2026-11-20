@@ -26,3 +26,9 @@ Hard-reload Jira, close/reopen PermitGuard; do not click Refresh. Expect automat
 For a fresh low-energy test, finish existing PGSAMPLE-1 through the owner's sample-only Remove my simulated Crew B lock confirmation and Close permit before reusing EQ-1. Do not remove real workers' locks or reset storage. Then open a new dedicated synthetic work item, create an EQ-1 permit as yourself, apply L-A1 with photo, begin Verify, record point QR **permitguard:V-3**, request human activation, then confirm selected EQ-1 with equipment QR **permitguard:register:10202:EQ-1** and the checked procedure attestation. During Saving, both fields must remain visibly filled/checked and disabled. Ask **PermitGuard Live Judge 2026** before and after activation: pending is NOT CLEARED with plain words; ACTIVE must explicitly say WORK_START only / not release clearance. Play Crew B, begin release, remove only your own L-A1; expect the plain simulated L-07 reason and Rovo release NOT CLEARED. Compare second-tab updates.
 
 Development only. No card, external runtime, production deployment, publication or real operational data. DEV badge remains intentional.
+
+## Deployment attempts
+
+Inline prompt/name candidate 5578e4a failed manifest lint with Agent not allowed. An unchanged standalone-lint retry also failed definitively; no deployment was created. Next attempt uses the official file-backed syntax prompt: resource:agent-resource;prompts/permitguard.txt and declared resource/agent directory, keeping the full same prompt, distinct display name, original key and actions. No validation bypass.
+
+Provisioned one empty synthetic Jira work item **PGSAMPLE-2** (HTTP 201) after checking project 10202 / PGSAMPLE and its dedicated sample marker, an exact-summary duplicate search, and Task type. No app permit, lock, policy or PGSAMPLE-1 record was written. Finish the existing L-07/close sample path before reusing EQ-1 on this new work item.
