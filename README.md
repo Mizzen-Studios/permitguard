@@ -7,7 +7,7 @@ Human-confirmed lockout/tagout (LOTO) permit **decision support** for Jira work 
 - [Public MIT repository](https://github.com/Mizzen-Studios/permitguard)
 - [Development site](https://one-atlas-xitr.atlassian.net), provisioned 15 November 2026, expires 13 February 2027.
 - [Judge work item PGSAMPLE-1](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-1)
-- [Dated CLI/API evidence](docs/demo-site-checks-2026-11-19.md), [browser guide](docs/browser-handoff.md), [site-admin fix and owner browser results](docs/admin-access-fix-2026-11-19.md), [first-create correction](docs/create-permit-fix-2026-11-20.md), [admin-enabled planning contract](skill.md).
+- [Dated CLI/API evidence](docs/demo-site-checks-2026-11-19.md), [browser guide](docs/browser-handoff.md), [site-admin fix and owner browser results](docs/admin-access-fix-2026-11-19.md), [first-create correction](docs/create-permit-fix-2026-11-20.md), [Rovo deployment recovery](docs/rovo-deploy-experiments-2026-11-20.md), [admin-enabled planning contract](skill.md).
 
 ## Connected development features
 

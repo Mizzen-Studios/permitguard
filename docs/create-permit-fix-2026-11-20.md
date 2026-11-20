@@ -47,3 +47,7 @@ Owner next step: reload PGSAMPLE-1 to load the new bundle. Existing six sample r
 - Remote validation request ID: 20b42ac044624162b7dac840cf39a753. Raw verbose log is private; no signed upload URLs are published. This retry is definitively failed, not pending. No 5.4.x success is claimed; validation was not bypassed.
 
 - Additional server-side read: `forge version details -e development -v 5 --non-interactive --json` returned the current development major-5 agent definition, both action schemas and all function references. Programmatic comparison against the candidate passed for each, including the agent display name. This establishes the declared agent already belongs to this registered app/version; it does not identify the unrelated duplicate search entry globally.
+
+## Release hold resolved — ~13:05 UTC
+
+Validated development deployments succeeded after the authorized ASCII-name/neutral-prompt experiment (5.4.0), role/human-confirmation chunk (5.5.0), then full original safety prompt (5.6.0). The original permitguard-agent key, both actions, backend functions and scopes remain intact. No validation bypass, new app, agent removal or re-keying. File/new-key/fallback removal experiments were unnecessary once the full prompt deployed. Code candidate 8f7dd79 includes all first-create fixes; see [per-attempt results](rovo-deploy-experiments-2026-11-20.md). Earlier FAILED evidence remains historical, not the current release status. No particular forbidden-word trigger is proven.
