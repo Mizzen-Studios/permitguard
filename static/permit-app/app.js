@@ -53,7 +53,7 @@ function render() {
 }
 async function refresh() {
  if (refreshing) return refreshing;
- refreshing=(async()=>{try { const result=await call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{}); if(!result || (!('permit' in result) && !['ADMINISTRATION','PERMITGUARD_LOCK_BOARD_SNAPSHOT'].includes(result.kind)) || (!result.actorId && result.kind!=='PERMITGUARD_LOCK_BOARD_SNAPSHOT')) throw new Error(result?.message || result?.error || 'Server did not return an authenticated permit state.'); state={...result,observedAt:new Date().toISOString()}; stale=false; error=''; if(subscription) sync='Live updates connected'; } catch(e){stale=true;error='Cannot confirm current permit state. '+String(e.message || e);} finally {refreshing=null;render();} })(); return refreshing;
+ refreshing=(async()=>{try { const result=await call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{}); if(!result || (!('permit' in result) && !['ADMINISTRATION','PERMITGUARD_LOCK_BOARD_SNAPSHOT'].includes(result.kind)) || (!result.actorId && result.kind!=='PERMITGUARD_LOCK_BOARD_SNAPSHOT')) throw new Error(result?.message || result?.error || 'Server did not return an authenticated permit state.'); state={...result,observedAt:new Date().toISOString()}; stale=false; error=''; if(subscription && sync==='Update received; checking saved state…') sync='Live updates connected'; } catch(e){stale=true;error='Cannot confirm current permit state. '+String(e.message || e);} finally {refreshing=null;render();} })(); return refreshing;
 }
 async function mutate(operation,payload={}) {
  if(busy || stale) return; const revision=state.revision ?? state.permit?.revision;

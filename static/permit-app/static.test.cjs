@@ -33,3 +33,8 @@ test('Realtime invalidation never hides an uncertain mutation failure or resubmi
  h.context.invoke=async(_m,args)=>{if(args.operation==='create_permit'){mutations++;onEvent({revision:1});return {ok:false,error:'UNAVAILABLE'};}reads++;};
  await h.run('mutate("create_permit")');assert.equal(mutations,1);assert.equal(reads,0);assert.equal(h.run('stale'),true);assert.match(h.root.innerHTML,/no operation was automatically resubmitted/);
 });
+
+test('state refresh after genuine Realtime error does not falsely claim connected subscription',async()=>{
+ const h=harness();let onEvent;h.context.realtime.subscribe=async(_c,cb)=>{onEvent=cb;return {unsubscribe(){}};};
+ h.run('state={actorId:"human",revision:0,policy:{},equipment:[],board:[]};stale=false');await h.run('subscribe()');onEvent(null,new Error('disconnect'));await h.run('refresh()');assert.match(h.root.innerHTML,/Realtime disconnected; use Refresh/);assert.doesNotMatch(h.root.innerHTML,/Live updates connected/);
+});
