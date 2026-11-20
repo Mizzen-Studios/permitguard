@@ -32,3 +32,16 @@ Owner next step: reload PGSAMPLE-1 to load the new bundle. Existing six sample r
 - No deployment success receipt exists for this fix. Last confirmed successful deployed version remains **5.3.0**. Install upgrades were not attempted after failure. Do not infer that the new code is running, or retry the owner judge path yet.
 - No validation bypass, agent removal/recreation, app re-registration, production deployment, payment change or unrelated source change was attempted. The unchanged existing Rovo module is required by the brief. The platform's underlying reason for denying it is unknown; this is a concrete Atlassian validation gate, not a diagnosed billing/entitlement condition.
 - Resume when Atlassian permits the existing agent deployment, or the owner explicitly authorizes an alternative. Use normal validated deployment of the preserved candidate, verify the deployment receipt and installation state, then request owner browser re-test. Do not resubmit a pending/uncertain deployment: deployment 9 has already been reconciled as FAILED.
+
+## Owner-requested identity comparison and retry — ~10:15 UTC
+
+- Compared 5.3.0 source commit 5e7aa12, candidate d989804 and current HEAD: the **entire parsed manifest is identical**, including rovo:agent key/name/prompt/actions, both action input schemas and every function reference. No agent identity revert was necessary; the duplicate-agent display rename already existed in the successful 5.3.0 source. No manifest or app ID change was made during this retry.
+- Registered app remains 60f4bdda-1062-4e5b-aab6-1d9a9cf53a90. Default environment is development; the explicit retry used -e development and verbose upload requests use environmentKey default (Forge's key for this development environment). Jira and Confluence installation list both report development and up-to-date major 5.
+- Repository manifest history contains only that registered app UUID plus the original all-zero scaffold placeholder. A local apps/*/manifest.yml scan finds PermitGuard's agent only in this checkout. No second registered PermitGuard app is evidenced by those checks. They cannot establish ownership of the other Rovo search entry across every app/site; that global ownership remains unverified without the signed-in Rovo/developer-console view.
+- Repeated all 83 tests/build and credential scan successfully, then retried normal validated development deployment. It failed **before a new deployment was created**, at manifest lint. Full error rule from the remote response:
+
+``json
+{"rule":"MANIFEST_INVALID_RULE","category":"ERROR","value":true,"reason":"Agent not allowed","changes":null,"errors":null}
+
+```
+- Remote validation request ID: 20b42ac044624162b7dac840cf39a753. Raw verbose log is private; no signed upload URLs are published. This retry is definitively failed, not pending. No 5.4.x success is claimed; validation was not bypassed.
