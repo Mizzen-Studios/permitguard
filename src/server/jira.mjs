@@ -20,9 +20,14 @@ export function jiraAdapters(api, route) {
       return project.key === 'PGSAMPLE' && project.description?.includes('[PermitGuard dedicated sample project]') === true;
     },
     async validatePeople(accountIds, issueId) {
+      // Jira's assignable search accepts an ISSUE KEY, not a numeric issue ID.
+      // Resolve under the same user identity; never trust a client-supplied key.
+      const issue = await requireOk(await api.asUser().requestJira(route`/rest/api/3/issue/${issueId}?fields=project`), 'Participant issue');
+      if (String(issue.id) !== String(issueId) || typeof issue.key !== 'string' || !/^[A-Za-z][A-Za-z0-9_]*-[1-9][0-9]*$/.test(issue.key)) throw new Error('PARTICIPANT_ISSUE_INVALID');
+      const issueKey = issue.key;
       // Assignable-user lookup is bounded and exact; inaccessible/inactive people fail closed.
       for (const accountId of accountIds) {
-        const users = await requireOk(await api.asUser().requestJira(route`/rest/api/3/user/assignable/search?issueKey=${issueId}&accountId=${accountId}&maxResults=2`), 'Named person');
+        const users = await requireOk(await api.asUser().requestJira(route`/rest/api/3/user/assignable/search?issueKey=${issueKey}&accountId=${accountId}&maxResults=2`), 'Named person');
         if (!Array.isArray(users) || !users.some(u => u.accountId === accountId && u.active === true)) throw new Error('Named person unavailable or not assignable');
       }
     },

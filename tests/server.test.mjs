@@ -84,3 +84,33 @@ test('site administrator can configure a business-space project; ordinary viewer
   assert.equal(auth.isProjectAdmin,siteAdmin);assert.equal(auth.displayName,'Alice Admin');assert.equal(auth.actorId,'alice');
  }
 });
+
+test('load sample revision 0 -> first permit revision 1 uses canonical Jira issue key for named people',async()=>{
+ let row={revision:null,data:emptySite()};const calls=[];
+ const route=(p,...a)=>p.reduce((s,t,i)=>s+t+(a[i]??''),'');
+ const api={asUser:()=>({requestJira:async path=>{
+  calls.push(path);
+  if(path.includes('assignable/search')) {assert.match(path,/issueKey=PGSAMPLE-1&/);assert.doesNotMatch(path,/issueKey=66400/);return {ok:true,status:200,json:async()=>[{accountId:'alice',active:true}]};}
+  return {ok:true,status:200,json:async()=>path.includes('mypermissions')?{permissions:{ADMINISTER:{havePermission:true},EDIT_ISSUES:{havePermission:true}}}:path.includes('myself')?{accountId:'alice',displayName:'Alice'}:path.includes('/project/')?{key:'PGSAMPLE',description:'[PermitGuard dedicated sample project]'}:{id:'66400',key:'PGSAMPLE-1',fields:{project:{id:'10202'}}}};
+ }})};
+ const store={atomic:true,read:async()=>structuredClone(row),commit:async(expected,data)=>{assert.equal(expected,row.revision);row={revision:expected===null?0:expected+1,data:structuredClone(data)};return row.revision;}};
+ const dispatch=createService({store,...jiraAdapters(api,route)});const context={accountId:'alice',issueId:'66400'};
+ const loaded=await dispatch('load_sample',{confirmed:true,expectedRevision:null},context);
+ assert.equal(loaded.revision,0);assert.equal(loaded.equipment.length,6);assert.equal(loaded.policy.mode,'ENFORCE');
+ const created=await dispatch('create_permit',{expectedRevision:0,equipmentIds:['register:10202:EQ-1'],crewId:'Crew A',workers:['alice'],verifierIds:['alice']},context);
+ assert.equal(created.revision,1);assert.equal(created.permit.state,'PLAN');assert.equal(created.permit.crewId,'Crew A');assert.equal(created.permit.workers[0],'alice');
+ assert.equal(calls.filter(p=>p.includes('assignable/search')).length,1);
+ const readback=await dispatch('get_state',{},context);assert.equal(readback.revision,1);assert.equal(readback.permit.id,'66400');
+ await assert.rejects(dispatch('create_permit',{expectedRevision:0},context),/CONFLICT/);
+});
+test('participant validation rejects inactive, inaccessible or mismatched canonical issue without writes',async()=>{
+ const route=(p,...a)=>p.reduce((s,t,i)=>s+t+(a[i]??''),'');
+ for(const scenario of ['inactive','denied','mismatch']) {
+  let searches=0;const api={asUser:()=>({requestJira:async path=>{
+   if(path.includes('assignable/search')){searches++;return {ok:scenario!=='denied',status:scenario==='denied'?403:200,json:async()=>[{accountId:'alice',active:false}]};}
+   return {ok:true,status:200,json:async()=>({id:scenario==='mismatch'?'999':'66400',key:'PGSAMPLE-1'})};
+  }})};
+  await assert.rejects(jiraAdapters(api,route).validatePeople(['alice'],'66400'),/Named person|PARTICIPANT_ISSUE_INVALID/);
+  assert.equal(searches,scenario==='mismatch'?0:1);
+ }
+});

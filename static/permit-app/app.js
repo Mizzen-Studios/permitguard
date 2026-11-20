@@ -2,7 +2,7 @@ import { invoke, realtime } from '@forge/bridge';
 const root = document.querySelector('#app');
 const stages = ['PLAN','LOCK','VERIFY','ACTIVE','RELEASE','CLOSED'];
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let state = null, busy = false, stale = true, error = '', notice = '', sync = 'Not subscribed; use Refresh', subscription, refreshing, adminResult = null, rules = [], playingCrewB = false, snapshotIssue = '';
+let state = null, busy = false, stale = true, error = '', notice = '', sync = 'Not subscribed; use Refresh', subscription, refreshing, adminResult = null, rules = [], playingCrewB = false, snapshotIssue = '', pendingInvalidation = false;
 const call = (operation, payload = {}) => invoke('permitguard', {operation, payload});
 const button = (label, action, primary = false, attrs = '') => '<button type="button" class="'+(primary?'primary':'secondary')+'" data-action="'+action+'" '+(busy||stale?'disabled ':'')+attrs+'>'+escape(label)+'</button>';
 const field = (id, label, value = '', attrs = '') => '<label for="'+id+'">'+label+'</label><input id="'+id+'" name="'+id+'" value="'+escape(value)+'" '+attrs+'>';
@@ -53,7 +53,7 @@ function render() {
 }
 async function refresh() {
  if (refreshing) return refreshing;
- refreshing=(async()=>{try { const result=await call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{}); if(!result || (!('permit' in result) && !['ADMINISTRATION','PERMITGUARD_LOCK_BOARD_SNAPSHOT'].includes(result.kind)) || (!result.actorId && result.kind!=='PERMITGUARD_LOCK_BOARD_SNAPSHOT')) throw new Error(result?.message || result?.error || 'Server did not return an authenticated permit state.'); state={...result,observedAt:new Date().toISOString()}; stale=false; error=''; } catch(e){stale=true;error='Cannot confirm current permit state. '+String(e.message || e);} finally {refreshing=null;render();} })(); return refreshing;
+ refreshing=(async()=>{try { const result=await call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{}); if(!result || (!('permit' in result) && !['ADMINISTRATION','PERMITGUARD_LOCK_BOARD_SNAPSHOT'].includes(result.kind)) || (!result.actorId && result.kind!=='PERMITGUARD_LOCK_BOARD_SNAPSHOT')) throw new Error(result?.message || result?.error || 'Server did not return an authenticated permit state.'); state={...result,observedAt:new Date().toISOString()}; stale=false; error=''; if(subscription) sync='Live updates connected'; } catch(e){stale=true;error='Cannot confirm current permit state. '+String(e.message || e);} finally {refreshing=null;render();} })(); return refreshing;
 }
 async function mutate(operation,payload={}) {
  if(busy || stale) return; const revision=state.revision ?? state.permit?.revision;
@@ -64,7 +64,7 @@ async function mutate(operation,payload={}) {
  if(operation==='play_crew_b') playingCrewB=true;
  notice='Server processed '+operation.replaceAll('_',' ')+'. Current state refreshed.';
  await refresh();
- }catch(e){error=String(e.message || e)+ ' Refresh before retrying; no operation was automatically resubmitted.';stale=true;} finally{busy=false;render();}
+ }catch(e){error=String(e.message || e)+ ' Refresh before retrying; no operation was automatically resubmitted.';stale=true;} finally{busy=false;if(pendingInvalidation){pendingInvalidation=false;if(!error)await refresh();}render();}
 }
 async function photoData(file) {
  if(!file || !file.size) return null;
@@ -93,7 +93,7 @@ root.addEventListener('click', async event=>{const el=event.target.closest('[dat
  await mutate(action,payload);
 });
 root.addEventListener('change',async event=>{const target=event.target.dataset.qrTarget;if(!target)return;const file=event.target.files?.[0];if(!file)return;let image;try{if(!('BarcodeDetector' in window))throw new Error('QR decoder unavailable. Enter the QR text manually; this is a user assertion, not hardware proof.');if(file.size>10*1024*1024)throw new Error('QR image must be under 10 MB.');image=await createImageBitmap(file);const results=await new BarcodeDetector({formats:['qr_code']}).detect(image);if(results.length!==1)throw new Error('Use an image containing exactly one readable QR code, or enter the text manually.');document.getElementById(target).value=results[0].rawValue;const status=document.createElement('p');status.className='subtle';status.setAttribute('role','status');status.textContent='QR text read from selected image. Confirm the tag and physical procedure before submitting.';event.target.after(status);}catch(e){const status=document.createElement('p');status.setAttribute('role','alert');status.textContent=e.message;event.target.after(status);}finally{image?.close();}});
-async function subscribe() {try{if(!realtime?.subscribe)throw new Error('API unavailable');subscription=await realtime.subscribe(state?.realtime?.channel || 'permitguard',(_payload,subscriptionError)=>{stale=true;if(subscriptionError){sync='Realtime disconnected; use Refresh';render();return;}if(busy){sync='Update received during save; refresh required';render();return;}refresh();});sync='Live updates connected';}catch{sync='Realtime unavailable; use Refresh';}render();}
+async function subscribe() {try{if(!realtime?.subscribe)throw new Error('API unavailable');subscription=await realtime.subscribe(state?.realtime?.channel || 'permitguard',(_payload,subscriptionError)=>{stale=true;if(subscriptionError){sync='Realtime disconnected; use Refresh';render();return;}if(busy){pendingInvalidation=true;sync='Update received; checking saved state…';return;}refresh();});sync='Live updates connected';}catch{sync='Realtime unavailable; use Refresh';}render();}
 window.addEventListener('pagehide',()=>subscription?.unsubscribe());
 window.addEventListener('offline',()=>{stale=true;error='Connection lost. Refresh after reconnecting before acting.';render();});
 window.addEventListener('online',()=>refresh());

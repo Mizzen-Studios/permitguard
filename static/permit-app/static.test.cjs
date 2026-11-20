@@ -18,3 +18,18 @@ test('no app egress or local fake permit, accessible structure',()=>{assert.ok(!
 test('bounded photo accepts only permitted types',async()=>{const h=harness();await assert.rejects(h.run('photoData({size:11000000,type:"image/jpeg"})'),/10 MB/);await assert.rejects(h.run('photoData({size:12,type:"image/svg+xml"})'),/10 MB/);});
 
 test('empty admin state exposes sample setup and names without acceptance-test copy',()=>{const h=harness();h.run('state={actorId:"human",actorDisplayName:"Olly Admin",isProjectAdmin:true,revision:1,policy:{},equipment:[],board:[]};stale=false;render()');assert.match(h.root.innerHTML,/details class="admin" open/);assert.match(h.root.innerHTML,/Load confirmed sample/);assert.match(h.root.innerHTML,/Signed-in account: Olly Admin/);assert.doesNotMatch(h.root.innerHTML,/acceptance have not been run|cross-browser delivery unverified/);});
+
+test('Realtime invalidation during successful sample save is reconciled, not a false refresh warning',async()=>{
+ const h=harness();let onEvent;h.context.realtime.subscribe=async(_channel,callback)=>{onEvent=callback;return {unsubscribe(){}};};
+ h.run('state={actorId:"human",revision:null,policy:{},equipment:[],board:[]};stale=false');await h.run('subscribe()');
+ h.context.invoke=async(_method,args)=>{if(args.operation==='load_sample'){onEvent({revision:0});return {revision:0};}return {permit:null,actorId:'human',revision:0,policy:{mode:'ENFORCE'},equipment:[],board:[]};};
+ await h.run('mutate("load_sample",{confirmed:true})');
+ assert.equal(h.run('stale'),false);assert.equal(h.run('busy'),false);assert.equal(h.run('pendingInvalidation'),false);
+ assert.match(h.root.innerHTML,/Live updates connected/);assert.doesNotMatch(h.root.innerHTML,/Update received during save; refresh required|Disconnected/);
+});
+test('Realtime invalidation never hides an uncertain mutation failure or resubmits it',async()=>{
+ const h=harness();let onEvent;let mutations=0,reads=0;h.context.realtime.subscribe=async(_c,cb)=>{onEvent=cb;return {unsubscribe(){}};};
+ h.run('state={actorId:"human",revision:0,policy:{},equipment:[],board:[]};stale=false');await h.run('subscribe()');
+ h.context.invoke=async(_m,args)=>{if(args.operation==='create_permit'){mutations++;onEvent({revision:1});return {ok:false,error:'UNAVAILABLE'};}reads++;};
+ await h.run('mutate("create_permit")');assert.equal(mutations,1);assert.equal(reads,0);assert.equal(h.run('stale'),true);assert.match(h.root.innerHTML,/no operation was automatically resubmitted/);
+});

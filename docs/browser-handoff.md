@@ -57,3 +57,9 @@ After creating a permit, test JQL **permitguardState = "ACTIVE"** and Automation
 Reload the Jira work item (not only the in-panel Refresh) so the new Custom UI bundle loads. The account label should read **Olly**, not an account ID. While equipment is empty, sample setup is expanded above Plan. Tick confirmation and click **Load confirmed sample** once; expect six equipment and Enforce only in PGSAMPLE. No loader invocation was made during this fix, preserving the first-run test. Continue the one-person judge path above.
 
 The UI now says **Live updates connected** only when subscribed; that is connection state, not evidence of two-browser acceptance. Test-status notes are documentation-only. Initial authorization now fetches issue, permissions and display name concurrently; there is no artificial skeleton timer. Forge/Jira cold-start duration remains unmeasured after deployment.
+
+## 20 November first-create re-test
+
+Owner confirmed the 5.3.0 sample loader works, six equipment records exist, Enforce / FAIL_CLOSED is active, and initial usable panel time was about five seconds. First permit creation then failed due to the assignable-person numeric-ID/issue-key adapter bug, now corrected; see [diagnosis and evidence](create-permit-fix-2026-11-20.md).
+
+Reload the work item for the updated bundle. **Skip sample loading if EQ-1..EQ-6 are already present.** Select EQ-1 and Crew A; keep yourself as worker and verifier. Create permit once: expect PLAN and site revision 0 → 1 if no intervening mutation. Then continue the existing Lock / Verify / activation / Crew B / Rovo path. Save-time invalidations are now reconciled automatically after success; uncertain mutation failures still require readback and never auto-resubmit.

@@ -23,7 +23,7 @@ export function createForgeWiring({ dispatch, requestJira, archive, now = () => 
   const actor = context => { const accountId=context?.principal?.accountId || context?.accountId; need(typeof accountId === 'string' && accountId.trim(), 'AUTHENTICATED_ACTOR_REQUIRED'); return accountId; };
   const trustedIssue = context => context?.extension?.issue?.id;
   const cleanContext = context => ({ accountId: actor(context), extension: { issue: { id: trustedIssue(context) } } });
-  const guard = fn => async (...args) => { try { return await fn(...args); } catch (error) { return safeError(error); } };
+  const guard = fn => async (...args) => { try { return await fn(...args); } catch (error) { const response=safeError(error); const operation=args[0]?.payload?.operation; console.warn(JSON.stringify({event:'permitguard_operation_failed',operation:operations.has(operation)?operation:'other',code:response.code})); return response; } };
   async function canonicalIssue(input) {
     need(typeof input === 'string' && /^(?:[0-9]+|[A-Za-z][A-Za-z0-9_]*-[1-9][0-9]*)$/.test(input) && input.length <= 100, 'INVALID_ISSUE');
     // User authorization is independent of any agent-supplied issue/project/actor claim.
