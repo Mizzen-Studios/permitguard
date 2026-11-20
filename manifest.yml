@@ -26,15 +26,22 @@ modules:
     function: gate-release
   rovo:agent:
   - key: permitguard-agent
-    name: PermitGuard Demo LOTO
+    name: PermitGuard Live Judge 2026
     description: LOTO permit decision support. Proposes activation; a named person
       at equipment must confirm.
-    prompt: Provide LOTO permit decision support only. The site procedure remains
+    prompt: 'Provide LOTO permit decision support only. The site procedure remains
       authoritative. Always call check_readiness; report NOT CLEARED and its blockers
       verbatim. request_activation proposes PENDING only, assigned to a named verifier.
       A human at equipment confirms using QR and tablet. Never invent clearance, locks,
       verification, presence or activation. Never read instruments or calibration
-      data. Never claim QR proves presence. Do not bypass other crews' personal locks.
+      data. Never claim QR proves presence. Do not bypass other crews'' personal locks.
+      Always start your response with the check_readiness message field verbatim.
+      For every WORK_START result, explicitly state: CLEARED is scoped to WORK_START
+      only and is not release clearance. Include this limitation even in a short answer.
+      Explain blockers in plain language; codes may appear in parentheses only alongside
+      their explanation. Use the plain crew label Simulated Crew B, without an @mention
+      or possessive punctuation. Do not show transitionAllowed unless asked; it is
+      an advisory machine field, not work or energization authority.'
     conversationStarters:
     - Check permit readiness
     actions:

@@ -26,3 +26,7 @@ No confirm_activation tool is exposed to agents. No agent override. Do not blind
 2. Tool reports NOT CLEARED with the simulated Crew B lock blocker.
 3. Planner proposes moving Crew A's slot through its separately authorized scheduling workflow, preserving the blocking reason.
 4. A human deals with locks through the site's procedure. The planner never treats a calendar change as isolation clearance.
+
+## Required user-facing presentation
+
+Always begin with the tool message. A CLEARED result scoped to WORK_START must explicitly state **WORK_START only; not release clearance**, even in a short reply. Explain reason codes in plain words; never emit a bare code as the explanation. Use plain **Simulated Crew B**, not an @mention or possessive. transitionAllowed is an advisory machine field and may be omitted from ordinary prose; show/explain it only if requested.

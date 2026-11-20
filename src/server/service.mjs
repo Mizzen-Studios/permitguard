@@ -48,7 +48,7 @@ export function createService({ store, challenges, authorize, projectIsSample, v
       if (!permit) return absent('NO_PERMIT');
       const checked = domain.checkRelease(permit, all(), { registerAvailable });
       // Site-wide locks are checked, but details from unreadable other issues never leave server.
-      return { ...checked, reasons: checked.reasons.map(r => r.code === 'LOCK_REMAINS' && !(project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner === actorId && r.crewId === 'Crew B (SIMULATED)') ? { code: 'LOCK_REMAINS', message: 'A personal lock remains on shared equipment; check the site lock board.' } : r) };
+      return { ...checked, reasons: checked.reasons.map(r => r.code === 'LOCK_REMAINS' && !(project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner === actorId && r.crewId === 'Crew B (SIMULATED)') ? { code: 'LOCK_REMAINS', message: 'A personal lock remains on shared equipment; check the site lock board.' } : (r.code==='LOCK_REMAINS'&&r.crewId==='Crew B (SIMULATED)'?{...r,message:'Simulated Crew B lock '+r.lockId+' remains on isolation point '+r.pointId+'.'}:r)) };
     };
     const result = () => ({ permit, sampleCrewB: project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner===actorId ? { exists:true, active:site.permits['sample-crew-b:'+issueId].locks.some(l=>!l.removedAt), locks:site.permits['sample-crew-b:'+issueId].locks.filter(l=>!l.removedAt).map(l=>({...l,simulated:true,name:'Crew B (simulated)'})) } : {exists:false}, policy: project.policy, equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus, source: project.source || 'BUILT_IN_REGISTER' }, realtime: { channel: 'permitguard' }, capabilities: { assetsImport: true }, actorId, actorDisplayName: auth.displayName || "Signed-in worker", isProjectAdmin: auth.isProjectAdmin === true, readiness: readiness(), isolationReadiness: isolationReadiness(), release: release(), revision: row.revision,
       // Never leak another issue/project, actor or crew through the site-wide aggregate.
@@ -60,7 +60,14 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     }
     if (operation === 'list_equipment') return { equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus }, operational: false };
     if (operation === 'get_state') return result();
-    if (operation === 'check_readiness') return { ...(permit?.state==='RELEASE'?release():readiness()), scope:permit?.state==='RELEASE'?'RELEASE':'WORK_START', activationPending:!!permit?.activations.some(a=>a.status==='PENDING'), releaseStatus:release().status, phase:permit?.state || 'NO_PERMIT', permitId: permit?.id ?? null, revision:row.revision, siteRevision:row.revision, permitRevision:permit?.revision??null, policy:project.policy, observedAt:now(), operational:false };
+    if (operation === 'check_readiness') {
+      const scope=permit?.state==='RELEASE'?'RELEASE':'WORK_START',checked=scope==='RELEASE'?release():readiness();
+      checked.reasons=checked.reasons.map(r=>({...r,message:r.message&&r.message!==r.code?r.message:({NO_PERMIT:'No permit has been created for this work item.',REGISTER_UNAVAILABLE:'The equipment register could not be confirmed.'}[r.code]||'Recorded prerequisites are incomplete; inspect the permit panel.')}));
+      const mandatoryNotice=scope==='WORK_START'?'CLEARED is scoped to WORK_START only and is not release clearance.':'This check is scoped to RELEASE only; recorded clearance is not permission to energize equipment.';
+      const message=checked.status==='CLEARED'?(scope==='WORK_START'?'CLEARED for WORK_START only. This is not release clearance. Follow the site procedure.':'Release records are CLEARED. This is not permission to energize equipment.'):
+        'NOT CLEARED. '+checked.reasons.map(r=>r.message||'Recorded prerequisites are incomplete.').join(' ');
+      return {...checked,scope,mandatoryNotice,message,displayStatus:checked.status==='CLEARED'&&scope==='WORK_START'?'CLEARED - WORK_START only; not release clearance':checked.status,activationPending:!!permit?.activations.some(a=>a.status==='PENDING'),releaseStatus:release().status,phase:permit?.state||'NO_PERMIT',permitId:permit?.id??null,revision:row.revision,siteRevision:row.revision,permitRevision:permit?.revision??null,policy:project.policy,observedAt:now(),operational:false};
+    }
     need(auth.canEdit === true, 'EDIT_ISSUES permission required');
     if (payload.expectedRevision !== undefined) need(payload.expectedRevision === row.revision, 'CONFLICT: refresh before retrying');
     const at = now();

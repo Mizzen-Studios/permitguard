@@ -6,8 +6,8 @@ const path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'app.js'),'utf8');
 function harness(){
  const handlers={}, calls=[]; const root={innerHTML:'',addEventListener:(n,f)=>handlers[n]=f,querySelector:()=>null,querySelectorAll:()=>[]};
- const context={console,Date,Promise,FileReader:class {},document:{querySelector:()=>root,addEventListener:()=>{}},window:{addEventListener:()=>{},confirm:()=>true},invoke:async(method,args)=>{calls.push({method,...args});return {permit:null,actorId:'human',revision:8,policy:{mode:'WARN_ONLY',failMode:'FAIL_CLOSED'},equipment:[],board:[]};},realtime:{subscribe:async()=>({unsubscribe(){}})}};
- vm.createContext(context);vm.runInContext(source.split(String.fromCharCode(10)).slice(1,-2).join(String.fromCharCode(10)),context);return {context,root,calls,handlers,run:s=>vm.runInContext(s,context)};
+ const context={console,Date,Promise,setTimeout:f=>Promise.resolve().then(f),FileReader:class {},document:{querySelector:()=>root,addEventListener:()=>{}},window:{addEventListener:()=>{},confirm:()=>true},invoke:async(method,args)=>{calls.push({method,...args});return {permit:null,actorId:'human',revision:8,policy:{mode:'WARN_ONLY',failMode:'FAIL_CLOSED'},equipment:[],board:[]};},realtime:{subscribe:async()=>({unsubscribe(){}})}};
+ vm.createContext(context);vm.runInContext(source.split(String.fromCharCode(10)).slice(1,-2).join(String.fromCharCode(10)),context);vm.runInContext('initializing=false',context);return {context,root,calls,handlers,run:s=>vm.runInContext(s,context)};
 }
 test('all six stages render one primary action, closed none',()=>{const h=harness();for(const stage of ['PLAN','LOCK','VERIFY','ACTIVE','RELEASE','CLOSED']){h.run('state={actorId:"human",revision:8,policy:{mode:"WARN_ONLY"},permit:{state:'+JSON.stringify(stage)+',id:"P",equipment:[{id:"EQ",name:"Pump",isolationPoints:[{id:"V-3",energyType:"hydraulic",highEnergy:true}]}],workers:["human"],verifierIds:["human"],locks:[],activations:[],verifications:[],audit:[]},board:[],release:{status:"NOT CLEARED"}};stale=false;render()');assert.equal((h.root.innerHTML.match(/class="primary"/g)||[]).length,stage==='CLOSED'?0:1);assert.match(h.root.innerHTML,/OSHA 1910.147/);}});
 test('bridge mutations carry store revision rather than permit revision',async()=>{const h=harness();h.run('state={actorId:"human",revision:8,permit:{revision:2}};stale=false');await h.run('mutate("begin_lock")');assert.equal(h.calls[0].method,'permitguard');assert.equal(h.calls[0].operation,'begin_lock');assert.equal(h.calls[0].payload.expectedRevision,8);assert.equal(h.calls.length,1);assert.equal(h.run('state.revision'),8);});
@@ -70,4 +70,24 @@ test('newer or unversioned Realtime invalidation requires one authoritative read
   h.context.invoke=async(_m,args)=>{if(args.operation==='get_state'){reads++;return {actorId:'human',revision:10,permit:null,equipment:[],policy:{},board:[]};}if(unknownFirst)callback({});callback({revision:unknownFirst?9:10});return {actorId:'human',revision:9,permit:null,equipment:[],policy:{},board:[]};};
   await h.run('mutate("apply_lock")');assert.equal(reads,1);assert.equal(h.run('state.revision'),10);assert.equal(h.run('stale'),false);
  }
+});
+
+test('initialization waits for bridge context and auto-loads without Refresh; retries reads only',async()=>{
+ const h=harness();let contexts=0,reads=0,subscriptions=0;h.context.view={getContext:async()=>{contexts++;if(contexts===1)throw new Error('bridge not ready');return {};}};h.context.invoke=async(_m,args)=>{assert.equal(args.operation,'get_state');reads++;return {actorId:'human',permit:null,revision:13,policy:{},equipment:[],board:[]};};h.context.realtime.subscribe=async()=>{subscriptions++;return {unsubscribe(){}};};
+ await h.run('initialize()');assert.equal(contexts,2);assert.equal(reads,1);assert.equal(subscriptions,1);assert.equal(h.run('stale'),false);assert.equal(h.run('initializing'),false);assert.doesNotMatch(h.root.innerHTML,/Connect to your permit|Open PermitGuard inside|Loading authenticated state/);
+});
+test('read-only bootstrap is bounded and a synchronous first bridge failure does not wedge Refresh',async()=>{
+ const h=harness();let calls=0;h.context.invoke=()=>{calls++;throw new Error('unavailable');};await h.run('initialize()');assert.equal(calls,3);assert.equal(h.run('stale'),true);h.context.invoke=async()=>({actorId:'human',permit:null,revision:13,policy:{},equipment:[],board:[]});await h.run('refresh()');assert.equal(h.run('stale'),false);
+});
+test('administration loads automatically and never subscribes to a missing issue stream',async()=>{
+ const h=harness();let subscriptions=0;h.context.invoke=async()=>({kind:'ADMINISTRATION',actorId:'human',scopes:{},uninstall:{instructions:'Review workflow rules'}});h.context.realtime.subscribe=async()=>{subscriptions++;throw new Error('not issue-scoped');};await h.run('initialize()');assert.equal(subscriptions,0);assert.match(h.root.innerHTML,/Administration loaded/);assert.doesNotMatch(h.root.innerHTML,/State unconfirmed|Not subscribed|Disconnected/);
+});
+test('Saving preserves actual QR, checkbox, select and file DOM nodes while disabling them',()=>{
+ const h=harness();h.run('state={actorId:"human",revision:13,policy:{},permit:null,equipment:[],board:[]};stale=false;render()');
+ const connection={firstChild:{nodeValue:'Ready'}},feedback={innerHTML:''};const controls=[{value:'permitguard:register:10202:EQ-1',disabled:false},{checked:true,disabled:false},{value:'register:10202:EQ-1',disabled:false},{files:[{name:'lock.png'}],disabled:false}];const html=h.root.innerHTML;h.root.querySelector=selector=>selector==='#connection-status'?connection:selector==='#feedback'?feedback:null;h.root.querySelectorAll=()=>controls;
+ h.run('busy=true;render()');assert.equal(h.root.innerHTML,html);assert.equal(connection.firstChild.nodeValue,'Saving…');assert.equal(controls[0].value,'permitguard:register:10202:EQ-1');assert.equal(controls[1].checked,true);assert.equal(controls[2].value,'register:10202:EQ-1');assert.equal(controls[3].files[0].name,'lock.png');assert.ok(controls.every(c=>c.disabled));
+});
+
+test('delayed issue resolver context is retried instead of misrendering issue as administration',async()=>{
+ const h=harness();let reads=0;h.context.view={getContext:async()=>({moduleKey:'permitguard-panel',extension:{issue:{id:'66400'}}})};h.context.invoke=async()=>++reads===1?{kind:'ADMINISTRATION',actorId:'human'}:{actorId:'human',permit:null,revision:13,policy:{},equipment:[],board:[]};await h.run('initialize()');assert.equal(reads,2);assert.equal(h.run('state.kind'),undefined);assert.equal(h.run('stale'),false);assert.doesNotMatch(h.root.innerHTML,/PermitGuard administration/);
 });

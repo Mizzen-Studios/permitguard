@@ -71,3 +71,7 @@ Reload the work item for the updated bundle. **Skip sample loading if EQ-1..EQ-6
 ## Latest re-test: activation and readiness correction
 
 Use [the preserved-permit steps and exact QR formats](activation-readiness-fix-2026-11-20.md). Owner already passed first-create, photo upload and second-tab Realtime on 5.6.0. Do not recreate/reset permit 66400; resume pending activation with the **equipment** QR `permitguard:register:10202:EQ-1`, not point QR `permitguard:V-3`. Before activation Rovo must be NOT CLEARED; after Begin release and removing your own L-A1 it must still be NOT CLEARED while synthetic L-07 remains. Deployment receipt/version is recorded in that evidence document when available.
+
+## Latest polish re-test
+
+Use **PermitGuard Live Judge 2026** (same live app/key, distinct display name). See [scoped wording, automatic loading, filled Saving fields and stale-agent admin handoff](scope-loading-polish-2026-11-20.md). The current RELEASE permit is preserved; finish its synthetic-only L-07/close path before a fresh EQ-1 test.

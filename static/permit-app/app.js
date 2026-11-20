@@ -1,8 +1,8 @@
-import { invoke, realtime } from '@forge/bridge';
+import { invoke, realtime, view } from '@forge/bridge';
 const root = document.querySelector('#app');
 const stages = ['PLAN','LOCK','VERIFY','ACTIVE','RELEASE','CLOSED'];
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let state = null, busy = false, stale = true, error = '', notice = '', sync = 'Not subscribed; use Refresh', subscription, refreshing, adminResult = null, rules = [], playingCrewB = false, snapshotIssue = '', pendingInvalidation = false, pendingRevision = null;
+let state = null, busy = false, stale = true, error = '', notice = '', sync = 'Not subscribed; use Refresh', subscription, refreshing, adminResult = null, rules = [], playingCrewB = false, snapshotIssue = '', pendingInvalidation = false, pendingRevision = null, initializing = true;
 const call = (operation, payload = {}) => invoke('permitguard', {operation, payload});
 const button = (label, action, primary = false, attrs = '') => '<button type="button" class="'+(primary?'primary':'secondary')+'" data-action="'+action+'" '+(busy||stale?'disabled ':'')+attrs+'>'+escape(label)+'</button>';
 const field = (id, label, value = '', attrs = '') => '<label for="'+id+'">'+label+'</label><input id="'+id+'" name="'+id+'" value="'+escape(value)+'" '+attrs+'>';
@@ -44,19 +44,50 @@ function admin() { if (!state.isProjectAdmin) return '<p class="bottom-note">Pro
 }
 function mapping() { const map={PLAN:['(c)(4)','Document equipment-specific energy-control procedures.'],LOCK:['(d)(1)–(5)','Prepare, shut down, isolate, apply personal devices and address stored energy.'],VERIFY:['(d)(6), (f)(3)','Verify isolation; group work requires accountable personal protection.'],ACTIVE:['(d), (f)(3)','Maintain the site energy-control procedure throughout group work.'],RELEASE:['(e), (f)(3)','Inspect, account for personnel and devices, and notify affected employees.'],CLOSED:['(e)','Record closure only after site release checks; closure is not energization authority.']}; const m=map[state?.permit?.state || 'PLAN'] || map.PLAN;return '<details class="reference"><summary>OSHA 1910.147 · this step</summary><p><a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147" target="_blank" rel="noopener noreferrer">Official energy-control standard</a> '+m[0]+': '+m[1]+'</p><p class="subtle">Informational mapping, not certification, legal advice or a complete compliance checklist. Your site procedure remains authoritative.</p></details>'; }
 function specialView() {
- if(state?.kind==='ADMINISTRATION') return '<h1>PermitGuard administration</h1><p>Open a Jira work item to manage its permit and project policy.</p><h2>What this app touches</h2><ul>'+Object.entries(state.scopes || {}).map(([k,v])=>'<li>'+escape(k)+': '+escape(typeof v==='object'?JSON.stringify(v):v)+'</li>').join('')+'</ul><h2>Before uninstall</h2><p>'+escape(state.uninstall?.instructions)+'</p>'+button('List app-owned workflow rules','list_rules')+(adminResult?'<pre>'+escape(JSON.stringify(adminResult,null,2))+'</pre>':'');
+ if(state?.kind==='ADMINISTRATION') return '<h1>PermitGuard administration</h1><p role="status">Administration loaded. No live permit subscription is required on this page.</p><p>Open a Jira work item to manage its permit and project policy.</p><h2>What this app touches</h2><ul>'+Object.entries(state.scopes || {}).map(([k,v])=>'<li>'+escape(k)+': '+escape(typeof v==='object'?JSON.stringify(v):v)+'</li>').join('')+'</ul><h2>Before uninstall</h2><p>'+escape(state.uninstall?.instructions)+'</p>'+button('List app-owned workflow rules','list_rules')+(adminResult?'<pre>'+escape(JSON.stringify(adminResult,null,2))+'</pre>':'');
  if(state?.kind==='PERMITGUARD_LOCK_BOARD_SNAPSHOT') return '<h1>Lock-board snapshot</h1><p>'+escape(state.label)+'</p><p>Not live. Choose a work item you can access; no other issue records are disclosed.</p><label for="snapshotIssue">Jira work item key</label><input id="snapshotIssue" value="'+escape(snapshotIssue)+'"><button data-action="load_snapshot">Load authorized snapshot</button><pre>'+escape(JSON.stringify(state.permits || [],null,2))+'</pre>';
  return '';
 }
 function render() {
+ // Keep the actual form nodes (including file inputs, QR and checkbox) while saving.
+ const connection=root.querySelector('#connection-status'),feedback=root.querySelector('#feedback');
+ if(busy&&connection&&feedback){
+  if(connection.firstChild)connection.firstChild.nodeValue='Saving…';
+  feedback.innerHTML=error?'<div class="blocked">'+escape(error)+'</div>':notice?'<div class="notice">'+escape(notice)+'</div>':'';
+  root.querySelectorAll('input,select,textarea,button').forEach(el=>{el.disabled=true;});
+  return;
+ }
+
  if(state?.kind) { root.innerHTML='<main><div class="safety">Decision support only; site procedure authoritative.</div><div role="status">'+escape(error || notice)+'</div>'+specialView()+'<button data-action="refresh">Refresh snapshot</button></main>'; return; }
- root.innerHTML='<header class="masthead"><div class="brand"><span class="brand-mark" aria-hidden="true">P<span></span></span><b>PermitGuard</b></div><span class="prototype">Connected isolation clipboard</span></header><div class="safety">Decision support only. Follow your site permit procedure. No offline mode or safety certification.</div><main><div id="feedback" role="'+(error?'alert':'status')+'" aria-live="polite">'+(error?'<div class="blocked">'+escape(error)+'</div>':'')+(notice?'<div class="notice">'+escape(notice)+'</div>':'')+'</div><div class="connection"><span>'+escape(busy?'Saving…':stale?'State unconfirmed — refresh before acting':'Server read '+new Date(state?.observedAt || Date.now()).toLocaleTimeString())+'<small>'+escape(stale&&sync==='Live updates connected'?'Updates subscribed; current state unconfirmed':sync)+'</small></span><button type="button" class="secondary" data-action="refresh" '+(busy?'disabled':'')+'>Refresh</button></div>'+(state?'<div class="permit-head"><div><p class="issue">'+escape(state.permit?.projectId || 'Current project')+' / '+escape(state.permit?.id || 'New permit')+'</p><h1>'+(state.permit?'Isolation permit':'Prepare the work')+'</h1><p class="subtle">Signed-in account: '+escape(state.actorDisplayName || 'Signed-in worker')+' · revision '+escape(state.revision ?? state.permit?.revision ?? 'not created')+'</p></div><div class="mode"><strong>'+escape(state.policy?.mode==='ENFORCE'?'Enforce':'Warn-only')+'</strong><span>'+escape(state.policy?.failMode || 'FAIL_CLOSED')+'</span><small>Advisory workflow allowance never means safe activation.</small></div></div><ol class="steps" aria-label="Permit progress">'+stages.map((s,i) => '<li '+(s===(state.permit?.state || 'PLAN')?'aria-current="step"':'')+'><span>'+(i+1)+'</span>'+s.charAt(0)+s.slice(1).toLowerCase()+'</li>').join('')+'</ol>'+(!state.equipment?.length?admin():'')+'<div class="workspace"><section id="work" tabindex="-1" class="work-sheet" aria-label="Current permit step">'+work()+'</section>'+board()+'</div>'+(state.equipment?.length?admin():'')+mapping():'<section id="work" class="work-sheet" tabindex="-1"><h1>Connect to your permit</h1><p>Open PermitGuard inside the installed Atlassian app. No local demonstration or cached readiness is substituted when the server is unavailable.</p></section>')+'</main>';
+ root.innerHTML='<header class="masthead"><div class="brand"><span class="brand-mark" aria-hidden="true">P<span></span></span><b>PermitGuard</b></div><span class="prototype">Connected isolation clipboard</span></header><div class="safety">Decision support only. Follow your site permit procedure. No offline mode or safety certification.</div><main><div id="feedback" role="'+(error?'alert':'status')+'" aria-live="polite">'+(error?'<div class="blocked">'+escape(error)+'</div>':'')+(notice?'<div class="notice">'+escape(notice)+'</div>':'')+'</div><div class="connection"><span id="connection-status">'+escape(busy?'Saving…':initializing?'Loading authenticated state…':stale?'State unconfirmed — refresh before acting':'Server read '+new Date(state?.observedAt || Date.now()).toLocaleTimeString())+'<small>'+escape(initializing?'Connecting automatically…':stale&&sync==='Live updates connected'?'Updates subscribed; current state unconfirmed':sync)+'</small></span><button type="button" class="secondary" data-action="refresh" '+(busy?'disabled':'')+'>Refresh</button></div>'+(state?'<div class="permit-head"><div><p class="issue">'+escape(state.permit?.projectId || 'Current project')+' / '+escape(state.permit?.id || 'New permit')+'</p><h1>'+(state.permit?'Isolation permit':'Prepare the work')+'</h1><p class="subtle">Signed-in account: '+escape(state.actorDisplayName || 'Signed-in worker')+' · revision '+escape(state.revision ?? state.permit?.revision ?? 'not created')+'</p></div><div class="mode"><strong>'+escape(state.policy?.mode==='ENFORCE'?'Enforce':'Warn-only')+'</strong><span>'+escape(state.policy?.failMode || 'FAIL_CLOSED')+'</span><small>Advisory workflow allowance never means safe activation.</small></div></div><ol class="steps" aria-label="Permit progress">'+stages.map((s,i) => '<li '+(s===(state.permit?.state || 'PLAN')?'aria-current="step"':'')+'><span>'+(i+1)+'</span>'+s.charAt(0)+s.slice(1).toLowerCase()+'</li>').join('')+'</ol>'+(!state.equipment?.length?admin():'')+'<div class="workspace"><section id="work" tabindex="-1" class="work-sheet" aria-label="Current permit step">'+work()+'</section>'+board()+'</div>'+(state.equipment?.length?admin():'')+mapping():'<section id="work" class="work-sheet" tabindex="-1"><h1>Loading PermitGuard</h1><p>Reading authenticated app state automatically. No action is available until the server confirms it.</p></section>')+'</main>';
  if (state?.isProjectAdmin) { const mode=root.querySelector('#mode'), fail=root.querySelector('#failMode'); if(mode) mode.value=state.policy?.mode || 'WARN_ONLY'; if(fail) fail.value=state.policy?.failMode || 'FAIL_CLOSED'; }
  root.querySelectorAll('form').forEach(form => { for(const el of form.elements) if(busy || stale) el.disabled=true; });
 }
 async function refresh() {
- if (refreshing) return refreshing;
- refreshing=(async()=>{try { const result=await call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{}); if(!result || (!('permit' in result) && !['ADMINISTRATION','PERMITGUARD_LOCK_BOARD_SNAPSHOT'].includes(result.kind)) || (!result.actorId && result.kind!=='PERMITGUARD_LOCK_BOARD_SNAPSHOT')) throw new Error(result?.message || result?.error || 'Server did not return an authenticated permit state.'); state={...result,observedAt:new Date().toISOString()}; stale=false; error=''; if(subscription && sync==='Update received; checking saved state…') sync='Live updates connected'; } catch(e){stale=true;error='Cannot confirm current permit state. '+String(e.message || e);} finally {refreshing=null;render();} })(); return refreshing;
+ if(refreshing)return refreshing;
+ // Defer invocation until after assigning refreshing, including synchronous bridge failures.
+ refreshing=Promise.resolve().then(async()=>{
+  try {
+   const result=await call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{});
+   if(!result||(!('permit' in result)&&!['ADMINISTRATION','PERMITGUARD_LOCK_BOARD_SNAPSHOT'].includes(result.kind))||(!result.actorId&&result.kind!=='PERMITGUARD_LOCK_BOARD_SNAPSHOT'))throw new Error(result?.message||result?.error||'Server did not return an authenticated app state.');
+   state={...result,observedAt:new Date().toISOString()};stale=false;error='';
+   if(subscription&&sync==='Update received; checking saved state…')sync='Live updates connected';
+   return true;
+  }catch(e){stale=true;error='Cannot confirm current app state. '+String(e.message||e);return false;}
+ }).finally(()=>{refreshing=null;render();});
+ return refreshing;
+}
+async function initialize() {
+ initializing=true;render();
+ try {
+  for(let attempt=0;attempt<3;attempt++){
+   let expectedIssue=false;
+   try {if(typeof view!=='undefined'&&view?.getContext){const context=await view.getContext();expectedIssue=!!context?.extension?.issue?.id||context?.moduleKey==='permitguard-panel';}}catch{if(attempt<2){await new Promise(resolve=>setTimeout(resolve,350*(attempt+1)));continue;}}
+   if(await refresh()) {if(!(expectedIssue&&state?.kind==='ADMINISTRATION'))break;state=null;stale=true;error='Waiting for the issue context to become available.';}
+   if(attempt<2)await new Promise(resolve=>setTimeout(resolve,350*(attempt+1)));
+  }
+ }finally{initializing=false;render();}
+ if(state&&!stale&&!state.kind)await subscribe();
 }
 async function mutate(operation,payload={}) {
  if(busy || stale) return; const revision=state.revision ?? state.permit?.revision;
@@ -113,4 +144,4 @@ window.addEventListener('pagehide',()=>subscription?.unsubscribe());
 window.addEventListener('offline',()=>{stale=true;error='Connection lost. Refresh after reconnecting before acting.';render();});
 window.addEventListener('online',()=>refresh());
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&!busy)refresh();});
-render();refresh().then(()=>{if(state)subscribe();});
+render();initialize();
