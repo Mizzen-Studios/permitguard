@@ -1,4 +1,4 @@
-> Current release: **development 5.7.0**, code `e34d2ae`; Jira/Confluence installations confirmed up to date. For existing permit 66400, use the latest preserved-permit instructions at the end and do not reset/create over it.
+> Current release: **development 5.8.0**, executable candidate `bc6ecb4`. Temporary agent-free fallback: action/MCP tools retained, no live renamed Forge agent is claimed. Use [the latest polish/re-test and admin handoff](scope-loading-polish-2026-11-20.md). Existing permit 66400 is preserved.
 
 # Owner browser acceptance — 19 November 2026
 
@@ -74,4 +74,6 @@ Use [the preserved-permit steps and exact QR formats](activation-readiness-fix-2
 
 ## Latest polish re-test
 
-Use **PermitGuard Live Judge 2026** (same live app/key, distinct display name). See [scoped wording, automatic loading, filled Saving fields and stale-agent admin handoff](scope-loading-polish-2026-11-20.md). The current RELEASE permit is preserved; finish its synthetic-only L-07/close path before a fresh EQ-1 test.
+**PermitGuard Live Judge 2026** is the proposed restored name, NOT a live agent in the 5.8.0 fallback. See [scoped wording, automatic loading, filled Saving fields and stale-agent admin handoff](scope-loading-polish-2026-11-20.md). The current RELEASE permit is preserved; finish its synthetic-only L-07/close path before a fresh EQ-1 test.
+
+Fresh synthetic work item: [PGSAMPLE-2](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2), provisioned empty (no permit/locks). Finish PGSAMPLE-1’s sample-only L-07/close path before reusing EQ-1 there.

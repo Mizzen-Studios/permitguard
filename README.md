@@ -1,3 +1,5 @@
+> **Current development release: 5.8.0.** The owner-authorized temporary `rovo:agent` removal was required by Atlassian’s Agent not allowed validation gate. Action/MCP tools remain; the proposed renamed agent/generated-answer polish is not claimed live. See [release and admin handoff](docs/scope-loading-polish-2026-11-20.md).
+
 # PermitGuard
 
 Human-confirmed lockout/tagout (LOTO) permit **decision support** for Jira work items and JSM agent requests. Atlassian Forge / Codegeist 2026: Specialized Industries + MCP bonus.
