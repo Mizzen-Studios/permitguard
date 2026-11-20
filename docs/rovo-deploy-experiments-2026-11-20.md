@@ -55,3 +55,57 @@ Owner authorized neutral prompt, resource prompt, fresh identity and agent-remov
   ]
 }
 ```
+
+## 02-role-human-confirmation
+
+```json
+{
+  "attempt": "02-role-human-confirmation",
+  "exitCode": 0,
+  "outcome": "SUCCESS",
+  "environment": "development",
+  "appId": "ari:cloud:ecosystem::app/60f4bdda-1062-4e5b-aab6-1d9a9cf53a90",
+  "agent": [
+    {
+      "key": "permitguard-agent",
+      "name": "PermitGuard Demo LOTO",
+      "description": "LOTO permit decision support. Proposes activation; a named person at equipment must confirm.",
+      "prompt": "Provide LOTO permit decision support only. The site procedure remains authoritative. Always call check_readiness; report NOT CLEARED and its blockers verbatim. request_activation proposes PENDING only, assigned to a named verifier. A human at equipment confirms using QR and tablet.",
+      "conversationStarters": [
+        "Check permit readiness"
+      ],
+      "actions": [
+        "check_readiness",
+        "request_activation"
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "rule": "MANIFEST_INVALID_RULE",
+      "category": "ERROR",
+      "value": false,
+      "reason": "Manifest is valid",
+      "changes": null,
+      "errors": null
+    },
+    {
+      "status": "IN_PROGRESS",
+      "errorDetails": null
+    },
+    {
+      "status": "DONE",
+      "errorDetails": null
+    }
+  ],
+  "receiptLines": [
+    "Deployed PermitGuard to the development environment.",
+    "ℹ The version of your app [5.5.0] that was just deployed to [development] is eligible for the Runs on Atlassian program."
+  ],
+  "requestIds": [
+    "483afa30e33d42d0b7c65bdc5528ad96",
+    "5b47f749ebd64b498c01e6b6fca96b80",
+    "24d7d75ff4f044aaa9b9f1a4e0591da9"
+  ]
+}
+```
