@@ -1,3 +1,5 @@
+> Current release: **development 5.7.0**, code `e34d2ae`; Jira/Confluence installations confirmed up to date. For existing permit 66400, use the latest preserved-permit instructions at the end and do not reset/create over it.
+
 # Owner browser acceptance — 19 November 2026
 
 Development app installed on https://one-atlas-xitr.atlassian.net in Jira and Confluence. Owner browser results at ~21:00 UK: PGSAMPLE-1 and issue panel rendered; Warn-only / FAIL_CLOSED and empty equipment were correct; no per-user consent prompt appeared; Rovo returned NOT CLEARED / NO_PERMIT. The sample loader was blocked by the prior site-admin permission bug. Remaining physical/device, Studio and Realtime acceptance is still unrun.

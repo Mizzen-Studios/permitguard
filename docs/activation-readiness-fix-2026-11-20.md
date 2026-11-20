@@ -38,3 +38,12 @@ Do not try to create a second permit on 66400 or reset its open permit. On an ow
 ## Outstanding boundaries
 
 Development-only release was authorized: DEV badge stays until a separately authorized production deployment. No production deployment, Marketplace/Devpost, promotion, card or real-data operation. Duplicate Rovo agent cleanup remains blocked on identifying the stale agent in a signed-in administrative session: both available Atlassian browser tabs show login; no unidentified agent or app was deleted. Existing original agent key/name and action/MCP contracts are preserved.
+
+## Release receipt — 20 November ~21:06 UTC
+
+- Code **e34d2aeb0896b0b563a64b9d190dd9f8f0f09e0a** pushed before release; clean candidate.
+- Validated **development 5.7.0** deployment succeeded with the full original Rovo agent retained. No fallback removal was needed and no manifest validation bypass used.
+- Jira and Confluence upgrade checks each returned **Site is already at the latest version** for one-atlas-xitr.atlassian.net. Installation list confirms development major 5 / Up-to-date in both products.
+- Final gates: **77 backend + 17 UI tests (94 total)**, connected build, diff checks and known-private-credential source/artifact scan passed. Local app.js SHA-256 **41406c473bd94c89811448cf44b6d99aeeca7dd65dfc45f7404a9f1fab8d6f7f**; HTML 532e4f6c5aa5bcb1131bdfa7581881725bd0b362c07faef18b74ce015daa19f0; CSS 571fcfec77153e860194be7c0ec1e7f9286d25ed730475c3bcc06c28c9332ba9.
+- Deployment receipt/configuration checks do not prove byte-for-byte remote bundle readback or post-release browser/KV-runtime acceptance. Owner re-test remains required. No live permit/sample reset or synthetic lock change was made during this release.
+- Challenge expiry is enforced logically; the dedicated namespace retains the latest record per actor/issue rather than claiming automatic physical TTL deletion. Replay authorization is prevented by expiry plus operational revision binding and final site CAS.
