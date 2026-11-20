@@ -24,17 +24,6 @@ modules:
     description: Opt-in decision-support gate. List and disable before uninstall.
       Project Warn-only is the install default.
     function: gate-release
-  rovo:agent:
-  - key: permitguard-agent
-    name: PermitGuard Live Judge 2026
-    description: LOTO permit decision support. Proposes activation; a named person
-      at equipment must confirm.
-    prompt: resource:agent-resource;prompts/permitguard.txt
-    conversationStarters:
-    - Check permit readiness
-    actions:
-    - check_readiness
-    - request_activation
   action:
   - key: check_readiness
     name: Check readiness

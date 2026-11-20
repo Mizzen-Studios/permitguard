@@ -13,7 +13,7 @@ Owner's 5.7.0 browser results: pre-activation NOT CLEARED / HUMAN_ACTIVATION_REQ
 
 ## Verification
 
-77 backend/integration + 22 UI contract tests (99) passed, build/diff checks passed. Covers explicit ACTIVE scope notice, plain release wording, context-first automatic loading, bounded read retries, recovery from synchronous first invoke failure, delayed issue/admin discrimination, no admin subscription, and preserving filled actual DOM nodes during Saving. Local tests do not prove post-deploy browser behavior, indexed Rovo names or generated-answer wording.
+77 backend/integration + 23 UI contract tests (100) passed, build/diff checks passed. Covers explicit ACTIVE scope notice, plain release wording, context-first automatic loading, bounded read retries, recovery from synchronous first invoke failure, delayed issue/admin discrimination, no admin subscription, and preserving filled actual DOM nodes during Saving. Local tests do not prove post-deploy browser behavior, indexed Rovo names or generated-answer wording.
 
 ## Admin handoff for stale agent entries
 
@@ -32,3 +32,9 @@ Development only. No card, external runtime, production deployment, publication 
 Inline prompt/name candidate 5578e4a failed manifest lint with Agent not allowed. An unchanged standalone-lint retry also failed definitively; no deployment was created. Next attempt uses the official file-backed syntax prompt: resource:agent-resource;prompts/permitguard.txt and declared resource/agent directory, keeping the full same prompt, distinct display name, original key and actions. No validation bypass.
 
 Provisioned one empty synthetic Jira work item **PGSAMPLE-2** (HTTP 201) after checking project 10202 / PGSAMPLE and its dedicated sample marker, an exact-summary duplicate search, and Task type. No app permit, lock, policy or PGSAMPLE-1 record was written. Finish the existing L-07/close sample path before reusing EQ-1 on this new work item.
+
+## Authorized agent fallback
+
+File-backed full prompt attempt 7e89558 also failed at manifest lint with Agent not allowed. Using the owner-authorized fallback: remove ONLY rovo:agent from the development manifest, preserving both action modules, handlers, rovo:mcp, app UUID, scopes and the full prompt resource. The proposed distinct agent name and prompt were NOT deployed and are not claimed live. Restore only the agent module from 7e89558 when validation accepts it, not an old entire source tree. No validation bypass.
+
+Also guarded a QR-preparation race: an external state update during the read-only challenge call causes readback and a specific no-confirmation-submitted message; it never silently drops submission or leaves Saving stuck, and never resubmits a mutation.
