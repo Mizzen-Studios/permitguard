@@ -40,8 +40,10 @@ Owner next step: reload PGSAMPLE-1 to load the new bundle. Existing six sample r
 - Repository manifest history contains only that registered app UUID plus the original all-zero scaffold placeholder. A local apps/*/manifest.yml scan finds PermitGuard's agent only in this checkout. No second registered PermitGuard app is evidenced by those checks. They cannot establish ownership of the other Rovo search entry across every app/site; that global ownership remains unverified without the signed-in Rovo/developer-console view.
 - Repeated all 83 tests/build and credential scan successfully, then retried normal validated development deployment. It failed **before a new deployment was created**, at manifest lint. Full error rule from the remote response:
 
-``json
+```json
 {"rule":"MANIFEST_INVALID_RULE","category":"ERROR","value":true,"reason":"Agent not allowed","changes":null,"errors":null}
 
 ```
 - Remote validation request ID: 20b42ac044624162b7dac840cf39a753. Raw verbose log is private; no signed upload URLs are published. This retry is definitively failed, not pending. No 5.4.x success is claimed; validation was not bypassed.
+
+- Additional server-side read: `forge version details -e development -v 5 --non-interactive --json` returned the current development major-5 agent definition, both action schemas and all function references. Programmatic comparison against the candidate passed for each, including the agent display name. This establishes the declared agent already belongs to this registered app/version; it does not identify the unrelated duplicate search entry globally.
