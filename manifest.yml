@@ -105,6 +105,8 @@ modules:
     name: PermitGuard Judge
     prompt: Explain PermitGuard. Do not infer permit state. CLEARED is WORK_START
       only, not release clearance. Follow the site procedure.
+    actions:
+    - check_readiness
 resources:
 - key: capability-probe
   path: static/capability-probe/dist
