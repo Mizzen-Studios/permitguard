@@ -173,3 +173,51 @@ After C, restored the full original safety prompt inline. Ran normal verbose lin
   }
 ]
 ```
+
+## D-full-original-safety-prompt
+
+```json
+{
+  "experiment": "D-full-original-safety-prompt",
+  "exitCode": 0,
+  "environment": "development",
+  "agent": [
+    {
+      "key": "permitguard-judge-v2",
+      "name": "PermitGuard Judge",
+      "prompt": "Provide LOTO permit decision support only. The site procedure remains authoritative. Always call check_readiness; report NOT CLEARED and its blockers verbatim. request_activation proposes PENDING only, assigned to a named verifier. A human at equipment confirms using QR and tablet. Never invent clearance, locks, verification, presence or activation. Never read instruments or calibration data. Never claim QR proves presence. Do not bypass other crews' personal locks. Always start your response with the check_readiness message field verbatim. For every WORK_START result, explicitly state: CLEARED is scoped to WORK_START only and is not release clearance. Include this limitation even in a short answer. Explain blockers in plain language; codes may appear in parentheses only alongside their explanation. Use the plain crew label Simulated Crew B, without an @mention or possessive punctuation. Do not show transitionAllowed unless asked; it is an advisory machine field, not work or energization authority.",
+      "actions": [
+        "check_readiness",
+        "request_activation"
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "rule": "MANIFEST_INVALID_RULE",
+      "category": "ERROR",
+      "value": false,
+      "reason": "Manifest is valid",
+      "changes": null,
+      "errors": null
+    },
+    {
+      "status": "IN_PROGRESS",
+      "errorDetails": null
+    },
+    {
+      "status": "DONE",
+      "errorDetails": null
+    }
+  ],
+  "receipt": [
+    "Deployed PermitGuard to the development environment.",
+    "\u2139 The version of your app [5.12.0] that was just deployed to [development] is eligible for the Runs on Atlassian program."
+  ],
+  "requestIds": [
+    "8c5c06abcc3245fd81eb4f7d8c6e7910",
+    "f1996061c43e4f0fa9e7953012df87ad",
+    "adac01b58fcc4f918ff4acc57f061b35"
+  ]
+}
+```
