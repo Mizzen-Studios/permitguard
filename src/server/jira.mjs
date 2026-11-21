@@ -12,7 +12,7 @@ export function jiraAdapters(api, route) {
       ]);
       const projectId = String(issue.fields?.project?.id || '');
       if (!projectId) throw new Error('Trusted issue project unavailable');
-      return { actorId, displayName: profile?.accountId === actorId ? profile.displayName : undefined, issueId: String(issue.id), projectId, isSiteAdmin: body.permissions?.ADMINISTER?.havePermission === true, isProjectAdmin: body.permissions?.ADMINISTER_PROJECTS?.havePermission === true || body.permissions?.ADMINISTER?.havePermission === true, canEdit: body.permissions?.EDIT_ISSUES?.havePermission === true };
+      return { actorId, displayName: profile?.accountId === actorId ? profile.displayName : undefined, issueId: String(issue.id), issueKey:issue.key||null, projectId, projectKey:issue.fields?.project?.key||null, projectName:issue.fields?.project?.name||null, isSiteAdmin: body.permissions?.ADMINISTER?.havePermission === true, isProjectAdmin: body.permissions?.ADMINISTER_PROJECTS?.havePermission === true || body.permissions?.ADMINISTER?.havePermission === true, canEdit: body.permissions?.EDIT_ISSUES?.havePermission === true };
     },
     async projectIsSample(projectId) {
       const project = await requireOk(await api.asUser().requestJira(route`/rest/api/3/project/${projectId}`), 'Sample project');

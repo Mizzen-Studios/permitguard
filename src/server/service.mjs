@@ -50,7 +50,7 @@ export function createService({ store, challenges, authorize, projectIsSample, v
       // Site-wide locks are checked, but details from unreadable other issues never leave server.
       return { ...checked, reasons: checked.reasons.map(r => r.code === 'LOCK_REMAINS' && !(project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner === actorId && r.crewId === 'Crew B (SIMULATED)') ? { code: 'LOCK_REMAINS', message: 'A personal lock remains on shared equipment; check the site lock board.' } : (r.code==='LOCK_REMAINS'&&r.crewId==='Crew B (SIMULATED)'?{...r,message:'Simulated Crew B lock '+r.lockId+' remains on isolation point '+r.pointId+'.'}:r)) };
     };
-    const result = () => ({ permit, sampleCrewB: project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner===actorId ? { exists:true, active:site.permits['sample-crew-b:'+issueId].locks.some(l=>!l.removedAt), locks:site.permits['sample-crew-b:'+issueId].locks.filter(l=>!l.removedAt).map(l=>({...l,simulated:true,name:'Crew B (simulated)'})) } : {exists:false}, policy: project.policy, equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus, source: project.source || 'BUILT_IN_REGISTER' }, realtime: { channel: 'permitguard' }, capabilities: { assetsImport: true }, actorId, actorDisplayName: auth.displayName || "Signed-in worker", isProjectAdmin: auth.isProjectAdmin === true, readiness: readiness(), isolationReadiness: isolationReadiness(), release: release(), revision: row.revision,
+    const result = () => ({ issueKey:auth.issueKey||null, projectName:auth.projectName||null, projectKey:auth.projectKey||null, permit, sampleCrewB: project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner===actorId ? { exists:true, active:site.permits['sample-crew-b:'+issueId].locks.some(l=>!l.removedAt), locks:site.permits['sample-crew-b:'+issueId].locks.filter(l=>!l.removedAt).map(l=>({...l,simulated:true,name:'Crew B (simulated)'})) } : {exists:false}, policy: project.policy, equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus, source: project.source || 'BUILT_IN_REGISTER' }, realtime: { channel: 'permitguard' }, capabilities: { assetsImport: true }, actorId, actorDisplayName: auth.displayName || "Signed-in worker", isProjectAdmin: auth.isProjectAdmin === true, readiness: readiness(), isolationReadiness: isolationReadiness(), release: release(), revision: row.revision,
       // Never leak another issue/project, actor or crew through the site-wide aggregate.
       board: permit ? permit.equipment.map(e => ({ equipmentId: e.id, activeLockCount: all().reduce((count, p) => count + p.locks.filter(l => !l.removedAt && p.equipment.some(pe => pe.id === e.id && pe.isolationPoints.some(pt => pt.id === l.pointId))).length, 0) })) : [],
       limitations: ['Decision support only; site procedure authoritative.', 'QR challenge and human attestation are not independent proof of physical presence.', ...(project.source === 'ASSETS' ? [registerAvailable ? 'Assets checked as connected user; metadata is not physical isolation evidence.' : 'Assets unavailable or changed: reimport required; no clearance authority.'] : ['Built-in register only; no Assets authority; external changes are not detected.'])] });
@@ -162,11 +162,12 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     // No retry after uncertain commit; return error and require refresh. Domain changes only persist here.
     const revision = await store.commit(row.revision, site);
     const response = { ...result(), revision, projection: { status: 'NOT_ATTEMPTED' } };
-    if (permit && projectProperty) {
-      try { await projectProperty(issueId, projection(permit, readiness(), release(), project.policy)); response.projection.status = 'UPDATED'; }
-      catch { response.projection.status = 'FAILED_NONAUTHORITATIVE'; }
-    }
-    if (publish) { try { await publish({ revision }); } catch { response.realtime = 'UNAVAILABLE'; } }
+    // Independent non-authoritative side effects run together, only AFTER the atomic commit.
+    // Both settle before replying; neither is a detached task or a reason to retry a mutation.
+    await Promise.all([
+      permit&&projectProperty ? Promise.resolve().then(()=>projectProperty(issueId,projection(permit,readiness(),release(),project.policy))).then(()=>{response.projection.status='UPDATED';},()=>{response.projection.status='FAILED_NONAUTHORITATIVE';}) : Promise.resolve(),
+      publish ? Promise.resolve().then(()=>publish({revision})).catch(()=>{response.realtime='UNAVAILABLE';}) : Promise.resolve()
+    ]);
     return response;
   };
 }

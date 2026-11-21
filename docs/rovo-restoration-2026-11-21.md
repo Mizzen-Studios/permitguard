@@ -144,3 +144,32 @@ Experiment A uses fresh key permitguard-judge-v2, short ASCII name PermitGuard J
   ]
 }
 ```
+
+## Controlled key-only lint comparison
+
+After C, restored the full original safety prompt inline. Ran normal verbose lint with the same name/prompt/actions and only the key changed, old first then fresh. No old-key deployment occurred. Results:
+
+```json
+[
+  {
+    "key": "permitguard-agent",
+    "exitCode": 0,
+    "agentNotAllowed": false,
+    "noIssuesFound": true,
+    "requestIds": [
+      "a9a22ec50d8645b0a61e33cc6d59d2f8",
+      "0f69ef16fea44cee890fdaf2e4a3d4aa"
+    ]
+  },
+  {
+    "key": "permitguard-judge-v2",
+    "exitCode": 1,
+    "agentNotAllowed": true,
+    "noIssuesFound": false,
+    "requestIds": [
+      "260768a2b6584c539145caa795b8e780",
+      "6d31734ec3884fe795338de21ed7513a"
+    ]
+  }
+]
+```

@@ -6,11 +6,11 @@ import { jiraAdapters } from '../src/server/jira.mjs';
 import { createForgeWiring } from '../src/forge/actions.mjs';
 import { issueInvalidationPublisher } from '../src/server/realtime.mjs';
 // All storage/Jira checks below are local mocks, NOT Forge/site acceptance.
-function fixture() {
+function fixture({projectProperty,publish}={}) {
   let row = { revision: null, data: emptySite() }, seq = 0;
   const store = { atomic: true, async read() { return structuredClone(row); }, async commit(expected, data) { assert.equal(expected, row.revision, 'CONFLICT'); row = { revision: row.revision === null ? 0 : row.revision + 1, data: structuredClone(data) }; return row.revision; } };
   const challengeRows=new Map();
-  const dispatch = createService({ challenges:{put:async c=>challengeRows.set(c.actorId+':'+c.issueId,structuredClone(c)),get:async(a,i)=>structuredClone(challengeRows.get(a+':'+i))}, store, authorize: async c => { if (!c.accountId) throw new Error('AUTH'); return { actorId: c.accountId, issueId: c.issueId || '1', projectId: c.projectId || '10', isProjectAdmin: c.admin !== false, canEdit: c.edit !== false }; }, projectIsSample: async p => p === '10', validatePeople: async people => assert.ok(people.every(x => ['alice','bob'].includes(x))), now: () => '2026-11-19T18:00:00Z', uuid: () => 'token-' + ++seq });
+  const dispatch = createService({ projectProperty,publish,challenges:{put:async c=>challengeRows.set(c.actorId+':'+c.issueId,structuredClone(c)),get:async(a,i)=>structuredClone(challengeRows.get(a+':'+i))}, store, authorize: async c => { if (!c.accountId) throw new Error('AUTH'); return { actorId: c.accountId, issueId: c.issueId || '1', projectId: c.projectId || '10', isProjectAdmin: c.admin !== false, canEdit: c.edit !== false }; }, projectIsSample: async p => p === '10', validatePeople: async people => assert.ok(people.every(x => ['alice','bob'].includes(x))), now: () => '2026-11-19T18:00:00Z', uuid: () => 'token-' + ++seq });
   const ctx = { accountId: 'alice' };
   const call = (op,p = {},c = ctx) => dispatch(op,p,c);
   return { call, store, dispatch, challengeRows, get row() { return row; } };
@@ -149,4 +149,17 @@ test('dedicated Forge challenge records are bounded per actor/issue and never us
 test('sample lock details are returned only to the synthetic owner',async()=>{
  const f=fixture();await created(f);await f.call('play_crew_b',{confirmed:true});const mine=await f.call('get_state');assert.equal(mine.sampleCrewB.locks[0].lockId,'L-07');assert.equal(mine.sampleCrewB.locks[0].simulated,true);
  const other=await f.call('get_state',{}, {accountId:'bob'});assert.equal(other.sampleCrewB.exists,false);assert.equal(other.sampleCrewB.locks,undefined);assert.ok(other.board[0].activeLockCount>0);
+});
+
+test('projection and Realtime run concurrently only after the atomic commit',async()=>{
+ let block=false,releaseProperty,notifyStarted;const propertyWait=new Promise(r=>releaseProperty=r),notification=new Promise(r=>notifyStarted=r);
+ const f=fixture({projectProperty:async()=>{if(block)await propertyWait;},publish:async()=>{if(block)notifyStarted();}});await created(f);const before=f.row.revision;block=true;
+ const saving=f.call('begin_lock');await notification;assert.equal(f.row.revision,before+1);assert.equal(f.row.data.permits['1'].state,'LOCK');releaseProperty();const result=await saving;assert.equal(result.projection.status,'UPDATED');assert.equal(result.revision,before+1);
+});
+test('parallel post-commit failures remain nonauthoritative and never repeat a mutation',async()=>{
+ let properties=0,notifications=0;const f=fixture({projectProperty:async()=>{properties++;throw new Error('private projection failure');},publish:async()=>{notifications++;throw new Error('private notification failure');}});await created(f);const before=f.row.revision,p=properties,n=notifications;const result=await f.call('begin_lock');assert.equal(result.revision,before+1);assert.equal(properties,p+1);assert.equal(notifications,n+1);assert.equal(result.projection.status,'FAILED_NONAUTHORITATIVE');assert.equal(result.realtime,'UNAVAILABLE');assert.equal(result.permit.state,'LOCK');
+});
+test('friendly issue/project labels come from the authorized Jira issue, not client claims',async()=>{
+ const route=(p,...a)=>p.reduce((s,t,i)=>s+t+(a[i]??''),'');const api={asUser:()=>({requestJira:async path=>({ok:true,status:200,json:async()=>path.includes('mypermissions')?{permissions:{EDIT_ISSUES:{havePermission:true}}}:path.includes('myself')?{accountId:'alice',displayName:'Alice'}:{id:'66401',key:'PGSAMPLE-2',fields:{project:{id:'10202',key:'PGSAMPLE',name:'PermitGuard Sample Plant'}}}})})};
+ const auth=await jiraAdapters(api,route).authorize({accountId:'alice',extension:{issue:{id:'66401'}},projectName:'forged'});assert.equal(auth.issueKey,'PGSAMPLE-2');assert.equal(auth.projectName,'PermitGuard Sample Plant');assert.equal(auth.projectKey,'PGSAMPLE');
 });
