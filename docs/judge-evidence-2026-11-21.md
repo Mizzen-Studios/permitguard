@@ -1,3 +1,5 @@
+> Latest owner baseline ~21:05 UK passes one-agent picker, new-chat WORK_START-only reply and inline/readable ACTIVE site revision 22 / one L-A1. Development **5.13.0** now adds startup/top-banner/wording changes; [separate evidence and retest](first-paint-2026-11-21.md). Historical pending-picker notes below are superseded by that owner result.
+
 > Current correction (~17:15 UTC): two valid product-owned agents, not a stale entry. Confluence-only uninstall completed; exactly one Jira install remains. [Verified topology and retest](jira-only-demo-2026-11-21.md).
 
 # Judge-readiness evidence — 21 November 2026

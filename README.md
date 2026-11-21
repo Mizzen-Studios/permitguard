@@ -1,4 +1,4 @@
-> **Current development release: 5.12.0, Jira-only demo.** The duplicate agents came from valid Jira + Confluence installs, not a stale agent. Confluence was uninstalled with owner authorization; `forge install list` confirms only the original Jira install remains. [Fix and exact retest](docs/jira-only-demo-2026-11-21.md). Final one-result picker confirmation is pending the owner browser check.
+> **Current development release: 5.13.0**, source `299644f`, Jira only. Parallel startup with a historical, nonactionable issue-property preview, deferred Realtime, top release blocker and one-caveat Rovo prompt. [Evidence and exact cold-load retest](docs/first-paint-2026-11-21.md). Owner accepted the one-agent picker/native scoped reply and inline/readable ACTIVE sample on 5.12.0 at ~21:05 UK; new startup timing/wording/viewport acceptance is pending.
 
 # PermitGuard
 
@@ -14,6 +14,8 @@ Human-confirmed lockout/tagout (LOTO) permit **decision support** for Jira work 
 ## Judge pack — current evidence, not inferred acceptance
 
 - [Dated integrity/acceptance evidence and duplicate-agent investigation](docs/judge-evidence-2026-11-21.md)
+- [Production deployment plan — NOT executed](docs/production-deploy-plan.md)
+- [Devpost text drafts — NOT submitted](docs/devpost-draft.md)
 - [Private demo recording script](docs/demo-video-script.md) — prepared, **not recorded or published**
 - [Exact test instructions, negative cases and remaining gates](docs/judge-test-instructions.md)
 - [Read-only fixture/history checker](scripts/check-demo-integrity.py) — no repair/site writes; does not read raw Forge storage

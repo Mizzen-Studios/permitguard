@@ -1,3 +1,5 @@
+> **Latest 5.13.0:** [first useful render / top release status / one-caveat retest](first-paint-2026-11-21.md). Owner confirmed one picker entry and native scoped reply on 5.12.0 at ~21:05 UK. Keep PGSAMPLE-2 active; no reset.
+
 > **Current:** duplicate entries were valid Jira/Confluence registrations. Confluence-only uninstall is complete; original Jira installation remains. Use [the current Jira-only retest](jira-only-demo-2026-11-21.md); no Rovo UI deletion. Older stale-agent investigation notes below are historical, not current instructions.
 
 > Latest owner results and integrity check: [21 November ~13:05 UK](judge-evidence-2026-11-21.md). Native Rovo scoped reply and readable UI/admin passed; two same-name agents remain an explicit blocked cleanup. [Current test instructions](judge-test-instructions.md), [private recording script](demo-video-script.md).
