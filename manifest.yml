@@ -100,6 +100,11 @@ modules:
     resolver:
       function: probe-resolver
     title: PermitGuard
+  rovo:agent:
+  - key: permitguard-judge-v2
+    name: PermitGuard Judge
+    prompt: Explain PermitGuard. Do not infer permit state. CLEARED is WORK_START
+      only, not release clearance. Follow the site procedure.
 resources:
 - key: capability-probe
   path: static/capability-probe/dist
