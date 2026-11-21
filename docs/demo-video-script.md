@@ -4,7 +4,7 @@
 
 ## Recording preflight
 
-1. Resolve the two-agent picker blocker in [evidence](judge-evidence-2026-11-21.md); prove one live entry with the tested tool response. Do not film two entries and pretend the ambiguity is resolved.
+1. Verify a single picker entry after the authorized Confluence-only uninstall in [the current retest](jira-only-demo-2026-11-21.md); prove the remaining Jira agent gives the scoped tool response. Do not delete valid product-owned agents through Rovo UI. Do not film two entries and pretend the ambiguity is resolved.
 2. Open [PGSAMPLE-2](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2). Current starting point is ACTIVE, own L-A1 only at the last accepted state; verify current state and signed-in worker before recording. No resets, storage edits or impersonation. If an expected lock/state differs, stop and reconcile rather than reseed over an open permit.
 3. Open a second same-issue tab for invalidation delivery and the current Rovo agent. Test microphone/framing locally. Leave real Saving time visible; do not imply mock speedups. Any later edited transition must be labelled as an edit, not live elapsed time.
 4. App panel may be inline. On a fresh issue: **View app actions → PermitGuard**. Admin optional panel menu **Show for all work items**; no blanket auto-open guarantee.

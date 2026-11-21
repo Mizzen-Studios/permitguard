@@ -1,3 +1,5 @@
+> **Current:** duplicate entries were valid Jira/Confluence registrations. Confluence-only uninstall is complete; original Jira installation remains. Use [the current Jira-only retest](jira-only-demo-2026-11-21.md); no Rovo UI deletion. Older stale-agent investigation notes below are historical, not current instructions.
+
 > Latest owner results and integrity check: [21 November ~13:05 UK](judge-evidence-2026-11-21.md). Native Rovo scoped reply and readable UI/admin passed; two same-name agents remain an explicit blocked cleanup. [Current test instructions](judge-test-instructions.md), [private recording script](demo-video-script.md).
 
 > Current release: **development 5.12.0**, executable candidate `32efded`; Rovo **PermitGuard Judge** restored with full boundaries and both actions. [Current exact retest](rovo-restoration-2026-11-21.md). PGSAMPLE-2’s ACTIVE permit is preserved.

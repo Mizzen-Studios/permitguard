@@ -1,3 +1,5 @@
+> Current demo is Jira-only after the authorized Confluence uninstall. [Current operation and retest](jira-only-demo-2026-11-21.md). Do not delete product-owned agents through Rovo UI.
+
 # Judge test instructions and release gates
 
 ## Current sample — no reset needed
@@ -5,7 +7,7 @@
 Development 5.12.0, [PGSAMPLE-2](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2), latest owner-observed ACTIVE/site revision 22, derived permit revision 6. Read the [dated evidence](judge-evidence-2026-11-21.md) first. Jira assignee is restored; description unchanged. Jira To Do and app ACTIVE are separate state machines.
 
 1. Hard-reload. If not inline, **View app actions → PermitGuard**. Expect readable project/work-item names, Enforce / Block while the register is unavailable, live authenticated state and one personal-lock record. Do not change mode or reseed equipment.
-2. Rovo search must ultimately show **exactly one verified live** PermitGuard Judge. Currently **BLOCKED: owner sees two; admin identity inspection/removal still needed**. Do not select by icon alone. Test the known live entry: “Check readiness for PGSAMPLE-2. State its scope and release status.” Expect **CLEARED for WORK_START only. This is not release clearance** and release NOT CLEARED. A read must not increment operational revision.
+2. Rovo search must ultimately show **exactly one verified live** PermitGuard Judge. The two valid product-owned entries were traced to Jira and Confluence installs. Confluence is now removed; verify one entry after reload/index propagation, with Jira preserved. Do not remove agents through Rovo UI. Test the known live entry: “Check readiness for PGSAMPLE-2. State its scope and release status.” Expect **CLEARED for WORK_START only. This is not release clearance** and release NOT CLEARED. A read must not increment operational revision.
 3. Administration: readable permission groups, no raw JSON/consent metadata or issue-subscription warning. Declared scope text does not prove every capability is currently configured.
 4. When the owner is ready to finish the synthetic scenario: Play Crew B only if absent → Begin release checks → remove own L-A1. Expect NOT CLEARED / Simulated Crew B lock L-07 remains on isolation point V-3, Close disabled, and another browser re-reads current state. Rovo must report release NOT CLEARED in plain words. Note actual save/delivery durations; do not substitute older timing evidence.
 5. Only the sample's creator may explicitly Remove my simulated Crew B lock. After all personal locks are gone and named-human close-out passes, Close can succeed with the not-permission-to-energize warning. Do not remove any real other worker's lock or claim physical safety.
@@ -35,12 +37,12 @@ The checker only performs GETs against the fixed synthetic issue, complete bound
 
 ## Explicit remaining acceptance gates
 
-- Identify/delete stale agent and verify one-result picker with the working scoped reply.
+- Verify one-result picker after the Confluence-only uninstall, with the working scoped reply; no Rovo UI deletion.
 - On a new Verify permit, request_activation via the actual Rovo agent creates PENDING only; same assigned human confirms. No activation tool or unassigned-human bypass.
 - Studio custom-agent and external OAuth MCP client: real end-to-end checks, not manifest inference.
 - High energy: two distinct consenting named humans; negative one-person test, no impersonation.
 - Jira workflow Preview gate execution, JQL indexing and administrator/uninstall recovery; deletion is currently unsupported and manual recovery must be retained.
-- Restricted Confluence archive only after explicit admin selects/authorizes a space. No live archive/export/compliance retention claim yet.
+- Optional Confluence macro/archive is unavailable with this Jira-only installation. Any later archive test requires separate authorization to restore the product dependency, address per-install agent registration and select a restricted space. No live archive/export/compliance retention claim yet.
 - Video: actual private recording, measured real timings, privacy check and source evidence. Script alone is NOT a video. Confirm official contest rules before any later owner-authorized upload/submission.
 
 Do not add a card, paid resource, external runtime, listing, publication or submission. Keep native Jira/Forge identities, issue permissions and site procedure authoritative.

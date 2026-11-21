@@ -1,4 +1,4 @@
-> **Current development release: 5.12.0.** Owner browser checks on 21 November confirm native Rovo WORK_START-only wording, readable panel/admin and the active sample. **Open blocker: two same-name Rovo picker entries; stale identity/removal requires an authenticated admin session.** [Current evidence](docs/judge-evidence-2026-11-21.md).
+> **Current development release: 5.12.0, Jira-only demo.** The duplicate agents came from valid Jira + Confluence installs, not a stale agent. Confluence was uninstalled with owner authorization; `forge install list` confirms only the original Jira install remains. [Fix and exact retest](docs/jira-only-demo-2026-11-21.md). Final one-result picker confirmation is pending the owner browser check.
 
 # PermitGuard
 
@@ -13,7 +13,7 @@ Human-confirmed lockout/tagout (LOTO) permit **decision support** for Jira work 
 
 ## Judge pack — current evidence, not inferred acceptance
 
-- [Dated integrity/acceptance evidence and duplicate-agent blocker](docs/judge-evidence-2026-11-21.md)
+- [Dated integrity/acceptance evidence and duplicate-agent investigation](docs/judge-evidence-2026-11-21.md)
 - [Private demo recording script](docs/demo-video-script.md) — prepared, **not recorded or published**
 - [Exact test instructions, negative cases and remaining gates](docs/judge-test-instructions.md)
 - [Read-only fixture/history checker](scripts/check-demo-integrity.py) — no repair/site writes; does not read raw Forge storage
@@ -48,7 +48,7 @@ Derived issue property permitguard.snapshot supports Automation and JQL aliases 
 
 Manifest modules are rovo:agent, **action** (not rovo:action), and Preview **rovo:mcp**. check_readiness accepts issueKey; request_activation accepts issueKey and verifierId. Caller identity comes from the platform principal; issue access is checked as that user. No agent confirmation tool exists.
 
-Native **PermitGuard Judge** read-only readiness, including explicit WORK_START-only / not-release wording, passed the owner browser check on 21 November ~13:05 UK. Two picker entries remain unresolved; only one agent is declared by the deployed manifest, which does not prove one indexed result. Actual Rovo pending-proposal execution, Studio custom-agent tools and external MCP acceptance remain separate owner browser tests. An administrator enables tools in Connected apps; external clients use Atlassian OAuth consent, not an anonymous endpoint. CREATE actions are not promised from Rovo Automation triggers. A planner may report NOT CLEARED and propose rescheduling through its own separately authorized scheduler. PermitGuard does not edit schedules or call external APIs.
+Native **PermitGuard Judge** read-only readiness, including explicit WORK_START-only / not-release wording, passed the owner browser check on 21 November ~13:05 UK. The two entries were valid registrations from Jira and Confluence installs; the optional Confluence install is now removed. One Jira installation remains; verify the final picker count in the browser. Actual Rovo pending-proposal execution, Studio custom-agent tools and external MCP acceptance remain separate owner browser tests. An administrator enables tools in Connected apps; external clients use Atlassian OAuth consent, not an anonymous endpoint. CREATE actions are not promised from Rovo Automation triggers. A planner may report NOT CLEARED and propose rescheduling through its own separately authorized scheduler. PermitGuard does not edit schedules or call external APIs.
 
 ## Confluence
 
