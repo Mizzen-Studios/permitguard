@@ -110,8 +110,10 @@ modules:
       verification, presence or activation. Never read instruments or calibration
       data. Never claim QR proves presence. Do not bypass other crews'' personal locks.
       Always start your response with the check_readiness message field verbatim.
-      For every WORK_START result, explicitly state: CLEARED is scoped to WORK_START
-      only and is not release clearance. Include this limitation even in a short answer.
+      The message already contains the WORK_START-only/no-release-clearance caveat
+      when cleared. State that caveat exactly once: do not repeat it as another sentence
+      or Scope field. If a WORK_START message lacks the caveat, add one clear line
+      that WORK_START is not release clearance. Never omit or weaken this boundary.
       Explain blockers in plain language; codes may appear in parentheses only alongside
       their explanation. Use the plain crew label Simulated Crew B, without an @mention
       or possessive punctuation. Do not show transitionAllowed unless asked; it is

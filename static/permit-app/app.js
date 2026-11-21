@@ -1,7 +1,8 @@
-import { invoke, realtime, view } from '@forge/bridge';
+import { invoke, realtime, view, requestJira } from '@forge/bridge';
 const root = document.querySelector('#app');
 const stages = ['PLAN','LOCK','VERIFY','ACTIVE','RELEASE','CLOSED'];
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let preview = null;
 let state = null, busy = false, stale = true, error = '', notice = '', sync = 'Not subscribed; use Refresh', subscription, refreshing, adminResult = null, rules = [], playingCrewB = false, snapshotIssue = '', pendingInvalidation = false, pendingRevision = null, initializing = true, saveStartedAt = 0, saveStage = '', saveTimer = null;
 const call = (operation, payload = {}) => invoke('permitguard', {operation, payload});
 const button = (label, action, primary = false, attrs = '') => '<button type="button" class="'+(primary?'primary':'secondary')+'" data-action="'+action+'" '+(busy||stale?'disabled ':'')+attrs+'>'+escape(label)+'</button>';
@@ -70,6 +71,29 @@ function specialView() {
  if(state?.kind==='PERMITGUARD_LOCK_BOARD_SNAPSHOT') return '<h1>Lock-board snapshot</h1><p>'+escape(state.label)+'</p><p>Not live. Choose a work item you can access; no other issue records are disclosed.</p><label for="snapshotIssue">Jira work item key</label><input id="snapshotIssue" value="'+escape(snapshotIssue)+'"><button data-action="load_snapshot">Load authorized snapshot</button><pre>'+escape(JSON.stringify(state.permits || [],null,2))+'</pre>';
  return '';
 }
+function releaseSummary(){
+ if(state?.kind)return '';
+ if(state?.permit){
+  const confirmed=!stale&&state.release?.status==='CLEARED';
+  const title=stale?'Release unconfirmed — last server read':confirmed?'Release records CLEARED — not energization authority':'Release NOT CLEARED';
+  const details=(state.release?.reasons||[]).slice(0,2).map(r=>r.message||'Inspect the current permit.').join(' ');
+  return '<section class="release-summary '+(confirmed?'release-records':'release-blocked')+'" role="status" aria-live="polite"><strong>'+escape(title)+'</strong><span>'+escape(details||'Follow the site release procedure; this record is not permission to energize.')+'</span></section>';
+ }
+ if(preview)return '<section class="release-summary projection-preview" role="status"><strong>Historical preview — not live or actionable</strong><span>Last recorded release: '+(preview.releaseBlocked?'NOT CLEARED':'unconfirmed')+'. Checking current permissions and app state.</span></section>';
+ return '';
+}
+async function loadPreview(context){
+ const id=String(context?.extension?.issue?.id||'');
+ if(!/^[0-9]+$/.test(id)||typeof requestJira!=='function')return false;
+ try{
+  const response=await requestJira('/rest/api/3/issue/'+id+'/properties/permitguard.snapshot');
+  if(!response.ok)return false;
+  const p=(await response.json()).value;
+  if(state||!initializing||p?.schemaVersion!==1||p.authoritative!==false||p.permitId!==id||!stages.includes(p.state)||!Number.isSafeInteger(p.revision)||p.revision<0||!Number.isSafeInteger(p.activeLockCount)||p.activeLockCount<0||!Number.isFinite(Date.parse(p.updatedAt))||Date.parse(p.updatedAt)>Date.now()+60000)return false;
+  // Only bounded metadata from the current user's issue; no persistent/client storage.
+  preview={phase:p.state,locks:p.activeLockCount,permitRevision:p.revision,updatedAt:p.updatedAt,releaseBlocked:p.release?.cleared===false};render();return true;
+ }catch{return false;}
+}
 function render() {
  // Keep the actual form nodes (including file inputs, QR and checkbox) while saving.
  const connection=root.querySelector('#connection-status'),feedback=root.querySelector('#feedback');
@@ -81,18 +105,19 @@ function render() {
  }
 
  if(state?.kind) { root.innerHTML='<main><div class="safety">Decision support only; site procedure authoritative.</div><div role="status">'+escape(error || notice)+'</div>'+specialView()+'<button data-action="refresh">Refresh snapshot</button></main>'; return; }
- root.innerHTML='<header class="masthead"><div class="brand"><span class="brand-mark" aria-hidden="true">P<span></span></span><b>PermitGuard</b></div><span class="prototype">Connected isolation clipboard</span></header><div class="safety">Decision support only. Follow your site permit procedure. No offline mode or safety certification.</div><main><div id="feedback" role="'+(error?'alert':'status')+'" aria-live="polite">'+(error?'<div class="blocked">'+escape(error)+'</div>':'')+(notice?'<div class="notice">'+escape(notice)+'</div>':'')+'</div><div class="connection"><span id="connection-status">'+escape(busy?'Saving…':initializing?'Loading authenticated state…':stale?'State unconfirmed — refresh before acting':'Server read '+new Date(state?.observedAt || Date.now()).toLocaleTimeString())+'<small>'+escape(initializing?'Connecting automatically…':stale&&sync==='Live updates connected'?'Updates subscribed; current state unconfirmed':sync)+'</small></span><button type="button" class="secondary" data-action="refresh" '+(busy?'disabled':'')+'>Refresh</button></div>'+(state?'<div class="permit-head"><div><p class="issue">'+escape(state.projectName || state.projectKey || 'Current project')+' · '+escape(state.issueKey || 'Current work item')+'</p><h1>'+(state.permit?'Isolation permit':'Prepare the work')+'</h1><p class="subtle">Signed-in account: '+escape(state.actorDisplayName || 'Signed-in worker')+' · revision '+escape(state.revision ?? state.permit?.revision ?? 'not created')+'</p></div><div class="mode"><strong>'+escape(state.policy?.mode==='ENFORCE'?'Enforce':'Warn-only')+'</strong><span>'+escape(state.policy?.failMode==='FAIL_OPEN_WITH_ALERT'?'Warn during register outages':'Block while the register is unavailable')+'</span><small>Advisory workflow allowance never means safe activation.</small></div></div><ol class="steps" aria-label="Permit progress">'+stages.map((s,i) => '<li '+(s===(state.permit?.state || 'PLAN')?'aria-current="step"':'')+'><span>'+(i+1)+'</span>'+s.charAt(0)+s.slice(1).toLowerCase()+'</li>').join('')+'</ol>'+(!state.equipment?.length?admin():'')+'<div class="workspace"><section id="work" tabindex="-1" class="work-sheet" aria-label="Current permit step">'+work()+'</section>'+board()+'</div>'+(state.equipment?.length?admin():'')+mapping():'<section id="work" class="work-sheet" tabindex="-1"><h1>'+(initializing?'Loading PermitGuard':'App state unavailable')+'</h1><p>'+(initializing?'Reading authenticated app state automatically.':'Unable to confirm app state after automatic connection attempts. Use Refresh to reconnect.')+' No action is available until the server confirms it.</p></section>')+'</main>';
+ root.innerHTML='<header class="masthead"><div class="brand"><span class="brand-mark" aria-hidden="true">P<span></span></span><b>PermitGuard</b></div><span class="prototype">Connected isolation clipboard</span></header><div class="safety">Decision support only. Follow your site permit procedure. No offline mode or safety certification.</div><main>'+releaseSummary()+'<div id="feedback" role="'+(error?'alert':'status')+'" aria-live="polite">'+(error?'<div class="blocked">'+escape(error)+'</div>':'')+(notice?'<div class="notice">'+escape(notice)+'</div>':'')+'</div><div class="connection"><span id="connection-status">'+escape(busy?'Saving…':initializing?'Loading authenticated state…':stale?'State unconfirmed — refresh before acting':'Server read '+new Date(state?.observedAt || Date.now()).toLocaleTimeString())+'<small>'+escape(initializing?'Connecting automatically…':stale&&sync==='Live updates connected'?'Updates subscribed; current state unconfirmed':sync)+'</small></span><button type="button" class="secondary" data-action="refresh" '+(busy?'disabled':'')+'>Refresh</button></div>'+(state?'<div class="permit-head"><div><p class="issue">'+escape(state.projectName || state.projectKey || 'Current project')+' · '+escape(state.issueKey || 'Current work item')+'</p><h1>'+(state.permit?'Isolation permit':'Prepare the work')+'</h1><p class="subtle">Signed-in account: '+escape(state.actorDisplayName || 'Signed-in worker')+' · revision '+escape(state.revision ?? state.permit?.revision ?? 'not created')+'</p></div><div class="mode"><strong>'+escape(state.policy?.mode==='ENFORCE'?'Enforce':'Warn-only')+'</strong><span>'+escape(state.policy?.failMode==='FAIL_OPEN_WITH_ALERT'?'Warn during register outages':'Block while the register is unavailable')+'</span><small>Advisory workflow allowance never means safe activation.</small></div></div><ol class="steps" aria-label="Permit progress">'+stages.map((s,i) => '<li '+(s===(state.permit?.state || 'PLAN')?'aria-current="step"':'')+'><span>'+(i+1)+'</span>'+s.charAt(0)+s.slice(1).toLowerCase()+'</li>').join('')+'</ol>'+(!state.equipment?.length?admin():'')+'<div class="workspace"><section id="work" tabindex="-1" class="work-sheet" aria-label="Current permit step">'+work()+'</section>'+board()+'</div>'+(state.equipment?.length?admin():'')+mapping():'<section id="work" class="work-sheet" tabindex="-1"><h1>'+(preview?'Checking live permit':initializing?'Loading PermitGuard':'App state unavailable')+'</h1>'+(preview?'<p>Last recorded phase: <b>'+escape(preview.phase)+'</b> · '+escape(preview.locks)+' lock record(s) · permit revision '+escape(preview.permitRevision)+'</p><p class="subtle">Projection recorded '+escape(when(preview.updatedAt))+'. It may be stale; no actions or live clearance are available from this preview.</p>':'')+'<p>'+(initializing?'Reading authenticated app state automatically.':'Unable to confirm app state after automatic connection attempts. Use Refresh to reconnect.')+' No action is available until the server confirms it.</p></section>')+'</main>';
  if (state?.isProjectAdmin) { const mode=root.querySelector('#mode'), fail=root.querySelector('#failMode'); if(mode) mode.value=state.policy?.mode || 'WARN_ONLY'; if(fail) fail.value=state.policy?.failMode || 'FAIL_CLOSED'; }
  root.querySelectorAll('form').forEach(form => { for(const el of form.elements) if(busy || stale) el.disabled=true; });
 }
-async function refresh() {
+async function refresh(contextReady=null) {
  if(refreshing)return refreshing;
  // Defer invocation until after assigning refreshing, including synchronous bridge failures.
  refreshing=Promise.resolve().then(async()=>{
   try {
-   const result=await call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{});
+   const [result,context]=await Promise.all([call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{}),contextReady]);
+   if((context?.extension?.issue?.id||context?.moduleKey==='permitguard-panel')&&result?.kind==='ADMINISTRATION')throw new Error('Waiting for the issue context to become available.');
    if(!result||(!('permit' in result)&&!['ADMINISTRATION','PERMITGUARD_LOCK_BOARD_SNAPSHOT'].includes(result.kind))||(!result.actorId&&result.kind!=='PERMITGUARD_LOCK_BOARD_SNAPSHOT'))throw new Error(result?.message||result?.error||'Server did not return an authenticated app state.');
-   state={...result,observedAt:new Date().toISOString()};stale=false;error='';
+   state={...result,observedAt:new Date().toISOString()};preview=null;stale=false;error='';
    if(subscription&&sync==='Update received; checking saved state…')sync='Live updates connected';
    return true;
   }catch(e){stale=true;error='Cannot confirm current app state. '+String(e.message||e);return false;}
@@ -103,13 +128,15 @@ async function initialize() {
  initializing=true;render();
  try {
   for(let attempt=0;attempt<3;attempt++){
-   let expectedIssue=false;
-   try {if(typeof view!=='undefined'&&view?.getContext){const context=await view.getContext();expectedIssue=!!context?.extension?.issue?.id||context?.moduleKey==='permitguard-panel';}}catch{if(attempt<2){await new Promise(resolve=>setTimeout(resolve,350*(attempt+1)));continue;}}
-   if(await refresh()) {if(!(expectedIssue&&state?.kind==='ADMINISTRATION'))break;state=null;stale=true;error='Waiting for the issue context to become available.';}
+   // Context/preview and the cold Forge resolver start together, never serially.
+   const contextReady=Promise.resolve().then(()=>typeof view!=='undefined'&&view?.getContext?view.getContext():null);
+   void contextReady.then(context=>loadPreview(context)).catch(()=>{});
+   if(await refresh(contextReady))break;
    if(attempt<2)await new Promise(resolve=>setTimeout(resolve,350*(attempt+1)));
   }
  }finally{initializing=false;render();}
- if(state&&!stale&&!state.kind)await subscribe();
+ // Paint usable authorized state first. Realtime is not part of bootstrap readiness.
+ if(state&&!stale&&!state.kind){sync='Current state loaded; connecting live updates…';render();setTimeout(()=>{if(state&&!stale&&!state.kind&&!subscription)void subscribe();},0);}
 }
 async function mutate(operation,payload={}) {
  if(busy || stale) return; const revision=state.revision ?? state.permit?.revision;

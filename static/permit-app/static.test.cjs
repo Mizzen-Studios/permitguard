@@ -74,7 +74,7 @@ test('newer or unversioned Realtime invalidation requires one authoritative read
 
 test('initialization waits for bridge context and auto-loads without Refresh; retries reads only',async()=>{
  const h=harness();let contexts=0,reads=0,subscriptions=0;h.context.view={getContext:async()=>{contexts++;if(contexts===1)throw new Error('bridge not ready');return {};}};h.context.invoke=async(_m,args)=>{assert.equal(args.operation,'get_state');reads++;return {actorId:'human',permit:null,revision:13,policy:{},equipment:[],board:[]};};h.context.realtime.subscribe=async()=>{subscriptions++;return {unsubscribe(){}};};
- await h.run('initialize()');assert.equal(contexts,2);assert.equal(reads,1);assert.equal(subscriptions,1);assert.equal(h.run('stale'),false);assert.equal(h.run('initializing'),false);assert.doesNotMatch(h.root.innerHTML,/Connect to your permit|Open PermitGuard inside|Loading authenticated state/);
+ await h.run('initialize()');assert.equal(contexts,2);assert.equal(reads,2);assert.equal(subscriptions,1);assert.equal(h.run('stale'),false);assert.equal(h.run('initializing'),false);assert.doesNotMatch(h.root.innerHTML,/Connect to your permit|Open PermitGuard inside|Loading authenticated state/);
 });
 test('read-only bootstrap is bounded and a synchronous first bridge failure does not wedge Refresh',async()=>{
  const h=harness();let calls=0;h.context.invoke=()=>{calls++;throw new Error('unavailable');};await h.run('initialize()');assert.equal(calls,3);assert.equal(h.run('stale'),true);h.context.invoke=async()=>({actorId:'human',permit:null,revision:13,policy:{},equipment:[],board:[]});await h.run('refresh()');assert.equal(h.run('stale'),false);
@@ -107,4 +107,33 @@ test('save progress shows observed elapsed seconds and no-resubmission guidance 
 });
 test('save timer is stopped even after an uncertain mutation failure; no retry is submitted',async()=>{
  const h=harness();let calls=0;h.context.invoke=async()=>{calls++;throw new Error('uncertain response');};h.run('state={actorId:"human",revision:22,policy:{},permit:null,equipment:[],board:[]};stale=false');await h.run('mutate("begin_release")');assert.equal(calls,1);assert.equal(h.run('saveTimer'),null);assert.equal(h.run('busy'),false);assert.equal(h.run('stale'),true);
+});
+
+const previewContext={extension:{issue:{id:'66401'}},moduleKey:'permitguard-panel'};
+const previewValue=()=>({schemaVersion:1,permitId:'66401',state:'ACTIVE',revision:6,activeLockCount:1,updatedAt:'2026-11-21T09:10:00Z',authoritative:false,release:{cleared:false},start:{cleared:true}});
+test('historical preview paints while the authenticated resolver is pending and never enables actions',async()=>{
+ const h=harness();let finish;h.context.view={getContext:async()=>previewContext};h.context.requestJira=async path=>{assert.equal(path,'/rest/api/3/issue/66401/properties/permitguard.snapshot');return {ok:true,json:async()=>({value:previewValue()})};};h.context.invoke=()=>new Promise(r=>finish=r);
+ const loading=h.run('initialize()');await new Promise(r=>setImmediate(r));assert.match(h.root.innerHTML,/Historical preview — not live or actionable/);assert.match(h.root.innerHTML,/Last recorded phase/);assert.match(h.root.innerHTML,/NOT CLEARED/);assert.equal(h.run('state'),null);assert.equal(h.run('stale'),true);await h.run('mutate("begin_release")');assert.equal(h.calls.length,0);
+ finish({actorId:'human',permit:{state:'ACTIVE',locks:[],equipment:[]},revision:22,policy:{},release:{status:'NOT CLEARED',reasons:[{message:'A personal lock remains.'}]},equipment:[],board:[]});await loading;assert.equal(h.run('preview'),null);assert.doesNotMatch(h.root.innerHTML,/Historical preview/);
+});
+test('context and live resolver begin in parallel, not as serial bridge requests',async()=>{
+ const h=harness();let finishContext,started=false;h.context.view={getContext:()=>new Promise(r=>finishContext=r)};h.context.invoke=async()=>{started=true;return {actorId:'human',permit:null,revision:22,policy:{},equipment:[],board:[]};};const loading=h.run('initialize()');await new Promise(r=>setImmediate(r));assert.equal(started,true);finishContext(previewContext);await loading;assert.equal(h.run('stale'),false);
+});
+test('a hanging realtime connection cannot delay usable authenticated state or initialization',async()=>{
+ const h=harness();h.context.realtime.subscribe=()=>new Promise(()=>{});await h.run('initialize()');assert.equal(h.run('initializing'),false);assert.equal(h.run('stale'),false);assert.match(h.root.innerHTML,/connecting live updates/);assert.doesNotMatch(h.root.innerHTML,/Loading PermitGuard/);
+});
+test('preview refuses other issues, invalid metadata and denied property access',async()=>{
+ for(const patch of [{permitId:'999'},{authoritative:true},{schemaVersion:9},{state:'FAKE'},{revision:-1},{activeLockCount:-1},{updatedAt:'bad'},{updatedAt:'2999-01-01T00:00:00Z'}]){
+  const h=harness();h.run('initializing=true');h.context.requestJira=async()=>({ok:true,json:async()=>({value:{...previewValue(),...patch}})});assert.equal(await h.run('loadPreview('+JSON.stringify(previewContext)+')'),false);assert.equal(h.run('preview'),null);
+ }
+ const h=harness();h.run('initializing=true');h.context.requestJira=async()=>({ok:false});assert.equal(await h.run('loadPreview('+JSON.stringify(previewContext)+')'),false);
+});
+test('positive property flags never become live clearance; failed live reads keep actions closed',async()=>{
+ const h=harness();h.context.view={getContext:async()=>previewContext};h.context.requestJira=async()=>({ok:true,json:async()=>({value:{...previewValue(),release:{cleared:true}}})});h.context.invoke=async()=>{throw new Error('permission unavailable');};await h.run('initialize()');assert.equal(h.run('stale'),true);assert.equal(h.run('state'),null);assert.doesNotMatch(h.root.innerHTML,/Release records CLEARED/);assert.match(h.root.innerHTML,/no actions or live clearance/);
+});
+test('top release blocker precedes permit header and tall work/lock board in live HTML',()=>{
+ const h=harness();h.run('state={actorId:"human",revision:22,policy:{},permit:{state:"ACTIVE",equipment:[],locks:[]},release:{status:"NOT CLEARED",reasons:[{message:"A personal lock remains on shared equipment."}]},equipment:[],board:[]};stale=false;render()');assert.ok(h.root.innerHTML.indexOf('Release NOT CLEARED')<h.root.innerHTML.indexOf('class="permit-head"'));assert.match(h.root.innerHTML,/A personal lock remains on shared equipment/);assert.match(fs.readFileSync(path.join(__dirname,'styles.css'),'utf8'),/position:sticky/);
+});
+test('late property response cannot replace already loaded live state',async()=>{
+ const h=harness();let finish;h.run('initializing=true');h.context.requestJira=()=>new Promise(r=>finish=r);const pending=h.run('loadPreview('+JSON.stringify(previewContext)+')');await h.run('refresh()');finish({ok:true,json:async()=>({value:previewValue()})});assert.equal(await pending,false);assert.equal(h.run('preview'),null);
 });

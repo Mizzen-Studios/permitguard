@@ -1,6 +1,8 @@
 import { kvs, Filter, FilterConditions } from '@forge/kvs';
 import { createArchiveRuntime } from './archive.mjs';
-import Resolver from '@forge/resolver';
+import ResolverModule from '@forge/resolver';
+// SDK CommonJS default interop differs between native Node and the Forge bundler.
+const Resolver = ResolverModule.default ?? ResolverModule;
 import api, { assumeTrustedRoute } from '@forge/api';
 import { dispatch } from '../server/index.mjs';
 import { createForgeWiring } from './actions.mjs';
