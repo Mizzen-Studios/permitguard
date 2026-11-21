@@ -1,4 +1,4 @@
-> **Current development release: 5.8.0.** The owner-authorized temporary `rovo:agent` removal was required by Atlassian’s Agent not allowed validation gate. Action/MCP tools remain; the proposed renamed agent/generated-answer polish is not claimed live. See [release and admin handoff](docs/scope-loading-polish-2026-11-20.md).
+> **Current development release: 5.12.0.** Rovo restored as **PermitGuard Judge** with both tools and full safety/WORK_START-only wording. [Recovery evidence and exact re-test](docs/rovo-restoration-2026-11-21.md). Development only; live Rovo prose/indexing acceptance is still an owner browser check.
 
 # PermitGuard
 

@@ -221,3 +221,39 @@ After C, restored the full original safety prompt inline. Ran normal verbose lin
   ]
 }
 ```
+
+## Interpretation — what is and is not established
+
+The same full fresh-key agent definition was rejected by standalone lint and then accepted by normal deployment validation. Both logs target the same app UUID 60f4bdda-1062-4e5b-aab6-1d9a9cf53a90 and internal environmentKey default (development). The old-key comparison also passed. This rules out a reliably reproducible bad-word/key diagnosis from these tests; provider validation is inconsistent/state-dependent in this observed sequence, and the hidden internal reason is not returned. No policy exemption, key/account/app churn loop, validation bypass or weakened final safety prompt was used. Request IDs above permit Atlassian to correlate server logs if a definitive internal diagnosis is needed; no external support post was submitted.
+
+## Final development release and verification
+
+- **5.12.0** deployed successfully: minimal agent 5.9.0 → readiness only 5.10.0 → pending activation tool 5.11.0 → full original safety prompt + tested UI/performance improvements 5.12.0.
+- Final executable candidate **32efdede912c7e77926bf6efa783272fecf63702**. Per-attempt record commit **6b881fb**. All attempts and outcomes pushed.
+- **PermitGuard Judge**, key **permitguard-judge-v2**. Server-reported major-5 metadata confirms exactly one agent with the complete prompt matching source and both action input schemas matching source. MCP remains declared. Jira and Confluence each report Site is already at the latest version on one-atlas-xitr.atlassian.net in development.
+- **80 backend/integration + 27 UI contract tests (107)**, build and diff checks passed. Known-private-credential scan passed across source/generated artifacts. Local app.js SHA-256 **238ebde660911c7df205093bd365ab07d19bd8b4d0d2e3b22382eab38bcf0a5a**, HTML 532e4f6c5aa5bcb1131bdfa7581881725bd0b362c07faef18b74ce015daa19f0, CSS 571fcfec77153e860194be7c0ec1e7f9286d25ed730475c3bcc06c28c9332ba9. Remote bundle byte readback is unavailable; deployment metadata is not live Rovo/generated-answer acceptance.
+- No permit/sample/lock/policy was mutated. PGSAMPLE-2 remains at the owner's reported ACTIVE revision 22 unless another authorized user changed it. No new app/site/identity, card, paid resource, production deployment, publication or contest submission.
+
+## Judge-facing changes
+
+- Admin What this app touches now groups declared permissions in readable Jira/people, Assets, JSM, Forge storage, workflow and Confluence explanations. It explicitly distinguishes declared scope from actual consent/user permissions; no raw arrays/source/verifyActualConsent flags are shown.
+- Permit heading uses the authorized Jira project name/key and work-item key (not 10202 / 66400). These labels come from the existing issue authorization read, not client claims or extra directory requests.
+- Enforce outage label reads **Block while the register is unavailable**. Policy dropdowns use plain wording; machine enum values and fail-closed semantics are unchanged.
+- Saving shows observed elapsed seconds and the current client stage (preparing QR confirmation versus waiting for Forge permissions/save/view updates), with keep-open/no-resubmission guidance. It retains filled/checked disabled fields. Each stage timer is stopped on success or failure; no fake percentage/ETA or mutation retry.
+- Issue-property projection and Realtime notification now run concurrently **after** the operational atomic commit and both settle before returning. Failure stays nonauthoritative, with no repeated commit. Fresh permission checks and conditional-write guards remain. Tests prove concurrency/order/warnings, not a measured production latency reduction.
+
+## Open the panel — documented platform behavior
+
+Current official Jira issue-panel docs say the panel is added when its configured button is clicked; it is not necessarily inline on a fresh issue. Judges: open the work item → **View app actions** icon → **PermitGuard**. The panel appears above Activity. Only users with edit permission see the button. A Jira administrator can optionally use the issue panel menu → **Show for all work items**; the docs say this option is admin-only. No global visibility preference was changed or auto-open implementation claimed.
+
+Source checked: https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-issue-panel/ (current page updated 9 October 2026).
+
+## Exact owner re-test
+
+1. Hard-reload [PGSAMPLE-2](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2), then View app actions → PermitGuard. Do not reset/create over the ACTIVE permit. Expect automatic load, friendly project/work-item heading and Enforce / Block while the register is unavailable.
+2. Open Rovo chat, search/select **PermitGuard Judge**, and ask **Check readiness for the permit on PGSAMPLE-2. State its scope and release status.** Expect live tool-backed ACTIVE data, with **CLEARED for WORK_START only. This is not release clearance.** Release remains NOT CLEARED while personal locks remain. The read must not advance operational revision. Ask **Does that mean I may release or energize?** Expect no: release is separate and site procedure governs; even closure records are not energization authority.
+3. Hard-reload the PermitGuard Jira admin page: expect permission paragraphs/groups, no raw scope JSON or metadata flags.
+4. When ready to finish this synthetic sample, Play Crew B if absent, Begin release checks, remove **only your own** L-A1. During save observe elapsed seconds/stage and preserved disabled controls; measure actual time separately. Expect NOT CLEARED / Simulated Crew B lock L-07 remains on isolation point V-3, close disabled, second tab updates. Ask the same agent again: RELEASE / NOT CLEARED with plain reasons, not an @mention or bare code. The owner may then explicitly remove their simulated L-07 and close, but no real other worker's lock may be removed.
+5. A fresh Verify/QR save can be retested later on a genuinely new dedicated sample work item after finishing existing EQ-1 permits. Equipment is intentionally pre-provisioned: the judge path selects EQ-1; there is no general create-equipment wizard. Assets configuration and the advanced admin built-in register fallback are separate from the walkthrough.
+
+Owner's read-only zero-agent observation supersedes the earlier stale-duplicate hypothesis: no stale cleanup/admin deletion is requested. Search indexing and generated text remain browser acceptance checks; the agent definition is verified deployed, not claimed observed in the picker here.

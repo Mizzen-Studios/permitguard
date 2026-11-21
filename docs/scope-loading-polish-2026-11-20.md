@@ -1,4 +1,4 @@
-> **Current status: development 5.8.0 agent-free fallback.** UI/tool fixes deployed; full-agent/generated-answer naming and wording re-test is blocked pending restoration or a separately configured custom agent.
+> **Historical 20 November fallback:** superseded by development **5.12.0**, Rovo **PermitGuard Judge** restored. See [21 November restoration/re-test](rovo-restoration-2026-11-21.md); owner confirmed zero stale agents before restoration.
 
 # Scoped Rovo wording and loading polish — 20 November 2026
 

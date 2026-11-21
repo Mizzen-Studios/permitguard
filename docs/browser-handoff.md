@@ -1,4 +1,4 @@
-> Current release: **development 5.8.0**, executable candidate `bc6ecb4`. Temporary agent-free fallback: action/MCP tools retained, no live renamed Forge agent is claimed. Use [the latest polish/re-test and admin handoff](scope-loading-polish-2026-11-20.md). Existing permit 66400 is preserved.
+> Current release: **development 5.12.0**, executable candidate `32efded`; Rovo **PermitGuard Judge** restored with full boundaries and both actions. [Current exact retest](rovo-restoration-2026-11-21.md). PGSAMPLE-2’s ACTIVE permit is preserved.
 
 # Owner browser acceptance — 19 November 2026
 
@@ -77,3 +77,7 @@ Use [the preserved-permit steps and exact QR formats](activation-readiness-fix-2
 **PermitGuard Live Judge 2026** is the proposed restored name, NOT a live agent in the 5.8.0 fallback. See [scoped wording, automatic loading, filled Saving fields and stale-agent admin handoff](scope-loading-polish-2026-11-20.md). The current RELEASE permit is preserved; finish its synthetic-only L-07/close path before a fresh EQ-1 test.
 
 Fresh synthetic work item: [PGSAMPLE-2](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2), provisioned empty (no permit/locks). Finish PGSAMPLE-1’s sample-only L-07/close path before reusing EQ-1 there.
+
+## 21 November current re-test and panel opening
+
+The 5.8.0 agent-free fallback is superseded by **5.12.0**, agent **PermitGuard Judge**. No stale agent cleanup is needed; owner found zero remaining agents before restoration. Open any fresh issue using **View app actions → PermitGuard**; default inline visibility is not promised. Admin optional panel-menu **Show for all work items** is documented by Atlassian. Use [the preserved ACTIVE-permit, scoped Rovo, readable admin and elapsed-save re-test](rovo-restoration-2026-11-21.md).
