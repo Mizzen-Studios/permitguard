@@ -1,4 +1,4 @@
-> **Current development release: 5.12.0.** Rovo restored as **PermitGuard Judge** with both tools and full safety/WORK_START-only wording. [Recovery evidence and exact re-test](docs/rovo-restoration-2026-11-21.md). Development only; live Rovo prose/indexing acceptance is still an owner browser check.
+> **Current development release: 5.12.0.** Owner browser checks on 21 November confirm native Rovo WORK_START-only wording, readable panel/admin and the active sample. **Open blocker: two same-name Rovo picker entries; stale identity/removal requires an authenticated admin session.** [Current evidence](docs/judge-evidence-2026-11-21.md).
 
 # PermitGuard
 
@@ -8,8 +8,19 @@ Human-confirmed lockout/tagout (LOTO) permit **decision support** for Jira work 
 
 - [Public MIT repository](https://github.com/Mizzen-Studios/permitguard)
 - [Development site](https://one-atlas-xitr.atlassian.net), provisioned 15 November 2026, expires 13 February 2027.
-- [Judge work item PGSAMPLE-1](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-1)
+- [Current active judge work item PGSAMPLE-2](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2); [completed first scenario PGSAMPLE-1](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-1)
 - [Dated CLI/API evidence](docs/demo-site-checks-2026-11-19.md), [browser guide](docs/browser-handoff.md), [site-admin fix and owner browser results](docs/admin-access-fix-2026-11-19.md), [first-create correction](docs/create-permit-fix-2026-11-20.md), [Rovo deployment recovery](docs/rovo-deploy-experiments-2026-11-20.md), [activation/readiness fixes](docs/activation-readiness-fix-2026-11-20.md), [admin-enabled planning contract](skill.md).
+
+## Judge pack — current evidence, not inferred acceptance
+
+- [Dated integrity/acceptance evidence and duplicate-agent blocker](docs/judge-evidence-2026-11-21.md)
+- [Private demo recording script](docs/demo-video-script.md) — prepared, **not recorded or published**
+- [Exact test instructions, negative cases and remaining gates](docs/judge-test-instructions.md)
+- [Read-only fixture/history checker](scripts/check-demo-integrity.py) — no repair/site writes; does not read raw Forge storage
+
+Open a fresh issue using **View app actions → PermitGuard** if not already inline. Jira admins can optionally select **Show for all work items** from the panel menu. Equipment is intentionally preloaded for the sample; no general create-equipment wizard is claimed.
+
+PGSAMPLE-2's temporary Jira unassignment was restored; description matches its original fixture and has no saved edit history. The derived property remains ACTIVE with one lock and release blocked. Permit revision 6 is distinct from the owner's last observed site revision 22. No reset or repair was performed. See the dated evidence for the raw-storage/read limitations.
 
 ## Connected development features
 
@@ -37,7 +48,7 @@ Derived issue property permitguard.snapshot supports Automation and JQL aliases 
 
 Manifest modules are rovo:agent, **action** (not rovo:action), and Preview **rovo:mcp**. check_readiness accepts issueKey; request_activation accepts issueKey and verifierId. Caller identity comes from the platform principal; issue access is checked as that user. No agent confirmation tool exists.
 
-Studio and external MCP acceptance are left for owner browser testing. An administrator enables tools in Connected apps; external clients use Atlassian OAuth consent, not an anonymous endpoint. CREATE actions are not promised from Rovo Automation triggers. A planner may report NOT CLEARED and propose rescheduling through its own separately authorized scheduler. PermitGuard does not edit schedules or call external APIs.
+Native **PermitGuard Judge** read-only readiness, including explicit WORK_START-only / not-release wording, passed the owner browser check on 21 November ~13:05 UK. Two picker entries remain unresolved; only one agent is declared by the deployed manifest, which does not prove one indexed result. Actual Rovo pending-proposal execution, Studio custom-agent tools and external MCP acceptance remain separate owner browser tests. An administrator enables tools in Connected apps; external clients use Atlassian OAuth consent, not an anonymous endpoint. CREATE actions are not promised from Rovo Automation triggers. A planner may report NOT CLEARED and propose rescheduling through its own separately authorized scheduler. PermitGuard does not edit schedules or call external APIs.
 
 ## Confluence
 

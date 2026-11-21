@@ -1,0 +1,43 @@
+{
+  "issueKey": "PGSAMPLE-2",
+  "readOnly": true,
+  "historyComplete": true,
+  "assigneeMatchesAuthenticatedOwner": true,
+  "descriptionMatchesProvisionedFixture": true,
+  "descriptionSha256": "6b18bfbbbf9beeb5d7a6b6ed07af4974183b3a7b5e458476af773314a839aa67",
+  "descriptionChangeCount": 0,
+  "jiraStatus": "To Do",
+  "changes": [
+    {
+      "atUtc": "2026-11-21T13:04:06.212000+00:00",
+      "field": "assignee",
+      "from": "assigned account",
+      "to": null
+    },
+    {
+      "atUtc": "2026-11-21T13:04:16.619000+00:00",
+      "field": "assignee",
+      "from": null,
+      "to": "assigned account"
+    }
+  ],
+  "derivedPermitSnapshot": {
+    "state": "ACTIVE",
+    "revision": 6,
+    "updatedAt": "2026-11-21T09:10:00.215Z",
+    "activeLockCount": 1,
+    "mode": "ENFORCE",
+    "failMode": "FAIL_CLOSED",
+    "start": {
+      "cleared": true
+    },
+    "release": {
+      "cleared": false
+    },
+    "authoritative": false
+  },
+  "rawForgeCesRead": false,
+  "siteRevision": null,
+  "limit": "Jira issue property is nonauthoritative; permit revision is not site revision. This is not an exhaustive stored-state audit.",
+  "checkedAt": "2026-11-21T13:17:59.265608+00:00"
+}

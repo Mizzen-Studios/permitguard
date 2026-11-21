@@ -1,3 +1,5 @@
+> Latest owner results and integrity check: [21 November ~13:05 UK](judge-evidence-2026-11-21.md). Native Rovo scoped reply and readable UI/admin passed; two same-name agents remain an explicit blocked cleanup. [Current test instructions](judge-test-instructions.md), [private recording script](demo-video-script.md).
+
 > Current release: **development 5.12.0**, executable candidate `32efded`; Rovo **PermitGuard Judge** restored with full boundaries and both actions. [Current exact retest](rovo-restoration-2026-11-21.md). PGSAMPLE-2’s ACTIVE permit is preserved.
 
 # Owner browser acceptance — 19 November 2026
