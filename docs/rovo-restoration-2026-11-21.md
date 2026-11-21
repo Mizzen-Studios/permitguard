@@ -96,3 +96,51 @@ Experiment A uses fresh key permitguard-judge-v2, short ASCII name PermitGuard J
   ]
 }
 ```
+
+## C-pending-proposal-action
+
+```json
+{
+  "experiment": "C-pending-proposal-action",
+  "exitCode": 0,
+  "environment": "development",
+  "agent": [
+    {
+      "key": "permitguard-judge-v2",
+      "name": "PermitGuard Judge",
+      "prompt": "Explain PermitGuard. Do not infer permit state. CLEARED is WORK_START only, not release clearance. Follow the site procedure.",
+      "actions": [
+        "check_readiness",
+        "request_activation"
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "rule": "MANIFEST_INVALID_RULE",
+      "category": "ERROR",
+      "value": false,
+      "reason": "Manifest is valid",
+      "changes": null,
+      "errors": null
+    },
+    {
+      "status": "IN_PROGRESS",
+      "errorDetails": null
+    },
+    {
+      "status": "DONE",
+      "errorDetails": null
+    }
+  ],
+  "receipt": [
+    "Deployed PermitGuard to the development environment.",
+    "\u2139 The version of your app [5.11.0] that was just deployed to [development] is eligible for the Runs on Atlassian program."
+  ],
+  "requestIds": [
+    "6aa186fdf3c04d6c9010327569c9a727",
+    "9ab8c87d0be14142821bc1b0cea8d6c1",
+    "0d918fb704df4af8bc2b20d7d2bed79a"
+  ]
+}
+```

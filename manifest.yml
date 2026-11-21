@@ -107,6 +107,7 @@ modules:
       only, not release clearance. Follow the site procedure.
     actions:
     - check_readiness
+    - request_activation
 resources:
 - key: capability-probe
   path: static/capability-probe/dist
