@@ -1,4 +1,4 @@
-> **Current development release: 5.14.0**, source `99c1ebc`, Jira only. One canonical readiness display message, strict copy-only Rovo instruction, runtime Forge-version/UI-source footer and preview lifecycle timings. [Current evidence and retest](docs/preview-and-rovo-2026-11-22.md). Owner measured ~5–6 s cold load on 5.13.0 and accepted the above-fold release strip/one-agent picker; new generated wording/footer/preview diagnostics still need browser acceptance.
+> **Current development release: 5.15.0**, source `4e3335f`, Jira only. Release-first readiness prose, fewer cosmetic read dependencies, static unconfirmed loading shell, and explicit iframe/panel timing scopes. [Current evidence and retest](docs/release-first-timing-2026-11-22.md). Latest owner navigation stopwatch on 5.14.0: ~17 s to preview / ~30 s to live; the panel counter’s 4.0 s is NOT total startup. New end-to-end latency is unmeasured.
 
 # PermitGuard
 

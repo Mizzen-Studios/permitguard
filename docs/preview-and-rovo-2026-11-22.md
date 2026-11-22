@@ -1,3 +1,5 @@
+> **Superseding owner report ~17:02:** 5.14.0 footer, one agent and single caveat PASS. Leading CLEARED remained ambiguous; navigation stopwatch ~17 s preview / ~30 s live was not represented by the 4.0 s panel clock. [5.15.0 follow-up](release-first-timing-2026-11-22.md). Earlier pending acceptance below is historical.
+
 # Canonical readiness, build footer and preview diagnosis — 5.14.0
 
 ## Owner evidence, 22 November ~09:05 UK / 5.13.0

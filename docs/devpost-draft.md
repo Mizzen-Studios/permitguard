@@ -36,7 +36,7 @@ Readiness has different meanings at work start and release. We separated the mac
 
 Two same-name Rovo agents turned out to be legitimate registrations from Jira and Confluence installs of the same app—not stale agents. Removing only the optional Confluence installation restored the one-agent picker while preserving Jira. A separate opaque Agent not allowed validation failure was intermittent in the observed CLI/deployment sequence; we do not claim a proven internal provider cause or a verification bypass.
 
-The current startup candidate begins issue-context and live-state reads together and may show a clearly labelled historical Jira-property preview before cold Forge authorization finishes. Preview is never live clearance or an action source. The owner’s single 5.13.0 run is reported below; repeat measurements and preview diagnostics are still needed. Local tests are not a latency benchmark.
+Startup remains an optimization area. Current code removes a cosmetic profile read from read-only authorization and no longer waits for frontend context after a valid authorized live issue response arrives. A static loading shell can render before the bridge evaluates. Preview remains historical, never live clearance or an action source. Request-count/dependency reductions are locally verified; no new full-navigation speedup is claimed. Jira navigation, iframe-document navigation and panel-code execution are distinct clocks.
 
 ## Accomplishments and evidence
 
@@ -44,7 +44,9 @@ Owner browser checks on 21 November ~21:05 UK confirmed one PermitGuard Judge, a
 
 On 22 November ~09:05 UK, the owner retested **5.13.0**: the release blocker was above the fold and one agent remained. A reported cold reload showed the frame at about 3.8 seconds and live state about one second later, estimated 5–6 seconds total. No historical preview was noticed. This single observation is not a controlled latency benchmark or proof of preview rendering. The agent still repeated its caveat, so single-caveat prose was a failed acceptance item—not a shipped success.
 
-The follow-up source **99c1ebc** consolidates redundant caveat strings into one canonical display message and directs Rovo to copy only that message. It adds a real Forge-version/UI-source footer and per-panel preview/live startup diagnostics, with 124 local tests. It is deployed as development **5.14.0** through normal verification; actual generated prose is still pending owner acceptance in the [current release note](preview-and-rovo-2026-11-22.md). Do not claim that a test count, metadata receipt or script alone proves a live feature or a recorded video.
+The follow-up source **99c1ebc** consolidates redundant caveat strings into one canonical display message and directs Rovo to copy only that message. It adds a real Forge-version/UI-source footer and per-panel preview/live startup diagnostics, with 124 local tests. It was deployed as development **5.14.0** through normal verification. The owner subsequently passed the actual footer, one-agent picker and single-caveat generated reply; the follow-up feedback was that leading with CLEARED still read as an unqualified yes. Do not claim that a test count, metadata receipt or script alone proves a live feature or a recorded video.
+
+The owner’s 17:02 report on **5.14.0** measured about **17 seconds to preview and 30 seconds to live from navigation**, while panel-only diagnostics showed **4.0 seconds**. The smaller counter excludes earlier loading and must not be advertised as total startup. The earlier 5–6-second observation is not representative proof of consistent performance. New source **4e3335f**, development **5.15.0**, leads with **Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance.** and makes clock boundaries explicit. Its new prose and real navigation performance still need the owner retest; see [current evidence](release-first-timing-2026-11-22.md).
 
 ## What we learned
 
@@ -52,7 +54,7 @@ A historical preview can improve orientation if it arrives first, but it should 
 
 ## What's next
 
-Confirm the canonical one-caveat response and preview lifecycle from actual browser diagnostics, repeat cold-load measurements, complete real Rovo proposal/Studio/external MCP and high-energy two-person checks, validate actual workflow/JQL behavior and capacity/recovery, and design the optional restricted archive with an administrator. Conflict guard and shift-end suspension remain future work, not implemented demo claims. Production is a separate gated plan, not a publication or qualification completed here.
+Confirm release-first/non-ambiguous wording, retain the single caveat, measure navigation with a stopwatch separately from iframe/panel clocks, complete real Rovo proposal/Studio/external MCP and high-energy two-person checks, validate actual workflow/JQL behavior and capacity/recovery, and design the optional restricted archive with an administrator. Conflict guard and shift-end suspension remain future work, not implemented demo claims. Production is a separate gated plan, not a publication or qualification completed here.
 
 ## Submission fields still requiring verification
 

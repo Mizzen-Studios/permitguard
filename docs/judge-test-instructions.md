@@ -1,3 +1,5 @@
+> **Current 5.15.0:** [release-first wording, fewer bootstrap dependencies and honest clock scopes](release-first-timing-2026-11-22.md). Owner accepted 5.14.0 footer/one agent/single caveat, but stopwatch showed ~17 s preview / ~30 s live from navigation. The old 4.0 s figure was panel-only, not page load. No sample reset.
+
 > **Latest retest is 5.14.0:** [footer version/UI hash, preview lifecycle and literal “Is PGSAMPLE-2 cleared?” question](preview-and-rovo-2026-11-22.md). Single-caveat prose failed in 5.13.0; do not mark it passed from prompt metadata alone.
 
 > **Start here for 5.13.0:** [cold-load preview/live/Realtime milestones, top release banner and one-time caveat](first-paint-2026-11-21.md). The earlier one-picker gate passed in the owner browser at ~21:05 UK on 5.12.0. Do not reset PGSAMPLE-2.

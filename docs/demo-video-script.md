@@ -55,11 +55,11 @@ Do not film a one-person low-energy test as the two-person high-energy feature. 
 
 Owner observation on **22 November ~09:05 UK, 5.13.0**: frame about **3.8 s** after hard reload, live state about **1 s** later, estimated **5–6 s total**. The top release strip was visible without scrolling and one agent remained. No historical preview was noticed, and the native reply still repeated the caveat. This is one reported run, not a controlled benchmark or proof that preview rendered.
 
-For the next recording, verify the small **footer Forge version and UI source fingerprint** first. Hard reload PGSAMPLE-2 without clearing cookies or touching Devpost. Capture frame appearance and live-state arrival honestly. If no preview is visible, open **Startup details**: record whether it rendered, arrived after live state, was unavailable, or was rejected. Its clock starts when panel code executes, not at Jira navigation. Never hold live state back to manufacture a preview shot. Preview is historical/not actionable, even if its recorded start flag was clear.
+For the next recording, verify the small **footer Forge version and UI source fingerprint** first. Hard reload PGSAMPLE-2 without clearing cookies or touching Devpost. Capture frame appearance and live-state arrival honestly. If no preview is visible, open **Startup details**: record whether it rendered, arrived after live state, was unavailable, or was rejected. Record three distinct scopes: navigation stopwatch, iframe-document clock if available, and panel-code clock. Never present panel-only seconds as total page startup. Never hold live state back to manufacture a preview shot. Preview is historical/not actionable, even if its recorded start flag was clear.
 
-Show live ACTIVE, its actual current revision and one lock, then the top Release NOT CLEARED strip. In a **new** native chat ask **Is PGSAMPLE-2 cleared?** The desired reply copies the canonical tool message once: WORK_START-only/not-release boundary, phase, release status, site-procedure reminder. Do not edit duplicate prose out and claim the raw agent passed; mark it a failed retest if it repeats. The new canonical-message candidate still needs owner prose acceptance.
+Show live ACTIVE, its actual current revision and one lock, then the top Release NOT CLEARED strip. In a **new** native chat ask **Is PGSAMPLE-2 cleared?** The desired reply copies the release-first canonical message once: Release: NOT CLEARED, then Work start only: CLEARED, the no-release-clearance caveat, phase and site-procedure reminder. Do not edit duplicate prose out and claim the raw agent passed; mark it a failed retest if it repeats. The owner passed single-caveat output on 5.14.0. The new release-first ordering in 5.15.0 still needs prose acceptance.
 
-Use real elapsed waits and the verified contest limit, not the rough timings above. See [current evidence/retest](preview-and-rovo-2026-11-22.md), [production plan, not executed](production-deploy-plan.md), and [Devpost draft, not submitted](devpost-draft.md).
+Use real elapsed waits and the verified contest limit, not the rough timings above. See [current evidence/retest](release-first-timing-2026-11-22.md), [production plan, not executed](production-deploy-plan.md), and [Devpost draft, not submitted](devpost-draft.md).
 
 ### Private recording log — fill from actual capture only
 
@@ -72,3 +72,9 @@ Use real elapsed waits and the verified contest limit, not the rough timings abo
 - Owner approval to share/upload: **NOT GRANTED**
 
 Keep a continuous raw source privately. Review for credentials, account menus, unrelated/private tabs and notifications before any later separately authorized export/share. No video has been recorded, uploaded or submitted by this task.
+
+## Latest timing correction — owner report 22 November 17:02
+
+Owner passed 5.14.0 footer/UI source, one agent and a single caveat, but reported approximately **17 s to preview / 30 s to live from navigation**, versus **4.0 s** on the panel-only clock. The recording must retain the actual wait; do not quote 4.0 s as page load or choose the earlier 5–6 s run to imply consistent speed. If a video edit removes waiting for length, label that edit and give the actual elapsed time; do not claim real-time continuity.
+
+For 5.15.0 verify footer version and UI **4e3335fb30f9**. Show release-first wording rather than leading with a bare CLEARED. The static Release unconfirmed shell is only loading chrome, not a historical preview or live check. Open Startup details after the load to compare iframe and panel clocks with the navigation stopwatch; top Jira navigation remains unmeasured inside the cross-origin frame. No 5.15.0 speedup has yet been measured, and no video has been recorded/uploaded.
