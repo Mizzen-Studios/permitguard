@@ -1,6 +1,6 @@
-# Devpost text — DRAFT ONLY / DO NOT SUBMIT
+# Devpost write-up — DRAFT ONLY / DO NOT SUBMIT
 
-Prepared privately in the repository as requested. No Devpost page was edited, saved, uploaded, listed or submitted. Reconcile the final accepted build, official contest rules/categories/field limits and actual team details before copying anything into Devpost. The existing signed-in Devpost browser session must be preserved.
+Repository text only. No Devpost form was opened, edited, saved or submitted, and no video was recorded/uploaded. Verify the actual 2026 fields, limits, eligibility and bonus clause before copying. Team names and attestations must be supplied by the actual entrants.
 
 ## Project name
 
@@ -8,57 +8,63 @@ PermitGuard
 
 ## Tagline
 
-Personal-lock accountability and human-confirmed LOTO permit decision support in Jira.
+Personal locks stay personal. Release readiness stays explicit.
 
 ## Inspiration
 
-In group lockout/tagout work, a permit record must never obscure the people whose personal locks still protect them. We wanted the remaining-lock question to be visible where a team coordinates the work, with a conversational assistant that reports recorded state rather than claiming safety authority.
+A group lockout permit is a coordination record, not a substitute for the people protecting themselves at equipment. We wanted the most important unresolved question—whose personal-lock record still blocks release—to remain visible where teams already coordinate their work in Jira. We also wanted an assistant that could explain the recorded state without turning a narrow result into an unqualified yes.
 
 ## What it does
 
-PermitGuard adds a Plan → Lock → Verify → Active → Release → Closed clipboard to Jira work items. Workers record their own attributable locks and bounded photo evidence. Named verifiers record checks, and activation stays pending until its assigned human confirms at equipment. High-energy points require two distinct named verifiers in the implemented domain rules; the real two-person browser acceptance is still outstanding.
+PermitGuard adds a human-confirmed LOTO clipboard to a Jira work item. The model follows Plan, Lock, Verify, Active, Release and Closed, with attributable personal locks, bounded evidence and named verification. Activation stays pending until its assigned human confirms at equipment; no agent confirmation tool exists.
 
-Release checking includes remaining personal-lock records on shared equipment. The synthetic judge scenario lets a permitted user finish their own lock removal while simulated Crew B's L-07 on V-3 still blocks release and closure. The roleplay is labelled simulation, not another real principal or permission to remove another person's lock.
+Work-start readiness and release readiness are deliberately separate. In the accepted active sample, PermitGuard Judge says: “Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE.” The release strip stays at the top of the panel rather than below a long work sheet.
 
-The native PermitGuard Judge Rovo agent reads deterministic readiness. Its essential distinction is **CLEARED for WORK_START only. This is not release clearance.** An agent can propose a PENDING activation, but it cannot confirm or activate it. Site procedures remain authoritative; QR/photo/checkbox records do not independently prove presence, isolation or safe energization.
+The synthetic Crew B scenario makes the distinction concrete: removing the current worker's own lock does not clear a remaining shared-equipment lock. Crew B is visibly labelled simulation, not a second real principal. The site's procedure remains authoritative. QR, photos and attestations are recorded inputs, not independent proof of presence, physical isolation or permission to energize.
 
 ## How we built it
 
-The development app uses Forge Custom UI, Jira user-authorized APIs, Forge app storage with conditional revision checks, and app-scoped Realtime invalidations that make authorized clients re-read state. Native Rovo exposes Check readiness and Request activation. A declared Forge MCP module is present; external OAuth MCP-client and Studio custom-agent acceptance remain separate, incomplete checks and are not being represented as demonstrated.
+We used Forge Custom UI, Node.js, user-authorized Jira APIs and a shared deterministic service. Revision-conditional Custom Entity Store writes serialize mutations and shared-equipment release checks. Realtime sends scoped invalidation hints; clients reread authorized state rather than treating a notification as permission to proceed. A derived Jira property can orient the user with a clearly historical, nonactionable preview while fresh checks load.
 
-The current demo uses a preloaded Equipment/Isolation points register. A configurable Assets adapter is limited to those types and has API/metadata and local test evidence, not a claim that the judge's built-in-register journey is a fully accepted connected Assets workflow. Instruments, calibration and Teamwork Graph are excluded.
+The native Rovo agent exposes read-only check_readiness and PENDING-only request_activation. Both preserve human control. The same two actions are declared through the Preview rovo:mcp module for Studio/custom-agent or consented MCP clients. **That candidate MCP route is implemented but not yet authenticated end-to-end or certified against the official bonus wording. Native Rovo action use is not MCP discovery proof.** We do not claim the bonus is complete.
 
-The runtime has no external service/egress, SQL, Forge LLM API or Containers. No scheduled jobs are configured. Optional Confluence macro/archive code exists but Confluence is uninstalled for this Jira-only demo; archive publication/compliance retention is not part of the accepted claim.
+The demo uses a built-in Equipment/Isolation points register. An optional bounded Assets adapter supports only those types. There is no app external runtime/egress, SQL, Forge LLM API or Containers. Optional Confluence/archive code is not part of the current Jira-only accepted demonstration.
 
-## Challenges
+## Challenges we ran into
 
-Readiness has different meanings at work start and release. We separated the machine fields and made Rovo explicitly say WORK_START is not release clearance. We preserved user-entered QR/checkbox/file controls while saving, reconciled versioned invalidations without resubmitting uncertain mutations, and kept permission/register checks fail-closed.
+The hardest presentation issue was that a technically scoped CLEARED could still sound like yes. We consolidated competing display strings into one canonical message and led with release status. We kept entered QR/photo controls intact while saving and kept every mutation behind current permission, register and revision checks.
 
-Two same-name Rovo agents turned out to be legitimate registrations from Jira and Confluence installs of the same app—not stale agents. Removing only the optional Confluence installation restored the one-agent picker while preserving Jira. A separate opaque Agent not allowed validation failure was intermittent in the observed CLI/deployment sequence; we do not claim a proven internal provider cause or a verification bypass.
+Startup also needed honest measurement. A panel-only four-second counter had excluded earlier loading while a navigation stopwatch showed a much longer wait. We labelled iframe and panel clocks separately, stopped presenting partial timing as total load, removed a cosmetic profile lookup from reads and stopped waiting for frontend context after an authorized server response arrived. We did not trade away safety checks to improve a timer.
 
-Startup remains an optimization area. Current code removes a cosmetic profile read from read-only authorization and no longer waits for frontend context after a valid authorized live issue response arrives. A static loading shell can render before the bridge evaluates. Preview remains historical, never live clearance or an action source. Request-count/dependency reductions are locally verified; no new full-navigation speedup is claimed. Jira navigation, iframe-document navigation and panel-code execution are distinct clocks.
+## Accomplishments we're proud of
 
-## Accomplishments and evidence
+The owner accepted development 5.15.0 / UI 4e3335fb30f9 on 22 November: one Judge agent, readable clock scopes and release-first, single-caveat Rovo output. In that reload, preview was about 2.7 seconds and live state about 4.3 seconds by stopwatch. Those are one observed run, not an SLA or a controlled performance claim; previous runs varied.
 
-Owner browser checks on 21 November ~21:05 UK confirmed one PermitGuard Judge, a new-chat WORK_START-only/non-release answer, and inline cold-loaded PGSAMPLE-2 with readable labels, ACTIVE/site revision 22 and one L-A1 lock. Earlier dated owner tests covered photo/QR activation, preserved Saving inputs and the simulated other-crew release barrier. Read-only Jira history checks confirmed accidental assignee shortcut edits were restored without a description change. See the dated evidence documents for exact versions and limitations.
-
-On 22 November ~09:05 UK, the owner retested **5.13.0**: the release blocker was above the fold and one agent remained. A reported cold reload showed the frame at about 3.8 seconds and live state about one second later, estimated 5–6 seconds total. No historical preview was noticed. This single observation is not a controlled latency benchmark or proof of preview rendering. The agent still repeated its caveat, so single-caveat prose was a failed acceptance item—not a shipped success.
-
-The follow-up source **99c1ebc** consolidates redundant caveat strings into one canonical display message and directs Rovo to copy only that message. It adds a real Forge-version/UI-source footer and per-panel preview/live startup diagnostics, with 124 local tests. It was deployed as development **5.14.0** through normal verification. The owner subsequently passed the actual footer, one-agent picker and single-caveat generated reply; the follow-up feedback was that leading with CLEARED still read as an unqualified yes. Do not claim that a test count, metadata receipt or script alone proves a live feature or a recorded video.
-
-The owner’s 17:02 report on **5.14.0** measured about **17 seconds to preview and 30 seconds to live from navigation**, while panel-only diagnostics showed **4.0 seconds**. The smaller counter excludes earlier loading and must not be advertised as total startup. The earlier 5–6-second observation is not representative proof of consistent performance. New source **4e3335f**, development **5.15.0**, leads with **Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance.** and makes clock boundaries explicit. Its new prose and real navigation performance still need the owner retest; see [current evidence](release-first-timing-2026-11-22.md).
+The release-barrier scenario and earlier human QR/photo checks have dated evidence. The current source has 131 local tests, including permission/revision failures and preserved-input contracts. We keep these categories separate: local tests, deployment metadata and actual browser acceptance do not prove the same thing.
 
 ## What we learned
 
-A historical preview can improve orientation if it arrives first, but it should never delay a faster live response or enable safety-related actions. Those still need current authorized server state. A live-update subscription is not a physical safety signal, and an assistant's confident prose must not broaden the scope of a deterministic result. Clear human attribution and explicit failure are more important than making every screen green.
+A useful assistant needs a precise boundary more than a confident answer. A fast historical preview should never hold up a fresher response or become authority. A status notification is not a physical interlock, and a scheduling change would not remove a personal lock. Human attribution and explicit failure matter more than making every screen green.
 
 ## What's next
 
-Confirm release-first/non-ambiguous wording, retain the single caveat, measure navigation with a stopwatch separately from iframe/panel clocks, complete real Rovo proposal/Studio/external MCP and high-energy two-person checks, validate actual workflow/JQL behavior and capacity/recovery, and design the optional restricted archive with an administrator. Conflict guard and shift-end suspension remain future work, not implemented demo claims. Production is a separate gated plan, not a publication or qualification completed here.
+Verify the official MCP bonus clause and capture authenticated discovery plus a read-only call through the qualifying approved route. Complete separate extended checks for native proposals, real two-person high-energy verification, workflow/JQL behavior and recovery/capacity before production qualification. Conflict guard and shift-end suspension remain future work, not demo claims. Production, publication and submission are separate decisions.
 
-## Submission fields still requiring verification
+## Built with — draft field
 
-- Official contest category/bonus eligibility and deadlines; Specialized Industries/MCP are the intended targets, not a claim of eligibility or completion.
-- Actual team members and roles, ownership/rights to media and open-source dependency attribution.
-- Final accepted source/release hashes, repository URL https://github.com/Mizzen-Studios/permitguard and a real privacy-reviewed video link. No video has been recorded/exported/uploaded by this task.
-- Any word/character limits and required attestations. No made-up visitor numbers, safety outcomes, ROI, certifications, customer deployments or latency improvements.
+Atlassian Forge · Custom UI · JavaScript / Node.js 22 runtime · Jira REST APIs · Forge Custom Entity Store · Forge Realtime · native Rovo actions · Preview rovo:mcp (runtime acceptance pending).
+
+## Links — not new publication
+
+- Existing public MIT source: https://github.com/Mizzen-Studios/permitguard
+- Setup/architecture: [README](../README.md)
+- Evidence: [submission readiness](submission-readiness-2026-11-22.md)
+- Demo video URL: **NOT RECORDED / NOT UPLOADED**
+
+## Internal submission gates — not claims to paste as completed
+
+- [MCP audit](mcp-bonus-readiness.md): current default paragraph above is truthful. Replace it with a demonstrated-use paragraph only after the qualifying authenticated receipt and official clause are linked. Do not claim both Studio and an external client are mandatory unless rules say so.
+- Verify canonical 2026 rules URL, category, bonus interpretation, deadline, exact form/character/video limits and team eligibility. Intended Specialized Industries/MCP targets are not organizer confirmation.
+- Confirm actual team identities/roles, media rights, dependency attribution and truthful entrant attestations. Do not invent customers, ROI, safety outcomes, certifications or production deployments.
+- Match the final video to its actual build and phase. Label shortened waits/earlier inserts; do not show a native action or a mock as an MCP call.
+- New exposure/OAuth consent, Studio publishing, production deploy, recording/export/share/upload and Devpost save/submission need the owner's separate decision. None was performed here.

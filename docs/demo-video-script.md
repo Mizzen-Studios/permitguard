@@ -1,80 +1,111 @@
-# PermitGuard judge demo — private recording script
+# Three-minute PermitGuard demo — script and shot list
 
-**DRAFT / NOT RECORDED.** Working target about 3 minutes from the current ACTIVE sample, not a claim of measured completion. Verify official contest video limits before recording; nothing is to be listed, uploaded or submitted by this run. Record only synthetic PGSAMPLE data. Keep site credentials, account menus, unrelated tabs and private browser material out of frame. Do not disturb the existing Devpost session.
+**DRAFT · NOT RECORDED / EXPORTED / UPLOADED.** Editorial target **exactly 03:00 / 180 seconds**, requested by the owner; official contest video rules are not yet verified. The accepted core stays development **5.15.0 / UI 4e3335fb30f9**. This task performs no recording actions, permit changes, OAuth grants, publication or submission.
 
-## Recording preflight
+## Preflight before any human recording
 
-1. Verify a single picker entry after the authorized Confluence-only uninstall in [the current retest](jira-only-demo-2026-11-21.md); prove the remaining Jira agent gives the scoped tool response. Do not delete valid product-owned agents through Rovo UI. Do not film two entries and pretend the ambiguity is resolved.
-2. Open [PGSAMPLE-2](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2). Current starting point is ACTIVE, own L-A1 only at the last accepted state; verify current state and signed-in worker before recording. No resets, storage edits or impersonation. If an expected lock/state differs, stop and reconcile rather than reseed over an open permit.
-3. Open a second same-issue tab for invalidation delivery and the current Rovo agent. Test microphone/framing locally. Leave real Saving time visible; do not imply mock speedups. Any later edited transition must be labelled as an edit, not live elapsed time.
-4. App panel may be inline. On a fresh issue: **View app actions → PermitGuard**. Admin optional panel menu **Show for all work items**; no blanket auto-open guarantee.
+- Use only synthetic PGSAMPLE data and the actual permitted signed-in person. Preserve Devpost/cookies/unrelated tabs. No secrets, account menus, email, tokens or unrelated work in frame.
+- Verify current build, one Judge and the actual ACTIVE permit/own lock before choosing S04. Do not reset or reseed an open permit; stop on an unexpected state. A new recorded state is not automatically the original accepted fixture.
+- Capture native Rovo before entering Release. Then record the sample-only Crew B sequence and only the current worker’s own lock removal. Leave a real remaining blocker; do not remove other people’s locks.
+- Record continuous raw footage privately first. UI waits are unknown; the 180-second timeline is an edit budget, not a promise that every API call fits. If a wait is shortened, label **Wait shortened — actual elapsed [measured]**. Do not present the edited clip as continuous real time or a three-minute LOTO procedure.
+- Owner report at 21:00: reload preview ~2.7 s/live ~4.3 s, readable separate clocks, one agent and release-first single caveat PASS. This is one observed run, not an SLA; earlier runs were slower. A static unconfirmed shell is not historical preview. Never substitute a panel-only counter for navigation time.
+- MCP bonus is [not fully verified](mcp-bonus-readiness.md). Default S07 must visibly say **Declared MCP tools — authenticated runtime evidence pending**. No mocked discovery or edited response may masquerade as an authenticated receipt.
 
-## Main clip from preserved ACTIVE permit
+## Locked shot budget
 
-**0:00–0:20 — problem and boundaries**
+| Shot | Time | Duration | Focus |
+| --- | --- | --- | --- |
+| S01 | 00:00–00:15 | 15 s | Problem and boundary |
+| S02 | 00:15–00:35 | 20 s | Identify the accepted build |
+| S03 | 00:35–01:00 | 25 s | Native Rovo, release first |
+| S04 | 01:00–01:40 | 40 s | Personal-lock release barrier |
+| S05 | 01:40–02:00 | 20 s | Authorized reread in another tab |
+| S06 | 02:00–02:15 | 15 s | Human-only activation boundary |
+| S07 | 02:15–02:45 | 30 s | MCP evidence — gated alternate |
+| S08 | 02:45–03:00 | 15 s | Architecture and close |
 
-Screen: current permit clipboard, policy and personal lock rail.
+**Total: 180 seconds, no gaps or overlaps.** Machine-readable source: [demo-shot-list.json](demo-shot-list.json).
 
-Say: “PermitGuard brings lockout/tagout permit decision support into Jira. The site procedure remains authoritative. These are recorded checks, not proof of physical isolation or permission to energize.”
+## S01 — Problem and boundary
 
-**0:20–0:55 — Rovo, with bounded meaning**
+**Screen:** Synthetic Jira work item / PermitGuard title and site-procedure notice.
 
-Screen: **PermitGuard Judge**. Ask: “Check readiness for PGSAMPLE-2. State its scope and release status.” Wait for the actual tool result.
+**Say:** “In group lockout work, a permit record must not hide the people whose personal locks still protect them. PermitGuard brings that coordination into Jira. The site procedure remains authoritative.”
 
-Say: “The agent reads the current work item as the signed-in user. Its separate release status remains blocked. An agent can propose a pending activation; only the assigned human can confirm at equipment.” The exact scope caveat is already in the on-screen tool message; do not add a second Rovo paraphrase. Do not claim the proposal path was demonstrated if this clip only reads status.
+**Evidence/claim boundary:** Accepted core; decision support only.
 
-**0:55–1:45 — make the safety conflict visible**
+## S02 — Identify the accepted build
 
-Screen: back to clipboard. If the owner's sample Crew B is absent, **Play Crew B** once. **Begin release checks**. Remove **only your own L-A1**, with its actual confirmation. Keep elapsed Saving and the real wait visible; narrate only statements supported by the current UI. Never remove another real worker's lock.
+**Screen:** PGSAMPLE-2 ACTIVE panel; footer 5.15.0 / UI 4e3335fb30f9; own-lock rail and top release strip.
 
-Say: “Even after my own lock is removed, a remaining personal-lock record blocks release. L-07 on V-3 belongs to the explicitly simulated Crew B.”
+**Say:** “Here is the accepted development build and our synthetic active permit. Work-start readiness and release readiness are separate. The release blocker stays visible at the top. Historical preview is labelled; actions wait for current authorization.”
 
-**1:45–2:20 — blocked close and second browser**
+**Evidence/claim boundary:** Owner accepted 22 Nov 21:00; capture fresh actual state.
 
-Screen: NOT CLEARED reason and disabled Close permit. Show the second tab's actual update, without claiming a fixed delay. Ask Rovo again for release readiness.
+## S03 — Native Rovo, release first
 
-Say: “The release check still includes shared-equipment locks. Neither the human UI nor Rovo can clear another crew's remaining lock. An invalidation makes the other tab re-read authorized state.”
+**Screen:** One PermitGuard Judge; new chat: Is PGSAMPLE-2 cleared?; actual tool response.
 
-**2:20–2:50 — architecture and honest scope**
+**Say:** “Ask the native Judge whether this work item is cleared. It leads with release not cleared, then gives the narrower work-start result. It reads the same deterministic service as the panel, rather than granting safety authority.”
 
-Screen: readable app permissions and README evidence links; no credential/usage-secret screens.
+**Evidence/claim boundary:** Native action path accepted; not MCP transport proof.
 
-Say: “This development app uses Forge app storage, Jira, scoped Realtime and native Rovo actions. No external runtime, SQL, Forge LLM API or Containers. Assets supports Equipment and Isolation points only. Native Rovo is demonstrated here; external MCP-client acceptance is a separate test.”
+## S04 — Personal-lock release barrier
 
-**2:50–3:00 — close**
+**Screen:** Explicit sample Crew B roleplay if absent; begin release checks; remove only current worker own L-A1; show L-07/V-3 blocker and blocked close.
 
-Say: “The site's procedure and named humans remain in control. Even a closed permit record is not permission to energize.” Leave the sample safely blocked unless the owner separately chooses the sample-only removal/close path. No implication of Marketplace or production qualification.
+**Say:** “For this synthetic exercise, Crew B is explicitly simulated. I begin release checks and remove only my own lock. A remaining shared-equipment personal-lock record still blocks release and closure. This is not another real worker, and not permission to remove someone else’s lock.”
 
-## Optional full-lifecycle insert (separate fresh synthetic work item)
+**Evidence/claim boundary:** Record only after human preflight/approval; no mutations by documentation task.
 
-Only after existing EQ-1 permits are finished, use a genuinely new dedicated sample issue: Create Crew A/EQ-1 with your actual identity → Begin locking → L-A1 with photo → Begin verification → point QR **permitguard:V-3**, procedure attestation → request PENDING activation assigned to yourself → show pre-activation Rovo NOT CLEARED → select EQ-1 and use **permitguard:register:10202:EQ-1** plus equipment attestation → Confirm at equipment and activate. Keep QR/checkbox filled and disabled through Saving. A photo chooser is not independent camera/presence proof. Do not reset PGSAMPLE-2 to fake a new lifecycle.
+## S05 — Authorized reread in another tab
 
-Do not film a one-person low-energy test as the two-person high-energy feature. Do not show unverified workflow transitions, archive publication, external MCP or conflict/shift-end features as completed. See [test matrix](judge-test-instructions.md).
+**Screen:** Actual second-tab update if captured; otherwise manually Refresh with visible label.
 
-## Cold-load/build-evidence insert — not recorded
+**Say:** “The other tab reads authorized state again. Realtime carries only invalidation hints, not permit records or safety authority. Refresh remains the fallback.”
 
-Owner observation on **22 November ~09:05 UK, 5.13.0**: frame about **3.8 s** after hard reload, live state about **1 s** later, estimated **5–6 s total**. The top release strip was visible without scrolling and one agent remained. No historical preview was noticed, and the native reply still repeated the caveat. This is one reported run, not a controlled benchmark or proof that preview rendered.
+**Evidence/claim boundary:** Only claim delivery if visible in recorded run; no fixed latency claim.
 
-For the next recording, verify the small **footer Forge version and UI source fingerprint** first. Hard reload PGSAMPLE-2 without clearing cookies or touching Devpost. Capture frame appearance and live-state arrival honestly. If no preview is visible, open **Startup details**: record whether it rendered, arrived after live state, was unavailable, or was rejected. Record three distinct scopes: navigation stopwatch, iframe-document clock if available, and panel-code clock. Never present panel-only seconds as total page startup. Never hold live state back to manufacture a preview shot. Preview is historical/not actionable, even if its recorded start flag was clear.
+## S06 — Human-only activation boundary
 
-Show live ACTIVE, its actual current revision and one lock, then the top Release NOT CLEARED strip. In a **new** native chat ask **Is PGSAMPLE-2 cleared?** The desired reply copies the release-first canonical message once: Release: NOT CLEARED, then Work start only: CLEARED, the no-release-clearance caveat, phase and site-procedure reminder. Do not edit duplicate prose out and claim the raw agent passed; mark it a failed retest if it repeats. The owner passed single-caveat output on 5.14.0. The new release-first ordering in 5.15.0 still needs prose acceptance.
+**Screen:** Source/README action diagram: GET readiness, CREATE PENDING, no agent confirmation tool.
 
-Use real elapsed waits and the verified contest limit, not the rough timings above. See [current evidence/retest](release-first-timing-2026-11-22.md), [production plan, not executed](production-deploy-plan.md), and [Devpost draft, not submitted](devpost-draft.md).
+**Say:** “The agent has no confirmation tool. Its activation action can only propose pending work for a named human. Equipment confirmation remains human-only; a QR or photo does not independently prove presence.”
 
-### Private recording log — fill from actual capture only
+**Evidence/claim boundary:** Implemented/local-tested rule; not a new live activation demonstration.
 
-- Capture date/UTC and permitted synthetic work item: **NOT RECORDED**
-- Footer Forge version / UI source hash / viewport: **NOT RECORDED**
-- Hard-reload frame / live-state times and Startup details: **NOT RECORDED**
-- One-agent search and exact unedited readiness reply/caveat count: **NOT RECORDED**
-- Own-lock/sample-Crew-B release block and second-tab delivery: **NOT RECORDED**
-- Local raw-video path/hash, privacy review, any labelled edits: **NOT RECORDED**
-- Owner approval to share/upload: **NOT GRANTED**
+## S07 — MCP evidence — gated alternate
 
-Keep a continuous raw source privately. Review for credentials, account menus, unrelated/private tabs and notifications before any later separately authorized export/share. No video has been recorded, uploaded or submitted by this task.
+**Screen:** DEFAULT: manifest tools and MCP readiness matrix with pending label. VERIFIED ALTERNATE: approved Studio/client discovery and real read-only tool receipt, only after audit is signed off..
 
-## Latest timing correction — owner report 22 November 17:02
+**Say:** “The same actions are declared as Forge MCP tools. Native Judge use alone does not prove MCP discovery. Today the authenticated MCP route and official bonus wording still need verification, so this is architecture evidence, not a claim that the bonus is complete.”
 
-Owner passed 5.14.0 footer/UI source, one agent and a single caveat, but reported approximately **17 s to preview / 30 s to live from navigation**, versus **4.0 s** on the panel-only clock. The recording must retain the actual wait; do not quote 4.0 s as page load or choose the earlier 5–6 s run to imply consistent speed. If a video edit removes waiting for length, label that edit and give the actual elapsed time; do not claim real-time continuity.
+**Evidence/claim boundary:** Default unverified branch; replace only after authenticated receipt and rules match.
 
-For 5.15.0 verify footer version and UI **4e3335fb30f9**. Show release-first wording rather than leading with a bare CLEARED. The static Release unconfirmed shell is only loading chrome, not a historical preview or live check. Open Startup details after the load to compare iframe and panel clocks with the navigation stopwatch; top Jira navigation remains unmeasured inside the cross-origin frame. No 5.15.0 speedup has yet been measured, and no video has been recorded/uploaded.
+## S08 — Architecture and close
+
+**Screen:** README architecture, public MIT repository and remaining release blocker.
+
+**Say:** “Forge stores bounded records and checks revisions before writes. Jira access remains user-authorized. No external app runtime or SQL is needed. Named humans and the site procedure remain in control.”
+
+**Evidence/claim boundary:** Source architecture, not production qualification.
+
+## S07 verified alternate — use only after the audit is satisfied
+
+Within the same **02:15–02:45** slot, show the approved Studio/custom-agent or OAuth client's real PermitGuard tool discovery and read-only check_readiness call, including the returned current phase/scope/release blocker. Say: “This approved client discovers the PermitGuard MCP tool and calls readiness as the actual user. Here is its current scoped result; it cannot confirm activation or bypass a remaining personal lock.”
+
+This branch is NOT ready today. Link the authenticated receipt and official prize-clause match before using it. Both Studio and an external client are not automatically required; select the route the verified rules actually accept. No publish/new OAuth grant/exposure change is authorized here.
+
+If MCP proof was recorded **before** S04, label the insert with its time and ACTIVE state. If captured live **after** S04, expect the actual RELEASE-state decision; don't force the earlier ACTIVE/work-start answer or reset the permit to match a script. The final video must make the state/chronology clear.
+
+## Privacy and evidence log — fill from real capture only
+
+- Raw capture date/path/hash, owner and viewport: **NOT RECORDED**
+- Actual footer, current permit phase/revision, native reply: **NOT RECORDED**
+- Navigation stopwatch versus iframe/panel clocks: **NOT RECORDED**
+- Own-lock removal / simulated remaining blocker / second-tab result: **NOT RECORDED**
+- MCP client/tool discovery/receipt and official clause reference: **NOT RECORDED / RULES NOT VERIFIED**
+- Edit decisions, actual waits and privacy review: **NOT RECORDED**
+- Owner permission to export/share/upload/submit: **NOT GRANTED**
+
+Keep all captions legible. Do not claim a live two-person high-energy check, camera/presence proof, Studio/MCP invocation, workflow transition, archive or production certification that the footage does not show. [Readiness](submission-readiness-2026-11-22.md) · [Devpost draft](devpost-draft.md).

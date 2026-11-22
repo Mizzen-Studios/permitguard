@@ -1,0 +1,57 @@
+{
+  "checkedDate": "2026-11-22",
+  "task": "documentation-only submission readiness",
+  "acceptedCore": {
+    "forgeVersion": "5.15.0",
+    "uiSource": "4e3335fb30f9",
+    "ownerReportUtc": "2026-11-22T21:00:00Z",
+    "nativeRovo": "PASS",
+    "oneJudge": "PASS",
+    "clockScopes": "PASS",
+    "observedReloadSeconds": {
+      "preview": 2.7,
+      "live": 4.3
+    },
+    "performanceClaim": "single owner observation, not SLA or controlled benchmark"
+  },
+  "runtimeFilesChanged": false,
+  "acceptedUiArtifactHashesUnchanged": true,
+  "tests": {
+    "backend": 85,
+    "ui": 43,
+    "checker": 3,
+    "total": 131
+  },
+  "video": {
+    "status": "DRAFT_NOT_RECORDED",
+    "shots": 8,
+    "targetSeconds": 180,
+    "officialContestLimitVerified": false
+  },
+  "mcp": {
+    "configuration": "PASS",
+    "nativeRovoIsMcpProof": false,
+    "unauthenticatedGetStatus": 404,
+    "unauthenticatedInitializeStatus": 401,
+    "oauthChallengeObserved": true,
+    "credentialsSent": false,
+    "toolsInvoked": false,
+    "authenticatedDiscovery": "NOT_RUN",
+    "authenticatedToolCall": "NOT_RUN",
+    "externalExposure": "NOT_VERIFIED",
+    "officialBonusRules": "NOT_VERIFIED",
+    "bonusFullyVerified": false,
+    "requiredClientRoute": "unknown until official rules are verified"
+  },
+  "actionsNotPerformed": [
+    "runtime deployment",
+    "production deployment",
+    "permit mutation",
+    "OAuth grant",
+    "external exposure enablement",
+    "Studio agent publication",
+    "video recording/export/upload",
+    "Marketplace listing",
+    "Devpost save/submission"
+  ]
+}
