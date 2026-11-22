@@ -21,7 +21,7 @@ Say: “PermitGuard brings lockout/tagout permit decision support into Jira. The
 
 Screen: **PermitGuard Judge**. Ask: “Check readiness for PGSAMPLE-2. State its scope and release status.” Wait for the actual tool result.
 
-Say: “The app reads this work item as the signed-in user. CLEARED is for WORK_START only, not release clearance. An agent can propose a pending activation; only its assigned human can confirm at equipment.” Do not claim the proposal path was demonstrated if this clip only reads status.
+Say: “The agent reads the current work item as the signed-in user. Its separate release status remains blocked. An agent can propose a pending activation; only the assigned human can confirm at equipment.” The exact scope caveat is already in the on-screen tool message; do not add a second Rovo paraphrase. Do not claim the proposal path was demonstrated if this clip only reads status.
 
 **0:55–1:45 — make the safety conflict visible**
 
@@ -51,6 +51,24 @@ Only after existing EQ-1 permits are finished, use a genuinely new dedicated sam
 
 Do not film a one-person low-energy test as the two-person high-energy feature. Do not show unverified workflow transitions, archive publication, external MCP or conflict/shift-end features as completed. See [test matrix](judge-test-instructions.md).
 
-## 5.13.0 cold-load/release-strip insert — not recorded
+## Cold-load/build-evidence insert — not recorded
 
-Before the main clip, capture a genuine hard reload of PGSAMPLE-2 and separately time historical preview (if it wins the race), live authorized state and Realtime connection. Do not clear cookies/unrelated sessions, hide the real delay or present the historical property as current clearance. Show the visible historical/not-actionable label and old timestamp, then the live ACTIVE permit with its top Release NOT CLEARED strip and one personal lock. Demonstrate the remaining Rovo agent stating the WORK_START-only caveat once, not twice. New timing/prose/viewport results must be recorded by the owner before being claimed in the video. See [exact 5.13.0 acceptance](first-paint-2026-11-21.md), [production plan, not executed](production-deploy-plan.md), and [Devpost draft, not submitted](devpost-draft.md). Adjust the rough timeline to the actual waits and verified contest limit; no automatic edits or upload are authorized.
+Owner observation on **22 November ~09:05 UK, 5.13.0**: frame about **3.8 s** after hard reload, live state about **1 s** later, estimated **5–6 s total**. The top release strip was visible without scrolling and one agent remained. No historical preview was noticed, and the native reply still repeated the caveat. This is one reported run, not a controlled benchmark or proof that preview rendered.
+
+For the next recording, verify the small **footer Forge version and UI source fingerprint** first. Hard reload PGSAMPLE-2 without clearing cookies or touching Devpost. Capture frame appearance and live-state arrival honestly. If no preview is visible, open **Startup details**: record whether it rendered, arrived after live state, was unavailable, or was rejected. Its clock starts when panel code executes, not at Jira navigation. Never hold live state back to manufacture a preview shot. Preview is historical/not actionable, even if its recorded start flag was clear.
+
+Show live ACTIVE, its actual current revision and one lock, then the top Release NOT CLEARED strip. In a **new** native chat ask **Is PGSAMPLE-2 cleared?** The desired reply copies the canonical tool message once: WORK_START-only/not-release boundary, phase, release status, site-procedure reminder. Do not edit duplicate prose out and claim the raw agent passed; mark it a failed retest if it repeats. The new canonical-message candidate still needs owner prose acceptance.
+
+Use real elapsed waits and the verified contest limit, not the rough timings above. See [current evidence/retest](preview-and-rovo-2026-11-22.md), [production plan, not executed](production-deploy-plan.md), and [Devpost draft, not submitted](devpost-draft.md).
+
+### Private recording log — fill from actual capture only
+
+- Capture date/UTC and permitted synthetic work item: **NOT RECORDED**
+- Footer Forge version / UI source hash / viewport: **NOT RECORDED**
+- Hard-reload frame / live-state times and Startup details: **NOT RECORDED**
+- One-agent search and exact unedited readiness reply/caveat count: **NOT RECORDED**
+- Own-lock/sample-Crew-B release block and second-tab delivery: **NOT RECORDED**
+- Local raw-video path/hash, privacy review, any labelled edits: **NOT RECORDED**
+- Owner approval to share/upload: **NOT GRANTED**
+
+Keep a continuous raw source privately. Review for credentials, account menus, unrelated/private tabs and notifications before any later separately authorized export/share. No video has been recorded, uploaded or submitted by this task.

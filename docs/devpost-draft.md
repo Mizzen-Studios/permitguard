@@ -36,21 +36,23 @@ Readiness has different meanings at work start and release. We separated the mac
 
 Two same-name Rovo agents turned out to be legitimate registrations from Jira and Confluence installs of the same app—not stale agents. Removing only the optional Confluence installation restored the one-agent picker while preserving Jira. A separate opaque Agent not allowed validation failure was intermittent in the observed CLI/deployment sequence; we do not claim a proven internal provider cause or a verification bypass.
 
-The current startup candidate begins issue-context and live-state reads together and may show a clearly labelled historical Jira-property preview before cold Forge authorization finishes. Preview is never live clearance or an action source. Its real browser timing remains to be measured; local tests are not a latency benchmark.
+The current startup candidate begins issue-context and live-state reads together and may show a clearly labelled historical Jira-property preview before cold Forge authorization finishes. Preview is never live clearance or an action source. The owner’s single 5.13.0 run is reported below; repeat measurements and preview diagnostics are still needed. Local tests are not a latency benchmark.
 
 ## Accomplishments and evidence
 
 Owner browser checks on 21 November ~21:05 UK confirmed one PermitGuard Judge, a new-chat WORK_START-only/non-release answer, and inline cold-loaded PGSAMPLE-2 with readable labels, ACTIVE/site revision 22 and one L-A1 lock. Earlier dated owner tests covered photo/QR activation, preserved Saving inputs and the simulated other-crew release barrier. Read-only Jira history checks confirmed accidental assignee shortcut edits were restored without a description change. See the dated evidence documents for exact versions and limitations.
 
-The startup/banner/prompt candidate **299644f** is deployed as development **5.13.0**, with 118 local tests/build and matching remote agent metadata. Its actual cold-load timing, above-fold rendering and single-caveat generated prose still require the owner browser retest. Do not claim that a test count, metadata receipt or script alone proves a live feature or a recorded video.
+On 22 November ~09:05 UK, the owner retested **5.13.0**: the release blocker was above the fold and one agent remained. A reported cold reload showed the frame at about 3.8 seconds and live state about one second later, estimated 5–6 seconds total. No historical preview was noticed. This single observation is not a controlled latency benchmark or proof of preview rendering. The agent still repeated its caveat, so single-caveat prose was a failed acceptance item—not a shipped success.
+
+The follow-up source **99c1ebc** consolidates redundant caveat strings into one canonical display message and directs Rovo to copy only that message. It adds a real Forge-version/UI-source footer and per-panel preview/live startup diagnostics, with 124 local tests. It is deployed as development **5.14.0** through normal verification; actual generated prose is still pending owner acceptance in the [current release note](preview-and-rovo-2026-11-22.md). Do not claim that a test count, metadata receipt or script alone proves a live feature or a recorded video.
 
 ## What we learned
 
-A fast preview can improve orientation, but safety-related actions still need current authorized server state. A live-update subscription is not a physical safety signal, and an assistant's confident prose must not broaden the scope of a deterministic result. Clear human attribution and explicit failure are more important than making every screen green.
+A historical preview can improve orientation if it arrives first, but it should never delay a faster live response or enable safety-related actions. Those still need current authorized server state. A live-update subscription is not a physical safety signal, and an assistant's confident prose must not broaden the scope of a deterministic result. Clear human attribution and explicit failure are more important than making every screen green.
 
 ## What's next
 
-Measure the new first-useful-render/live-confirmation timings, complete real Rovo proposal/Studio/external MCP and high-energy two-person checks, validate actual workflow/JQL behavior and capacity/recovery, and design the optional restricted archive with an administrator. Conflict guard and shift-end suspension remain future work, not implemented demo claims. Production is a separate gated plan, not a publication or qualification completed here.
+Confirm the canonical one-caveat response and preview lifecycle from actual browser diagnostics, repeat cold-load measurements, complete real Rovo proposal/Studio/external MCP and high-energy two-person checks, validate actual workflow/JQL behavior and capacity/recovery, and design the optional restricted archive with an administrator. Conflict guard and shift-end suspension remain future work, not implemented demo claims. Production is a separate gated plan, not a publication or qualification completed here.
 
 ## Submission fields still requiring verification
 

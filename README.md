@@ -1,4 +1,4 @@
-> **Current development release: 5.13.0**, source `299644f`, Jira only. Parallel startup with a historical, nonactionable issue-property preview, deferred Realtime, top release blocker and one-caveat Rovo prompt. [Evidence and exact cold-load retest](docs/first-paint-2026-11-21.md). Owner accepted the one-agent picker/native scoped reply and inline/readable ACTIVE sample on 5.12.0 at ~21:05 UK; new startup timing/wording/viewport acceptance is pending.
+> **Current development release: 5.14.0**, source `99c1ebc`, Jira only. One canonical readiness display message, strict copy-only Rovo instruction, runtime Forge-version/UI-source footer and preview lifecycle timings. [Current evidence and retest](docs/preview-and-rovo-2026-11-22.md). Owner measured ~5–6 s cold load on 5.13.0 and accepted the above-fold release strip/one-agent picker; new generated wording/footer/preview diagnostics still need browser acceptance.
 
 # PermitGuard
 

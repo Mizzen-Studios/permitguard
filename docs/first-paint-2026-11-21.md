@@ -1,3 +1,5 @@
+> **Owner retest 22 Nov ~09:05 UK:** top blocker and one-agent picker PASS; frame ~3.8 s, live ~1 s later, estimated 5–6 s total. No preview noticed; Rovo caveat still duplicated. [5.14.0 follow-up evidence/retest](preview-and-rovo-2026-11-22.md). Earlier pending checks below are historical, not current acceptance claims.
+
 # First useful render — development 5.13.0
 
 ## Baseline accepted by owner at ~21:05 UK

@@ -1,3 +1,5 @@
+> **Latest 5.14.0 / 99c1ebc:** [canonical message, footer build ID and preview diagnostics](preview-and-rovo-2026-11-22.md). Reuse PGSAMPLE-2; no reset. On 5.13.0 the owner passed the top release strip and one-agent picker, measured ~5–6 s total cold load, saw no preview and still saw a duplicate Rovo caveat. New prose is not accepted until retest.
+
 > **Latest 5.13.0:** [first useful render / top release status / one-caveat retest](first-paint-2026-11-21.md). Owner confirmed one picker entry and native scoped reply on 5.12.0 at ~21:05 UK. Keep PGSAMPLE-2 active; no reset.
 
 > **Current:** duplicate entries were valid Jira/Confluence registrations. Confluence-only uninstall is complete; original Jira installation remains. Use [the current Jira-only retest](jira-only-demo-2026-11-21.md); no Rovo UI deletion. Older stale-agent investigation notes below are historical, not current instructions.
