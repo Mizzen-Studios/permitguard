@@ -4,10 +4,10 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'app.js'),'utf8');
-function harness(){
+function harness(overrides={}){
  const handlers={}, calls=[]; const root={innerHTML:'',addEventListener:(n,f)=>handlers[n]=f,querySelector:()=>null,querySelectorAll:()=>[]};
  const context={console,Date,Promise,setTimeout:f=>Promise.resolve().then(f),setInterval:()=>1,clearInterval:()=>{},FileReader:class {},document:{querySelector:()=>root,addEventListener:()=>{}},window:{addEventListener:()=>{},confirm:()=>true},invoke:async(method,args)=>{calls.push({method,...args});return {permit:null,actorId:'human',revision:8,policy:{mode:'WARN_ONLY',failMode:'FAIL_CLOSED'},equipment:[],board:[]};},realtime:{subscribe:async()=>({unsubscribe(){}})}};
- vm.createContext(context);vm.runInContext(source.split(String.fromCharCode(10)).slice(1,-2).join(String.fromCharCode(10)),context);vm.runInContext('initializing=false',context);return {context,root,calls,handlers,run:s=>vm.runInContext(s,context)};
+ Object.assign(context,overrides);vm.createContext(context);vm.runInContext(source.split(String.fromCharCode(10)).slice(1,-2).join(String.fromCharCode(10)),context);vm.runInContext('initializing=false',context);return {context,root,calls,handlers,run:s=>vm.runInContext(s,context)};
 }
 test('all six stages render one primary action, closed none',()=>{const h=harness();for(const stage of ['PLAN','LOCK','VERIFY','ACTIVE','RELEASE','CLOSED']){h.run('state={actorId:"human",revision:8,policy:{mode:"WARN_ONLY"},permit:{state:'+JSON.stringify(stage)+',id:"P",equipment:[{id:"EQ",name:"Pump",isolationPoints:[{id:"V-3",energyType:"hydraulic",highEnergy:true}]}],workers:["human"],verifierIds:["human"],locks:[],activations:[],verifications:[],audit:[]},board:[],release:{status:"NOT CLEARED"}};stale=false;render()');assert.equal((h.root.innerHTML.match(/class="primary"/g)||[]).length,stage==='CLOSED'?0:1);assert.match(h.root.innerHTML,/OSHA 1910.147/);}});
 test('bridge mutations carry store revision rather than permit revision',async()=>{const h=harness();h.run('state={actorId:"human",revision:8,permit:{revision:2}};stale=false');await h.run('mutate("begin_lock")');assert.equal(h.calls[0].method,'permitguard');assert.equal(h.calls[0].operation,'begin_lock');assert.equal(h.calls[0].payload.expectedRevision,8);assert.equal(h.calls.length,1);assert.equal(h.run('state.revision'),8);});
@@ -114,7 +114,7 @@ const previewValue=()=>({schemaVersion:1,permitId:'66401',state:'ACTIVE',revisio
 test('historical preview paints while the authenticated resolver is pending and never enables actions',async()=>{
  const h=harness();let finish;h.context.view={getContext:async()=>previewContext};h.context.requestJira=async path=>{assert.equal(path,'/rest/api/3/issue/66401/properties/permitguard.snapshot');return {ok:true,json:async()=>({value:previewValue()})};};h.context.invoke=()=>new Promise(r=>finish=r);
  const loading=h.run('initialize()');await new Promise(r=>setImmediate(r));assert.match(h.root.innerHTML,/Historical preview — not live or actionable/);assert.match(h.root.innerHTML,/Last recorded phase/);assert.match(h.root.innerHTML,/NOT CLEARED/);assert.equal(h.run('state'),null);assert.equal(h.run('stale'),true);await h.run('mutate("begin_release")');assert.equal(h.calls.length,0);
- finish({actorId:'human',permit:{state:'ACTIVE',locks:[],equipment:[]},revision:22,policy:{},release:{status:'NOT CLEARED',reasons:[{message:'A personal lock remains.'}]},equipment:[],board:[]});await loading;assert.equal(h.run('preview'),null);assert.doesNotMatch(h.root.innerHTML,/Historical preview/);
+ finish({actorId:'human',permit:{state:'ACTIVE',locks:[],equipment:[]},revision:22,policy:{},release:{status:'NOT CLEARED',reasons:[{message:'A personal lock remains.'}]},equipment:[],board:[]});await loading;assert.equal(h.run('preview'),null);assert.doesNotMatch(h.root.innerHTML,/Historical preview — not live or actionable/);
 });
 test('context and live resolver begin in parallel, not as serial bridge requests',async()=>{
  const h=harness();let finishContext,started=false;h.context.view={getContext:()=>new Promise(r=>finishContext=r)};h.context.invoke=async()=>{started=true;return {actorId:'human',permit:null,revision:22,policy:{},equipment:[],board:[]};};const loading=h.run('initialize()');await new Promise(r=>setImmediate(r));assert.equal(started,true);finishContext(previewContext);await loading;assert.equal(h.run('stale'),false);
@@ -136,4 +136,25 @@ test('top release blocker precedes permit header and tall work/lock board in liv
 });
 test('late property response cannot replace already loaded live state',async()=>{
  const h=harness();let finish;h.run('initializing=true');h.context.requestJira=()=>new Promise(r=>finish=r);const pending=h.run('loadPreview('+JSON.stringify(previewContext)+')');await h.run('refresh()');finish({ok:true,json:async()=>({value:previewValue()})});assert.equal(await pending,false);assert.equal(h.run('preview'),null);
+});
+
+test('footer identifies UI source while loading and actual Forge version after live confirmation',()=>{
+ const h=harness({__PERMITGUARD_BUILD__:'abc123def456'});h.run('render()');assert.match(h.root.innerHTML,/UI abc123def456/);assert.match(h.root.innerHTML,/version pending live connection/);
+ h.run('state={actorId:"human",permit:null,revision:22,policy:{},equipment:[],board:[],buildInfo:{version:"5.14.0"}};stale=false;render()');assert.match(h.root.innerHTML,/PermitGuard 5.14.0/);assert.match(h.root.innerHTML,/Startup details/);
+ h.run('state.buildInfo.version="<script>bad</script>";render()');assert.doesNotMatch(h.root.innerHTML,/<script>bad/);
+});
+test('preview timing records a real render instead of forcing a flash after live state',async()=>{
+ const h=harness();h.run('initializing=true');h.context.requestJira=async()=>({ok:true,json:async()=>({value:previewValue()})});assert.equal(await h.run('loadPreview('+JSON.stringify(previewContext)+')'),true);assert.ok(h.run('previewShownAt')>0);assert.match(h.run('buildFooter()'),/Historical preview rendered/);
+});
+test('late preview diagnostics update only footer, never rebuild an edited form',async()=>{
+ const h=harness();h.run('initializing=true');let finish;h.context.requestJira=()=>new Promise(r=>finish=r);const pending=h.run('loadPreview('+JSON.stringify(previewContext)+')');await h.run('refresh()');const before=h.root.innerHTML;finish({ok:true,json:async()=>({value:previewValue()})});assert.equal(await pending,false);assert.equal(h.root.innerHTML,before);assert.equal(h.run('previewShownAt'),0);assert.match(h.run('buildFooter()'),/arrived after live state/);
+});
+test('preview supports key-only native context and records unavailable/denied results',async()=>{
+ const h=harness();h.run('initializing=true');h.context.requestJira=async path=>{assert.equal(path,'/rest/api/3/issue/PGSAMPLE-2/properties/permitguard.snapshot');return {ok:true,json:async()=>({value:previewValue()})};};assert.equal(await h.run('loadPreview({extension:{issue:{key:"PGSAMPLE-2"}}})'),true);
+ const denied=harness();denied.context.requestJira=async()=>({ok:false,status:403});assert.equal(await denied.run('loadPreview('+JSON.stringify(previewContext)+')'),false);assert.match(denied.run('buildFooter()'),/HTTP 403/);
+ const missing=harness();await missing.run('loadPreview({})');assert.match(missing.run('buildFooter()'),/No issue reference/);
+});
+test('build footer is present on admin/snapshot states and failed bootstrap',()=>{
+ for(const value of [{kind:'ADMINISTRATION',scopes:[],capabilities:{},uninstall:{}},{kind:'SNAPSHOT',permits:[],limitations:[],capturedAt:'2026-11-22'}]){const h=harness();h.run('state='+JSON.stringify(value)+';render()');assert.match(h.root.innerHTML,/class="build-footer"/);}
+ const h=harness();h.run('preview={phase:"ACTIVE",locks:1,permitRevision:6,updatedAt:"2026-11-21"};initializing=false;render()');assert.match(h.root.innerHTML,/Live permit unavailable/);assert.match(h.root.innerHTML,/class="build-footer"/);
 });

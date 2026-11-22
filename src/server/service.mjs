@@ -63,10 +63,12 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     if (operation === 'check_readiness') {
       const scope=permit?.state==='RELEASE'?'RELEASE':'WORK_START',checked=scope==='RELEASE'?release():readiness();
       checked.reasons=checked.reasons.map(r=>({...r,message:r.message&&r.message!==r.code?r.message:({NO_PERMIT:'No permit has been created for this work item.',REGISTER_UNAVAILABLE:'The equipment register could not be confirmed.'}[r.code]||'Recorded prerequisites are incomplete; inspect the permit panel.')}));
-      const mandatoryNotice=scope==='WORK_START'?'CLEARED is scoped to WORK_START only and is not release clearance.':'This check is scoped to RELEASE only; recorded clearance is not permission to energize equipment.';
-      const message=checked.status==='CLEARED'?(scope==='WORK_START'?'CLEARED for WORK_START only. This is not release clearance. Follow the site procedure.':'Release records are CLEARED. This is not permission to energize equipment.'):
-        'NOT CLEARED. '+checked.reasons.map(r=>r.message||'Recorded prerequisites are incomplete.').join(' ');
-      return {...checked,scope,mandatoryNotice,message,displayStatus:checked.status==='CLEARED'&&scope==='WORK_START'?'CLEARED - WORK_START only; not release clearance':checked.status,activationPending:!!permit?.activations.some(a=>a.status==='PENDING'),releaseStatus:release().status,phase:permit?.state||'NO_PERMIT',permitId:permit?.id??null,revision:row.revision,siteRevision:row.revision,permitRevision:permit?.revision??null,policy:project.policy,observedAt:now(),operational:false};
+      const releaseStatus=release().status,phase=permit?.state||'NO_PERMIT';
+      const scopeLine=scope==='WORK_START'?(checked.status==='CLEARED'?'CLEARED for WORK_START only. This is not release clearance.':'NOT CLEARED for WORK_START. This is not release clearance.'):
+        'Release records are '+checked.status+'. This is not permission to energize equipment.';
+      // One complete human response; no competing paraphrases in other display fields.
+      const message=[scopeLine,checked.status==='NOT CLEARED'?checked.reasons.map(r=>r.message).join(' '):'', 'Phase: '+phase+'. Release Status: '+releaseStatus+'. Follow the site procedure.'].filter(Boolean).join(' ');
+      return {...checked,scope,message,activationPending:!!permit?.activations.some(a=>a.status==='PENDING'),releaseStatus,phase,permitId:permit?.id??null,revision:row.revision,siteRevision:row.revision,permitRevision:permit?.revision??null,policy:project.policy,observedAt:now(),operational:false};
     }
     need(auth.canEdit === true, 'EDIT_ISSUES permission required');
     if (payload.expectedRevision !== undefined) need(payload.expectedRevision === row.revision, 'CONFLICT: refresh before retrying');

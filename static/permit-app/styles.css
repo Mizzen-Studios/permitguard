@@ -4,3 +4,5 @@
 
 /* Release status is the first main content, above tall permit chrome. */
 .release-summary{position:sticky;top:0;z-index:3;background:#fff0f0;border:1px solid #d9a6ac;border-left:5px solid var(--red);padding:10px 14px;margin:0 0 14px;color:#76202b;font-size:.9rem}.release-summary strong,.release-summary span{display:block}.release-summary span{font-size:.82rem;margin-top:3px}.release-summary.projection-preview{background:#fff5da;color:#584117;border-color:#d7ba7c}.release-summary.release-records{background:#f6f2e7;color:#584117;border-color:#d7ba7c}main{padding-top:16px}.connection{padding-bottom:12px}
+
+.build-footer{padding:12px 28px 20px;color:var(--muted);font-size:.75rem;border-top:1px solid var(--line)}.build-footer details{margin-top:6px;max-width:60rem}.build-footer p{font-size:.75rem;margin:6px 0}

@@ -3,7 +3,7 @@ import { createArchiveRuntime } from './archive.mjs';
 import ResolverModule from '@forge/resolver';
 // SDK CommonJS default interop differs between native Node and the Forge bundler.
 const Resolver = ResolverModule.default ?? ResolverModule;
-import api, { assumeTrustedRoute } from '@forge/api';
+import api, { assumeTrustedRoute, getAppContext } from '@forge/api';
 import { dispatch } from '../server/index.mjs';
 import { createForgeWiring } from './actions.mjs';
 
@@ -21,7 +21,10 @@ const wiring = createForgeWiring({ dispatch, requestJira, archive: createArchive
 export const checkReadiness = wiring.checkReadiness;
 export const requestActivation = wiring.requestActivation;
 const resolver = new Resolver();
-resolver.define('permitguard', wiring.resolver);
+export function publicBuildInfo(){
+ try{const {appVersion,environmentType}=getAppContext();return {version:appVersion,environment:environmentType};}catch{return null;}
+}
+resolver.define('permitguard', async request => ({...await wiring.resolver(request), buildInfo:publicBuildInfo()}));
 // Compatibility for the disposable capability resource, not agent confirmation endpoints.
 resolver.define('capability_probe', wiring.capabilityProbe);
 resolver.define('check_readiness', request => wiring.resolver({ ...request, payload: { operation: 'check_readiness', payload: {} } }));
