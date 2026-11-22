@@ -127,7 +127,7 @@ test('wrong point/equipment QR never changes operational revision; same-person l
  const ctx={accountId:'alice'}, wiring=createForgeWiring({dispatch:f.dispatch,requestJira:async()=>({ok:true,json:async()=>({id:'1',fields:{project:{id:'10'}}})})});
  const pending=await wiring.checkReadiness({issueId:'1'},ctx);assert.equal(pending.status,'NOT CLEARED');assert.equal(pending.transitionAllowed,false);assert.equal(pending.phase,'VERIFY');assert.ok(pending.reasons.some(r=>r.code==='HUMAN_ACTIVATION_REQUIRED'));assert.equal(pending.siteRevision,baseline.revision);assert.deepEqual(f.row,baseline);
  state=await f.call('confirm_activation',{equipmentId,activationId,...good,confirmedAtEquipment:true,expectedRevision:baseline.revision});assert.equal(state.permit.state,'ACTIVE');assert.equal(state.revision,baseline.revision+1);assert.equal(state.permit.activations[0].confirmedBy,'alice');
- const activeReport=await wiring.checkReadiness({issueId:'1'},ctx);assert.equal(activeReport.status,'CLEARED');assert.equal(activeReport.scope,'WORK_START');assert.match(activeReport.message,/WORK_START only.*not release clearance/);assert.equal('mandatoryNotice' in activeReport,false);assert.equal('displayStatus' in activeReport,false);assert.equal(activeReport.message.split('This is not release clearance.').length-1,1);assert.match(activeReport.message,/Phase: ACTIVE\. Release Status: NOT CLEARED/);assert.equal(activeReport.releaseStatus,'NOT CLEARED');
+ const activeReport=await wiring.checkReadiness({issueId:'1'},ctx);assert.equal(activeReport.status,'CLEARED');assert.equal(activeReport.scope,'WORK_START');assert.match(activeReport.message,/^Release: NOT CLEARED\. Work start only: CLEARED\. This is not release clearance\./);assert.equal('mandatoryNotice' in activeReport,false);assert.equal('displayStatus' in activeReport,false);assert.equal(activeReport.message.split('This is not release clearance.').length-1,1);assert.match(activeReport.message,/Phase: ACTIVE\./);assert.equal(activeReport.releaseStatus,'NOT CLEARED');
  await assert.rejects(f.call('confirm_activation',{equipmentId,activationId,...good,confirmedAtEquipment:true}),/QR_CHALLENGE_EXPIRED/);assert.equal(f.row.revision,state.revision);
  await f.call('begin_release');state=await f.call('remove_lock',{lockId:'A'});assert.equal(state.release.status,'NOT CLEARED');assert.ok(state.release.reasons.some(r=>r.lockId==='L-07'&&r.pointId==='V-3'));
  const release=await wiring.checkReadiness({issueId:'1'},ctx);assert.equal(release.status,'NOT CLEARED');assert.equal(release.transitionAllowed,false);assert.ok(release.reasons.some(r=>r.lockId==='L-07'));assert.match(release.message,/Simulated Crew B lock L-07 remains on isolation point V-3/);assert.doesNotMatch(release.message,/@Crew|SIMULATED.*'s|LOCK_REMAINS/);await f.call('remove_sample_lock',{confirmed:true});assert.equal((await f.call('close_permit')).permit.state,'CLOSED');
@@ -162,4 +162,19 @@ test('parallel post-commit failures remain nonauthoritative and never repeat a m
 test('friendly issue/project labels come from the authorized Jira issue, not client claims',async()=>{
  const route=(p,...a)=>p.reduce((s,t,i)=>s+t+(a[i]??''),'');const api={asUser:()=>({requestJira:async path=>({ok:true,status:200,json:async()=>path.includes('mypermissions')?{permissions:{EDIT_ISSUES:{havePermission:true}}}:path.includes('myself')?{accountId:'alice',displayName:'Alice'}:{id:'66401',key:'PGSAMPLE-2',fields:{project:{id:'10202',key:'PGSAMPLE',name:'PermitGuard Sample Plant'}}}})})};
  const auth=await jiraAdapters(api,route).authorize({accountId:'alice',extension:{issue:{id:'66401'}},projectName:'forged'});assert.equal(auth.issueKey,'PGSAMPLE-2');assert.equal(auth.projectName,'PermitGuard Sample Plant');assert.equal(auth.projectKey,'PGSAMPLE');
+});
+
+test('read-only Jira authorization skips cosmetic profile but still checks native issue and permissions',async()=>{
+ const calls=[];const route=(p,...a)=>p.reduce((s,t,i)=>s+t+(a[i]??''),'');
+ const api={asUser:()=>({requestJira:async path=>{calls.push(path);assert.ok(!path.includes('/myself'));return {ok:true,status:200,json:async()=>path.includes('mypermissions')?{permissions:{EDIT_ISSUES:{havePermission:true}}}:{id:'1',fields:{project:{id:'10'}}}};}})};
+ const auth=await jiraAdapters(api,route).authorize({accountId:'alice',issueId:'1'},{includeProfile:false});assert.equal(calls.length,2);assert.equal(auth.actorId,'alice');assert.equal(auth.canEdit,true);assert.equal(auth.displayName,undefined);
+});
+test('service omits profile only on read operations, never on a mutation',async()=>{
+ const options=[];const dispatch=createService({store:{atomic:true,read:async()=>({revision:0,data:emptySite()})},authorize:async(_ctx,o)=>{options.push(o.includeProfile);return {actorId:'alice',issueId:'1',projectId:'10',canEdit:false};}});
+ await dispatch('get_state');await dispatch('check_readiness');await assert.rejects(dispatch('begin_lock'),/EDIT_ISSUES/);assert.deepEqual(options,[false,false,true]);
+});
+
+test('profile-free read still fails closed when fresh permission lookup is denied',async()=>{
+ const calls=[];const route=(p,...a)=>p.reduce((s,t,i)=>s+t+(a[i]??''),'');const api={asUser:()=>({requestJira:async path=>{calls.push(path);return path.includes('mypermissions')?{ok:false,status:403}:{ok:true,status:200,json:async()=>({id:'1',fields:{project:{id:'10'}}})};}})};
+ await assert.rejects(jiraAdapters(api,route).authorize({accountId:'alice',issueId:'1'},{includeProfile:false}),/403/);assert.equal(calls.length,2);assert.ok(!calls.some(p=>p.includes('/myself')));
 });

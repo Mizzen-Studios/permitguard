@@ -72,9 +72,9 @@ test('newer or unversioned Realtime invalidation requires one authoritative read
  }
 });
 
-test('initialization waits for bridge context and auto-loads without Refresh; retries reads only',async()=>{
+test('valid authorized live state does not wait for failed frontend context',async()=>{
  const h=harness();let contexts=0,reads=0,subscriptions=0;h.context.view={getContext:async()=>{contexts++;if(contexts===1)throw new Error('bridge not ready');return {};}};h.context.invoke=async(_m,args)=>{assert.equal(args.operation,'get_state');reads++;return {actorId:'human',permit:null,revision:13,policy:{},equipment:[],board:[]};};h.context.realtime.subscribe=async()=>{subscriptions++;return {unsubscribe(){}};};
- await h.run('initialize()');assert.equal(contexts,2);assert.equal(reads,2);assert.equal(subscriptions,1);assert.equal(h.run('stale'),false);assert.equal(h.run('initializing'),false);assert.doesNotMatch(h.root.innerHTML,/Connect to your permit|Open PermitGuard inside|Loading authenticated state/);
+ await h.run('initialize()');assert.equal(contexts,1);assert.equal(reads,1);assert.equal(subscriptions,1);assert.equal(h.run('stale'),false);assert.equal(h.run('initializing'),false);assert.doesNotMatch(h.root.innerHTML,/Connect to your permit|Open PermitGuard inside|Loading authenticated state/);
 });
 test('read-only bootstrap is bounded and a synchronous first bridge failure does not wedge Refresh',async()=>{
  const h=harness();let calls=0;h.context.invoke=()=>{calls++;throw new Error('unavailable');};await h.run('initialize()');assert.equal(calls,3);assert.equal(h.run('stale'),true);h.context.invoke=async()=>({actorId:'human',permit:null,revision:13,policy:{},equipment:[],board:[]});await h.run('refresh()');assert.equal(h.run('stale'),false);
@@ -157,4 +157,17 @@ test('preview supports key-only native context and records unavailable/denied re
 test('build footer is present on admin/snapshot states and failed bootstrap',()=>{
  for(const value of [{kind:'ADMINISTRATION',scopes:[],capabilities:{},uninstall:{}},{kind:'SNAPSHOT',permits:[],limitations:[],capturedAt:'2026-11-22'}]){const h=harness();h.run('state='+JSON.stringify(value)+';render()');assert.match(h.root.innerHTML,/class="build-footer"/);}
  const h=harness();h.run('preview={phase:"ACTIVE",locks:1,permitRevision:6,updatedAt:"2026-11-21"};initializing=false;render()');assert.match(h.root.innerHTML,/Live permit unavailable/);assert.match(h.root.innerHTML,/class="build-footer"/);
+});
+
+test('a hanging frontend context cannot delay a valid server-authorized issue DTO',async()=>{
+ const h=harness();h.context.view={getContext:()=>new Promise(()=>{})};await h.run('initialize()');assert.equal(h.run('stale'),false);assert.equal(h.run('initializing'),false);assert.equal(h.calls.length,1);assert.match(h.root.innerHTML,/Current state loaded/);
+});
+test('timing footer distinguishes iframe, panel code and unmeasured Jira navigation',()=>{
+ const FakeDate=class extends Date{static now(){return 100000;}};const h=harness({Date:FakeDate,performance:{timeOrigin:74000}});h.run('liveLoadedAt=104000');const f=h.run('buildFooter()');assert.match(f,/Jira navigation → live: not measured here/);assert.match(f,/navigation → panel code: 26.0 s/);assert.match(f,/navigation → live: 30.0 s/);assert.match(f,/first live state 4.0 s/);assert.match(f,/Do not compare panel-only seconds/);
+});
+test('missing iframe timing is unavailable, never invented as full navigation time',()=>{
+ const h=harness();h.run('liveLoadedAt=Date.now()');const f=h.run('buildFooter()');assert.match(f,/document navigation → live: unavailable/);assert.match(f,/not total Jira navigation time/);
+});
+test('static HTML shows only an unconfirmed loading shell before bridge evaluation',()=>{
+ const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');assert.match(html,/Release unconfirmed/);assert.match(html,/not a permit preview or clearance/);assert.doesNotMatch(html,/<button|<form/);assert.match(html,/rel="preload" href="app.js" as="script"/);
 });

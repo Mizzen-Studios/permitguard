@@ -4,6 +4,9 @@ const stages = ['PLAN','LOCK','VERIFY','ACTIVE','RELEASE','CLOSED'];
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uiSource = typeof __PERMITGUARD_BUILD__ === 'string' ? __PERMITGUARD_BUILD__ : 'local source';
 const startupStartedAt=Date.now();
+// This iframe's document clock is accessible; the cross-origin Jira navigation clock is not.
+const iframeNavigationAt=typeof performance!=='undefined'&&Number.isFinite(performance.timeOrigin)&&performance.timeOrigin>0&&performance.timeOrigin<=startupStartedAt?performance.timeOrigin:null;
+let liveRequestStartedAt=0,liveRequestFinishedAt=0,contextReceivedAt=0;
 let previewStatus='Waiting for issue context',previewReceivedAt=0,previewShownAt=0,liveLoadedAt=0;
 let preview = null;
 let state = null, busy = false, stale = true, error = '', notice = '', sync = 'Not subscribed; use Refresh', subscription, refreshing, adminResult = null, rules = [], playingCrewB = false, snapshotIssue = '', pendingInvalidation = false, pendingRevision = null, initializing = true, saveStartedAt = 0, saveStage = '', saveTimer = null;
@@ -87,8 +90,9 @@ function releaseSummary(){
 }
 function buildFooter(){
  const version=state?.buildInfo?.version,validVersion=typeof version==='string'&&/^[0-9]+(?:\.[0-9]+){1,2}$/.test(version);
- const timing=at=>at?((at-startupStartedAt)/1000).toFixed(1)+' s':'not recorded';
- return '<footer class="build-footer"><small>PermitGuard '+(validVersion?escape(version):state?'— version unavailable':'— version pending live connection')+' · UI '+escape(uiSource)+'</small><details><summary>Startup details</summary><p>Preview: '+escape(previewStatus)+'. Snapshot received: '+timing(previewReceivedAt)+'. First preview render: '+timing(previewShownAt)+'. First live state: '+timing(liveLoadedAt)+'.</p><p>Times start when panel code runs, not when Jira navigation begins. Preview is optional and never actionable; live state is never delayed to display it.</p></details></footer>';
+ const timing=(at,origin=startupStartedAt)=>at&&origin?((at-origin)/1000).toFixed(1)+' s':'not recorded';
+ const iframeLive=iframeNavigationAt?timing(liveLoadedAt,iframeNavigationAt):'unavailable';
+ return '<footer class="build-footer"><small>PermitGuard '+(validVersion?escape(version):state?'— version unavailable':'— version pending live connection')+' · UI '+escape(uiSource)+'</small><details><summary>Startup details — not total Jira navigation time</summary><p><strong>Jira navigation → live: not measured here. Use the navigation stopwatch.</strong></p><p>Iframe document navigation → panel code: '+timing(startupStartedAt,iframeNavigationAt)+'. Iframe document navigation → live: '+iframeLive+'. This iframe clock still excludes Jira waiting to create or navigate the frame.</p><p>Panel-code clock only: context received '+timing(contextReceivedAt)+'; snapshot received '+timing(previewReceivedAt)+'; first historical preview '+timing(previewShownAt)+'; first live state '+timing(liveLoadedAt)+'. First state-request round trip (including a failed attempt): '+(liveRequestFinishedAt&&liveRequestStartedAt?((liveRequestFinishedAt-liveRequestStartedAt)/1000).toFixed(1)+' s':'not recorded')+'.</p><p>Preview: '+escape(previewStatus)+'. Do not compare panel-only seconds with a Jira-navigation stopwatch. Preview is optional and never actionable; live state is never delayed to display it.</p></details></footer>';
 }
 function updateBuildFooter(){const footer=root.querySelector('.build-footer');if(footer)footer.outerHTML=buildFooter();}
 async function loadPreview(context){
@@ -129,8 +133,11 @@ async function refresh(contextReady=null) {
  // Defer invocation until after assigning refreshing, including synchronous bridge failures.
  refreshing=Promise.resolve().then(async()=>{
   try {
-   const [result,context]=await Promise.all([call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{}),contextReady]);
-   if((context?.extension?.issue?.id||context?.moduleKey==='permitguard-panel')&&result?.kind==='ADMINISTRATION')throw new Error('Waiting for the issue context to become available.');
+   if(!liveRequestStartedAt)liveRequestStartedAt=Date.now();
+   let result;try{result=await call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{});}finally{if(!liveRequestFinishedAt)liveRequestFinishedAt=Date.now();}
+   // A trusted issue DTO already has server authorization. Frontend context is only
+   // needed to reject an early administration fallback, not to gate valid live state.
+   if(result?.kind==='ADMINISTRATION'&&contextReady){const context=await contextReady;if(context?.extension?.issue?.id||context?.moduleKey==='permitguard-panel')throw new Error('Waiting for the issue context to become available.');}
    if(!result||(!('permit' in result)&&!['ADMINISTRATION','PERMITGUARD_LOCK_BOARD_SNAPSHOT'].includes(result.kind))||(!result.actorId&&result.kind!=='PERMITGUARD_LOCK_BOARD_SNAPSHOT'))throw new Error(result?.message||result?.error||'Server did not return an authenticated app state.');
    state={...result,observedAt:new Date().toISOString()};preview=null;liveLoadedAt=liveLoadedAt||Date.now();stale=false;error='';
    if(subscription&&sync==='Update received; checking saved state…')sync='Live updates connected';
@@ -145,7 +152,7 @@ async function initialize() {
   for(let attempt=0;attempt<3;attempt++){
    // Context/preview and the cold Forge resolver start together, never serially.
    const contextReady=Promise.resolve().then(()=>typeof view!=='undefined'&&view?.getContext?view.getContext():null);
-   void contextReady.then(context=>loadPreview(context)).catch(()=>{previewStatus='Issue context unavailable';updateBuildFooter();});
+   void contextReady.then(context=>{contextReceivedAt=contextReceivedAt||Date.now();return loadPreview(context);}).catch(()=>{previewStatus='Issue context unavailable';updateBuildFooter();});
    if(await refresh(contextReady))break;
    if(attempt<2)await new Promise(resolve=>setTimeout(resolve,350*(attempt+1)));
   }

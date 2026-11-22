@@ -1,14 +1,14 @@
 const requireOk = async (response, label) => { if (!response.ok) throw new Error(label + ': access unavailable (' + response.status + ')'); return response.status === 204 ? null : response.json(); };
 export function jiraAdapters(api, route) {
   return {
-    async authorize(context) {
+    async authorize(context,{includeProfile=true}={}) {
       const actorId = context.accountId;
       const issueId = context.extension?.issue?.id || context.issueId;
       if (typeof actorId !== 'string' || !actorId || typeof issueId !== 'string' || !/^[0-9]+$/.test(issueId)) throw new Error('Authenticated account and trusted issue context required');
       const [issue, body, profile] = await Promise.all([
         api.asUser().requestJira(route`/rest/api/3/issue/${issueId}?fields=project`).then(r => requireOk(r, 'Issue')),
         api.asUser().requestJira(route`/rest/api/3/mypermissions?issueId=${issueId}&permissions=ADMINISTER_PROJECTS,ADMINISTER,EDIT_ISSUES`).then(r => requireOk(r, 'Permissions')),
-        api.asUser().requestJira(route`/rest/api/3/myself`).then(r => requireOk(r, 'Profile')).catch(() => null)
+        includeProfile?api.asUser().requestJira(route`/rest/api/3/myself`).then(r => requireOk(r, 'Profile')).catch(() => null):Promise.resolve(null)
       ]);
       const projectId = String(issue.fields?.project?.id || '');
       if (!projectId) throw new Error('Trusted issue project unavailable');
