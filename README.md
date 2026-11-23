@@ -4,7 +4,7 @@
 
 **Accepted development core:** Forge **5.15.0**, UI source **4e3335fb30f9**. Owner retest reported 22 November 2026 at 21:00 UTC: one PermitGuard Judge, readable iframe/panel clocks, preview ~2.7 s and live ~4.3 s by reload stopwatch, and release-first scoped Rovo output. These are one observed run, not an SLA or controlled benchmark. [Evidence and readiness](docs/submission-readiness-2026-11-22.md).
 
-**Submission status:** repository drafts only. Intended Codegeist 2026 category: Specialized Industries. **MCP bonus is NOT yet fully verified**: declared tools are not authenticated MCP discovery/invocation evidence, and official 2026 prize wording still needs verification. [Bonus audit and exact missing proof](docs/mcp-bonus-readiness.md). No production deployment, recording/upload, Marketplace listing, Devpost save or submission is performed here.
+**Submission status:** repository drafts only. Intended Codegeist 2026 category: Specialized Industries. **MCP bonus is NOT yet fully verified**: the owner supplied the official 2026 prize clause on 23 November, and live Forge metadata matches the required rovo:mcp architecture; authenticated MCP discovery/invocation evidence is still missing. [Bonus audit and exact missing proof](docs/mcp-bonus-readiness.md). No production deployment, recording/upload, Marketplace listing, Devpost save or submission is performed here.
 
 ## What judges can see
 
@@ -74,7 +74,7 @@ rovo:mcp ── same action keys ───────────────�
 
 **Rovo MCP — declared, runtime proof outstanding:** one Preview rovo:mcp module exposes those same two keys for Studio custom agents or consented MCP clients. The Atlassian-hosted endpoint pattern is `https://mcp.atlassian.com/forge/<registered-app-UUID>`. Another developer's clone uses its own UUID. Per-installation external exposure is disabled by default; a site/org admin enables selected tools, and external clients use OAuth 2.1 with the user's own site permissions. No grants or external-client connections were created for this documentation task.
 
-Intended bonus evidence: show legitimate tool discovery and a **read-only check_readiness** invocation for the synthetic issue, then the same release-blocked result. A native Judge screenshot, manifest, endpoint string or unauthenticated 401 does not prove this. External-client use is optional in the platform docs; the contest's exact required path is not yet verified. Do not assume exposing tools is equivalent to consuming a different Atlassian MCP server. [MCP audit](docs/mcp-bonus-readiness.md) · [caller contract](skill.md).
+Intended bonus evidence: show legitimate tool discovery and a **read-only check_readiness** invocation for the synthetic issue, then the same release-blocked result. A native Judge screenshot, manifest, endpoint string or unauthenticated 401 does not prove this. External-client use is optional in the platform docs; the owner-supplied prize clause targets a Forge app exposing an MCP server using rovo:mcp. A different upstream/coding-assistance MCP server is not a substitute for this exposed Forge tool. [Exact read-only owner steps](docs/mcp-read-only-proof-2026-11-23.md). [MCP audit](docs/mcp-bonus-readiness.md) · [caller contract](skill.md).
 
 ## Submission pack
 

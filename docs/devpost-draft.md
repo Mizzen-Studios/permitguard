@@ -26,7 +26,7 @@ The synthetic Crew B scenario makes the distinction concrete: removing the curre
 
 We used Forge Custom UI, Node.js, user-authorized Jira APIs and a shared deterministic service. Revision-conditional Custom Entity Store writes serialize mutations and shared-equipment release checks. Realtime sends scoped invalidation hints; clients reread authorized state rather than treating a notification as permission to proceed. A derived Jira property can orient the user with a clearly historical, nonactionable preview while fresh checks load.
 
-The native Rovo agent exposes read-only check_readiness and PENDING-only request_activation. Both preserve human control. The same two actions are declared through the Preview rovo:mcp module for Studio/custom-agent or consented MCP clients. **That candidate MCP route is implemented but not yet authenticated end-to-end or certified against the official bonus wording. Native Rovo action use is not MCP discovery proof.** We do not claim the bonus is complete.
+The native Rovo agent exposes read-only check_readiness and PENDING-only request_activation. Both preserve human control. The same two actions are declared through the Preview rovo:mcp module for Studio/custom-agent or consented MCP clients. **The owner-supplied official bonus wording targets this Forge rovo:mcp exposure, and deployed metadata matches it. The route is implemented but not yet authenticated end-to-end. Native Rovo action use is not MCP discovery proof.** We do not claim the bonus is complete.
 
 The demo uses a built-in Equipment/Isolation points register. An optional bounded Assets adapter supports only those types. There is no app external runtime/egress, SQL, Forge LLM API or Containers. Optional Confluence/archive code is not part of the current Jira-only accepted demonstration.
 
@@ -48,7 +48,7 @@ A useful assistant needs a precise boundary more than a confident answer. A fast
 
 ## What's next
 
-Verify the official MCP bonus clause and capture authenticated discovery plus a read-only call through the qualifying approved route. Complete separate extended checks for native proposals, real two-person high-energy verification, workflow/JQL behavior and recovery/capacity before production qualification. Conflict guard and shift-end suspension remain future work, not demo claims. Production, publication and submission are separate decisions.
+The official MCP bonus clause is recorded from the owner’s 23 November reading. Capture authenticated discovery plus a read-only call through the qualifying approved route. Complete separate extended checks for native proposals, real two-person high-energy verification, workflow/JQL behavior and recovery/capacity before production qualification. Conflict guard and shift-end suspension remain future work, not demo claims. Production, publication and submission are separate decisions.
 
 ## Built with — draft field
 
@@ -64,7 +64,7 @@ Atlassian Forge · Custom UI · JavaScript / Node.js 22 runtime · Jira REST API
 ## Internal submission gates — not claims to paste as completed
 
 - [MCP audit](mcp-bonus-readiness.md): current default paragraph above is truthful. Replace it with a demonstrated-use paragraph only after the qualifying authenticated receipt and official clause are linked. Do not claim both Studio and an external client are mandatory unless rules say so.
-- Verify canonical 2026 rules URL, category, bonus interpretation, deadline, exact form/character/video limits and team eligibility. Intended Specialized Industries/MCP targets are not organizer confirmation.
+- Verify canonical 2026 rules URL, category, remaining full-rule conditions, deadline, exact form/character/video limits and team eligibility. Intended Specialized Industries/MCP targets are not organizer confirmation.
 - Confirm actual team identities/roles, media rights, dependency attribution and truthful entrant attestations. Do not invent customers, ROI, safety outcomes, certifications or production deployments.
 - Match the final video to its actual build and phase. Label shortened waits/earlier inserts; do not show a native action or a mock as an MCP call.
 - New exposure/OAuth consent, Studio publishing, production deploy, recording/export/share/upload and Devpost save/submission need the owner's separate decision. None was performed here.

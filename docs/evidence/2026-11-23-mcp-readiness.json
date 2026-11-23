@@ -1,0 +1,74 @@
+{
+  "checkedDate": "2026-11-23",
+  "task": "read-only MCP proof preparation",
+  "officialBonus": {
+    "url": "https://codegeist2026.devpost.com/",
+    "section": "Prizes",
+    "quote": "Best app with Atlassian MCP: $1500 to 6 projects that use a Forge app exposing an MCP server.",
+    "provenance": "owner-retrieved official-page excerpt supplied 2026-11-23 08:59 UTC, reconfirmed 21:05 UTC",
+    "independentAssistantPageRetrieval": false,
+    "resourcesClarification": "Owner reports Forge tools exposed via Rovo MCP using rovo:mcp",
+    "architectureMatch": true,
+    "otherContestEligibilityVerified": false
+  },
+  "liveForgeChecks": {
+    "originalJiraInstall": "35a88eb5-064f-489a-8a92-9a65a87a7f2a",
+    "upToDate": true,
+    "confluenceInstalled": false,
+    "developmentMajor": 5,
+    "deployedMcpEqualsSource": true,
+    "module": {
+      "key": "permitguard-mcp",
+      "name": "PermitGuard",
+      "tools": [
+        "check_readiness",
+        "request_activation"
+      ]
+    }
+  },
+  "browser": {
+    "defaultProfile": "initialization timeout",
+    "alternateProfile": "capture",
+    "visiblePage": "Log in to continue",
+    "loginAttempted": false,
+    "credentialsEntered": false,
+    "cookiesReset": false
+  },
+  "derivedJiraBaseline": {
+    "readOnly": true,
+    "rawForgeCesRead": false,
+    "snapshot": {
+      "state": "ACTIVE",
+      "revision": 6,
+      "updatedAt": "2026-11-21T09:10:00.215Z",
+      "activeLockCount": 1,
+      "mode": "ENFORCE",
+      "failMode": "FAIL_CLOSED",
+      "start": {
+        "cleared": true
+      },
+      "release": {
+        "cleared": false
+      },
+      "authoritative": false
+    },
+    "limitation": "Derived Jira property, not current CES authority; compare live panel and tool revisions around the real call"
+  },
+  "mcpRuntimeProof": {
+    "authenticatedDiscovery": "NOT_RUN",
+    "readOnlyToolCall": "NOT_RUN",
+    "toolReceipt": null,
+    "siteExposure": "NOT_VERIFIED",
+    "selectedToolForOwner": "check_readiness",
+    "operationalWritesAuthorized": false
+  },
+  "notPerformed": [
+    "deployment",
+    "permit/lock/policy/rule change",
+    "OAuth grant",
+    "external exposure toggle",
+    "Studio publish",
+    "video upload",
+    "Marketplace/Devpost submission"
+  ]
+}
