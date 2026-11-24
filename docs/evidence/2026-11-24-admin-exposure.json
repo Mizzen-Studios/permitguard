@@ -1,0 +1,55 @@
+{
+  "reportedUtc": "2026-11-24T13:03:00Z",
+  "provenance": "owner read-only admin inspection; external screenshot referenced, not independently accessed by assistant",
+  "site": "one-atlas-xitr.atlassian.net",
+  "siteId": "07414114-107c-4823-9f70-ebb38371bbae",
+  "ownerReportedApp": {
+    "name": "PermitGuard",
+    "environment": "Development",
+    "connections": 1,
+    "installationMethod": "Manual",
+    "installedDate": "2026-11-19",
+    "version": "5.15.0",
+    "upToDate": true,
+    "sharingEnabled": false,
+    "exposureEnabled": false,
+    "individualToolNamesShown": false,
+    "individualToolSelectionShown": false,
+    "warning": "Enabling this gives access to perform any action the app is capable of, on behalf of users.",
+    "toggleChanged": false
+  },
+  "screenshot": {
+    "ownerLocator": "box:/workspace/research/hackathons/codegeist-2026/screens/permitguard-mcp/01-admin-tools.png",
+    "imported": false,
+    "independentlyInspected": false,
+    "privacyReviewed": false
+  },
+  "assessment": {
+    "expectedInstalledVersion": "5.15.0",
+    "latestPriorDocsCommit": "cf0115814d2c3a3409cf9a2ee451def09016afbc",
+    "runtimeSource": "4e3335fb30f98f47ebb8442577d1f5b63dd142f7",
+    "interveningChangesDocsOnly": true,
+    "currentMcpTools": {
+      "check_readiness": "GET",
+      "request_activation": "CREATE"
+    },
+    "currentMcpReadOnly": false,
+    "enableAsIsRecommended": false,
+    "authenticatedMcpInvocation": "NOT_RUN",
+    "hardZeroCostVerified": false,
+    "developmentOAuthWithSharingOffVerified": false,
+    "proposedClient": "MCP Inspector 2.16.0, subject to owner approval; not installed or smoke-tested",
+    "codeChangeOrDeploymentAuthorized": false
+  },
+  "notPerformed": [
+    "exposure toggle",
+    "sharing/distribution enablement",
+    "manifest change",
+    "deployment",
+    "client installation",
+    "OAuth grant",
+    "operational tool call",
+    "Studio Publish",
+    "Marketplace/Devpost submission"
+  ]
+}

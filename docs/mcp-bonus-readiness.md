@@ -1,3 +1,5 @@
+> **13:03 owner observation/correction:** DEV **5.15.0 Up to date**, sharing disabled, app-wide **Expose tools to MCP-compatible apps OFF**, no individual tool names/checkboxes. The current module exposes GET **and CREATE**, so enabling it is not read-only-only. Earlier selective-toggle advice below is superseded/withdrawn. [Assessment, risks, conditional GET-only plan and cleanup](mcp-exposure-assessment-2026-11-24.md). No toggle/deployment/client approval is granted.
+
 > **24 November owner decision: PARKED, not a core-pack blocker.** No approved OAuth MCP client is available this run. Do not resume external setup, request grants or publish a Studio agent. Authenticated invocation remains NOT_RUN. Optional [browser-only catalog/picker discovery](mcp-browser-discovery-2026-11-24.md) is limited evidence and cannot promote runtime proof. [Current pack](submission-pack-2026-11-24.md).
 
 # MCP bonus audit — NOT FULLY VERIFIED
@@ -22,7 +24,7 @@ Updated 23 November 2026. **Official bonus architecture clarified; authenticated
 - Root CLI help advertises Forge developer skills/MCP servers for coding assistance, not invocation of this installed app's OAuth MCP tool. A developer-assistance MCP connection would not prove this route.
 - A read-only derived Jira snapshot baseline was fetched with the existing checker. It is not raw CES authority or a substitute for recording live site/permit revisions around the actual tool call. No permit action or new deployment was performed.
 - Official Studio tutorial's documented fresh-agent path requires **Publish** before chatting. Do not execute that path under the no-publication restriction. A genuine draft Test/Preview or an existing suitable private custom agent may be used only if available; otherwise use the external route below.
-- Preferred no-publication route: site admin selects **Check readiness only** for external exposure, then an already-approved OAuth-capable client invokes that tool. Leave **Request activation** disabled. The owner performs required browser/admin/consent steps; no toggles/grants were changed by the assistant.
+- **Withdrawn:** the earlier proposed per-tool admin selection does not exist in the owner-observed Forge UI. Only a broad app exposure switch is present. Current module has request_activation CREATE; do not enable it as a read-only-only interface. A future GET-only module/redeploy and approved client/budget require separate decisions.
 
 ## Requirement/evidence matrix
 
@@ -34,7 +36,7 @@ Updated 23 November 2026. **Official bonus architecture clarified; authenticated
 | Native PermitGuard Judge action use | Owner browser | 5.15.0, one agent, release-first reply and one caveat passed at 21:00 report | NATIVE_PASS, NOT MCP proof |
 | Current declared module accepted in development deployment | Existing release evidence | 5.15.0 source 4e3335f, normal deployment/metadata checks | DEPLOYMENT_PASS, NOT transport proof |
 | Protocol authentication boundary | Noncredentialed probe this task | GET endpoint 404; POST JSON-RPC initialize returned 401 with OAuth challenge | AUTH_BOUNDARY_ONLY |
-| Admin-selected tools exposed for the intended installation | Platform external path requirement | Not inspected under authenticated admin; no toggles changed | NOT_VERIFIED |
+| Actual external exposure state | Owner admin inspection, 24 Nov 13:03 | App-wide switch DISABLED; no tool names/checkboxes, no change made | OWNER_REPORTED_OFF |
 | Studio custom-agent MCP discovery + actual tool call | Proposed platform proof route | No receipt/recording yet | NOT_RUN |
 | External client OAuth + discovery + actual tool call | Alternative qualifying exposure route under supplied clause | No grant or authenticated client receipt | NOT_RUN |
 | Official bonus architecture wording | Owner-retrieved official Prizes/Resources | Forge app exposing an MCP server using rovo:mcp; matches deployed definition | CLAUSE_RECORDED / ARCHITECTURE_MATCH |
@@ -52,7 +54,7 @@ Observed candidate endpoint: https://mcp.atlassian.com/forge/60f4bdda-1062-4e5b-
 Prefer an already authorized private Studio/draft test route if it permits a real MCP call without Publish, avoiding unnecessary third-party data sharing. An existing consented external client is an alternative if required/approved. Do not publish a Studio agent, create a new OAuth grant, enable exposure, change accounts or buy a client merely to get a screenshot. No login, grant, toggle or new agent was performed. Current browser availability is recorded in the dated handoff, not inferred from yesterday’s session.
 
 1. Bonus clause/source/provenance are now recorded above. Other contest/video/eligibility conditions remain separate; do not guess them.
-2. Identify the actual site/installation/environment and the chosen approved client/Studio agent. Avoid credentials/account menus in captures. For an external route, show selected tools enabled and the OAuth-consented site without token/secret screens. If new consent/exposure/publish is needed, stop for the owner's specific decision.
+2. Identify the actual site/installation/environment and the chosen approved client/Studio agent. Avoid credentials/account menus in captures. For an external route, first obtain approval for a GET-only deployed module and client/budget as in the current assessment; the actual UI has an app-wide switch, not selected-tool checkboxes. Capture that state and the OAuth-consented site without token/secret screens. If new consent/exposure/publish is needed, stop for the owner's specific decision.
 3. Capture actual MCP discovery/tool selection showing the PermitGuard tools. Do not relabel native Judge actions as MCP. A screenshot of source or an endpoint URL is insufficient.
 4. Invoke **check_readiness({issueKey:"PGSAMPLE-2"})** read-only using the real user. Capture the tool receipt/call and its current scoped result: release NOT CLEARED / work-start-only CLEARED / ACTIVE at this sample state. Record time, build, client, tool name, returned scope/release status and a privacy-reviewed receipt reference. Check no operational revision changes. Do not infer this path from mocks.
 5. Verify no agent confirmation/lock-removal/policy-bypass tool is exposed. A permission-denied/unavailable case must not invent clearance. Real second-user isolation remains separate from synthetic tests.

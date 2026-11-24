@@ -1,3 +1,5 @@
+> **13:03 update:** owner inspected admin UI, reporting DEV 5.15.0 Up to date and app-wide exposure OFF; no individual tool names/selection. External screenshot reference is recorded, not imported or independently reviewed. Current module includes CREATE, so leave exposure OFF. [Assessment and corrected conditional plan](mcp-exposure-assessment-2026-11-24.md). Morning preparation/capture-plan states below remain historical; no new repository media is claimed.
+
 # Core submission pack — 24 November 2026
 
 ## Status and authorization

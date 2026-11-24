@@ -127,8 +127,8 @@
     {
       "id": "C08",
       "proposedFilename": "08-studio-catalog.png",
-      "subject": "Connected-app PermitGuard tool picker or admin tool catalog; no Add/Publish/toggle",
-      "sourceClass": "Optional browser catalog evidence, not tool invocation",
+      "subject": "Optional Studio picker if available, or actual admin app-wide exposure switch; admin observation does not list/discover individual tools",
+      "sourceClass": "Optional browser UI evidence, not MCP invocation or protocol tool discovery",
       "shot": "Bonus appendix only",
       "requiredForCore": false,
       "status": "NOT_CAPTURED",
@@ -141,5 +141,6 @@
       "privacyReview": "NOT_REVIEWED",
       "sharingAuthorized": false
     }
-  ]
+  ],
+  "ownerAdminObservation": "See evidence/2026-11-24-admin-exposure.json; external screenshot reported, not imported into this capture plan"
 }
