@@ -1,6 +1,8 @@
+> **Current deployment: 5.16.0 · UI 5f92b0c1b926** — approved GET-only MCP change deployed and metadata/install verified. Native proposal action retained; UI behavior unchanged, new clean source marker. Prior 5.15.0 acceptance is historical. Fresh browser acceptance and authenticated MCP proof remain owner-run. [Deployment receipt](mcp-get-deployment-2026-11-24.md) · [Linux commands and cleanup](mcp-linux-owner-proof.md). Do not toggle exposure or mutate state from this guide.
+
 # Three-minute PermitGuard core demo — script and shot list
 
-**DRAFT · NOT RECORDED / EXPORTED / UPLOADED. Updated 24 November 2026.** Exactly **180 seconds / 03:00** of editorial slots, not a timed LOTO procedure or a verified contest video limit. Accepted development core remains **5.15.0 / UI 4e3335fb30f9**. MCP runtime proof is **parked by the owner**, not a gate for this core pack. No external client setup or Studio Publish.
+**DRAFT · NOT RECORDED / EXPORTED / UPLOADED. Updated 24 November 2026.** Exactly **180 seconds / 03:00** of editorial slots, not a timed LOTO procedure or a verified contest video limit. Accepted development core remains **5.15.0 / UI 4e3335fb30f9**. MCP runtime proof is **awaiting the owner-run receipt**, not a gate for this core pack. No external client setup or Studio Publish.
 
 ## Safe, read-only recording order
 
@@ -79,7 +81,7 @@
 
 **Screen:** README architecture / source-labelled permissions, revision guard and Warn-only versus Enforce settings; do not toggle policy.
 
-**Say:** “Jira permissions and the invoking person are checked before the shared service acts. Conditional writes protect revision consistency. Projects start Warn-only; Enforce requires administrator opt-in and defaults fail-closed. The MCP module is deployed, but its runtime proof is parked separately, not counted as a passed core demonstration.”
+**Say:** “Jira permissions and the invoking person are checked before the shared service acts. Conditional writes protect revision consistency. Projects start Warn-only; Enforce requires administrator opt-in and defaults fail-closed. The MCP module exposes only the read tool; its real invocation awaits the owner’s receipt and is not counted as a passed core demonstration.”
 
 **Evidence boundary:** Source and prior deployment checks; read-only policy inspection, no MCP invocation claim.
 

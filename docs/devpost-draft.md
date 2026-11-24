@@ -48,7 +48,7 @@ A useful assistant needs a precise boundary more than a confident answer. A fast
 
 ## What's next
 
-The official MCP bonus clause is recorded from the owner’s 23 November reading. Authenticated MCP invocation is parked at the owner’s request because no approved OAuth client is available this run; it is not a gate for preparing the core demonstration. Optional browser-only catalog discovery is not a substitute for runtime proof. Complete separate extended checks for native proposals, real two-person high-energy verification, workflow/JQL behavior and recovery/capacity before production qualification. Conflict guard and shift-end suspension remain future work, not demo claims. Production, publication and submission are separate decisions.
+The official MCP bonus clause is recorded from the owner’s 23 November reading. The owner will run authenticated MCP discovery and one manual read from their Linux box after the approved GET-only development deployment; the receipt is not yet available and is not a gate for preparing the core demonstration. Optional browser-only catalog discovery is not a substitute for runtime proof. Complete separate extended checks for native proposals, real two-person high-energy verification, workflow/JQL behavior and recovery/capacity before production qualification. Conflict guard and shift-end suspension remain future work, not demo claims. Production, publication and submission are separate decisions.
 
 ## Built with — draft field
 

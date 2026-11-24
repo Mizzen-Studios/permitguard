@@ -4,9 +4,9 @@ Authorized 24 November 2026 at 16:57 UTC: maintainer narrows the MCP tools to GE
 
 ## 0. Verify the new deployment and capture before state
 
-Open **one-atlas-xitr.atlassian.net → PGSAMPLE-2 → PermitGuard → Refresh**. Record the actual new Forge version/UI label from the linked deployment receipt, phase, **site revision and permit revision separately**, and lock records. The prior accepted baseline was 5.15.0 / UI 4e3335fb30f9; this approved deployment will change the version/build marker, not the UI logic. Don't reset/reseed or modify the permit to match a screenshot.
+Open **one-atlas-xitr.atlassian.net → PGSAMPLE-2 → PermitGuard → Refresh**. Record the **5.16.0 / UI 5f92b0c1b926** from the linked verified deployment receipt, phase, **site revision and permit revision separately**, and lock records. The prior accepted baseline was 5.15.0 / UI 4e3335fb30f9; this approved deployment will change the version/build marker, not the UI logic. If an old footer remains, reload once/allow normal propagation; if still mismatched, report it rather than reinstalling or changing scopes. Don't reset/reseed or modify the permit to match a screenshot.
 
-Admin still shows **Expose tools to MCP-compatible apps OFF** until you enable it below. Native Rovo still has its guarded request_activation CREATE proposal; **MCP must have only check_readiness GET**. This narrows the MCP interface, not all existing app scopes.
+The last owner-observed exposure state was **OFF** at 13:03. Recheck it before enabling below; the maintainer did not independently revisit that UI. Native Rovo still has its guarded request_activation CREATE proposal; **MCP must have only check_readiness GET**. This narrows the MCP interface, not all existing app scopes.
 
 ## 1. Start the pinned client locally, no shared tokens
 

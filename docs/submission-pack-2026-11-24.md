@@ -1,3 +1,5 @@
+> **Current deployment: 5.16.0 · UI 5f92b0c1b926** — approved GET-only MCP change deployed and metadata/install verified. Native proposal action retained; UI behavior unchanged, new clean source marker. Prior 5.15.0 acceptance is historical. Fresh browser acceptance and authenticated MCP proof remain owner-run. [Deployment receipt](mcp-get-deployment-2026-11-24.md) · [Linux commands and cleanup](mcp-linux-owner-proof.md). Do not toggle exposure or mutate state from this guide.
+
 > **13:03 update:** owner inspected admin UI, reporting DEV 5.15.0 Up to date and app-wide exposure OFF; no individual tool names/selection. External screenshot reference is recorded, not imported or independently reviewed. Current module includes CREATE, so leave exposure OFF. [Assessment and corrected conditional plan](mcp-exposure-assessment-2026-11-24.md). Morning preparation/capture-plan states below remain historical; no new repository media is claimed.
 
 # Core submission pack — 24 November 2026

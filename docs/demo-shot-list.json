@@ -3,7 +3,7 @@
   "targetSeconds": 180,
   "coreVersion": "5.15.0",
   "uiSource": "4e3335fb30f9",
-  "mcpBonusStatus": "PARKED_PENDING_OWNER",
+  "mcpBonusStatus": "AWAITING_OWNER",
   "shots": [
     {
       "id": "S01",
@@ -65,7 +65,7 @@
       "end": 165,
       "title": "Architecture and safe defaults",
       "screen": "README architecture / source-labelled permissions, revision guard and Warn-only versus Enforce settings; do not toggle policy",
-      "narration": "Jira permissions and the invoking person are checked before the shared service acts. Conditional writes protect revision consistency. Projects start Warn-only; Enforce requires administrator opt-in and defaults fail-closed. The MCP module is deployed, but its runtime proof is parked separately, not counted as a passed core demonstration.",
+      "narration": "Jira permissions and the invoking person are checked before the shared service acts. Conditional writes protect revision consistency. Projects start Warn-only; Enforce requires administrator opt-in and defaults fail-closed. The MCP module exposes only the read tool; its real invocation awaits the owner’s receipt and is not counted as a passed core demonstration.",
       "evidence": "Source and prior deployment checks; read-only policy inspection, no MCP invocation claim"
     },
     {

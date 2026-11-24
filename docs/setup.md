@@ -1,6 +1,8 @@
+> **Current deployment: 5.16.0 · UI 5f92b0c1b926** — approved GET-only MCP change deployed and metadata/install verified. Native proposal action retained; UI behavior unchanged, new clean source marker. Prior 5.15.0 acceptance is historical. Fresh browser acceptance and authenticated MCP proof remain owner-run. [Deployment receipt](mcp-get-deployment-2026-11-24.md) · [Linux commands and cleanup](mcp-linux-owner-proof.md). Do not toggle exposure or mutate state from this guide.
+
 # Setup and demo preflight
 
-This is a guide, not authorization to deploy, install, provision, enable external tools or mutate the accepted sample. Current maintainer core is development **5.15.0 / UI 4e3335fb30f9**; this submission-pack task changes documentation only.
+This is a guide, not authorization to deploy, install, provision, enable external tools or mutate the accepted sample. Current development is **5.16.0 / UI 5f92b0c1b926**, following the approved GET-only MCP deployment; earlier owner-accepted core was 5.15.0. UI logic and native proposal behavior are unchanged; a fresh owner browser check is not yet recorded.
 
 ## Local verification
 
@@ -27,7 +29,7 @@ Name actual workers/verifiers; use that installation's displayed/generated QR, n
 
 ## Judge preflight on accepted core
 
-1. Footer **5.15.0 · UI 4e3335fb30f9**; readable labels and release strip above fold; exactly one **PermitGuard Judge**. Stop on a mismatch instead of recording the wrong build.
+1. Footer **5.16.0 · UI 5f92b0c1b926**; readable labels and release strip above fold; exactly one **PermitGuard Judge**. Stop on a mismatch instead of recording the wrong build.
 2. PGSAMPLE-2 is the preserved ACTIVE path at the last accepted report. Verify state/lock records before choosing a recording action; don't repair via raw storage or impersonate people.
 3. New chat: **Is PGSAMPLE-2 cleared?** Expected start: **Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE.**
 4. Measure reload stopwatch separately from iframe/panel clocks. Owner's 21:00 report: preview ~2.7 s/live ~4.3 s in that run; prior runs varied substantially. Static loading chrome, historical preview and authorized live state are different milestones.

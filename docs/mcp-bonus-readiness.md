@@ -1,3 +1,5 @@
+> **Deployment verified: Development 5.16.0 · UI 5f92b0c1b926.** MCP now exposes **check_readiness GET only**; native Judge proposal retained. [Readback/test receipt](mcp-get-deployment-2026-11-24.md) · [Owner Linux commands/OAuth/single read/OFF/revoke](mcp-linux-owner-proof.md). Actual MCP invocation remains NOT_RUN / AWAITING_OWNER; exposure was not toggled by the maintainer. Earlier two-tool/off observations below are historical.
+
 > **16:57 superseding approval:** owner approved narrowing MCP to GET only, tests and normal Development deployment, with native proposal retained. See [deployment receipt](mcp-get-deployment-2026-11-24.md) for actual completion. The two-tool risk discussion below describes the prior **5.15.0** state. [Current owner Linux runbook](mcp-linux-owner-proof.md); client/exposure/call/cleanup are owner-side only.
 
 > **13:03 owner observation/correction:** DEV **5.15.0 Up to date**, sharing disabled, app-wide **Expose tools to MCP-compatible apps OFF**, no individual tool names/checkboxes. The current module exposes GET **and CREATE**, so enabling it is not read-only-only. Earlier selective-toggle advice below is superseded/withdrawn. [Assessment, risks, conditional GET-only plan and cleanup](mcp-exposure-assessment-2026-11-24.md). No toggle/deployment/client approval is granted.
@@ -32,13 +34,13 @@ Updated 23 November 2026. **Official bonus architecture clarified; authenticated
 
 | Check | Authority | Current evidence | Status |
 | --- | --- | --- | --- |
-| Exactly one app MCP module; valid name/tool limits | Platform spec | permitguard-mcp, name PermitGuard, two tools | CONFIG_PASS |
-| Tools resolve to declared action/function handlers | Platform spec/source | check_readiness → readiness-action; request_activation → activation-action; implemented handlers | CONFIG_PASS |
+| Exactly one app MCP module; valid name/tool limits | Platform spec | permitguard-mcp, name PermitGuard, one GET tool: check_readiness | CONFIG_PASS |
+| Tools resolve to declared action/function handlers | Platform spec/source | MCP check_readiness → readiness-action; native-only request_activation → activation-action retained | CONFIG_PASS |
 | Caller-scoped authorization; GET read versus PENDING-only CREATE | Source/local tests | trusted principal, asUser issue/permission checks, no confirm tool; local positive/negative tests | LOCAL_PASS; MCP identity path NOT_RUN |
 | Native PermitGuard Judge action use | Owner browser | 5.15.0, one agent, release-first reply and one caveat passed at 21:00 report | NATIVE_PASS, NOT MCP proof |
-| Current declared module accepted in development deployment | Existing release evidence | 5.15.0 source 4e3335f, normal deployment/metadata checks | DEPLOYMENT_PASS, NOT transport proof |
-| Protocol authentication boundary | Noncredentialed probe this task | GET endpoint 404; POST JSON-RPC initialize returned 401 with OAuth challenge | AUTH_BOUNDARY_ONLY |
-| Actual external exposure state | Owner admin inspection, 24 Nov 13:03 | App-wide switch DISABLED; no tool names/checkboxes, no change made | OWNER_REPORTED_OFF |
+| Current declared module accepted in development deployment | Existing release evidence | 5.16.0 source 5f92b0c, normal deploy and exact remote MCP/native metadata checks | DEPLOYMENT_PASS, NOT transport proof |
+| Protocol authentication boundary | Historical noncredentialed probe | GET endpoint 404; POST JSON-RPC initialize returned 401 with OAuth challenge | AUTH_BOUNDARY_ONLY |
+| Actual external exposure state | Owner admin inspection, 24 Nov 13:03 | Owner observed DISABLED at 13:03; not rechecked after 5.16 deploy; no maintainer change | OWNER_REPORTED_OFF |
 | Studio custom-agent MCP discovery + actual tool call | Proposed platform proof route | No receipt/recording yet | NOT_RUN |
 | External client OAuth + discovery + actual tool call | Alternative qualifying exposure route under supplied clause | No grant or authenticated client receipt | NOT_RUN |
 | Official bonus architecture wording | Owner-retrieved official Prizes/Resources | Forge app exposing an MCP server using rovo:mcp; matches deployed definition | CLAUSE_RECORDED / ARCHITECTURE_MATCH |

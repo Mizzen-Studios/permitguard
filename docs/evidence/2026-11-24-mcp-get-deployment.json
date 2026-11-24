@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-24",
+  "authorization": "owner 16:57 UTC; step 1 only; owner runs client/exposure/call/cleanup",
+  "status": "VERIFIED",
+  "appId": "60f4bdda-1062-4e5b-aab6-1d9a9cf53a90",
+  "environment": "development",
+  "site": "one-atlas-xitr.atlassian.net",
+  "version": "5.16.0",
+  "versionProvenance": "normal successful forge deploy output",
+  "metadataReadbackMajor": 5,
+  "sourceCommit": "5f92b0c1b926e35cbdc3f45a3352f76dabfaaf58",
+  "uiLabel": "5f92b0c1b926",
+  "installation": {
+    "id": "35a88eb5-064f-489a-8a92-9a65a87a7f2a",
+    "product": "Jira",
+    "upToDate": true,
+    "confluenceInstalled": false
+  },
+  "remoteMetadata": {
+    "mcpKey": "permitguard-mcp",
+    "mcpTools": [
+      "check_readiness"
+    ],
+    "mcpReadActionVerb": "GET",
+    "nativeAgentKey": "permitguard-judge-v2",
+    "nativeActions": [
+      "check_readiness",
+      "request_activation"
+    ],
+    "nativeProposalVerb": "CREATE"
+  },
+  "checks": {
+    "backend": 88,
+    "ui": 43,
+    "python": 3,
+    "total": 134,
+    "bootstrapAfterBuild": true,
+    "buildClean": true,
+    "lint": true,
+    "productionAuditKnownVulnerabilities": 0,
+    "knownSecretScanFiles": 109
+  },
+  "artifacts": {
+    "static/permit-app/dist/styles.css": "568a6fceb6fd010b42cf41caa6c577275e2cb5960c3d47b89bd836426a70f668",
+    "static/permit-app/dist/app.js": "a3a273574cafb0b586413cf01fc730a16643c4d23f312c15f279366820389357",
+    "static/permit-app/dist/index.html": "d36fbeedcab05e098fa2c365daec5152d2cac53c4a541013a094647de92ad719",
+    "static/capability-probe/dist/app.js": "a059e6240de8ba52761bed1e24cb588bb24585e0f5ff861284893efd196769f5",
+    "static/capability-probe/dist/icon.svg": "18de1f50630efb89a1d52e1384ad1297ad5542de56391777c3e7d0fa816d540d",
+    "static/capability-probe/dist/index.html": "b4d243f18ee064f6b8ecfe6ed823e0db2ad0f363baec107b453b67502f8e0eb9",
+    "static/capability-probe/dist/style.css": "4b2842a47ab94fc5ef6cad5cb413d4eea6e06b10c6cbec7e0e882164e1aaff5d"
+  },
+  "remoteArtifactBytesVerified": false,
+  "liveBrowserAcceptance": "NOT_RUN",
+  "authenticatedMcpDiscovery": "NOT_RUN",
+  "authenticatedMcpToolCall": "NOT_RUN",
+  "exposure": {
+    "lastOwnerObservation": "OFF, 2026-11-24 13:03 UTC",
+    "independentlyRecheckedAfterDeploy": false,
+    "toggledByMaintainer": false
+  },
+  "ownerNoCardReport": true,
+  "hardZeroCostPolicyIndependentlyVerified": false,
+  "notPerformed": [
+    "exposure/sharing toggle",
+    "client installation/execution",
+    "OAuth",
+    "MCP invocation",
+    "permit/lock/proposal/policy mutation",
+    "Studio Publish",
+    "Marketplace/Devpost submission"
+  ]
+}
