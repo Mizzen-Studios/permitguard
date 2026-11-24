@@ -1,8 +1,10 @@
+> **MCP text receipt is now available; no Inspector screenshot/video was saved.** Planned C09/S07 insert must be labelled historical owner evidence, not recreated live UI. [Receipt](evidence/mcp-owner-receipt-2026-11-24.md). Exposure remains OFF; [Olly approval gates](codegeist-rules-alignment-2026-11-24.md) apply to any new live capture.
+
 > **13:03 update:** owner inspected admin UI, reporting DEV 5.15.0 Up to date and app-wide exposure OFF; no individual tool names/selection. External screenshot reference is recorded, not imported or independently reviewed. Current module includes CREATE, so leave exposure OFF. [Assessment and corrected conditional plan](mcp-exposure-assessment-2026-11-24.md). Morning preparation/capture-plan states below remain historical; no new repository media is claimed.
 
 # Screenshot list — plan only, no new screenshots
 
-24 November 2026. Six core frames, two optional frames. **All NOT_CAPTURED**; filenames below are proposed, not existing attachments. No browser authentication, mutation, image generation or publishing is performed by this checklist. [Machine-readable capture log](capture-log.json) · [script](demo-video-script.md).
+24 November 2026. Six core frames and three additional planned frames (including the MCP receipt insert). **All NOT_CAPTURED**; filenames below are proposed, not existing attachments. No browser authentication, mutation, image generation or publishing is performed by this checklist. [Machine-readable capture log](capture-log.json) · [script](demo-video-script.md).
 
 | ID / proposed filename | What must be legible | Shot / evidence class |
 | --- | --- | --- |
@@ -14,6 +16,7 @@
 | C06 / 06-architecture-boundaries.png | Shared service, principal/revision gates and no agent confirmation tool | S06/S07/S08; Labelled source/documentation |
 | C07 / 07-clock-scopes.png (optional) | Iframe versus panel clock labels, not a total-load benchmark | S02; Optional current UI |
 | C08 / 08-studio-catalog.png (optional) | Optional Studio tool picker or actual admin exposure switch; the latter has no individual tool names; no Add/Publish/toggle | Bonus appendix only; Optional browser catalog evidence, not tool invocation |
+| C09 / 09-mcp-receipt-insert.png | Redacted historical receipt: check_readiness_development, exact input, WORK_START versus blocked release, broad consent and OFF cleanup; no tokens/personal/internal IDs | S07; owner text source, planned image not captured |
 
 ## Capture order and state continuity
 

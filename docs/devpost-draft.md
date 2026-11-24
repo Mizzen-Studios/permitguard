@@ -26,7 +26,7 @@ The synthetic Crew B scenario makes the distinction concrete: removing the curre
 
 We used Forge Custom UI, Node.js, user-authorized Jira APIs and a shared deterministic service. Revision-conditional Custom Entity Store writes serialize mutations and shared-equipment release checks. Realtime sends scoped invalidation hints; clients reread authorized state rather than treating a notification as permission to proceed. A derived Jira property can orient the user with a clearly historical, nonactionable preview while fresh checks load.
 
-The native Rovo agent exposes read-only check_readiness and PENDING-only request_activation. Both preserve human control. The same two actions are declared through the Preview rovo:mcp module for Studio/custom-agent or consented MCP clients. **The owner-supplied official bonus wording targets this Forge rovo:mcp exposure, and deployed metadata matches it. The route is implemented but not yet authenticated end-to-end. Native Rovo action use is not MCP discovery proof.** We do not claim the bonus is complete.
+The native Rovo agent exposes read-only check_readiness and PENDING-only request_activation. The Forge rovo:mcp interface separately exposes **only check_readiness GET**, preserving the native proposal action without exposing it to MCP clients. In an owner-run Development 5.16.0 test, local Inspector authenticated with sharing OFF, discovered exactly **check_readiness_development**, and made one read with issueKey PGSAMPLE-2. It returned **WORK_START**, **ACTIVE**, **release NOT CLEARED**, **siteRevision 22**, **permitRevision 6** and **operational:false**. This is a real MCP-path result, not a native Rovo reply or mocked call. Consent displayed **Read, Write, and Search**: the MCP interface is read-only, not the app's entire authorization scope. The owner verified unchanged panel site revision/locks, restored exposure OFF, stopped/disconnected the client and removed its grant. The panel did not expose before/after permit revision, so only the returned value 6 is asserted.
 
 The demo uses a built-in Equipment/Isolation points register. An optional bounded Assets adapter supports only those types. There is no app external runtime/egress, SQL, Forge LLM API or Containers. Optional Confluence/archive code is not part of the current Jira-only accepted demonstration.
 
@@ -40,7 +40,7 @@ Startup also needed honest measurement. A panel-only four-second counter had exc
 
 The owner accepted development 5.15.0 / UI 4e3335fb30f9 on 22 November: one Judge agent, readable clock scopes and release-first, single-caveat Rovo output. In that reload, preview was about 2.7 seconds and live state about 4.3 seconds by stopwatch. Those are one observed run, not an SLA or a controlled performance claim; previous runs varied.
 
-The release-barrier scenario and earlier human QR/photo checks have dated evidence. The current source has 131 local tests, including permission/revision failures and preserved-input contracts. We keep these categories separate: local tests, deployment metadata and actual browser acceptance do not prove the same thing.
+The release-barrier scenario and earlier human QR/photo checks have dated evidence. The current source has 134 local tests, including permission/revision failures and preserved-input contracts. We keep these categories separate: local tests, deployment metadata and actual browser acceptance do not prove the same thing.
 
 ## What we learned
 
@@ -48,23 +48,27 @@ A useful assistant needs a precise boundary more than a confident answer. A fast
 
 ## What's next
 
-The official MCP bonus clause is recorded from the owner’s 23 November reading. The owner will run authenticated MCP discovery and one manual read from their Linux box after the approved GET-only development deployment; the receipt is not yet available and is not a gate for preparing the core demonstration. Optional browser-only catalog discovery is not a substitute for runtime proof. Complete separate extended checks for native proposals, real two-person high-energy verification, workflow/JQL behavior and recovery/capacity before production qualification. Conflict guard and shift-end suspension remain future work, not demo claims. Production, publication and submission are separate decisions.
+The MCP technical proof is now documented against the owner-supplied official Rules exports. Remaining submission work is judge installability/access, final media and entrant attestations—not another unapproved exposure test. Exposure currently stays OFF; Olly must approve enabling it for the intended judge installation(s) and test window before submission/judging. Current sharing-disabled Development access is not the required judge installation link. Complete separate extended checks for native proposals, real two-person high-energy verification, workflow/JQL behavior and recovery/capacity before production qualification. Conflict guard and shift-end suspension remain future work, not demo claims. Publication and submission are separate decisions.
+
+## MCP bonus — proposed field text, not submitted
+
+The official overview asks for projects that **“use a Forge app exposing an MCP server.”** The governing Rules specify tools exposed via the Atlassian MCP server using **rovo:mcp**. PermitGuard implements that Forge module with a GET-only readiness tool and has an owner-run authenticated discovery/invocation receipt from the exact registered-app endpoint. The discovered Development tool was **check_readiness_development**; its single PGSAMPLE-2 call preserved the distinction between work-start readiness and blocked release. Exposure was disabled and the OAuth grant removed afterward. This supports the MCP technical requirement; entrant eligibility, judge installation access and final submission remain separate.
 
 ## Built with — draft field
 
-Atlassian Forge · Custom UI · JavaScript / Node.js 22 runtime · Jira REST APIs · Forge Custom Entity Store · Forge Realtime · native Rovo actions · Preview rovo:mcp (runtime acceptance pending).
+Atlassian Forge · Custom UI · JavaScript / Node.js 22 runtime · Jira REST APIs · Forge Custom Entity Store · Forge Realtime · native Rovo actions · Preview rovo:mcp (owner-run authenticated MCP read verified).
 
 ## Links — not new publication
 
 - Existing public MIT source: https://github.com/Mizzen-Studios/permitguard
 - Setup/architecture: [README](../README.md)
-- Evidence: [submission readiness](submission-readiness-2026-11-22.md)
+- Evidence: [redacted MCP receipt](evidence/mcp-owner-receipt-2026-11-24.md) · [official-rule alignment](codegeist-rules-alignment-2026-11-24.md) · [core readiness history](submission-readiness-2026-11-22.md)
 - Demo video URL: **NOT RECORDED / NOT UPLOADED**
 
 ## Internal submission gates — not claims to paste as completed
 
-- [MCP audit](mcp-bonus-readiness.md): current default paragraph above is truthful. Replace it with a demonstrated-use paragraph only after the qualifying authenticated receipt and official clause are linked. Do not claim both Studio and an external client are mandatory unless rules say so.
-- Verify canonical 2026 rules URL, category, remaining full-rule conditions, deadline, exact form/character/video limits and team eligibility. Intended Specialized Industries/MCP targets are not organizer confirmation.
+- MCP technical clause/evidence is now linked. Preserve limits: owner textual receipt, one DEV call, broad consent, returned permit revision only; no Studio test or prize confirmation is invented. [Current audit](mcp-bonus-readiness.md).
+- [Owner-supplied Rules exports](codegeist-rules-alignment-2026-11-24.md) establish the MCP clause, deadline (22 Dec 2026 20:00 UTC), under-five-minute public YouTube requirement and judge installation link. Still confirm actual form/character limits and entrant eligibility; intended Specialized Industries/MCP selections are not organizer confirmation.
 - Confirm actual team identities/roles, media rights, dependency attribution and truthful entrant attestations. Do not invent customers, ROI, safety outcomes, certifications or production deployments.
 - Match the final video to its actual build and phase. Label shortened waits/earlier inserts; do not show a native action or a mock as an MCP call.
-- New exposure/OAuth consent, Studio publishing, production deploy, recording/export/share/upload and Devpost save/submission need the owner's separate decision. None was performed here.
+- The owner’s documented DEV OAuth/read/cleanup is complete. Future exposure for judge access needs **Olly’s OK** and a supported installation plan; sharing/distribution, production, media publication and Devpost save/submission remain unapproved. This repository preparation opened no Devpost form and performs no new toggle or call.

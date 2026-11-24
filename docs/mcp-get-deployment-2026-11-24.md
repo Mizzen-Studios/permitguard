@@ -1,3 +1,5 @@
+> **Owner MCP run completed, 24 November 21:06:40 UTC: PASS_OWNER_RECEIPT.** Actual tool **check_readiness_development**, broad Read/Write/Search consent, one scoped read, owner-verified OFF/disconnect/grant cleanup. [Redacted receipt and limitations](evidence/mcp-owner-receipt-2026-11-24.md) · [Official Rules and Olly’s pre-submission OK gates](codegeist-rules-alignment-2026-11-24.md). Exposure stays OFF; do not replay or enable automatically. Earlier NOT_RUN/awaiting-owner statements below are dated history.
+
 # GET-only MCP development deployment — 24 November 2026
 
 Status: **VERIFIED — deployed Development 5.16.0**. Owner approved step 1 at 16:57 UTC. [Exact Linux owner runbook](mcp-linux-owner-proof.md) is ready for the owner-run OAuth/discovery/single-read/OFF/revoke test.

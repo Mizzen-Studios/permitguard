@@ -1,33 +1,32 @@
-> **Current deployment: 5.16.0 · UI 5f92b0c1b926** — approved GET-only MCP change deployed and metadata/install verified. Native proposal action retained; UI behavior unchanged, new clean source marker. Prior 5.15.0 acceptance is historical. Fresh browser acceptance and authenticated MCP proof remain owner-run. [Deployment receipt](mcp-get-deployment-2026-11-24.md) · [Linux commands and cleanup](mcp-linux-owner-proof.md). Do not toggle exposure or mutate state from this guide.
+# Three-minute PermitGuard demo — core plus MCP evidence
 
-# Three-minute PermitGuard core demo — script and shot list
+**DRAFT · NOT RECORDED / EXPORTED / UPLOADED. Updated 24 November 2026 after owner receipt.** Eight contiguous shots, exactly **180 seconds / 03:00**. Official Rules say **under five minutes**; 180 seconds fits the planned limit, not proof of a finished video. Current Development **5.16.0 / UI 5f92b0c1b926**; prior owner full-core acceptance was 5.15.0. [Rules/exposure pre-submission gates](codegeist-rules-alignment-2026-11-24.md).
 
-**DRAFT · NOT RECORDED / EXPORTED / UPLOADED. Updated 24 November 2026.** Exactly **180 seconds / 03:00** of editorial slots, not a timed LOTO procedure or a verified contest video limit. Accepted development core remains **5.15.0 / UI 4e3335fb30f9**. MCP runtime proof is **awaiting the owner-run receipt**, not a gate for this core pack. No external client setup or Studio Publish.
+## Capture boundaries
 
-## Safe, read-only recording order
+- Default core sequence remains read-only. No seed/reset, lock removal, phase change, closure, agent proposal or human confirmation just to obtain footage. Record actual current state, not a forced ACTIVE fixture.
+- Native Judge uses one read-only check; do not call proposal/confirmation actions. Label two-tab Refresh as **manual**, unless actual automatic propagation is filmed.
+- **S07 is a historical redacted text-receipt insert**, not a filmed live Inspector UI. [Owner receipt](evidence/mcp-owner-receipt-2026-11-24.md) documents one real MCP call at 21:06:40 UTC, actual tool **check_readiness_development**, input PGSAMPLE-2, siteRevision 22 / returned permitRevision 6, scoped result and cleanup. No Inspector screenshots/video were saved. Do not synthesize UI or animate a fictional live call. If later filming real Inspector UI is desired, seek separate exposure/new-call approval first; **exposure stays OFF now**.
+- No overlay “permit revision unchanged 6→6”: the panel did not display it before/after. Site revision 22 and visible locks unchanged is the supported observation. No independent raw transport capture is invented.
+- Consent was **Read, Write, and Search**. Show GET-only MCP interface versus broader app authorization distinctly; READ-ONLY/IDEMPOTENT annotations are not a read-only OAuth grant.
+- Raw waits are measured. Shortened waits must say **Wait shortened — actual elapsed [measured]**; never present an edited wait as a continuous stopwatch. Label navigation/iframe/panel scopes; earlier ~2.7/~4.3 s core observation and this single 3.77 s tool call are not an SLA or the same timing measure.
+- Keep site-procedure authority and physical-safety limitations explicit. No QR/photo presence proof, production/compliance certification or real two-person high-energy proof is added by this MCP receipt.
+- [Screenshot/capture checklist](screenshots-list.md), [capture log](capture-log.json), [repository-only Devpost draft](devpost-draft.md). No finished media or new publication is authorized here.
 
-1. Sign in to the existing synthetic PGSAMPLE-2. Verify actual live phase, build and lock records. No reset/reseed, Crew B injection, phase transition, lock removal or close attempt is authorized by this script. If state differs, record what is real or stop; do not force ACTIVE.
-2. Capture the current panel, release strip and attribution first; then the native Judge's single GET readiness response. The accepted ACTIVE example is **Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE.** A legitimate different phase needs its own truthful narration, not edited replacement text.
-3. Inspect the lock records without touching them. Source/inventory screenshots must say **Implementation/source view — not a live mutation**. Only separately authorized existing footage may replace this with a real release exercise; identify its capture date/build/phase. Do not imply that a source rule was executed on screen.
-4. Open a second tab and use labelled **manual Refresh**. No new write just to trigger Realtime. Show automatic delivery only if genuine footage exists; otherwise keep the default narration below.
-5. Finish with the human boundary, architecture and still-blocked release status if that is the actual state. No closure/energization implication, no production qualification or physical isolation claim.
-6. Record full raw footage privately; the timeline is an edit budget. Shortened waits need **Wait shortened — actual elapsed [measured]**. Never present a shortened wait as a continuous stopwatch run. Separate navigation, iframe and panel clocks. Owner's 22 November ~2.7 s preview/~4.3 s live was one observation, not an SLA; don't reuse those figures as a new measurement.
-7. Follow the [screenshot list and privacy checklist](screenshots-list.md). No account menus, tokens, emails, unrelated work, unreviewed images or consent screens. No permission to export/share/upload/submit is implied.
-
-## Locked shot budget
+## Locked edit budget
 
 | Shot | Time | Duration | Focus |
 | --- | --- | --- | --- |
 | S01 | 00:00–00:15 | 15 s | Problem and boundary |
-| S02 | 00:15–00:35 | 20 s | Identify the accepted build |
+| S02 | 00:15–00:35 | 20 s | Identify the deployed build |
 | S03 | 00:35–01:00 | 25 s | Native Rovo, release first |
 | S04 | 01:00–01:40 | 40 s | Personal-lock barrier — read-only walkthrough |
 | S05 | 01:40–02:00 | 20 s | Authorized reread in another tab |
 | S06 | 02:00–02:15 | 15 s | Human-only activation boundary |
-| S07 | 02:15–02:45 | 30 s | Architecture and safe defaults |
+| S07 | 02:15–02:45 | 30 s | Real Forge MCP read — owner receipt |
 | S08 | 02:45–03:00 | 15 s | Architecture and close |
 
-**Eight shots; 180 seconds; no gaps or overlaps.** [Machine-readable shot list](demo-shot-list.json). Spoken copy leaves room for pointing and real UI waits; use the edit rule above rather than racing an unfinished request.
+[Machine-readable shot list](demo-shot-list.json). S07 reuses the existing 30-second slot, so no other core shot is removed and the total remains 180 seconds.
 
 ## S01 — Problem and boundary
 
@@ -37,13 +36,13 @@
 
 **Evidence boundary:** Accepted core; decision support only.
 
-## S02 — Identify the accepted build
+## S02 — Identify the deployed build
 
-**Screen:** PGSAMPLE-2 ACTIVE panel; footer 5.15.0 / UI 4e3335fb30f9; own-lock rail and top release strip.
+**Screen:** PGSAMPLE-2 ACTIVE panel; footer 5.16.0 / UI 5f92b0c1b926; own-lock rail and top release strip.
 
-**Say:** “Here is the accepted development build and our synthetic active permit. Work-start readiness and release readiness are separate. The release blocker stays visible at the top. Historical preview is labelled; actions wait for current authorization.”
+**Say:** “Here is the deployed development build and our synthetic active permit. Work-start readiness and release readiness are separate. The release blocker stays visible at the top. Historical preview is labelled; actions wait for current authorization.”
 
-**Evidence boundary:** Owner accepted 22 Nov 21:00; capture fresh actual state.
+**Evidence boundary:** 5.16 footer/panel observed by owner 24 Nov; prior broad core acceptance was 5.15 on 22 Nov.
 
 ## S03 — Native Rovo, release first
 
@@ -77,13 +76,13 @@
 
 **Evidence boundary:** Implemented/local-tested rule; not a new live activation demonstration.
 
-## S07 — Architecture and safe defaults
+## S07 — Real Forge MCP read — owner receipt
 
-**Screen:** README architecture / source-labelled permissions, revision guard and Warn-only versus Enforce settings; do not toggle policy.
+**Screen:** 5 seconds GET-only rovo:mcp declaration, 20 seconds legible redacted owner receipt (actual check_readiness_development name, input, scoped result), 5 seconds owner-reported OFF/grant cleanup. Label Historical owner receipt · 24 Nov 21:06:40 UTC · not live Inspector footage.
 
-**Say:** “Jira permissions and the invoking person are checked before the shared service acts. Conditional writes protect revision consistency. Projects start Warn-only; Enforce requires administrator opt-in and defaults fail-closed. The MCP module exposes only the read tool; its real invocation awaits the owner’s receipt and is not counted as a passed core demonstration.”
+**Say:** “PermitGuard also exposes a Forge MCP server. In this owner-documented development run, Inspector discovered one read-only tool. One call returned work-start-only clearance, not release clearance, at revisions twenty-two and six. Consent still showed broad app permissions. Exposure was disabled and the client grant removed afterward.”
 
-**Evidence boundary:** Source and prior deployment checks; read-only policy inspection, no MCP invocation claim.
+**Evidence boundary:** PASS_OWNER_RECEIPT: genuine owner-run discovery/read, historical text evidence only; no new call, activation, screenshot or filmed Inspector interaction claimed.
 
 ## S08 — Architecture and close
 
@@ -93,14 +92,8 @@
 
 **Evidence boundary:** Source architecture, not production qualification.
 
-## Parked bonus appendix — outside the 180-second core cut
+## Review before any recording/publication decision
 
-No 30-second core slot is reserved for an unavailable MCP client. The deployed module matches the owner-supplied official prize architecture; authenticated tool invocation remains NOT_RUN. A native Judge action or a Studio picker screenshot does not substitute for that receipt.
-
-Optional browser-only [catalog/discovery steps](mcp-browser-discovery-2026-11-24.md) need no shared tokens, external client or Publish. They are not a runtime prerequisite and can be skipped. Do not run activation or change exposure settings to improve this video. A later authenticated MCP clip requires reviewed real evidence and a new agreed edit, not silent substitution into this core script.
-
-## Capture log — not fabricated assets
-
-Use [capture-log.json](capture-log.json) for planned filenames, source class and review state. All entries currently **NOT_CAPTURED**; there are no new images or video files behind this script. Record actual capture UTC, build, issue/phase/revisions and file hash when footage exists. Privacy review and separate owner permission are required before any sharing/upload.
-
-No real two-person high-energy test, camera/presence proof, workflow transition, archive or MCP invocation is claimed here. [Current pack status](submission-pack-2026-11-24.md) · [Devpost draft](devpost-draft.md).
+- Legible actual MCP name/input/result; no cropped-away scope caveat or release NOT CLEARED. status CLEARED / transitionAllowed:true in the JSON is WORK_START-scoped and must not look like release permission.
+- Historical receipt insert visibly dated and labelled; no Inspector screenshot/recording claim. No access token, code, callback URL, cookie, account menu, personal name or internal permit ID in the insert.
+- Finished video must match what is actually shown; capture/export/upload is not completed by this script. Public YouTube, judge installation link, sharing/distribution, exposure-for-judges and Devpost submission all need **Olly's explicit OK** first. See [pre-submission checklist](codegeist-rules-alignment-2026-11-24.md).

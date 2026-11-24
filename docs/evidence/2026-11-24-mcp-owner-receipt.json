@@ -1,0 +1,155 @@
+{
+  "classification": "PASS_OWNER_RECEIPT",
+  "scopeOfPass": "Authenticated Forge rovo:mcp discovery and one successful read-only business invocation on Development; owner-observed cleanup",
+  "provenance": {
+    "source": "Owner private textual receipt, read by maintainer; not independent live observation",
+    "originalFilename": "receipt-2026-11-24.txt",
+    "sha256": "84bcf38d38beecb8e71ae5d8b44d81ff872926574e40e8bb68b7deac9c581d3d",
+    "originalPreservedPrivately": true,
+    "rawTransportTraceAvailable": false,
+    "screenshotsOrVideoAvailable": false
+  },
+  "client": {
+    "name": "MCP Inspector",
+    "version": "2.16.0",
+    "node": "24.22.1",
+    "npm": "11.21.1",
+    "loopbackOnly": true,
+    "secretStore": "memory",
+    "persistTokens": "none"
+  },
+  "deployment": {
+    "version": "5.16.0",
+    "uiSource": "5f92b0c1b926",
+    "site": "one-atlas-xitr.atlassian.net",
+    "server": "https://mcp.atlassian.com/forge/60f4bdda-1062-4e5b-aab6-1d9a9cf53a90",
+    "transport": "Streamable HTTP",
+    "reportedProtocolVersion": "2025-03-26",
+    "sharingEnabled": false
+  },
+  "authorization": {
+    "scopeText": "Read, Write, and Search",
+    "description": "Broad existing app consent; not a read-only OAuth grant",
+    "ownerConsentUtcApprox": "2026-11-24T21:06:15Z",
+    "developmentOAuthWithSharingOff": "PASS_OWNER_RECEIPT"
+  },
+  "discovery": {
+    "observedUtc": "2026-11-24T21:06:16Z",
+    "count": 1,
+    "actualToolName": "check_readiness_development",
+    "declarationKey": "check_readiness",
+    "reportedAnnotations": [
+      "READ-ONLY",
+      "IDEMPOTENT"
+    ],
+    "requiredInput": {
+      "issueKey": {
+        "type": "string",
+        "title": "Jira work item key"
+      }
+    },
+    "note": "Environment suffix is part of discovered transport name; annotation/input observations transcribed from owner receipt, not fabricated raw tools/list JSON"
+  },
+  "invocation": {
+    "sentUtcApprox": "2026-11-24T21:06:39.900Z",
+    "loggedUtc": "2026-11-24T21:06:40Z",
+    "count": 1,
+    "input": {
+      "issueKey": "PGSAMPLE-2"
+    },
+    "reportedElapsedSeconds": 3.77,
+    "result": {
+      "status": "CLEARED",
+      "reasons": [],
+      "transitionAllowed": true,
+      "scope": "WORK_START",
+      "humanConfirmationRequired": false,
+      "operational": false,
+      "message": "Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE. Follow the site procedure.",
+      "activationPending": false,
+      "releaseStatus": "NOT CLEARED",
+      "phase": "ACTIVE",
+      "permitId": "[REDACTED internal synthetic permit ID]",
+      "revision": 22,
+      "siteRevision": 22,
+      "permitRevision": 6,
+      "policy": {
+        "failMode": "FAIL_CLOSED",
+        "mode": "ENFORCE"
+      },
+      "observedAt": "2026-11-24T21:06:43.899Z"
+    }
+  },
+  "stateComparison": {
+    "before": {
+      "observedUtc": "2026-11-24T21:03:55Z",
+      "siteRevision": 22,
+      "permitRevision": null,
+      "phase": "ACTIVE",
+      "releaseStatus": "NOT CLEARED",
+      "lockIds": [
+        "L-A1"
+      ]
+    },
+    "after": {
+      "observedUtc": "2026-11-24T21:09:18Z",
+      "siteRevision": 22,
+      "permitRevision": null,
+      "phase": "ACTIVE",
+      "releaseStatus": "NOT CLEARED",
+      "lockIds": [
+        "L-A1"
+      ]
+    },
+    "siteRevisionAndVisibleLocksUnchanged": "OWNER_OBSERVED",
+    "permitRevisionBeforeAfter": "NOT_OBSERVED_IN_PANEL; only returned value 6 known",
+    "operationalMutationReported": false
+  },
+  "cleanup": {
+    "exposureLifecycle": "OFF → ON for this DEV app only → OFF",
+    "exposureOffVerifiedAfterReload": true,
+    "inspectorDisconnected": true,
+    "inspectorStopped": true,
+    "newInspectorGrantRemoved": true,
+    "grantManagementUrl": "https://id.atlassian.com/manage-profile/apps",
+    "sharingChanged": false,
+    "unrelatedAppsChanged": false
+  },
+  "deviations": [
+    "A field-fill UI locator failed before any business request was sent; not a second invocation",
+    "Actual tool name is check_readiness_development",
+    "Broad Read/Write/Search consent despite sole GET MCP interface"
+  ],
+  "redactions": [
+    "Operator personal name",
+    "Internal synthetic permit ID",
+    "Local/private home-directory paths"
+  ],
+  "secretsIncluded": false,
+  "limitations": [
+    "Owner-supplied textual evidence, not independently replayed transport",
+    "No Inspector screenshots or recording saved",
+    "Before/after permitRevision not shown by panel",
+    "No production/judge-install/distribution/entrant-eligibility or award signoff"
+  ],
+  "currentExposure": "OFF — owner verified after reload",
+  "furtherExposureRequires": "Olly explicit OK; no automatic submission-time enablement",
+  "maintainerReview": {
+    "privateOriginalRead": true,
+    "officialExportsRead": true,
+    "independentLiveReplay": false,
+    "browserCleanup": {
+      "taskProfiles": [
+        "capture",
+        "openclaw"
+      ],
+      "running": false,
+      "pids": null,
+      "chromiumOrCrashpadProcessesSeen": 0,
+      "stopActionNeeded": false,
+      "profilesOrCookiesDeleted": false,
+      "unrelatedSessionsTouched": false
+    },
+    "newExposureOrOAuthPerformed": false
+  }
+}

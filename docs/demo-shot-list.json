@@ -1,9 +1,9 @@
 {
   "status": "DRAFT_NOT_RECORDED",
   "targetSeconds": 180,
-  "coreVersion": "5.15.0",
-  "uiSource": "4e3335fb30f9",
-  "mcpBonusStatus": "AWAITING_OWNER",
+  "coreVersion": "5.16.0",
+  "uiSource": "5f92b0c1b926",
+  "mcpBonusStatus": "PASS_OWNER_RECEIPT",
   "shots": [
     {
       "id": "S01",
@@ -18,10 +18,10 @@
       "id": "S02",
       "start": 15,
       "end": 35,
-      "title": "Identify the accepted build",
-      "screen": "PGSAMPLE-2 ACTIVE panel; footer 5.15.0 / UI 4e3335fb30f9; own-lock rail and top release strip",
-      "narration": "Here is the accepted development build and our synthetic active permit. Work-start readiness and release readiness are separate. The release blocker stays visible at the top. Historical preview is labelled; actions wait for current authorization.",
-      "evidence": "Owner accepted 22 Nov 21:00; capture fresh actual state"
+      "title": "Identify the deployed build",
+      "screen": "PGSAMPLE-2 ACTIVE panel; footer 5.16.0 / UI 5f92b0c1b926; own-lock rail and top release strip",
+      "narration": "Here is the deployed development build and our synthetic active permit. Work-start readiness and release readiness are separate. The release blocker stays visible at the top. Historical preview is labelled; actions wait for current authorization.",
+      "evidence": "5.16 footer/panel observed by owner 24 Nov; prior broad core acceptance was 5.15 on 22 Nov"
     },
     {
       "id": "S03",
@@ -63,10 +63,10 @@
       "id": "S07",
       "start": 135,
       "end": 165,
-      "title": "Architecture and safe defaults",
-      "screen": "README architecture / source-labelled permissions, revision guard and Warn-only versus Enforce settings; do not toggle policy",
-      "narration": "Jira permissions and the invoking person are checked before the shared service acts. Conditional writes protect revision consistency. Projects start Warn-only; Enforce requires administrator opt-in and defaults fail-closed. The MCP module exposes only the read tool; its real invocation awaits the owner’s receipt and is not counted as a passed core demonstration.",
-      "evidence": "Source and prior deployment checks; read-only policy inspection, no MCP invocation claim"
+      "title": "Real Forge MCP read — owner receipt",
+      "screen": "5 seconds GET-only rovo:mcp declaration, 20 seconds legible redacted owner receipt (actual check_readiness_development name, input, scoped result), 5 seconds owner-reported OFF/grant cleanup. Label Historical owner receipt · 24 Nov 21:06:40 UTC · not live Inspector footage.",
+      "narration": "PermitGuard also exposes a Forge MCP server. In this owner-documented development run, Inspector discovered one read-only tool. One call returned work-start-only clearance, not release clearance, at revisions twenty-two and six. Consent still showed broad app permissions. Exposure was disabled and the client grant removed afterward.",
+      "evidence": "PASS_OWNER_RECEIPT: genuine owner-run discovery/read, historical text evidence only; no new call, activation, screenshot or filmed Inspector interaction claimed"
     },
     {
       "id": "S08",
@@ -79,5 +79,6 @@
     }
   ],
   "updatedDate": "2026-11-24",
-  "recordingMode": "READ_ONLY_CORE_DEFAULT"
+  "recordingMode": "READ_ONLY_CORE_DEFAULT",
+  "mcpMedia": "Redacted historical textual receipt insert; no Inspector screenshot/video exists"
 }

@@ -3,7 +3,7 @@
   "status": "PLAN_ONLY_NO_ASSETS_CAPTURED",
   "coreVersion": "5.16.0",
   "uiSource": "5f92b0c1b926",
-  "externalMcpProof": "AWAITING_OWNER",
+  "externalMcpProof": "PASS_OWNER_RECEIPT",
   "assets": [
     {
       "id": "C01",
@@ -140,9 +140,27 @@
       "permitRevision": null,
       "privacyReview": "NOT_REVIEWED",
       "sharingAuthorized": false
+    },
+    {
+      "id": "C09",
+      "proposedFilename": "09-mcp-receipt-insert.png",
+      "subject": "Legible redacted owner text receipt, actual suffixed name/input/scoped result/cleanup; historical not live Inspector UI",
+      "sourceClass": "Owner receipt text source ready, planned visual insert not captured",
+      "shot": "S07",
+      "requiredForCore": false,
+      "requiredForSelectedMcpSegment": true,
+      "status": "NOT_CAPTURED",
+      "sourceDocument": "evidence/mcp-owner-receipt-2026-11-24.md",
+      "actualPath": null,
+      "capturedUtc": null,
+      "sha256": null,
+      "privacyReview": "NOT_REVIEWED",
+      "sharingAuthorized": false
     }
   ],
   "ownerAdminObservation": "See evidence/2026-11-24-admin-exposure.json; external screenshot reported, not imported into this capture plan",
   "deploymentReceipt": "mcp-get-deployment-2026-11-24.md",
-  "previousOwnerAcceptedBaseline": "5.15.0 / UI 4e3335fb30f9; new deployment browser check NOT_RUN"
+  "previousOwnerAcceptedBaseline": "5.15.0 / UI 4e3335fb30f9; new deployment browser check NOT_RUN",
+  "mcpReceiptSource": "evidence/mcp-owner-receipt-2026-11-24.md",
+  "actualInspectorScreenshotsOrVideo": 0
 }

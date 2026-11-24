@@ -1,3 +1,5 @@
+> **MCP owner receipt classified PASS; exposure stays OFF.** Official Rules require a Forge app exposing tools via the Atlassian MCP server using rovo:mcp, matching the deployed interface plus genuine owner-run call. This is technical evidence, not full submission/award signoff. [Rules/source hashes and **Olly’s OK** pre-submission exposure/judge-access gates](docs/codegeist-rules-alignment-2026-11-24.md).
+
 > **24 November 16:57 approval:** MCP narrowed to **check_readiness GET only**; native proposal action retained. **Deployed/verified Development 5.16.0 · UI 5f92b0c1b926**. Deployment/readback: [GET-only development receipt](docs/mcp-get-deployment-2026-11-24.md). [Owner Linux Inspector/OAuth/single-call/OFF/revoke runbook](docs/mcp-linux-owner-proof.md). No exposure or OAuth is performed by the maintainer.
 
 # PermitGuard
@@ -6,7 +8,7 @@
 
 **Accepted development core:** Forge **5.15.0**, UI source **4e3335fb30f9**. Owner retest reported 22 November 2026 at 21:00 UTC: one PermitGuard Judge, readable iframe/panel clocks, preview ~2.7 s and live ~4.3 s by reload stopwatch, and release-first scoped Rovo output. These are one observed run, not an SLA or controlled benchmark. [Current pack/readiness](docs/submission-pack-2026-11-24.md).
 
-**Submission status:** repository drafts only. Intended Codegeist 2026 category: Specialized Industries. **MCP runtime proof is AWAITING THE OWNER’S LINUX RUN, not a core-pack blocker**: the owner supplied the official 2026 prize clause on 23 November, and live Forge metadata matches the required rovo:mcp architecture; authenticated MCP discovery/invocation evidence is still missing. [Bonus audit and exact missing proof](docs/mcp-bonus-readiness.md). No production deployment, recording/upload, Marketplace listing, Devpost save or submission is performed here.
+**Submission status:** repository drafts only. Intended Codegeist 2026 category: Specialized Industries. **MCP technical runtime evidence: PASS (owner receipt, 24 November 21:06:40 UTC).** On Development 5.16.0, Inspector discovered exactly **check_readiness_development** and made one authenticated read returning **ACTIVE / WORK_START / release NOT CLEARED / siteRevision 22 / permitRevision 6 / operational:false**. Native proposal remains outside the GET-only MCP list. OAuth worked with sharing OFF; consent still said **Read, Write, and Search**—this is not a read-only OAuth grant. Owner restored **exposure OFF**, stopped/disconnected Inspector and removed its grant. [Redacted receipt/classification](docs/evidence/mcp-owner-receipt-2026-11-24.md).
 
 ## What judges can see
 
@@ -81,6 +83,7 @@ Intended bonus evidence: show legitimate tool discovery and a **read-only check_
 ## Submission pack
 
 - [Exposure assessment: 5.15 expected; current MCP includes CREATE—leave OFF](docs/mcp-exposure-assessment-2026-11-24.md)
+- [MCP owner receipt — redacted, genuine DEV invocation](docs/evidence/mcp-owner-receipt-2026-11-24.md) · [Official Rules alignment / pre-submission gates](docs/codegeist-rules-alignment-2026-11-24.md)
 - [Current pack status](docs/submission-pack-2026-11-24.md) · [Screenshot list](docs/screenshots-list.md) · [Capture log](docs/capture-log.json)
 - [Optional browser-only catalog discovery — no client/Publish](docs/mcp-browser-discovery-2026-11-24.md)
 - [180-second read-only core demo script and shot list](docs/demo-video-script.md) · [machine-readable shots](docs/demo-shot-list.json)

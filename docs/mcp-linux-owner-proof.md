@@ -1,3 +1,5 @@
+> **Owner MCP run completed, 24 November 21:06:40 UTC: PASS_OWNER_RECEIPT.** Actual tool **check_readiness_development**, broad Read/Write/Search consent, one scoped read, owner-verified OFF/disconnect/grant cleanup. [Redacted receipt and limitations](evidence/mcp-owner-receipt-2026-11-24.md) · [Official Rules and Olly’s pre-submission OK gates](codegeist-rules-alignment-2026-11-24.md). Exposure stays OFF; do not replay or enable automatically. Earlier NOT_RUN/awaiting-owner statements below are dated history.
+
 # Owner Linux runbook — one read-only PermitGuard MCP receipt
 
 Authorized 24 November 2026 at 16:57 UTC: maintainer narrows the MCP tools to GET only and deploys Development. **Owner alone** runs Inspector/OAuth/exposure/invocation/cleanup on their own Linux box. No Studio Publish, app sharing/distribution, production, Marketplace, Devpost or public receipt upload. This file is instructions, not a completed tool receipt. [Development deployment receipt](mcp-get-deployment-2026-11-24.md) must say VERIFIED before proceeding.
@@ -32,7 +34,7 @@ Leave this process running. This is **web mode** by default; **http** maps to **
 
 Both secret flags are deliberate: Linux without a keychain can otherwise persist secrets in a plaintext file. Memory storage keeps this process's credentials in RAM; persist-tokens=none prevents newly acquired OAuth tokens outliving the process. It does not erase pre-existing client/browser state, registration metadata, logs or data you choose to save. npm cache/config metadata may remain. Do not use DEBUG output or a full debug export for the receipt.
 
-Published 2.16.0 tarball integrity and its web/launcher transport, endpoint and secret-setting source were inspected read-only by the maintainer; **no authenticated client smoke test is claimed**. Leave inherited ports alone; if a port is occupied, stop the unused Inspector you own or report the conflict, not another service.
+Published 2.16.0 tarball integrity and its web/launcher transport, endpoint and secret-setting source were inspected read-only by the maintainer; **the later owner-run authenticated test is recorded in the linked receipt; no maintainer replay is claimed**. Leave inherited ports alone; if a port is occupied, stop the unused Inspector you own or report the conflict, not another service.
 
 ## 2. Owner temporarily enables this app only
 
@@ -40,7 +42,7 @@ Open **admin.atlassian.com → your organization → Apps → Sites → one-atla
 
 - Record OFF first. Read the broad warning. Only after the linked deployed module is verified GET-only, click **Enable tools** / the **Expose tools to MCP-compatible apps** switch. Confirm only the requested existing app/site if prompted.
 - Expected: **ON**. There are **no per-tool checkboxes** here. The deployed module limits the advertised tool set, not the switch.
-- **Stop/cancel** on any request for sharing in the developer console, Studio Publish, new install, production, additional roles, payment, new paid terms or another app/site. Development OAuth with sharing OFF is not yet proven; do not enable sharing to make it work.
+- **Stop/cancel** on any request for sharing in the developer console, Studio Publish, new install, production, additional roles, payment, new paid terms or another app/site. Owner has now demonstrated Development OAuth with sharing OFF for this exact app/site/client; other installations are not thereby proven; do not enable sharing to make it work.
 - Do not touch GitLab/Box system MCP apps. Enabling exposure alone is not a successful connection or tool call.
 
 If anything fails after exposure is enabled, perform section 5 before debugging further.
@@ -64,7 +66,7 @@ Open the **Tools** view and trigger **List Tools** / refresh discovery. Expected
 
 **request_activation, confirm_activation, lock/policy/load/reset/close tools must NOT be discoverable through this PermitGuard MCP connection.** If any extra/write tool appears, do not call anything: disconnect, set exposure OFF and return the redacted list. Native Judge retaining its proposal action is expected and unrelated to this MCP tool list.
 
-A genuine tools/list result is protocol discovery proof. The admin switch screenshot or model text alone is not.
+A genuine tools/list result is protocol discovery proof. In the completed owner run its actual name was **check_readiness_development**; the _development suffix must not be dropped when selecting the discovered tool. The admin switch screenshot or model text alone is not.
 
 ## 4. Exactly one manual business invocation
 
