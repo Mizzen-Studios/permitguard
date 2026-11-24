@@ -1,3 +1,5 @@
+> **16:57 superseding approval:** owner approved narrowing MCP to GET only, tests and normal Development deployment, with native proposal retained. See [deployment receipt](mcp-get-deployment-2026-11-24.md) for actual completion. The two-tool risk discussion below describes the prior **5.15.0** state. [Current owner Linux runbook](mcp-linux-owner-proof.md); client/exposure/call/cleanup are owner-side only.
+
 # Development MCP exposure assessment — 24 November 2026, 13:03 owner report
 
 ## Decision: leave the switch OFF for now

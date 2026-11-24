@@ -1,3 +1,5 @@
+> **24 November 16:57 approval:** MCP narrowed to **check_readiness GET only**; native proposal action retained. Deployment/readback status: [GET-only development receipt](docs/mcp-get-deployment-2026-11-24.md). [Owner Linux Inspector/OAuth/single-call/OFF/revoke runbook](docs/mcp-linux-owner-proof.md). No exposure or OAuth is performed by the maintainer.
+
 # PermitGuard
 
 **Human-confirmed lockout/tagout permit decision support in Jira.** The site's LOTO procedure remains authoritative; this app is not safety certification, a physical interlock or permission to energize.
@@ -72,7 +74,7 @@ rovo:mcp ── same action keys ───────────────�
 
 **Native Rovo — accepted:** rovo:agent permitguard-judge-v2 calls Forge **action** handlers. check_readiness is GET and returns one release-first canonical message; request_activation is CREATE and only proposes PENDING for an assigned named human. There is no agent confirm tool. Native action use is **not** MCP transport proof.
 
-**Rovo MCP — declared, runtime proof outstanding:** one Preview rovo:mcp module exposes those same two keys for Studio custom agents or consented MCP clients. The Atlassian-hosted endpoint pattern is `https://mcp.atlassian.com/forge/<registered-app-UUID>`. Another developer's clone uses its own UUID. Per-installation external exposure is disabled by default; a site/org admin enables app-wide exposure in the observed Forge UI (not per-tool selection), and external clients use OAuth 2.1 with the user's own site permissions. No grants or external-client connections were created for this documentation task.
+**Rovo MCP — declared, runtime proof outstanding:** one Preview rovo:mcp module now exposes only **check_readiness (GET)**; the native Judge still has both actions. For Studio custom agents or consented MCP clients. The Atlassian-hosted endpoint pattern is `https://mcp.atlassian.com/forge/<registered-app-UUID>`. Another developer's clone uses its own UUID. Per-installation external exposure is disabled by default; a site/org admin enables app-wide exposure in the observed Forge UI (not per-tool selection), and external clients use OAuth 2.1 with the user's own site permissions. No grants or external-client connections were created for this documentation task.
 
 Intended bonus evidence: show legitimate tool discovery and a **read-only check_readiness** invocation for the synthetic issue, then the same release-blocked result. A native Judge screenshot, manifest, endpoint string or unauthenticated 401 does not prove this. External-client use is optional in the platform docs; the owner-supplied prize clause targets a Forge app exposing an MCP server using rovo:mcp. A different upstream/coding-assistance MCP server is not a substitute for this exposed Forge tool. [Observed exposure OFF and current safety assessment](docs/mcp-exposure-assessment-2026-11-24.md). [MCP audit](docs/mcp-bonus-readiness.md) · [caller contract](skill.md).
 

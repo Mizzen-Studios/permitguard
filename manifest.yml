@@ -61,7 +61,6 @@ modules:
     name: PermitGuard
     tools:
     - check_readiness
-    - request_activation
   macro:
   - key: permitguard-lockboard
     title: PermitGuard lock-board snapshot

@@ -178,3 +178,23 @@ test('profile-free read still fails closed when fresh permission lookup is denie
  const calls=[];const route=(p,...a)=>p.reduce((s,t,i)=>s+t+(a[i]??''),'');const api={asUser:()=>({requestJira:async path=>{calls.push(path);return path.includes('mypermissions')?{ok:false,status:403}:{ok:true,status:200,json:async()=>({id:'1',fields:{project:{id:'10'}}})};}})};
  await assert.rejects(jiraAdapters(api,route).authorize({accountId:'alice',issueId:'1'},{includeProfile:false}),/403/);assert.equal(calls.length,2);assert.ok(!calls.some(p=>p.includes('/myself')));
 });
+
+// Local service/wiring regression, not an actual MCP transport or site receipt.
+test('readiness action on ACTIVE permit leaves storage, locks and integrations unchanged', async () => {
+  let readsOnly = false, attemptedEffects = 0;
+  const effect = async () => { if (readsOnly) attemptedEffects++; assert.equal(readsOnly, false, 'readiness must not write property/publish'); };
+  const f = fixture({ projectProperty: effect, publish: effect });
+  const { equipmentId } = await verified(f);
+  let s = await f.call('request_activation', { verifierId: 'alice' });
+  const challenge = await f.call('qr_challenge', { target: equipmentId });
+  await f.call('confirm_activation', { activationId: s.permit.activations[0].id, equipmentId, ...challenge, confirmedAtEquipment: true });
+  const before = structuredClone(f.row), challengesBefore = structuredClone(f.challengeRows);
+  f.store.commit = async () => assert.fail('readiness must not commit');
+  readsOnly = true;
+  const wiring = createForgeWiring({ dispatch: f.dispatch, requestJira: async () => ({ ok: true, json: async () => ({ id: '1', fields: { project: { id: '10' } } }) }) });
+  const result = await wiring.checkReadiness({ issueKey: 'PGSAMPLE-2' }, { principal: { accountId: 'alice' } });
+  assert.equal(result.phase, 'ACTIVE'); assert.equal(result.scope, 'WORK_START');
+  assert.equal(result.releaseStatus, 'NOT CLEARED'); assert.equal(result.operational, false);
+  assert.equal(result.siteRevision, before.revision); assert.equal(result.permitRevision, before.data.permits['1'].revision);
+  assert.deepEqual(f.row, before); assert.deepEqual(f.challengeRows, challengesBefore); assert.equal(attemptedEffects, 0);
+});
