@@ -1,3 +1,5 @@
+> **24 November owner decision: PARKED, not a core-pack blocker.** No approved OAuth MCP client is available this run. Do not resume external setup, request grants or publish a Studio agent. Authenticated invocation remains NOT_RUN. Optional [browser-only catalog/picker discovery](mcp-browser-discovery-2026-11-24.md) is limited evidence and cannot promote runtime proof. [Current pack](submission-pack-2026-11-24.md).
+
 # MCP bonus audit — NOT FULLY VERIFIED
 
 Updated 23 November 2026. **Official bonus architecture clarified; authenticated call proof still pending.** The core remains accepted development 5.15.0 / UI 4e3335fb30f9. The owner supplied the official excerpt below; live Forge metadata now confirms the deployed rovo:mcp definition equals source. Do not claim the real MCP invocation has passed. [Exact read-only browser/client handoff](mcp-read-only-proof-2026-11-23.md).

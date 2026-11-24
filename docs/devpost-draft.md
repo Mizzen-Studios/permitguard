@@ -1,6 +1,6 @@
 # Devpost write-up — DRAFT ONLY / DO NOT SUBMIT
 
-Repository text only. No Devpost form was opened, edited, saved or submitted, and no video was recorded/uploaded. Verify the actual 2026 fields, limits, eligibility and bonus clause before copying. Team names and attestations must be supplied by the actual entrants.
+Repository text only. No Devpost form was opened, edited, saved or submitted, and no video was recorded/uploaded. Verify the remaining 2026 fields, limits and eligibility before copying; the owner-supplied bonus clause is recorded in the MCP audit. Team names and attestations must be supplied by the actual entrants.
 
 ## Project name
 
@@ -48,7 +48,7 @@ A useful assistant needs a precise boundary more than a confident answer. A fast
 
 ## What's next
 
-The official MCP bonus clause is recorded from the owner’s 23 November reading. Capture authenticated discovery plus a read-only call through the qualifying approved route. Complete separate extended checks for native proposals, real two-person high-energy verification, workflow/JQL behavior and recovery/capacity before production qualification. Conflict guard and shift-end suspension remain future work, not demo claims. Production, publication and submission are separate decisions.
+The official MCP bonus clause is recorded from the owner’s 23 November reading. Authenticated MCP invocation is parked at the owner’s request because no approved OAuth client is available this run; it is not a gate for preparing the core demonstration. Optional browser-only catalog discovery is not a substitute for runtime proof. Complete separate extended checks for native proposals, real two-person high-energy verification, workflow/JQL behavior and recovery/capacity before production qualification. Conflict guard and shift-end suspension remain future work, not demo claims. Production, publication and submission are separate decisions.
 
 ## Built with — draft field
 

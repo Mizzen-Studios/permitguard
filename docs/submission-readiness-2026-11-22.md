@@ -1,3 +1,5 @@
+> **24 November current status:** [core pack](submission-pack-2026-11-24.md). External MCP proof is owner-parked and does not block preparation. The prior pending-owner invocation steps below are historical, not actions to execute this run.
+
 > **23 November update:** owner supplied the official Prizes clause/Resources clarification; rovo:mcp architecture matches, live Forge module/install checks pass. The missing-clause blocker below is historical and resolved for this bonus interpretation. Actual authenticated MCP invocation remains pending. [Current audit](mcp-bonus-readiness.md) · [exact read-only proof steps](mcp-read-only-proof-2026-11-23.md). Other contest conditions remain separate.
 
 # Submission readiness — 22 November 2026

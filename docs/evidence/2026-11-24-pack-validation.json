@@ -1,0 +1,34 @@
+{
+  "checkedDate": "2026-11-24",
+  "task": "core submission preparation; bonus parked",
+  "testsPassed": {
+    "backend": 85,
+    "ui": 43,
+    "python": 3,
+    "total": 131
+  },
+  "runtimeSourceChanged": false,
+  "acceptedUiArtifactHashesUnchanged": true,
+  "coreVersion": "5.15.0",
+  "uiSource": "4e3335fb30f9",
+  "coreVideo": {
+    "shots": 8,
+    "seconds": 180,
+    "defaultMode": "READ_ONLY_CORE_DEFAULT",
+    "actuallyRecorded": false
+  },
+  "screenshotPlan": {
+    "required": 6,
+    "optional": 2,
+    "actuallyCaptured": 0
+  },
+  "mcpProof": {
+    "state": "PARKED_PENDING_OWNER",
+    "authenticatedInvocation": "NOT_RUN",
+    "blocksCorePack": false,
+    "browserDiscoveryOptional": true,
+    "browserDiscoveryIsRuntimeProof": false
+  },
+  "markdownReferencesChecked": 144,
+  "noPublicationOrSubmission": true
+}

@@ -1,3 +1,5 @@
+> **PARKED by owner, 24 November. Historical external-client handoff — do not execute this run.** No approved OAuth client is available; no exposure enabling, grants, Studio Publish or invocation is requested. Use only the optional [browser-only discovery checklist](mcp-browser-discovery-2026-11-24.md). Discovery does not complete this runtime proof.
+
 # One real read-only PermitGuard MCP call — owner handoff
 
 23 November 2026. Target **one-atlas-xitr.atlassian.net**, registered app **60f4bdda-1062-4e5b-aab6-1d9a9cf53a90**, existing Jira-only install **35a88eb5-064f-489a-8a92-9a65a87a7f2a**, accepted core **5.15.0 / UI 4e3335fb30f9**. No new app/deployment, operational write, public/private agent publishing, Marketplace/Devpost action or video upload.

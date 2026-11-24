@@ -3,7 +3,7 @@
   "targetSeconds": 180,
   "coreVersion": "5.15.0",
   "uiSource": "4e3335fb30f9",
-  "mcpBonusStatus": "NOT_FULLY_VERIFIED",
+  "mcpBonusStatus": "PARKED_PENDING_OWNER",
   "shots": [
     {
       "id": "S01",
@@ -36,19 +36,19 @@
       "id": "S04",
       "start": 60,
       "end": 100,
-      "title": "Personal-lock release barrier",
-      "screen": "Explicit sample Crew B roleplay if absent; begin release checks; remove only current worker own L-A1; show L-07/V-3 blocker and blocked close",
-      "narration": "For this synthetic exercise, Crew B is explicitly simulated. I begin release checks and remove only my own lock. A remaining shared-equipment personal-lock record still blocks release and closure. This is not another real worker, and not permission to remove someone else’s lock.",
-      "evidence": "Record only after human preflight/approval; no mutations by documentation task"
+      "title": "Personal-lock barrier — read-only walkthrough",
+      "screen": "Inspect current personal-lock records and top release result; source-labelled shared-lock guard inset if needed. No seeding, phase change, lock removal or close attempt.",
+      "narration": "Personal-lock records remain attributable. A worker removing their own lock does not clear someone else’s remaining record. The shared service enforces that barrier. Here we inspect the current record and the rule without changing locks or pretending a simulated crew is another real person.",
+      "evidence": "Current UI read plus labelled source rule; no new live release sequence claimed"
     },
     {
       "id": "S05",
       "start": 100,
       "end": 120,
       "title": "Authorized reread in another tab",
-      "screen": "Actual second-tab update if captured; otherwise manually Refresh with visible label",
-      "narration": "The other tab reads authorized state again. Realtime carries only invalidation hints, not permit records or safety authority. Refresh remains the fallback.",
-      "evidence": "Only claim delivery if visible in recorded run; no fixed latency claim"
+      "screen": "Two read-only views of the same issue, explicitly labelled manual Refresh; show automatic invalidation only if genuinely recorded",
+      "narration": "The other tab rereads authorized state. Here we show manual Refresh explicitly. Realtime carries invalidation hints, not permit records or safety authority; we do not claim delivery that this recording has not shown.",
+      "evidence": "Read-only reread; no fabricated change/automatic delivery"
     },
     {
       "id": "S06",
@@ -63,10 +63,10 @@
       "id": "S07",
       "start": 135,
       "end": 165,
-      "title": "MCP evidence — gated alternate",
-      "screen": "DEFAULT: manifest tools and MCP readiness matrix with pending label. VERIFIED ALTERNATE: approved Studio/client discovery and real read-only tool receipt, only after audit is signed off.",
-      "narration": "The same actions are declared as Forge MCP tools. The official bonus recognizes this architecture. Native Judge use alone still does not prove MCP discovery. We await the authenticated read-only tool receipt; this shot shows the implemented server boundary, not completed runtime proof.",
-      "evidence": "Default unverified branch; replace only after authenticated receipt and rules match"
+      "title": "Architecture and safe defaults",
+      "screen": "README architecture / source-labelled permissions, revision guard and Warn-only versus Enforce settings; do not toggle policy",
+      "narration": "Jira permissions and the invoking person are checked before the shared service acts. Conditional writes protect revision consistency. Projects start Warn-only; Enforce requires administrator opt-in and defaults fail-closed. The MCP module is deployed, but its runtime proof is parked separately, not counted as a passed core demonstration.",
+      "evidence": "Source and prior deployment checks; read-only policy inspection, no MCP invocation claim"
     },
     {
       "id": "S08",
@@ -77,5 +77,7 @@
       "narration": "Forge stores bounded records and checks revisions before writes. Jira access remains user-authorized. No external app runtime or SQL is needed. Named humans and the site procedure remain in control.",
       "evidence": "Source architecture, not production qualification"
     }
-  ]
+  ],
+  "updatedDate": "2026-11-24",
+  "recordingMode": "READ_ONLY_CORE_DEFAULT"
 }
