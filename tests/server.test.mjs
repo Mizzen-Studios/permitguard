@@ -198,3 +198,10 @@ test('readiness action on ACTIVE permit leaves storage, locks and integrations u
   assert.equal(result.siteRevision, before.revision); assert.equal(result.permitRevision, before.data.permits['1'].revision);
   assert.deepEqual(f.row, before); assert.deepEqual(f.challengeRows, challengesBefore); assert.equal(attemptedEffects, 0);
 });
+
+
+test('sample roleplay hint is absent until a synthetic permit exists; no write from state read',async()=>{
+ const f=fixture();assert.equal((await f.call('get_state')).capabilities.sampleRoleplay,false);
+ await f.call('load_sample',{confirmed:true});assert.equal((await f.call('get_state')).capabilities.sampleRoleplay,false);
+ await f.call('create_permit');const before=structuredClone(f.row);assert.equal((await f.call('get_state')).capabilities.sampleRoleplay,true);assert.deepEqual(f.row,before);
+});

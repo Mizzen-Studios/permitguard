@@ -12,7 +12,7 @@ function harness(overrides={}){
 test('all six stages render one primary action, closed none',()=>{const h=harness();for(const stage of ['PLAN','LOCK','VERIFY','ACTIVE','RELEASE','CLOSED']){h.run('state={actorId:"human",revision:8,policy:{mode:"WARN_ONLY"},permit:{state:'+JSON.stringify(stage)+',id:"P",equipment:[{id:"EQ",name:"Pump",isolationPoints:[{id:"V-3",energyType:"hydraulic",highEnergy:true}]}],workers:["human"],verifierIds:["human"],locks:[],activations:[],verifications:[],audit:[]},board:[],release:{status:"NOT CLEARED"}};stale=false;render()');assert.equal((h.root.innerHTML.match(/class="primary"/g)||[]).length,stage==='CLOSED'?0:1);assert.match(h.root.innerHTML,/OSHA 1910.147/);}});
 test('bridge mutations carry store revision rather than permit revision',async()=>{const h=harness();h.run('state={actorId:"human",revision:8,permit:{revision:2}};stale=false');await h.run('mutate("begin_lock")');assert.equal(h.calls[0].method,'permitguard');assert.equal(h.calls[0].operation,'begin_lock');assert.equal(h.calls[0].payload.expectedRevision,8);assert.equal(h.calls.length,1);assert.equal(h.run('state.revision'),8);});
 test('stale and busy mutations are not submitted',async()=>{const h=harness();await h.run('mutate("begin_lock")');assert.equal(h.calls.length,0);h.run('stale=false;busy=true');await h.run('mutate("begin_lock")');assert.equal(h.calls.length,0);});
-test('remote strings escaped, non-admin cannot see controls',()=>{const h=harness();h.run('state={actorId:"<script>bad</script>",revision:1,policy:{},permit:null,equipment:[],board:[]};stale=false;render()');assert.doesNotMatch(h.root.innerHTML,/<script>bad/);assert.match(h.root.innerHTML,/&lt;script&gt;/);assert.doesNotMatch(h.root.innerHTML,/Load confirmed sample/);});
+test('remote strings escaped, non-admin cannot see controls',()=>{const h=harness();h.run('state={actorId:"human",actorDisplayName:"<script>bad</script>",revision:1,policy:{},permit:null,equipment:[],board:[]};stale=false;render()');assert.doesNotMatch(h.root.innerHTML,/<script>bad/);assert.match(h.root.innerHTML,/&lt;script&gt;/);assert.doesNotMatch(h.root.innerHTML,/Load confirmed sample/);});
 test('aggregate locks are explicit, never mistaken for zero',()=>{const h=harness();h.run('state={actorId:"human",permit:null,board:[{equipmentId:"EQ",activeLockCount:3}]};render()');assert.ok(h.root.innerHTML.includes('3</b> personal locks recorded'));});
 test('no app egress or local fake permit, accessible structure',()=>{assert.ok(!['fetch(', 'XMLHttpRequest','localStorage','sessionStorage','subscribeGlobal','publishGlobal'].some(x=>source.includes(x)));for(const text of ['aria-current="step"',"setAttribute('role','status')","setAttribute('role','alert')",'expectedRevision','BarcodeDetector','challengeToken','physical procedure','No offline mode'])assert.ok(source.includes(text),text);const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');assert.match(html,/lang="en"/);assert.match(html,/Skip to permit/);});
 test('bounded photo accepts only permitted types',async()=>{const h=harness();await assert.rejects(h.run('photoData({size:11000000,type:"image/jpeg"})'),/10 MB/);await assert.rejects(h.run('photoData({size:12,type:"image/svg+xml"})'),/10 MB/);});
@@ -170,4 +170,41 @@ test('missing iframe timing is unavailable, never invented as full navigation ti
 });
 test('static HTML shows only an unconfirmed loading shell before bridge evaluation',()=>{
  const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');assert.match(html,/Release unconfirmed/);assert.match(html,/not a permit preview or clearance/);assert.doesNotMatch(html,/<button|<form/);assert.match(html,/rel="preload" href="app.js" as="script"/);
+});
+
+
+test('fresh empty register gives role-specific guidance without an inert create form or fake clearance',()=>{
+ for(const admin of [true,false]){
+  const h=harness();h.run('state={actorId:"human",isProjectAdmin:'+admin+',permit:null,equipment:[],policy:{},board:[],assets:{status:"NOT_CONNECTED"}};stale=false;render()');
+  assert.match(h.root.innerHTML,/Release NOT CLEARED — no permit/);assert.match(h.root.innerHTML,/No equipment registered yet/);
+  assert.doesNotMatch(h.root.innerHTML,/data-operation="create_permit"/);assert.equal(h.calls.length,0);
+  assert.match(h.root.innerHTML,admin?/new synthetic demo only/:/Ask a project administrator/);
+ }
+});
+test('connected register outage is not presented as an empty sample setup opportunity',()=>{
+ const h=harness();h.run('state={actorId:"human",isProjectAdmin:true,permit:null,equipment:[],policy:{},board:[],assets:{status:"UNAVAILABLE"}};stale=false;render()');
+ assert.match(h.root.innerHTML,/Equipment register unconfirmed/);assert.match(h.root.innerHTML,/do not replace it with sample data/);assert.doesNotMatch(h.run('plan()'),/new synthetic demo only/);assert.equal(h.calls.length,0);
+});
+test('configured first-run register still offers the real create form without automatic writes',()=>{
+ const h=harness();h.run('state={actorId:"human",permit:null,equipment:[{id:"EQ",name:"Pump"}],policy:{},board:[]};stale=false;render()');
+ assert.match(h.root.innerHTML,/data-operation="create_permit"/);assert.match(h.root.innerHTML,/Worker account IDs/);assert.equal(h.calls.length,0);
+});
+test('failed read has actionable reconnect guidance and never echoes bridge exception details',async()=>{
+ const h=harness();h.context.invoke=async()=>{throw new Error('PRIVATE_BRIDGE_CANARY');};await h.run('initialize()');
+ assert.match(h.root.innerHTML,/Reconnect safely/);assert.match(h.root.innerHTML,/issue permissions/);assert.match(h.root.innerHTML,/Never paste an API token/);assert.doesNotMatch(h.root.innerHTML,/PRIVATE_BRIDGE_CANARY/);assert.equal(h.calls.length,0);assert.equal(h.run('stale'),true);
+});
+test('uncertain save neither echoes opaque exceptions nor retries the write',async()=>{
+ const h=harness();let writes=0;h.context.invoke=async()=>{writes++;throw new Error('PRIVATE_WRITE_CANARY');};h.run('state={actorId:"human",permit:null,equipment:[],policy:{},board:[],revision:1};stale=false');await h.run('mutate("create_permit")');
+ assert.equal(writes,1);assert.match(h.root.innerHTML,/may already have completed/);assert.match(h.root.innerHTML,/no operation was automatically resubmitted/);assert.doesNotMatch(h.root.innerHTML,/PRIVATE_WRITE_CANARY/);assert.equal(h.run('stale'),true);
+});
+
+test('sample roleplay is absent on fresh/real projects and requires a server-owned capability or active own sample',()=>{
+ const h=harness();h.run('state={actorId:"human",permit:null,equipment:[],policy:{},board:[],capabilities:{sampleRoleplay:false}};stale=false;render()');assert.doesNotMatch(h.root.innerHTML,/Judge sample roleplay/);
+ h.run('state.capabilities.sampleRoleplay=true;render()');assert.match(h.root.innerHTML,/Judge sample roleplay/);assert.equal(h.calls.length,0);
+});
+
+test('fresh guidance precedes advanced administration and links to a unique target',()=>{
+ const h=harness();h.run('state={actorId:"human",isProjectAdmin:true,permit:null,equipment:[],policy:{},board:[]};stale=false;render()');
+ assert.ok(h.root.innerHTML.indexOf('No equipment registered yet')<h.root.innerHTML.indexOf('id="project-administration"'));
+ assert.equal((h.root.innerHTML.match(/id="project-administration"/g)||[]).length,1);assert.match(h.root.innerHTML,/href="#project-administration"/);
 });
