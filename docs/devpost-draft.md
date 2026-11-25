@@ -1,3 +1,5 @@
+> **Current submission-form working copy:** [docs/submission/devpost-writeup.md](submission/devpost-writeup.md), with [bonus evidence/target matrix](submission/bonus-targets.md). Older background below is not proof of a deployed candidate or submission.
+
 # Devpost write-up — DRAFT ONLY / DO NOT SUBMIT
 
 Repository text only. No Devpost form was opened, edited, saved or submitted, and no video was recorded/uploaded. Verify the remaining 2026 fields, limits and eligibility before copying; the owner-supplied bonus clause is recorded in the MCP audit. Team names and attestations must be supplied by the actual entrants.
