@@ -1,4 +1,4 @@
-> **Unreleased local candidate:** UX source changes are not deployed. The DEV 5.16.0 capture baseline remains unchanged. [Submission working pack](docs/submission/README.md).
+> **Unreleased local candidate:** UX/agent source changes are not deployed. The DEV 5.16.0 capture baseline remains unchanged. [Submission working pack](docs/submission/README.md).
 
 > **25 November readiness handoff:** [judge production/share-link plan](docs/judge-access-plan.md) · [exact owner 180-second capture checklist](docs/video-capture-list.md) · [prioritised remaining work / owner inputs](docs/submission-checklist-2026-11-25.md). Planning only: no production/link/exposure changes.
 

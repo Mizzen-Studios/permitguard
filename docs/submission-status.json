@@ -59,5 +59,11 @@
       "evidence": null
     }
   ],
-  "note": "Local consistency checks cannot grant approval, create access or certify contest eligibility. No actions are scheduled."
+  "note": "Local consistency checks cannot grant approval, create access or certify contest eligibility. No actions are scheduled.",
+  "localSourceCandidate": {
+    "status": "NOT_DEPLOYED",
+    "sourceBuildCommit": "bc800397bc17",
+    "verification": "submission/verification-2026-11-25.json",
+    "notes": "UX/agent candidate only; currentDemo and capture metadata remain the prior owner-observed Development baseline."
+  }
 }

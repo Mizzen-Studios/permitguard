@@ -14,7 +14,8 @@
     "test:ui": "node static/permit-panel/smoke.cjs",
     "build:probe": "node src/forge/build-probe.cjs",
     "build": "node src/forge/build-probe.cjs && node src/ui-build.cjs",
-    "test:contracts": "node --test static/permit-app/static.test.cjs"
+    "test:contracts": "node --test static/permit-app/static.test.cjs",
+    "test:ui:local-browser": "node tests/browser-local.cjs"
   },
   "dependencies": {
     "@forge/api": "^8.5.0",

@@ -37,4 +37,11 @@ Capture/review footage first while distribution approval is pending. Then approv
 - Added **npm run check:submission**: repeatable local timeline/capture/narration/link/receipt/approval checks, with negative regressions for misleading claims. PASS still reports **submissionReady:false**, seven pending human gates, and no public actions authorized. [Machine status](submission-status.json) is an evidence/status ledger, never authority to execute actions.
 - Reconciled stale 5.15 CREATE-tool labels, old mutation-based recording guidance and ambiguous permit-revision capture instructions. Historical receipts remain dated; current recording stays read-only.
 - Prepared [private footage intake/review checklist](footage-handoff.md) and [blank take log](footage-take-log.template.json). No received footage, media hashes, visual/audio review, final render or approval is fabricated.
-- No app source, manifest, deployed bundle or live installation changed; production/share/exposure/publication gates remain pending.
+- At docs/tooling milestone 5ca45cf, no app source/manifest changed. The later 21:02 follow-up introduces **undeployed** UX/agent source candidates; see the separate record below. No live installation, exposure or publication change is implied.
+
+
+## 21:02 follow-up — unreleased UX/agent candidate
+
+[Submission working pack](submission/README.md) now contains the requested Devpost write-up and prize matrix. Empty/error UX, canonical answer guards, safe recovery and PENDING proposal wording are locally tested. [Verification](submission/verification-2026-11-25.json): isolated candidate build/SDK bootstrap, normal Forge lint, 187 unit/contract/checker tests, plus 28 local synthetic Chromium renders. No new live native-agent/model or tenant acceptance is asserted. The existing 5.16.0 footage baseline is untouched; no need to reseed or re-record because of these **source-only** changes.
+
+Candidate deployment, current live UX/agent checks, judge production install and any sharing/exposure/publication remain separate decisions; this work does not consume those approvals.

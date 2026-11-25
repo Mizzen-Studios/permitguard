@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-11-25T21:20:18.479504+00:00",
+  "classification": "LOCAL_UNRELEASED_CANDIDATE_NOT_LIVE_ACCEPTANCE",
+  "candidateSourceCommit": "bc800397bc17efe3ae8ab8c84440021a86a3d290",
+  "candidateUiSource": "bc800397bc17",
+  "tests": {
+    "backend": 134,
+    "uiVm": 50,
+    "python": 3,
+    "total": 187,
+    "candidateSdkBootstrapRerun": 2
+  },
+  "build": {
+    "isolatedCopy": true,
+    "originalDemoArtifactsUnchanged": true,
+    "candidateArtifactsSha256": {
+      "static/permit-app/dist/app.js": "d3f9304f3469c508eceb0af51f127ae95fb6390cc1b92c39f5e8e22e86e30306",
+      "static/permit-app/dist/styles.css": "437b69a0f27dfc7b84793530e1c5c8fb3ff1b4b49820f5b131ef1a3b1d12d526",
+      "static/permit-app/dist/index.html": "d36fbeedcab05e098fa2c365daec5152d2cac53c4a541013a094647de92ad719",
+      "static/capability-probe/dist/app.js": "a059e6240de8ba52761bed1e24cb588bb24585e0f5ff861284893efd196769f5"
+    },
+    "localNode": "24.22.1",
+    "packageEngines": ">=22",
+    "forgeRuntimeTarget": "nodejs22.x",
+    "exactForgeRuntimeExecuted": false,
+    "moduleTypelessLocalWarning": true
+  },
+  "lint": {
+    "forgeCli": "15.1.0",
+    "normalLint": "PASS_NO_ISSUES",
+    "cliUpdateNotice": "16.0.0 available; not installed"
+  },
+  "browser": {
+    "classification": "LOCAL_SYNTHETIC_BROWSER_ONLY",
+    "renderCases": 28,
+    "viewportWidths": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "pageOverflowCases": 0,
+    "refreshTouchTargetAtLeast44px": true,
+    "keyboardSkip": true,
+    "pageErrors": [],
+    "networkBlocked": true,
+    "visualReviewRepresentativeScreenshots": true,
+    "tenantOrPhysicalDeviceAcceptance": false,
+    "taskBrowserAndContextClosed": true,
+    "chromiumOrCrashpadProcessesRemaining": 0
+  },
+  "agent": {
+    "goldenActiveMessageUnchanged": true,
+    "newGenerativeOrNativeTenantEvaluation": "NOT_RUN",
+    "newMcpInvocation": false,
+    "authorityAdded": false
+  },
+  "actions": {
+    "deployment": false,
+    "sharingOrLinkCreation": false,
+    "mcpExposure": false,
+    "billingChange": false,
+    "mediaPublication": false,
+    "devpostFormOrSubmission": false
+  },
+  "pending": [
+    "Owner footage and review",
+    "Separately approved candidate deployment/live UX and native-agent evaluation",
+    "Approved production/share-link judge installation rehearsal",
+    "Entrant attestations and later exposure/publication/submission decisions"
+  ]
+}
