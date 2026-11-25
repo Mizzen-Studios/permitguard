@@ -22,7 +22,19 @@ const validationErrors = {
  'Assigned named verifier must confirm pending activation':'Only the assigned named verifier can confirm this pending activation.',
  'NOT CLEARED: resolve readiness issues; advisory policy does not authorize activation':'Isolation checks are incomplete. Resolve the displayed lock, photo and verification requirements before activation.'
 };
+const recoveryErrors = {
+ AUTHENTICATED_ACTOR_REQUIRED:['AUTHENTICATED_ACTOR_REQUIRED','Sign in to Atlassian and reopen the work item or reconnect the approved client. Never share an API token.'],
+ ISSUE_CONTEXT_REQUIRED:['ISSUE_CONTEXT_REQUIRED','Provide a Jira work-item key you can access, or open its PermitGuard panel. Do not guess an issue or create a permit automatically.'],
+ INVALID_ISSUE:['INVALID_ISSUE','Use a valid Jira work-item key such as PROJECT-123; confirm which work item you mean.'],
+ ISSUE_ACCESS_REQUIRED:['ISSUE_ACCESS_REQUIRED','The signed-in person cannot access the requested work item. Check its key and Jira permissions with an administrator; do not substitute another identity.'],
+ 'EDIT_ISSUES permission required':['EDIT_ISSUES_REQUIRED','You need Edit Issues permission for this change. Ask a project administrator; current records have not been confirmed by this error.'],
+ 'Project administrator required':['PROJECT_ADMIN_REQUIRED','Only a project administrator can configure this project. No policy or sample change is authorized by this error.'],
+ 'CONFLICT: refresh before retrying':['STATE_CHANGED','Another change was observed. Refresh the permit and review its current state before retrying.'],
+ 'Create permit first':['NO_PERMIT','No permit exists on this work item. Open its PermitGuard panel; plan a permit only when explicitly intended.'],
+ READINESS_RESPONSE_UNCONFIRMED:['READINESS_RESPONSE_UNCONFIRMED','The readiness response was incomplete. Refresh the permit panel and obtain a new read before drawing any conclusion.']
+};
 export function safeError(error) {
+  if(Object.hasOwn(recoveryErrors,error?.message)){const [code,message]=recoveryErrors[error.message];return {ok:false,status:'ERROR',code,error:code,message,requiresRefresh:true,operational:false};}
   if(Object.hasOwn(validationErrors,error?.message)) return {ok:false,status:'ERROR',code:error.message in validationErrors && /^[A-Z_]+$/.test(error.message)?error.message:'VALIDATION_REJECTED',error:'VALIDATION_REJECTED',message:validationErrors[error.message],requiresRefresh:error.message==='QR_CHALLENGE_EXPIRED',operational:false};
   const allowed = new Set(['AUTHENTICATED_ACTOR_REQUIRED', 'ISSUE_CONTEXT_REQUIRED', 'INVALID_ISSUE', 'ISSUE_ACCESS_REQUIRED', 'INVALID_OPERATION', 'INVALID_PAYLOAD', 'INVALID_RULE_SELECTION', 'INVALID_ACTION', 'ARCHIVE_CONFIG_PENDING', 'SITE_ADMIN_REQUIRED']);
   const code = allowed.has(error?.message) ? error.message : 'PERMITGUARD_UNAVAILABLE';
@@ -98,10 +110,10 @@ export function createForgeWiring({ dispatch, requestJira, archive, now = () => 
     need(trustedIssue(context), 'ISSUE_CONTEXT_REQUIRED');
     const result = await dispatch(operation, payload, context);
     if (archive && operation==='close_permit') { try { result.archive=await archive.appendClosed(result.permit,context); } catch { result.archive={status:'PENDING_ADMIN_ARCHIVE',message:'Permit closed in Forge. A configured restricted space and an authorized administrator are required to publish the monthly register.'}; } }
-    return { ...result, capabilities: activeCapabilities, realtime: { channel: 'permitguard' } };
+    return { ...result, capabilities: { ...activeCapabilities, assetsImport:result.capabilities?.assetsImport===true, sampleRoleplay:result.capabilities?.sampleRoleplay===true }, realtime: { channel: 'permitguard' } };
   });
   function action(operation) {
-    return guard(async (event = {}, context = {}) => {
+    const run = guard(async (event = {}, context = {}) => {
       // Rovo context is server-supplied second argument. Never accept actor/context from inputs.
       const accountId = actor(context);
       const issueInput = context.extension?.issue?.id || event.context?.jira?.issueId || event.context?.jira?.issueKey || event.issueId || event.issueKey;
@@ -109,9 +121,17 @@ export function createForgeWiring({ dispatch, requestJira, archive, now = () => 
       const issueId = await canonicalIssue(Number.isSafeInteger(issueInput) && issueInput>0 ? String(issueInput) : issueInput);
       const payload = operation === 'request_activation' ? { verifierId: event.verifierId } : {};
       const result = await dispatch(operation, payload, { accountId, issueId });
-      if(operation==='request_activation'){const pending=result.permit?.activations?.find(a=>a.status==='PENDING');return {...result, status:pending?'PENDING':'NOT CONFIRMED', activationId:pending?.id, assignedVerifierId:pending?.verifierId, humanConfirmationRequired:true, activationAuthority:false, operational:false};}
+      if(operation==='request_activation'){const pending=result.permit?.activations?.find(a=>a.status==='PENDING');return {...result, status:pending?'PENDING':'NOT CONFIRMED', message:pending?'Activation proposal PENDING. The assigned named human must confirm at the equipment using its equipment QR and tablet. This is not activation or energization authority. Follow the site procedure.':'Activation proposal unconfirmed. Refresh the permit panel and inspect current records before retrying. Only the assigned named human can confirm at the equipment; follow the site procedure.', activationId:pending?.id, assignedVerifierId:pending?.verifierId, humanConfirmationRequired:true, activationAuthority:false, operational:false};}
+      const prefix=result?.scope==='WORK_START'?'Release: '+result.releaseStatus+'. Work start only: '+result.status+'. This is not release clearance.':'Release records are '+result?.status+'. This is not permission to energize equipment.';
+      need(['WORK_START','RELEASE'].includes(result?.scope)&&['CLEARED','NOT CLEARED'].includes(result?.status)&&['CLEARED','NOT CLEARED'].includes(result?.releaseStatus)&&result?.operational===false&&(result.scope!=='RELEASE'||result.status===result.releaseStatus)&&typeof result?.message==='string'&&result.message.startsWith(prefix),'READINESS_RESPONSE_UNCONFIRMED');
       return result;
     });
+    return async (...args) => {
+      const response=await run(...args);
+      if(response?.ok!==false)return response;
+      const message=operation==='check_readiness'?'NOT CLEARED: current readiness could not be confirmed. '+response.message+' Follow the site procedure.':'Activation proposal outcome unconfirmed. '+response.message+' Open the permit panel and inspect current records before retrying. Only the assigned named human can confirm activation; follow the site procedure.';
+      return {...response,message,activationAuthority:false,operational:false};
+    };
   }
   return { resolver, checkReadiness: action('check_readiness'), requestActivation: action('request_activation'),
     capabilityProbe: guard(async request => { actor(request?.context); await requireSiteAdmin(requestJira); return { ...(await noIssueState(request.context)), checkedAt: now(), rulesChanged: false, limitations: ['Capability information only; no Assets, transition, Realtime, Rovo or device acceptance is asserted.'] }; }) };

@@ -62,7 +62,7 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     if (operation === 'get_state') return result();
     if (operation === 'check_readiness') {
       const scope=permit?.state==='RELEASE'?'RELEASE':'WORK_START',checked=scope==='RELEASE'?release():readiness();
-      checked.reasons=checked.reasons.map(r=>({...r,message:r.message&&r.message!==r.code?r.message:({NO_PERMIT:'No permit has been created for this work item.',REGISTER_UNAVAILABLE:'The equipment register could not be confirmed.'}[r.code]||'Recorded prerequisites are incomplete; inspect the permit panel.')}));
+      checked.reasons=checked.reasons.map(r=>({...r,message:r.message&&r.message!==r.code?r.message:({NO_PERMIT:'No permit has been created for this work item. Open its PermitGuard panel; if no equipment is available, ask a project administrator to configure the register.',REGISTER_UNAVAILABLE:'The equipment register could not be confirmed.'}[r.code]||'Recorded prerequisites are incomplete; inspect the permit panel.')}));
       const releaseStatus=release().status,phase=permit?.state||'NO_PERMIT';
       const scopeLine=scope==='WORK_START'?(checked.status==='CLEARED'?'Work start only: CLEARED. This is not release clearance.':'Work start only: NOT CLEARED. This is not release clearance.'):
         'Release records are '+checked.status+'. This is not permission to energize equipment.';

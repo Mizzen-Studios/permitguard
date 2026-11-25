@@ -205,3 +205,11 @@ test('sample roleplay hint is absent until a synthetic permit exists; no write f
  await f.call('load_sample',{confirmed:true});assert.equal((await f.call('get_state')).capabilities.sampleRoleplay,false);
  await f.call('create_permit');const before=structuredClone(f.row);assert.equal((await f.call('get_state')).capabilities.sampleRoleplay,true);assert.deepEqual(f.row,before);
 });
+
+test('register outage guidance never advertises a non-existent supervisor override',async()=>{
+ const f=fixture();await verified(f);// Isolated local fixture, not a site read.
+ const permit=f.row.data.permits['1'];
+ const domain=await import('../src/domain/permit.mjs');const r=domain.checkReadiness(permit,{registerAvailable:false});
+ const message=r.reasons.find(x=>x.code==='REGISTER_UNAVAILABLE').message;
+ assert.match(message,/Restore access and reconcile/);assert.doesNotMatch(message,/Supervisor override|Warn-only (admins)/);assert.equal(r.status,'NOT CLEARED');
+});

@@ -16,3 +16,8 @@ Local UI VM contracts and server setup tests passed. Isolated **Chromium synthet
 First browser harness attempt retained old script bindings across setContent calls. Fresh page per viewport fixed the harness; this is not a product defect. Task-owned browser/context closed in finally after both attempts.
 
 Real fresh-install and native Rovo browser acceptance remain **NOT_RUN for this candidate**. Prior live evidence stays dated; local fixtures do not upgrade it.
+
+
+## Rovo source candidate
+
+[Answer contracts and evaluation limits](agent-answer-quality.md): safe actionable failures, malformed-response guards, unchanged ACTIVE canonical message and one bounded PENDING proposal reply. Removed the misleading register-outage suggestion of an unimplemented supervisor override. No new native acceptance or Forge action is claimed.

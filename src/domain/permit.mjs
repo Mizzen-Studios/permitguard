@@ -76,7 +76,7 @@ export function verifyPoint(original, { pointId, actorId, at, qrPointId, confirm
 }
 export function checkReadiness(permit, { policy = DEFAULT_POLICY, registerAvailable = true } = {}) {
   const reasons = isolationIssues(permit, policy);
-  if (!registerAvailable) reasons.push({ code: 'REGISTER_UNAVAILABLE', message: "Can't confirm readiness (Assets/register unavailable). Retry / Supervisor override (reason) / Warn-only (admins)" });
+  if (!registerAvailable) reasons.push({ code: 'REGISTER_UNAVAILABLE', message: "The equipment register is unavailable or changed. Restore access and reconcile the register with a project administrator; changing policy does not authorize activation." });
   if (permit.state !== 'VERIFY') reasons.push({ code: 'INVALID_STATE', message: 'Permit must be in Verify before work can start' });
   for (const point of pointsFor(permit)) {
     const verified = new Set(permit.verifications.filter(v => v.pointId === point.id && permit.verifierIds.includes(v.actorId)).map(v => v.actorId));
