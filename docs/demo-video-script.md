@@ -1,3 +1,5 @@
+> **Record using the [exact capture checklist](video-capture-list.md): URLs, issue keys, clicks, expected results and durations for each of these eight shots.** No production/share/exposure or lifecycle writes. [Readiness priorities](submission-checklist-2026-11-25.md).
+
 # Three-minute PermitGuard demo — core plus MCP evidence
 
 **DRAFT · NOT RECORDED / EXPORTED / UPLOADED. Updated 24 November 2026 after owner receipt.** Eight contiguous shots, exactly **180 seconds / 03:00**. Official Rules say **under five minutes**; 180 seconds fits the planned limit, not proof of a finished video. Current Development **5.16.0 / UI 5f92b0c1b926**; prior owner full-core acceptance was 5.15.0. [Rules/exposure pre-submission gates](codegeist-rules-alignment-2026-11-24.md).

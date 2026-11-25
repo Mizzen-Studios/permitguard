@@ -40,7 +40,7 @@ Startup also needed honest measurement. A panel-only four-second counter had exc
 
 The owner accepted development 5.15.0 / UI 4e3335fb30f9 on 22 November: one Judge agent, readable clock scopes and release-first, single-caveat Rovo output. In that reload, preview was about 2.7 seconds and live state about 4.3 seconds by stopwatch. Those are one observed run, not an SLA or a controlled performance claim; previous runs varied.
 
-The release-barrier scenario and earlier human QR/photo checks have dated evidence. The current source has 134 local tests, including permission/revision failures and preserved-input contracts. We keep these categories separate: local tests, deployment metadata and actual browser acceptance do not prove the same thing.
+The release-barrier scenario and earlier human QR/photo checks have dated evidence. The current source has 137 local tests, including permission/revision failures and preserved-input contracts. We keep these categories separate: local tests, deployment metadata and actual browser acceptance do not prove the same thing.
 
 ## What we learned
 

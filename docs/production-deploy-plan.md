@@ -1,3 +1,5 @@
+> **25 November current entrypoints:** [judge installation plan](judge-access-plan.md), [README fresh-site quickstart](../README.md#judge-installation-and-quickstart), [read-only owner capture checklist](video-capture-list.md) and [priorities](submission-checklist-2026-11-25.md). The operational/version notes below are historical: MCP now has an owner PASS receipt, current demo is DEV 5.16.0, and the new recording plan does **not** authorize seed/phase/lock/roleplay writes. No production deployment, share link or exposure is authorized.
+
 # Production deployment plan — DRAFT, NOT EXECUTED
 
 Owner requested a plan only. **No production deploy/install, app distribution, Marketplace listing, Devpost upload or submission is authorized by this document.** Keep development app/site/permit intact. Owner-provided contest dates and categories must be checked against current official rules before any later submission; this plan does not establish eligibility.

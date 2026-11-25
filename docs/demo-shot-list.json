@@ -12,7 +12,16 @@
       "title": "Problem and boundary",
       "screen": "Synthetic Jira work item / PermitGuard title and site-procedure notice",
       "narration": "In group lockout work, a permit record must not hide the people whose personal locks still protect them. PermitGuard brings that coordination into Jira. The site procedure remains authoritative.",
-      "evidence": "Accepted core; decision support only"
+      "evidence": "Accepted core; decision support only",
+      "captureUrl": "https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2",
+      "captureIssueKey": "PGSAMPLE-2",
+      "captureClicks": [
+        "Open the URL in the already signed-in demo browser.",
+        "If the panel is not inline: View app actions → PermitGuard.",
+        "Frame the work-item key, PermitGuard title and site-procedure/decision-support notice. Do not press any lifecycle control."
+      ],
+      "captureExpected": "Actual synthetic issue and authenticated panel; decision support/site-procedure boundary visible. No safety certification claim.",
+      "captureDurationSeconds": 15
     },
     {
       "id": "S02",
@@ -21,7 +30,16 @@
       "title": "Identify the deployed build",
       "screen": "PGSAMPLE-2 ACTIVE panel; footer 5.16.0 / UI 5f92b0c1b926; own-lock rail and top release strip",
       "narration": "Here is the deployed development build and our synthetic active permit. Work-start readiness and release readiness are separate. The release blocker stays visible at the top. Historical preview is labelled; actions wait for current authorization.",
-      "evidence": "5.16 footer/panel observed by owner 24 Nov; prior broad core acceptance was 5.15 on 22 Nov"
+      "evidence": "5.16 footer/panel observed by owner 24 Nov; prior broad core acceptance was 5.15 on 22 Nov",
+      "captureUrl": "https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2",
+      "captureIssueKey": "PGSAMPLE-2",
+      "captureClicks": [
+        "Start a navigation stopwatch, then reload this issue once.",
+        "Open PermitGuard through View app actions if needed; let live state finish loading.",
+        "Scroll to footer: capture actual Forge version and UI marker. Scroll back to release strip and ACTIVE phase; expand Startup details only to distinguish clocks, not to imply its timer measures all Jira navigation."
+      ],
+      "captureExpected": "Expected baseline 5.16.0 / UI 5f92b0c1b926, ACTIVE, Release NOT CLEARED, lock L-A1. Historical preview, if shown, is explicitly not live/actionable. Current state must be checked; last owner observation was 24 Nov, not a new live assertion.",
+      "captureDurationSeconds": 20
     },
     {
       "id": "S03",
@@ -30,7 +48,16 @@
       "title": "Native Rovo, release first",
       "screen": "One PermitGuard Judge; new chat: Is PGSAMPLE-2 cleared?; actual tool response",
       "narration": "Ask the native Judge whether this work item is cleared. It leads with release not cleared, then gives the narrower work-start result. It reads the same deterministic service as the panel, rather than granting safety authority.",
-      "evidence": "Native action path accepted; not MCP transport proof"
+      "evidence": "Native action path accepted; not MCP transport proof",
+      "captureUrl": "https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2",
+      "captureIssueKey": "PGSAMPLE-2",
+      "captureClicks": [
+        "Open Jira Rovo/Chat in the top navigation; open its agent picker.",
+        "Search PermitGuard Judge; select the one intended live Jira DEV agent. If multiple indistinguishable agents appear, stop rather than deleting/selecting at random.",
+        "Choose New chat, enter exactly: Is PGSAMPLE-2 cleared? Send once. Wait for the actual reply/tool-backed result."
+      ],
+      "captureExpected": "On the preserved ACTIVE baseline: Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE. Follow the site procedure. Capture actual text; do not type/reconstruct it as model output. No activation proposal.",
+      "captureDurationSeconds": 25
     },
     {
       "id": "S04",
@@ -39,7 +66,16 @@
       "title": "Personal-lock barrier — read-only walkthrough",
       "screen": "Inspect current personal-lock records and top release result; source-labelled shared-lock guard inset if needed. No seeding, phase change, lock removal or close attempt.",
       "narration": "Personal-lock records remain attributable. A worker removing their own lock does not clear someone else’s remaining record. The shared service enforces that barrier. Here we inspect the current record and the rule without changing locks or pretending a simulated crew is another real person.",
-      "evidence": "Current UI read plus labelled source rule; no new live release sequence claimed"
+      "evidence": "Current UI read plus labelled source rule; no new live release sequence claimed",
+      "captureUrl": "https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2",
+      "captureIssueKey": "PGSAMPLE-2",
+      "captureClicks": [
+        "Return to PermitGuard; inspect Personal lock rail and the L-A1 record (do not remove it). Keep the top Release NOT CLEARED strip legible.",
+        "For a source inset, open https://github.com/Mizzen-Studios/permitguard/blob/5f92b0c1b926e35cbdc3f45a3352f76dabfaaf58/src/domain/permit.mjs in another tab. Ctrl+F: checkRelease, then LOCK_REMAINS.",
+        "Label the inset Source rule — not a live release demonstration. Return to the unchanged issue. Do not open Judge sample roleplay, play Crew B, Begin release checks, remove any lock or try Close."
+      ],
+      "captureExpected": "Real currently visible personal-lock record plus the source rule that any remaining shared-equipment lock blocks release. If Crew B is absent, do not invent a Crew B UI record; no lock-removal/blocked-close sequence is being filmed.",
+      "captureDurationSeconds": 40
     },
     {
       "id": "S05",
@@ -48,7 +84,16 @@
       "title": "Authorized reread in another tab",
       "screen": "Two read-only views of the same issue, explicitly labelled manual Refresh; show automatic invalidation only if genuinely recorded",
       "narration": "The other tab rereads authorized state. Here we show manual Refresh explicitly. Realtime carries invalidation hints, not permit records or safety authority; we do not claim delivery that this recording has not shown.",
-      "evidence": "Read-only reread; no fabricated change/automatic delivery"
+      "evidence": "Read-only reread; no fabricated change/automatic delivery",
+      "captureUrl": "https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2",
+      "captureIssueKey": "PGSAMPLE-2",
+      "captureClicks": [
+        "Open the same exact issue in a second browser tab; open PermitGuard if necessary.",
+        "Switch between the two tabs. In tab B click the panel Refresh button once; wait for live reread.",
+        "Keep an explicit Manual Refresh — no state change label. Record current phase/release/lock state; return to tab A."
+      ],
+      "captureExpected": "Both authorized views agree after reread. This does NOT demonstrate automatic Realtime delivery or a state-change race. No cross-tab mutation is needed.",
+      "captureDurationSeconds": 20
     },
     {
       "id": "S06",
@@ -57,7 +102,16 @@
       "title": "Human-only activation boundary",
       "screen": "Source/README action diagram: GET readiness, CREATE PENDING, no agent confirmation tool",
       "narration": "The agent has no confirmation tool. Its activation action can only propose pending work for a named human. Equipment confirmation remains human-only; a QR or photo does not independently prove presence.",
-      "evidence": "Implemented/local-tested rule; not a new live activation demonstration"
+      "evidence": "Implemented/local-tested rule; not a new live activation demonstration",
+      "captureUrl": "https://github.com/Mizzen-Studios/permitguard/blob/5f92b0c1b926e35cbdc3f45a3352f76dabfaaf58/manifest.yml",
+      "captureIssueKey": null,
+      "captureClicks": [
+        "Open the pinned manifest URL in a source tab (not the demo admin console).",
+        "Ctrl+F: rovo:agent; show its actions check_readiness and request_activation. Then find actionVerb: CREATE and the request_activation binding.",
+        "Use the prepared source-labelled architecture caption: proposal → PENDING → assigned human confirmation. Do not ask an agent to activate or film QR/photo assertions."
+      ],
+      "captureExpected": "Source/action boundary only: no confirm/activate agent tool, guarded native proposal remains. Not a new filmed PENDING/activation lifecycle test.",
+      "captureDurationSeconds": 15
     },
     {
       "id": "S07",
@@ -66,7 +120,16 @@
       "title": "Real Forge MCP read — owner receipt",
       "screen": "5 seconds GET-only rovo:mcp declaration, 20 seconds legible redacted owner receipt (actual check_readiness_development name, input, scoped result), 5 seconds owner-reported OFF/grant cleanup. Label Historical owner receipt · 24 Nov 21:06:40 UTC · not live Inspector footage.",
       "narration": "PermitGuard also exposes a Forge MCP server. In this owner-documented development run, Inspector discovered one read-only tool. One call returned work-start-only clearance, not release clearance, at revisions twenty-two and six. Consent still showed broad app permissions. Exposure was disabled and the client grant removed afterward.",
-      "evidence": "PASS_OWNER_RECEIPT: genuine owner-run discovery/read, historical text evidence only; no new call, activation, screenshot or filmed Inspector interaction claimed"
+      "evidence": "PASS_OWNER_RECEIPT: genuine owner-run discovery/read, historical text evidence only; no new call, activation, screenshot or filmed Inspector interaction claimed",
+      "captureUrl": "https://github.com/Mizzen-Studios/permitguard/blob/4d21c6786026e5f539b9e7c0c5fb41d86c7b62ba/docs/evidence/mcp-owner-receipt-2026-11-24.md",
+      "captureIssueKey": "PGSAMPLE-2 (historical receipt only)",
+      "captureClicks": [
+        "First 5 s: pinned manifest, find rovo:mcp and show tools: check_readiness only.",
+        "Next 20 s: open the REDACTED receipt URL. Frame actual check_readiness_development name, input {\"issueKey\":\"PGSAMPLE-2\"}, WORK_START / ACTIVE / release NOT CLEARED, siteRevision 22 / returned permitRevision 6 / operational:false.",
+        "Final 5 s: frame the receipt cleanup and broad Read, Write, and Search consent note. Add persistent label Historical owner receipt · 24 Nov 21:06:40 UTC · not live Inspector footage. Do not launch Inspector, OAuth or turn exposure on."
+      ],
+      "captureExpected": "Faithful historical text-receipt insert, not a recreated Inspector screen. Original owner call and OFF/grant cleanup are supported; permit revision 6→6 was not observed. Exposure remains OFF. No new MCP call.",
+      "captureDurationSeconds": 30
     },
     {
       "id": "S08",
@@ -75,7 +138,16 @@
       "title": "Architecture and close",
       "screen": "README architecture, public MIT repository and remaining release blocker",
       "narration": "Forge stores bounded records and checks revisions before writes. Jira access remains user-authorized. No external app runtime or SQL is needed. Named humans and the site procedure remain in control.",
-      "evidence": "Source architecture, not production qualification"
+      "evidence": "Source architecture, not production qualification",
+      "captureUrl": "https://github.com/Mizzen-Studios/permitguard",
+      "captureIssueKey": null,
+      "captureClicks": [
+        "Open README architecture/boundary text, then the MIT LICENSE tab if useful.",
+        "Frame the public repository URL and final site-procedure disclaimer.",
+        "Close with the explicit limitation: decision support, named humans, no physical isolation/safety certification. Stop recording."
+      ],
+      "captureExpected": "Source/ownership/architecture close, not Marketplace listing, contest submission or production qualification.",
+      "captureDurationSeconds": 15
     }
   ],
   "updatedDate": "2026-11-24",
