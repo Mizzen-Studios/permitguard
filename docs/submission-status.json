@@ -1,9 +1,9 @@
 {
   "updatedDate": "2026-11-25",
-  "mode": "PREPARATION_ONLY",
+  "mode": "PRODUCTION_REHEARSAL_APPROVED",
   "publicActionsAuthorized": false,
   "installationLink": null,
-  "productionDeployed": false,
+  "productionDeployed": true,
   "judgeBrowserRehearsal": "NOT_RUN",
   "currentDemo": {
     "environment": "development",
@@ -18,9 +18,9 @@
   "gates": [
     {
       "id": "production-and-distribution",
-      "status": "WAITING_APPROVAL",
+      "status": "BLOCKED_CONSOLE_LOGIN",
       "owner": "Olly",
-      "evidence": null
+      "evidence": "evidence/2026-11-25-production-deployment.json"
     },
     {
       "id": "judge-install-browser-rehearsal",
@@ -61,9 +61,17 @@
   ],
   "note": "Local consistency checks cannot grant approval, create access or certify contest eligibility. No actions are scheduled.",
   "localSourceCandidate": {
-    "status": "NOT_DEPLOYED",
+    "status": "DEPLOYED_PRODUCTION_2.0.0_NOT_FRESH_SITE_ACCEPTED",
     "sourceBuildCommit": "bc800397bc17",
     "verification": "submission/verification-2026-11-25.json",
-    "notes": "UX/agent candidate only; currentDemo and capture metadata remain the prior owner-observed Development baseline."
+    "notes": "Production deployed from clean 713eadc; DEV capture baseline unchanged. Distribution is approved but blocked by actual console sign-in; no installation link exists."
+  },
+  "production": {
+    "version": "2.0.0",
+    "uiSource": "713eadc3dfbc",
+    "sourceCommit": "713eadc3dfbccd2458453f0c0c02ebcfab9bb721",
+    "evidence": "evidence/2026-11-25-production-deployment.json",
+    "privateDistribution": "BLOCKED_CONSOLE_LOGIN",
+    "installLinkCreated": false
   }
 }

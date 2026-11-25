@@ -1,6 +1,6 @@
 # PermitGuard — Devpost working draft
 
-**Repository draft only. Not saved to a Devpost form, published or submitted.** Actual form limits/entrant declarations still need checking. Intended category: **Apps for Specialized Industries**. New UX/agent polish is locally tested source, not deployed; existing owner demo evidence is Development 5.16.0. [Readiness and evidence](README.md).
+**Repository draft only. Not saved to a Devpost form, published or submitted.** Actual form limits/entrant declarations still need checking. Intended category: **Apps for Specialized Industries**. Production 2.0.0 now contains the UX/agent polish; new-site install/browser acceptance is NOT_RUN and private link creation is BLOCKED_CONSOLE_LOGIN. Existing owner demo evidence remains Development 5.16.0. [Readiness and evidence](README.md).
 
 ## Tagline
 
@@ -46,7 +46,7 @@ A trustworthy answer is more useful than an optimistic one. Putting release stat
 
 ## What's next
 
-The owner is recording the existing 180-second demo plan. The next release gates are an explicitly approved production/Jira installation link and clean-site browser rehearsal, review of the actual footage, entrant/media-rights attestations and an agreed judge MCP access window. No production, sharing, exposure or publication change is authorized by this draft.
+The owner is recording the existing 180-second demo plan. Production deploy and a private Jira-only link were approved in the owner request at 21:39 UTC. Production 2.0.0 is deployed; generating the link is blocked by developer-console sign-in. The next gates are that private link and clean-site browser rehearsal, footage review, entrant/media-rights attestations and a separately agreed judge MCP window. Marketplace, MCP exposure, billing and publication remain unapproved.
 
 Recovery/capacity/retention/export and broader live workflow/JQL, automatic Realtime, two-human high-energy and device validation remain separately scoped work before production qualification. Conflict guard and shift-end suspension remain future ideas, not implemented demo claims.
 
@@ -69,5 +69,5 @@ Atlassian Forge; Jira; JavaScript; Custom UI; Forge app storage; Forge Realtime;
 - MCP evidence: [redacted owner receipt](../evidence/mcp-owner-receipt-2026-11-24.md), [Rules/hash alignment](../codegeist-rules-alignment-2026-11-24.md).
 - Video: **NOT_RECORDED/NOT_RECEIVED** at this draft milestone; do not invent a public YouTube link.
 - Judge installation link: **NOT_CREATED**; the demo browse URL is not an installation link. [Plan and tested-to-date limits](../judge-access-plan.md).
-- Production/judge-install browser rehearsal: **NOT_RUN**. New local UX/agent changes: **NOT_DEPLOYED**.
+- Production/judge-install browser rehearsal: **NOT_RUN**. UX/agent candidate: **DEPLOYED_PRODUCTION_2.0.0**, not yet fresh-site accepted.
 - Entrant names/eligibility, team authority, media rights, app contact/privacy details, exact form field/character limits and final selected bonus/category require the actual owner's verification; none is fabricated.

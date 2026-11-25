@@ -1,3 +1,5 @@
+> **21:39 approval follow-up:** Production **2.0.0** has now deployed from 713eadc. Private Jira-only distribution is approved but **BLOCKED_CONSOLE_LOGIN**; install link NOT_CREATED, fresh-site NOT_RUN. Earlier source/preparation-only statements below are historical, not the current deployment status. [Current handoff](production-install-rehearsal-2026-11-25.md).
+
 # Submission readiness — priority order, 25 November 2026
 
 **Preparation only. NOT_SUBMITTED.** Deadline from supplied Official Rules: **22 December 2026 20:00 UTC**. Target completing evidence/access/media well before then; a deadline is not authorization. [Rules and source hashes](codegeist-rules-alignment-2026-11-24.md).

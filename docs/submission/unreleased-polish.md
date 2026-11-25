@@ -1,3 +1,5 @@
+> **21:39 approval follow-up:** Production **2.0.0** has now deployed from 713eadc. Private Jira-only distribution is approved but **BLOCKED_CONSOLE_LOGIN**; install link NOT_CREATED, fresh-site NOT_RUN. Earlier source/preparation-only statements below are historical, not the current deployment status. [Current handoff](../production-install-rehearsal-2026-11-25.md).
+
 # Unreleased judge-facing polish - 25 November 2026
 
 **SOURCE ONLY - NOT DEPLOYED.** No change to the owner demo, accepted MCP receipt or recording baseline. Later deployment and native-agent acceptance need a separate decision.

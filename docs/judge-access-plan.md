@@ -1,3 +1,5 @@
+> **21:39 approval follow-up:** Production **2.0.0** has now deployed from 713eadc. Private Jira-only distribution is approved but **BLOCKED_CONSOLE_LOGIN**; install link NOT_CREATED, fresh-site NOT_RUN. Earlier source/preparation-only statements below are historical, not the current deployment status. [Current handoff](production-install-rehearsal-2026-11-25.md).
+
 # Judge access plan — preparation only, 25 November 2026
 
 **NOT EXECUTED. No production deploy, distribution/share link, public sharing or MCP exposure change.** Existing demo stays Development 5.16.0 / UI 5f92b0c1b926, Jira only; exposure OFF per owner receipt. £0 constraint: no card, new terms, paid resources, new paid seats or trials requiring payment. If available entitlement/allowance is insufficient, stop. No-card is not independently proven as a hard usage cap.

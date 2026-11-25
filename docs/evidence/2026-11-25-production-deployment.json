@@ -1,0 +1,86 @@
+{
+  "classification": "DEPLOYMENT_ONLY_DISTRIBUTION_BLOCKED_LOGIN",
+  "approval": {
+    "source": "Owner request in this conversation, 25 November 2026 21:39 UTC",
+    "productionDeploy": true,
+    "privateJiraDistribution": true,
+    "freshFreeSiteRehearsal": true,
+    "marketplace": false,
+    "mcpExposure": false,
+    "billing": false
+  },
+  "appId": "60f4bdda-1062-4e5b-aab6-1d9a9cf53a90",
+  "sourceCommit": "713eadc3dfbccd2458453f0c0c02ebcfab9bb721",
+  "uiSource": "713eadc3dfbc",
+  "environment": "production",
+  "version": "2.0.0",
+  "deployedAt": "2026-11-25T21:42:12.849Z",
+  "deploymentStatus": "Success",
+  "verification": {
+    "normalDeployVerification": true,
+    "normalForgeLint": "No issues found",
+    "npmCiAuditVulnerabilities": 0,
+    "backendTests": 134,
+    "uiContracts": 50,
+    "pythonTests": 3,
+    "sdkBootstrap": 2,
+    "knownSecretSourceAndArtifactScan": "PASS",
+    "storageIndex": "permitguard-site/by-key ACTIVE",
+    "productionInstallationsObserved": 0,
+    "developmentJiraInstallation": "major 5 Up-to-date; not upgraded",
+    "artifactHashes": {
+      "static/permit-app/dist/app.js": "871f1f7dc6d1f104e509bb1971b4a395daea4f803824ded08b2ff2ae1373f7e1",
+      "static/permit-app/dist/styles.css": "437b69a0f27dfc7b84793530e1c5c8fb3ff1b4b49820f5b131ef1a3b1d12d526",
+      "static/permit-app/dist/index.html": "d36fbeedcab05e098fa2c365daec5152d2cac53c4a541013a094647de92ad719",
+      "static/capability-probe/dist/app.js": "a059e6240de8ba52761bed1e24cb588bb24585e0f5ff861284893efd196769f5"
+    },
+    "remoteArtifactByteReadback": false,
+    "remoteMajorVersionMetadata": {
+      "version": 2,
+      "deploymentDateTime": "2026-11-25T21:42:33.468Z",
+      "environmentType": "PRODUCTION",
+      "egresses": [],
+      "remotes": 0,
+      "services": 0,
+      "requiresLicense": false,
+      "moduleReadback": {
+        "jira:issuePanel": 1,
+        "jira:adminPage": 1,
+        "jira:workflowValidator": 2,
+        "action": 2,
+        "rovo:mcp": 1,
+        "macro": 1,
+        "jira:entityProperty": 1,
+        "jira:projectSettingsPage": 1,
+        "rovo:agent": 1
+      }
+    }
+  },
+  "distribution": {
+    "status": "BLOCKED_CONSOLE_LOGIN",
+    "configurationChanged": false,
+    "installationLinkCreated": false,
+    "jiraOnlyRequested": true,
+    "loginGateObserved": true
+  },
+  "acceptance": {
+    "freshSiteInstall": "NOT_RUN",
+    "nativeAgentOnFreshSite": "NOT_RUN",
+    "mcp": "NOT_ENABLED_OR_INVOKED_BY_THIS_TASK",
+    "billingChanged": false,
+    "marketplaceListingCreated": false
+  },
+  "postDeploymentLedgerTests": {
+    "backend": 138,
+    "uiPreflight": 50,
+    "pythonPreflight": 3,
+    "total": 191
+  },
+  "cleanup": {
+    "taskOwnedProfile": "openclaw",
+    "running": false,
+    "ownedBrowserRootExited": true,
+    "cookiesAndExistingTabsPreserved": true,
+    "otherCaptureProfileObservedAndUntouched": true
+  }
+}

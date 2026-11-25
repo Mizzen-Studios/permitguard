@@ -19,12 +19,12 @@ export function loadPack(root) {
     const text = readFileSync(join(root, name), 'utf8');
     try { return JSON.parse(text); } catch { throw new Error(name + ': invalid JSON (content not echoed)'); }
   };
-  return { files, documents, shots: json('docs/demo-shot-list.json'), capture: json('docs/capture-log.json'), receipt: json('docs/evidence/2026-11-24-mcp-owner-receipt.json'), status: json('docs/submission-status.json') };
+  return { files, documents, shots: json('docs/demo-shot-list.json'), capture: json('docs/capture-log.json'), receipt: json('docs/evidence/2026-11-24-mcp-owner-receipt.json'), status: json('docs/submission-status.json'), production: files.has('docs/evidence/2026-11-25-production-deployment.json') ? json('docs/evidence/2026-11-25-production-deployment.json') : null };
 }
 
 export function validatePack(pack) {
   const errors = [], check = (ok, message) => { if (!ok) errors.push(message); };
-  const { shots, capture, receipt, status, documents, files } = pack;
+  const { shots, capture, receipt, status, documents, files, production } = pack;
   const script = documents['docs/demo-video-script.md'] || '';
   const guide = documents['docs/video-capture-list.md'] || '';
   const list = shots.shots || [];
@@ -62,11 +62,16 @@ export function validatePack(pack) {
     check(asset.sharingAuthorized === false, asset.id + ': publication approval is not supplied by this preparation pack');
   }
   check(ids.has('C09') && capture.actualInspectorScreenshotsOrVideo === 0, 'Do not invent Inspector screenshots/video');
-  check(status.mode === 'PREPARATION_ONLY' && status.publicActionsAuthorized === false && status.installationLink === null && status.productionDeployed === false && status.judgeBrowserRehearsal === 'NOT_RUN', 'Preparation must not silently become approved/deployed/installed');
+  check(status.publicActionsAuthorized === false && status.installationLink === null && status.judgeBrowserRehearsal === 'NOT_RUN', 'No public link/publication or fresh-site acceptance may be invented');
+  if(status.mode==='PRODUCTION_REHEARSAL_APPROVED') {
+    check(status.productionDeployed===true && production?.classification==='DEPLOYMENT_ONLY_DISTRIBUTION_BLOCKED_LOGIN' && production?.approval?.productionDeploy===true && production?.approval?.privateJiraDistribution===true && production?.approval?.mcpExposure===false && production?.approval?.billing===false && production?.approval?.marketplace===false, 'Approved deployment needs its bounded owner request and receipt');
+    check(production?.appId==='60f4bdda-1062-4e5b-aab6-1d9a9cf53a90' && production?.environment==='production' && production?.version===status.production?.version && production?.uiSource===status.production?.uiSource && /^[a-f0-9]{40}$/.test(production?.sourceCommit||'') && Number.isFinite(Date.parse(production?.deployedAt)) && production?.deploymentStatus==='Success', 'Production deployment identity/version/evidence mismatch');
+    check(production?.distribution?.status==='BLOCKED_CONSOLE_LOGIN' && production?.distribution?.installationLinkCreated===false && production?.distribution?.configurationChanged===false && production?.acceptance?.freshSiteInstall==='NOT_RUN', 'Deployment is not distribution or fresh-site acceptance');
+  } else check(status.mode==='PREPARATION_ONLY' && status.productionDeployed===false, 'Preparation must not silently become deployed');
   check(status.mcpExposure.lastOwnerObserved === 'OFF' && status.mcpExposure.changedByPreparation === false, 'Exposure state/provenance must stay explicit');
   const required = ['production-and-distribution', 'judge-install-browser-rehearsal', 'raw-footage', 'final-media-review', 'judge-mcp-access-window', 'entrant-attestations', 'publication-and-submission'];
   check(status.gates.length === required.length && new Set(status.gates.map(g => g.id)).size === required.length && required.every(id => status.gates.some(g => g.id === id)), 'Pending human gates must not disappear');
-  check(status.gates.every(g => ['WAITING_APPROVAL', 'WAITING_OWNER_INPUT', 'NOT_RUN'].includes(g.status) && g.evidence === null), 'New completion evidence requires deliberate human review, not a silent gate flip');
+  check(status.gates.every(g => status.mode==='PRODUCTION_REHEARSAL_APPROVED' && g.id==='production-and-distribution' ? g.status==='BLOCKED_CONSOLE_LOGIN' && g.evidence==='evidence/2026-11-25-production-deployment.json' : ['WAITING_APPROVAL', 'WAITING_OWNER_INPUT', 'NOT_RUN'].includes(g.status) && g.evidence===null), 'New completion evidence requires deliberate review, not a silent gate flip');
   let localReferences = 0;
   for (const [name, text] of Object.entries(documents)) {
     for (const m of text.matchAll(/\[[^\]]*\]\(([^)\s]+)\)/g)) {
