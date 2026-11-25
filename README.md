@@ -84,7 +84,7 @@ Intended bonus evidence: show legitimate tool discovery and a **read-only check_
 
 ## Submission pack
 
-- [Exposure assessment: 5.15 expected; current MCP includes CREATE—leave OFF](docs/mcp-exposure-assessment-2026-11-24.md)
+- [Historical 5.15 exposure assessment; superseded by 5.16 GET-only receipt](docs/mcp-exposure-assessment-2026-11-24.md)
 - [MCP owner receipt — redacted, genuine DEV invocation](docs/evidence/mcp-owner-receipt-2026-11-24.md) · [Official Rules alignment / pre-submission gates](docs/codegeist-rules-alignment-2026-11-24.md)
 - [Current pack status](docs/submission-pack-2026-11-24.md) · [Screenshot list](docs/screenshots-list.md) · [Capture log](docs/capture-log.json)
 - [Optional browser-only catalog discovery — no client/Publish](docs/mcp-browser-discovery-2026-11-24.md)
@@ -122,3 +122,8 @@ MIT · [LICENSE](LICENSE) · Maintainer contact: [GitHub Issues](https://github.
 8. **MCP — NEEDS OLLY OK AT SUBMISSION / BEFORE JUDGE TESTS.** Exposure stays OFF now. With separate approval, the administrator enables the intended installed app, judge uses an approved MCP client/normal OAuth, discovers the actual environment-named readiness tool and reads the actual PGSAMPLE-N once. The historical name check_readiness_development is not a promised production name. Consent may say **Read, Write, and Search** despite the GET-only MCP interface. See [exposure/window/cleanup steps](docs/judge-access-plan.md#mcp--needs-olly-ok-at-submission--before-judge-testing).
 
 **Rehearsal record required before calling this fully tested:** generated-link install by intended admin, production version/source, fresh project marker/issue, actual footer/one agent, PLAN response, role/permission checks, optional approved MCP response and cleanup, errors/elapsed times. No raw tokens or personal identifiers in published evidence. We will replace NOT_RUN only with that real acceptance record. [Exact owner recording checklist](docs/video-capture-list.md).
+
+
+### Local submission-pack consistency check
+
+Run **npm run check:submission** (or **npm run check:submission -- --json**) without credentials. It only reads local documentation/JSON; it validates timing, capture URLs/fields, narration, local file links and owner-receipt/scope/approval boundaries. A PASS is **not** production/browser/media acceptance or permission to submit. Pending human gates stay explicit in [submission status](docs/submission-status.json). No network, browser, site write or public action is performed. [Private footage handoff](docs/footage-handoff.md).

@@ -138,3 +138,8 @@
 - Send the **eight raw clips** plus a short take log: clip IDs, UTC, actual version/source/state, real wait lengths, failed takes, intended crops/redactions, audio issues and any state change/concurrent activity. Keep raw files private; do not upload to YouTube/Devpost/public hosting. An existing approved private transfer location is fine; if none is agreed, tell me file sizes first and we'll choose one without public sharing or payment.
 - I'll work from the supplied footage; no edited video, render, export or upload is claimed by this checklist. Final preview/edits and any publication need Olly's approval. [Remaining priorities and owner decisions](submission-checklist-2026-11-25.md).
 - When finished, close only the capture/source tabs or browser instance you opened for this recording; preserve unrelated signed-in work and cookies. No broad killall/pkill.
+
+
+## Private transfer and review
+
+[Footage handoff](footage-handoff.md) · [optional blank take log](footage-take-log.template.json). Actual filenames/hashes/durations and privacy review are recorded only after bytes exist; no raw footage or filled private log belongs in this public repository.

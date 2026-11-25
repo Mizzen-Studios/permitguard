@@ -20,7 +20,7 @@ PermitGuard adds a human-confirmed LOTO clipboard to a Jira work item. The model
 
 Work-start readiness and release readiness are deliberately separate. In the accepted active sample, PermitGuard Judge says: “Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE.” The release strip stays at the top of the panel rather than below a long work sheet.
 
-The synthetic Crew B scenario makes the distinction concrete: removing the current worker's own lock does not clear a remaining shared-equipment lock. Crew B is visibly labelled simulation, not a second real principal. The site's procedure remains authoritative. QR, photos and attestations are recorded inputs, not independent proof of presence, physical isolation or permission to energize.
+The earlier synthetic Crew B scenario illustrates the shared-equipment rule: removing the current worker's own lock does not clear another remaining lock. Crew B was labelled simulation, not a second real principal. The current read-only video plan inspects actual lock records and a source-labelled guard instead of recreating that mutation. The site's procedure remains authoritative. QR, photos and attestations are recorded inputs, not independent proof of presence, physical isolation or permission to energize.
 
 ## How we built it
 
@@ -40,7 +40,7 @@ Startup also needed honest measurement. A panel-only four-second counter had exc
 
 The owner accepted development 5.15.0 / UI 4e3335fb30f9 on 22 November: one Judge agent, readable clock scopes and release-first, single-caveat Rovo output. In that reload, preview was about 2.7 seconds and live state about 4.3 seconds by stopwatch. Those are one observed run, not an SLA or a controlled performance claim; previous runs varied.
 
-The release-barrier scenario and earlier human QR/photo checks have dated evidence. The current source has 137 local tests, including permission/revision failures and preserved-input contracts. We keep these categories separate: local tests, deployment metadata and actual browser acceptance do not prove the same thing.
+The release-barrier scenario and earlier human QR/photo checks have dated evidence. Local tests cover permission/revision failures, preserved-input contracts, fresh judge setup and submission-pack consistency. Counts are reported by the actual test run, not treated as a safety or production certification. We keep these categories separate: local tests, deployment metadata and actual browser acceptance do not prove the same thing.
 
 ## What we learned
 

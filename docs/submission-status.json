@@ -1,0 +1,63 @@
+{
+  "updatedDate": "2026-11-25",
+  "mode": "PREPARATION_ONLY",
+  "publicActionsAuthorized": false,
+  "installationLink": null,
+  "productionDeployed": false,
+  "judgeBrowserRehearsal": "NOT_RUN",
+  "currentDemo": {
+    "environment": "development",
+    "version": "5.16.0",
+    "uiSource": "5f92b0c1b926"
+  },
+  "mcpExposure": {
+    "lastOwnerObserved": "OFF",
+    "observationDate": "2026-11-24",
+    "changedByPreparation": false
+  },
+  "gates": [
+    {
+      "id": "production-and-distribution",
+      "status": "WAITING_APPROVAL",
+      "owner": "Olly",
+      "evidence": null
+    },
+    {
+      "id": "judge-install-browser-rehearsal",
+      "status": "NOT_RUN",
+      "owner": "approved site administrator",
+      "evidence": null
+    },
+    {
+      "id": "raw-footage",
+      "status": "WAITING_OWNER_INPUT",
+      "owner": "recorder",
+      "evidence": null
+    },
+    {
+      "id": "final-media-review",
+      "status": "NOT_RUN",
+      "owner": "owner and assistant",
+      "evidence": null
+    },
+    {
+      "id": "judge-mcp-access-window",
+      "status": "WAITING_APPROVAL",
+      "owner": "Olly",
+      "evidence": null
+    },
+    {
+      "id": "entrant-attestations",
+      "status": "WAITING_OWNER_INPUT",
+      "owner": "actual entrants",
+      "evidence": null
+    },
+    {
+      "id": "publication-and-submission",
+      "status": "WAITING_APPROVAL",
+      "owner": "Olly",
+      "evidence": null
+    }
+  ],
+  "note": "Local consistency checks cannot grant approval, create access or certify contest eligibility. No actions are scheduled."
+}

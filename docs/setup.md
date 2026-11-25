@@ -35,7 +35,7 @@ Name actual workers/verifiers; use that installation's displayed/generated QR, n
 2. PGSAMPLE-2 is the preserved ACTIVE path at the last accepted report. Verify state/lock records before choosing a recording action; don't repair via raw storage or impersonate people.
 3. New chat: **Is PGSAMPLE-2 cleared?** Expected start: **Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE.**
 4. Measure reload stopwatch separately from iframe/panel clocks. Owner's 21:00 report: preview ~2.7 s/live ~4.3 s in that run; prior runs varied substantially. Static loading chrome, historical preview and authorized live state are different milestones.
-5. For the release-blocker recording, use only the explicit sample Crew B roleplay and remove only your own lock. This is a future human recording plan, not authority for this task to change the permit.
-6. MCP bonus remains [unverified](mcp-bonus-readiness.md). No private Studio agent, OAuth grant, external exposure or publication is created by following the read-only checklist. Stop at a login/consent/publish gate and ask the owner.
+5. For the current recording, **do not** use roleplay or remove any lock. Inspect the current personal-lock rail and a source-labelled release guard, as the read-only capture checklist specifies. Older mutation scenarios are historical evidence, not recording instructions.
+6. MCP technical evidence is [PASS_OWNER_RECEIPT](mcp-bonus-readiness.md), not overall eligibility or submission signoff. No private Studio agent, OAuth grant, external exposure or publication is created by following the read-only checklist. Stop at a login/consent/publish gate and ask the owner.
 
 Connection required; no offline mode. Site procedure remains authoritative. [Shot list](demo-video-script.md) · [submission readiness](submission-readiness-2026-11-22.md).

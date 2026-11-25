@@ -1,5 +1,5 @@
 {
-  "updatedDate": "2026-11-24",
+  "updatedDate": "2026-11-25",
   "status": "PLAN_ONLY_NO_ASSETS_CAPTURED",
   "coreVersion": "5.16.0",
   "uiSource": "5f92b0c1b926",
@@ -160,7 +160,7 @@
   ],
   "ownerAdminObservation": "See evidence/2026-11-24-admin-exposure.json; external screenshot reported, not imported into this capture plan",
   "deploymentReceipt": "mcp-get-deployment-2026-11-24.md",
-  "previousOwnerAcceptedBaseline": "5.15.0 / UI 4e3335fb30f9; new deployment browser check NOT_RUN",
+  "previousOwnerAcceptedBaseline": "5.15.0 full-core owner acceptance 22 Nov; 5.16 footer/panel plus MCP owner observations 24 Nov; full 5.16 browser regression NOT_RERUN",
   "mcpReceiptSource": "evidence/mcp-owner-receipt-2026-11-24.md",
   "actualInspectorScreenshotsOrVideo": 0
 }

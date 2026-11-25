@@ -1,6 +1,6 @@
 > **MCP text receipt is now available; no Inspector screenshot/video was saved.** Planned C09/S07 insert must be labelled historical owner evidence, not recreated live UI. [Receipt](evidence/mcp-owner-receipt-2026-11-24.md). Exposure remains OFF; [Olly approval gates](codegeist-rules-alignment-2026-11-24.md) apply to any new live capture.
 
-> **13:03 update:** owner inspected admin UI, reporting DEV 5.15.0 Up to date and app-wide exposure OFF; no individual tool names/selection. External screenshot reference is recorded, not imported or independently reviewed. Current module includes CREATE, so leave exposure OFF. [Assessment and corrected conditional plan](mcp-exposure-assessment-2026-11-24.md). Morning preparation/capture-plan states below remain historical; no new repository media is claimed.
+> **Historical 24-Nov 13:03 observation:** 5.15 had a CREATE tool in its MCP list. This was superseded by the 5.16 GET-only deployment and actual owner read/cleanup receipt. Do not treat the old two-tool state as current. No new Inspector screenshots/video exist.
 
 # Screenshot list — plan only, no new screenshots
 
@@ -20,7 +20,7 @@
 
 ## Capture order and state continuity
 
-1. First capture C01–C03 in one read-only session; note current build, phase and **site/permit revisions separately**. Never remove a lock or create simulated Crew B for a still image. If no other-crew lock exists, don't imply one does; use a source-labelled guard diagram instead.
+1. First capture C01–C03 in one read-only session; note current build, phase and site revision. Record permit revision only if actually visible; otherwise mark **NOT_OBSERVED**. Do not infer it from the historical MCP result. Never remove a lock or create simulated Crew B for a still image. If no other-crew lock exists, don't imply one does; use a source-labelled guard diagram instead.
 2. Capture C04 in a new native Judge chat. Its wording must match current state. It proves a native Forge action, not MCP. Preserve the real result rather than replacing it with the previously accepted ACTIVE example.
 3. Capture C05 using manual Refresh. Two equal stills do not prove automatic Realtime propagation. If an earlier genuine automatic-update clip is used, cite its date/build and label it an insert.
 4. Capture C06 directly from current source/README; label **Implementation/source view — not live activation**. No claim that QR, two-person verification, workflow, Assets or archive was exercised by a diagram.
@@ -37,4 +37,4 @@
 
 ## Done means
 
-Required core frames exist, reflect actual state, are readable and privacy-reviewed; optional images may remain absent. A prepared checklist is not captured evidence. Recording/export/share/upload and Devpost/Marketplace publication still require separate authorization. The parked MCP receipt is not part of these core-frame acceptance conditions.
+Required core frames exist, reflect actual state, are readable and privacy-reviewed; optional images may remain absent. A prepared checklist is not captured evidence. Recording/export/share/upload and Devpost/Marketplace publication still require separate authorization. The MCP receipt is available as historical text; the S07 insert must preserve that label, not pretend to be live Inspector footage.

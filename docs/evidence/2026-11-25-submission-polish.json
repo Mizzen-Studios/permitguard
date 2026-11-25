@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-11-25T17:06:17.355Z",
+  "classification": "LOCAL_CONSISTENCY_PASS_NOT_SUBMISSION_READY",
+  "tests": {
+    "backend": 117,
+    "ui": 43,
+    "python": 3,
+    "total": 163,
+    "newSubmissionPackTests": 26,
+    "negativeClaimRegressions": 22
+  },
+  "validator": {
+    "command": "npm run check:submission",
+    "localConsistency": "PASS",
+    "shots": 8,
+    "targetSeconds": 180,
+    "localReferences": 217,
+    "submissionReady": false,
+    "pendingHumanGates": 7,
+    "externalUrlsOrAnchorsChecked": false,
+    "networkOrBrowserUsed": false,
+    "footageBytesReviewed": false
+  },
+  "dependencyAudit": {
+    "scope": "production dependencies",
+    "knownVulnerabilities": 0,
+    "registryReadPerformed": true,
+    "dependenciesChanged": false
+  },
+  "runtime": {
+    "applicationSourceChanged": false,
+    "manifestChanged": false,
+    "localDeployedBaselineArtifactsUnchanged": true,
+    "freshRemoteArtifactReadbackPerformed": false,
+    "deployedBaselineReceipt": "2026-11-24-mcp-get-deployment.json",
+    "deploymentPerformed": false
+  },
+  "actions": {
+    "production": false,
+    "distributionOrShareLink": false,
+    "mcpExposure": false,
+    "oauth": false,
+    "mediaPublication": false,
+    "contestSubmission": false,
+    "browserLaunched": false
+  },
+  "limitations": [
+    "Pending owner footage and actual media review",
+    "Production/share-link browser rehearsal awaiting Olly approval",
+    "No entrant attestations, public media or submission approved",
+    "Status ledger is not authorization"
+  ]
+}

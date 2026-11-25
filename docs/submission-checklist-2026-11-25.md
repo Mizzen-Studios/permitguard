@@ -30,3 +30,11 @@
 ## Suggested early-finish sequence — not scheduled actions
 
 Capture/review footage first while distribution approval is pending. Then approve and test the real production installation path, fix actual onboarding blockers, finalize text/media, and run a final owner review well before 22 December. Do not wait until the deadline to discover install/entitlement failures. Every new milestone should be pushed promptly; hourly minimum while actively changing the repo. No background toggle or automatic submission is scheduled.
+
+
+## Approval-free polish completed while awaiting footage
+
+- Added **npm run check:submission**: repeatable local timeline/capture/narration/link/receipt/approval checks, with negative regressions for misleading claims. PASS still reports **submissionReady:false**, seven pending human gates, and no public actions authorized. [Machine status](submission-status.json) is an evidence/status ledger, never authority to execute actions.
+- Reconciled stale 5.15 CREATE-tool labels, old mutation-based recording guidance and ambiguous permit-revision capture instructions. Historical receipts remain dated; current recording stays read-only.
+- Prepared [private footage intake/review checklist](footage-handoff.md) and [blank take log](footage-take-log.template.json). No received footage, media hashes, visual/audio review, final render or approval is fabricated.
+- No app source, manifest, deployed bundle or live installation changed; production/share/exposure/publication gates remain pending.
