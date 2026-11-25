@@ -82,6 +82,9 @@
     "secondCrewPath": "Different authenticated person; normal permit/lock records on separate issue in guarded sample only",
     "liveSecondCrewAcceptance": "NOT_RUN",
     "liveDataWritten": false,
-    "guide": "second-crew-demo.md"
+    "guide": "second-crew-demo.md",
+    "sourceCommit": "2638662cf82801bfa3e163767d916e2823282007",
+    "uiSource": "2638662cf828",
+    "verification": "evidence/2026-11-25-second-crew-candidate.json"
   }
 }

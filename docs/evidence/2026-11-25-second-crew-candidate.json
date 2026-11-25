@@ -1,0 +1,58 @@
+{
+  "status": "LOCAL_CONTRACTS_PASS_NOT_DEPLOYED",
+  "verifiedAt": "2026-11-25T22:12:07.178314+00:00",
+  "sourceCommit": "2638662cf82801bfa3e163767d916e2823282007",
+  "uiSource": "2638662cf828",
+  "tests": {
+    "backendAndStructural": 150,
+    "uiContracts": 51,
+    "python": 3,
+    "total": 204
+  },
+  "build": "PASS",
+  "sdkBootstrap": "PASS (included in backend suite; rerun separately)",
+  "forgeLint": "No issues found",
+  "knownSecretSourceArtifactScan": "PASS before commit; unchanged source rebuilt from pinned commit",
+  "artifactHashes": {
+    "static/permit-app/dist/app.js": "da178ea65c518453a3befeca35e4a3afd862577fe19098d58891c270e8461c0a",
+    "static/permit-app/dist/index.html": "d36fbeedcab05e098fa2c365daec5152d2cac53c4a541013a094647de92ad719",
+    "static/capability-probe/dist/app.js": "a059e6240de8ba52761bed1e24cb588bb24585e0f5ff861284893efd196769f5"
+  },
+  "mcp": {
+    "baseActionKey": "permitguard_check_readiness",
+    "toolCount": 1,
+    "verb": "GET",
+    "exposureChanged": false,
+    "clientInvoked": false,
+    "remoteDiscoveredName": "NOT_RUN"
+  },
+  "crewB": {
+    "normalSeparateIssueRecordPath": true,
+    "distinctExistingSignedInAccountRequired": true,
+    "ordinaryPhotoAndPersonalRemovalControls": true,
+    "liveDataWritten": false,
+    "liveTwoPersonAcceptance": "NOT_RUN"
+  },
+  "production": {
+    "unchangedVersion": "2.0.0",
+    "majorMetadataTimestamp": "2026-11-25T21:42:33.468Z",
+    "recheckedViaForgeVersionList": true,
+    "newDeploymentPerformed": false
+  },
+  "distribution": {
+    "status": "BLOCKED_CONSOLE_LOGIN",
+    "linkCreatedByTask": false
+  },
+  "boundaries": {
+    "marketplaceChanged": false,
+    "billingChanged": false,
+    "mcpExposureChanged": false,
+    "newBrowserStarted": false
+  },
+  "notes": [
+    "Local atomic-store tests are not live Forge/Jira/person/photo/Realtime acceptance.",
+    "Old DEV owner receipt remains historical and unmodified.",
+    "One UI assertion initially expected the renamed legacy simulation label; updated contract and reran all suites successfully.",
+    "No private distribution URL or credentials in this receipt."
+  ]
+}
