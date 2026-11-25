@@ -115,16 +115,34 @@ export function createService({ store, challenges, authorize, projectIsSample, v
         domain.createPermit({ id: 'validation', projectId, equipment, workers: [actorId], verifierIds: [actorId], crewId: 'validation' });
         project.equipment = equipment; project.source = 'BUILT_IN_REGISTER'; project.sample = false; registerAvailable = true; assetsStatus = 'NOT_CONNECTED'; break;
       }
+      case 'create_demo_crew_b':
       case 'create_permit': {
+        let plan = payload;
+        if (operation === 'create_demo_crew_b') {
+          need(project.sample === true && project.source === 'SAMPLE' && await projectIsSample(projectId) && payload.confirmed === true, 'Confirmed dedicated sample project only');
+          need(project.policy.mode === 'ENFORCE' && project.policy.failMode === 'FAIL_CLOSED', 'DEMO_SECOND_CREW_POLICY_REQUIRED');
+          const pumpId = 'register:' + projectId + ':EQ-1';
+          const pump = project.equipment.find(e => e.id === pumpId);
+          need(pump && pump.isolationPoints.length === 1 && pump.isolationPoints[0].id === 'V-3' && pump.isolationPoints.every(p => p.highEnergy === false), 'DEMO_SECOND_CREW_UNAVAILABLE');
+          // Never impersonate Crew A or reuse the synthetic single-person roleplay.
+          // Only existence is inspected: no other issue/crew/person details are disclosed.
+          const otherLock = p => p.locks.find(l => !l.removedAt && l.actorId !== actorId && p.workers.includes(l.actorId) && l.pointId === 'V-3');
+          const source = all().find(p => p.projectId === projectId && p.id !== issueId && /^[0-9]+$/.test(p.id) && !p.sampleOwner && !p.sampleOnly && p.state !== 'CLOSED' && !p.workers.includes(actorId) && p.equipment.some(e => e.id === pumpId) && otherLock(p));
+          need(source, 'DEMO_SECOND_CREW_UNAVAILABLE');
+          // A historical placeholder ID is not a second real principal. Verify it
+          // against native active/assignable people, without disclosing it to the client.
+          await validatePeople([otherLock(source).actorId], issueId);
+          plan = { crewId: 'Crew B', equipmentIds: [pumpId], workers: [actorId], verifierIds: [actorId] };
+        }
         need(registerAvailable, 'ASSETS_UNAVAILABLE: cannot plan from stale equipment'); need(!permit, 'Permit already exists'); need(all().length < 60, 'SITE_CAPACITY_REACHED');
-        const workers = ids(payload.workers || [actorId]), verifierIds = ids(payload.verifierIds || [actorId]);
+        const workers = ids(plan.workers || [actorId]), verifierIds = ids(plan.verifierIds || [actorId]);
         need(workers.includes(actorId), 'Creator must be assigned worker');
         await validatePeople([...new Set([...workers, ...verifierIds])], issueId);
-        const selected = payload.equipmentIds || project.equipment.slice(0, 1).map(e => e.id);
+        const selected = plan.equipmentIds || project.equipment.slice(0, 1).map(e => e.id);
         need(Array.isArray(selected) && selected.length && selected.length <= 6, 'Select registered equipment');
         const equipment = selected.map(id => { const e = project.equipment.find(e => e.id === id); need(e, 'Unknown equipment; register it first'); return e; });
         if (equipment.some(e => e.isolationPoints.some(p => p.highEnergy))) need(verifierIds.length >= 2, 'High energy requires two named people');
-        permit = domain.createPermit({ id: issueId, projectId, crewId: str(payload.crewId || 'Crew A'), workers, verifierIds, equipment }); break;
+        permit = domain.createPermit({ id: issueId, projectId, crewId: str(plan.crewId || 'Crew A'), workers, verifierIds, equipment }); break;
       }
       case 'qr_challenge': {
         requirePermit(); const target = str(payload.target);

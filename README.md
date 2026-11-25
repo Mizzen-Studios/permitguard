@@ -2,6 +2,8 @@
 
 > **25 November readiness handoff:** [judge production/share-link plan](docs/judge-access-plan.md) · [exact owner 180-second capture checklist](docs/video-capture-list.md) · [prioritised remaining work / owner inputs](docs/submission-checklist-2026-11-25.md). Planning only: no production/link/exposure changes.
 
+> **Source-only follow-up:** branded GET-only MCP key **permitguard_check_readiness** and a guarded two-person Crew B permit path are implemented but **NOT_DEPLOYED**. No live second-crew record was seeded or relabeled. [Real-record setup, boundaries and local tests](docs/second-crew-demo.md).
+
 > **MCP owner receipt classified PASS; exposure stays OFF.** Official Rules require a Forge app exposing tools via the Atlassian MCP server using rovo:mcp, matching the deployed interface plus genuine owner-run call. This is technical evidence, not full submission/award signoff. [Rules/source hashes and **Olly’s OK** pre-submission exposure/judge-access gates](docs/codegeist-rules-alignment-2026-11-24.md).
 
 > **24 November 16:57 approval:** MCP narrowed to **check_readiness GET only**; native proposal action retained. **Deployed/verified Development 5.16.0 · UI 5f92b0c1b926**. Deployment/readback: [GET-only development receipt](docs/mcp-get-deployment-2026-11-24.md). [Owner Linux Inspector/OAuth/single-call/OFF/revoke runbook](docs/mcp-linux-owner-proof.md). No exposure or OAuth is performed by the maintainer.
@@ -19,7 +21,7 @@
 - A Plan → Lock → Verify → Active → Release → Closed clipboard, attributable personal locks and human-only equipment confirmation.
 - Separate work-start and release decisions. The accepted ACTIVE sample says:
   > Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE.
-- A remaining shared-equipment personal lock blocks release/closure, even after the current worker removes their own lock. Sample Crew B is explicitly simulated, not proof of a second real principal.
+- A remaining shared-equipment personal lock blocks release/closure, even after the current worker removes their own lock. The legacy single-person Crew B roleplay is explicitly simulated. A new source-only path uses a different authenticated person and normal separate-issue lock records; live two-person acceptance is NOT_RUN.
 - Native Rovo reads the same deterministic service; an activation action can propose **PENDING**, never confirm or activate it. Real native proposal execution and two-person high-energy acceptance remain outside the accepted read-only core.
 
 Demo: [PGSAMPLE-2](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2). Existing authorized users only; this is not a public anonymous app. Panel: **View app actions → PermitGuard** if not already inline. Do not reset the active sample. Demo site expires 13 February 2027.
@@ -80,7 +82,7 @@ rovo:mcp ── same action keys ───────────────�
 
 **Native Rovo — accepted:** rovo:agent permitguard-judge-v2 calls Forge **action** handlers. check_readiness is GET and returns one release-first canonical message; request_activation is CREATE and only proposes PENDING for an assigned named human. There is no agent confirm tool. Native action use is **not** MCP transport proof.
 
-**Rovo MCP — declared, runtime proof outstanding:** one Preview rovo:mcp module now exposes only **check_readiness (GET)**; the native Judge still has both actions. It supports Studio custom agents or consented MCP clients. The Atlassian-hosted endpoint pattern is `https://mcp.atlassian.com/forge/<registered-app-UUID>`. Another developer's clone uses its own UUID. Per-installation external exposure is disabled by default; a site/org admin enables app-wide exposure in the observed Forge UI (not per-tool selection), and external clients use OAuth 2.1 with the user's own site permissions. No grants or external-client connections were created for this documentation task.
+**Rovo MCP — declared, runtime proof outstanding:** the deployed baseline exposes only **check_readiness (GET)**; the unreleased source changes the sole MCP binding to **permitguard_check_readiness (GET)**, with the same fixed read handler; the native Judge still has both actions. It supports Studio custom agents or consented MCP clients. The Atlassian-hosted endpoint pattern is `https://mcp.atlassian.com/forge/<registered-app-UUID>`. Another developer's clone uses its own UUID. Per-installation external exposure is disabled by default; a site/org admin enables app-wide exposure in the observed Forge UI (not per-tool selection), and external clients use OAuth 2.1 with the user's own site permissions. No grants or external-client connections were created for this documentation task.
 
 Intended bonus evidence: show legitimate tool discovery and a **read-only check_readiness** invocation for the synthetic issue, then the same release-blocked result. A native Judge screenshot, manifest, endpoint string or unauthenticated 401 does not prove this. External-client use is optional in the platform docs; the owner-supplied prize clause targets a Forge app exposing an MCP server using rovo:mcp. A different upstream/coding-assistance MCP server is not a substitute for this exposed Forge tool. [Observed exposure OFF and current safety assessment](docs/mcp-exposure-assessment-2026-11-24.md). [MCP audit](docs/mcp-bonus-readiness.md) · [caller contract](skill.md).
 

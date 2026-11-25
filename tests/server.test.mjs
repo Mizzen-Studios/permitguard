@@ -6,11 +6,11 @@ import { jiraAdapters } from '../src/server/jira.mjs';
 import { createForgeWiring } from '../src/forge/actions.mjs';
 import { issueInvalidationPublisher } from '../src/server/realtime.mjs';
 // All storage/Jira checks below are local mocks, NOT Forge/site acceptance.
-function fixture({projectProperty,publish}={}) {
+function fixture({projectProperty,publish,isSample=async p => p === '10'}={}) {
   let row = { revision: null, data: emptySite() }, seq = 0;
   const store = { atomic: true, async read() { return structuredClone(row); }, async commit(expected, data) { assert.equal(expected, row.revision, 'CONFLICT'); row = { revision: row.revision === null ? 0 : row.revision + 1, data: structuredClone(data) }; return row.revision; } };
   const challengeRows=new Map();
-  const dispatch = createService({ projectProperty,publish,challenges:{put:async c=>challengeRows.set(c.actorId+':'+c.issueId,structuredClone(c)),get:async(a,i)=>structuredClone(challengeRows.get(a+':'+i))}, store, authorize: async c => { if (!c.accountId) throw new Error('AUTH'); return { actorId: c.accountId, issueId: c.issueId || '1', projectId: c.projectId || '10', isProjectAdmin: c.admin !== false, canEdit: c.edit !== false }; }, projectIsSample: async p => p === '10', validatePeople: async people => assert.ok(people.every(x => ['alice','bob'].includes(x))), now: () => '2026-11-19T18:00:00Z', uuid: () => 'token-' + ++seq });
+  const dispatch = createService({ projectProperty,publish,challenges:{put:async c=>challengeRows.set(c.actorId+':'+c.issueId,structuredClone(c)),get:async(a,i)=>structuredClone(challengeRows.get(a+':'+i))}, store, authorize: async c => { if (!c.accountId) throw new Error('AUTH'); return { actorId: c.accountId, issueId: c.issueId || '1', projectId: c.projectId || '10', isProjectAdmin: c.admin !== false, canEdit: c.edit !== false }; }, projectIsSample: isSample, validatePeople: async people => assert.ok(people.every(x => ['alice','bob'].includes(x))), now: () => '2026-11-19T18:00:00Z', uuid: () => 'token-' + ++seq });
   const ctx = { accountId: 'alice' };
   const call = (op,p = {},c = ctx) => dispatch(op,p,c);
   return { call, store, dispatch, challengeRows, get row() { return row; } };
@@ -212,4 +212,50 @@ test('register outage guidance never advertises a non-existent supervisor overri
  const domain=await import('../src/domain/permit.mjs');const r=domain.checkReadiness(permit,{registerAvailable:false});
  const message=r.reasons.find(x=>x.code==='REGISTER_UNAVAILABLE').message;
  assert.match(message,/Restore access and reconcile/);assert.doesNotMatch(message,/Supervisor override|Warn-only (admins)/);assert.equal(r.status,'NOT CLEARED');
+});
+
+// These are persisted service records in a local atomic-store fixture, NOT live Forge acceptance.
+test('different signed-in Crew B creates own normal sample permit and shared lock blocks Crew A release',async()=>{
+ const f=fixture();const {equipmentId}=await verified(f);
+ let a=await f.call('request_activation',{verifierId:'alice'});const challenge=await f.call('qr_challenge',{target:equipmentId});
+ await f.call('confirm_activation',{activationId:a.permit.activations[0].id,equipmentId,...challenge,confirmedAtEquipment:true});
+ f.row.data.projects['20']={untouched:'non-demo project'};const unrelated=structuredClone(f.row.data.projects['20']);
+ const bob={accountId:'bob',issueId:'2',admin:false};
+ let b=await f.call('create_demo_crew_b',{confirmed:true,workers:['alice'],verifierIds:['alice'],equipmentIds:['fake'],actorId:'alice'},bob);
+ assert.equal(b.permit.state,'PLAN');assert.deepEqual(b.permit.workers,['bob']);assert.deepEqual(b.permit.verifierIds,['bob']);assert.equal(b.permit.crewId,'Crew B');assert.equal(b.permit.locks.length,0);assert.equal(b.permit.sampleOwner,undefined);assert.equal(b.permit.equipment[0].id,equipmentId);
+ await f.call('begin_lock',{},bob);await assert.rejects(f.call('apply_lock',{pointId:'V-3',lockId:'L-07'},bob),/photo required/);
+ b=await f.call('apply_lock',{pointId:'V-3',lockId:'L-07',photoData:'data:image/png;base64,YQ=='},bob);
+ assert.equal(b.permit.locks[0].actorId,'bob');assert.equal(b.permit.locks[0].simulated,undefined);assert.ok(b.permit.locks[0].photoRef.startsWith('evidence:'));
+ await f.call('begin_release');a=await f.call('remove_lock',{lockId:'A'});assert.equal(a.release.status,'NOT CLEARED');assert.equal(a.board[0].activeLockCount,1);assert.equal((await f.call('gate_dry_run')).actions.find(g=>g.action==='RELEASE').wouldBlock,true);assert.ok(a.release.reasons.some(r=>r.code==='LOCK_REMAINS'));assert.doesNotMatch(JSON.stringify(a.release),/bob|L-07/);
+ await assert.rejects(f.call('close_permit'),/Release blocked/);
+ await assert.rejects(f.call('remove_lock',{lockId:'L-07'},{accountId:'alice',issueId:'2'}),/Only the worker/);
+ await assert.rejects(f.call('remove_sample_lock',{confirmed:true}),/Only creator/);
+ const beforeRead=structuredClone(f.row);await f.call('check_readiness');assert.deepEqual(f.row,beforeRead);
+ await f.call('remove_lock',{lockId:'L-07'},bob);a=await f.call('get_state');assert.equal(a.release.status,'CLEARED');await f.call('close_permit');
+ assert.deepEqual(f.row.data.projects['20'],unrelated);assert.equal(f.row.data.permits['2'].locks[0].actorId,'bob');assert.ok(f.row.data.permits['2'].locks[0].removedAt);assert.equal(f.row.data.permits['1'].state,'CLOSED');
+});
+test('real Crew B helper rejects same person, no source lock, missing consent, non-sample and repeat without writes',async()=>{
+ const f=fixture();await created(f);const bob={accountId:'bob',issueId:'2'};
+ let before=structuredClone(f.row);await assert.rejects(f.call('create_demo_crew_b',{confirmed:true},bob),/DEMO_SECOND_CREW_UNAVAILABLE/);assert.deepEqual(f.row,before);
+ await f.call('begin_lock');await f.call('apply_lock',{pointId:'V-3',lockId:'A',photoData:'data:image/png;base64,YQ=='});
+ for(const [payload,ctx,pattern] of [[{confirmed:true},{accountId:'alice',issueId:'2'},/DEMO_SECOND_CREW_UNAVAILABLE/],[{},bob,/Confirmed dedicated/],[{confirmed:true},{...bob,projectId:'20'},/Confirmed dedicated/],[{confirmed:true},{...bob,edit:false},/EDIT_ISSUES/]]){before=structuredClone(f.row);await assert.rejects(f.call('create_demo_crew_b',payload,ctx),pattern);assert.deepEqual(f.row,before);}
+ await f.call('create_demo_crew_b',{confirmed:true},bob);before=structuredClone(f.row);await assert.rejects(f.call('create_demo_crew_b',{confirmed:true},bob),/already exists/);assert.deepEqual(f.row,before);
+});
+test('real Crew B rechecks the current dedicated-project marker and never uses legacy simulated locks',async()=>{
+ let valid=true;const f=fixture({isSample:async()=>valid});await created(f);await f.call('play_crew_b',{confirmed:true});
+ const bob={accountId:'bob',issueId:'2'};await assert.rejects(f.call('create_demo_crew_b',{confirmed:true},bob),/DEMO_SECOND_CREW_UNAVAILABLE/);
+ await f.call('begin_lock');await f.call('apply_lock',{pointId:'V-3',lockId:'A',photoData:'data:image/png;base64,YQ=='});valid=false;const before=structuredClone(f.row);await assert.rejects(f.call('create_demo_crew_b',{confirmed:true},bob),/Confirmed dedicated/);assert.deepEqual(f.row,before);
+});
+
+test('real second-crew helper cannot downgrade policy or bypass fail-closed defaults',async()=>{
+ const f=fixture();await created(f);await f.call('begin_lock');await f.call('apply_lock',{pointId:'V-3',lockId:'A',photoData:'data:image/png;base64,YQ=='});
+ await f.call('set_policy',{mode:'WARN_ONLY'});let before=structuredClone(f.row);await assert.rejects(f.call('create_demo_crew_b',{confirmed:true},{accountId:'bob',issueId:'2'}),/DEMO_SECOND_CREW_POLICY_REQUIRED/);assert.deepEqual(f.row,before);
+ await f.call('set_policy',{mode:'ENFORCE',failMode:'FAIL_OPEN_WITH_ALERT'});before=structuredClone(f.row);await assert.rejects(f.call('create_demo_crew_b',{confirmed:true},{accountId:'bob',issueId:'2'}),/DEMO_SECOND_CREW_POLICY_REQUIRED/);assert.deepEqual(f.row,before);
+});
+
+test('historical placeholder worker cannot qualify as an authenticated source crew',async()=>{
+ const f=fixture();await created(f);await f.call('begin_lock');await f.call('apply_lock',{pointId:'V-3',lockId:'A',photoData:'data:image/png;base64,YQ=='});
+ // Corrupt only this local fixture to represent an old synthetic principal, never live data.
+ f.row.data.permits['1'].workers=['sample-worker-placeholder'];f.row.data.permits['1'].locks[0].actorId='sample-worker-placeholder';
+ const before=structuredClone(f.row);await assert.rejects(f.call('create_demo_crew_b',{confirmed:true},{accountId:'bob',issueId:'2'}));assert.deepEqual(f.row,before);
 });

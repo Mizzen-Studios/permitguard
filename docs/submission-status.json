@@ -73,5 +73,15 @@
     "evidence": "evidence/2026-11-25-production-deployment.json",
     "privateDistribution": "BLOCKED_CONSOLE_LOGIN",
     "installLinkCreated": false
+  },
+  "followUpCandidate": {
+    "status": "SOURCE_ONLY_NOT_DEPLOYED",
+    "mcpBaseActionKey": "permitguard_check_readiness",
+    "mcpTools": 1,
+    "mcpActionVerb": "GET",
+    "secondCrewPath": "Different authenticated person; normal permit/lock records on separate issue in guarded sample only",
+    "liveSecondCrewAcceptance": "NOT_RUN",
+    "liveDataWritten": false,
+    "guide": "second-crew-demo.md"
   }
 }

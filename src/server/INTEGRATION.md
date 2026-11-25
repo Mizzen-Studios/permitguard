@@ -35,6 +35,7 @@ Operations/payloads:
 - request_activation: {verifierId}; participant proposes PENDING, never activates.
 - confirm_activation: {activationId,equipmentId,challengeToken,qrValue,confirmedAtEquipment:true}; assigned verifier only; requires actual CLEARED regardless of advisory policy.
 - remove_lock: {lockId}; authenticated original owner only.
+- create_demo_crew_b: {confirmed:true}; SOURCE_ONLY candidate. Existing trusted current issue must have no permit; current dedicated sample marker, SAMPLE register, ENFORCE/FAIL_CLOSED and a different authenticated worker’s existing lock on the sample low-energy EQ-1/V-3 are required. Creates normal Crew B PLAN for the caller/current issue only, validates assignability, ignores actor/equipment overrides. Does not apply a lock/photo or confirm/activate. Person B uses normal apply_lock with required photo and only that actor can remove it. [Exact guide](../../docs/second-crew-demo.md).
 - play_crew_b / remove_sample_lock: {confirmed:true}; dedicated verified sample only. Crew B explicitly SIMULATED, owner-account attributable, no impersonation. Creator removes own synthetic lock only.
 
 board contains [{equipmentId,activeLockCount}] summaries, NOT other-issue locks/names (privacy). UI must render summaries, current permit.locks for own rail, and generic release blockers. release checks ALL site aggregate permits, cross-project, no pagination. Additional crew/project identifiers are redacted from response.

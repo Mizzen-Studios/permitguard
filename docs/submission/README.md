@@ -9,3 +9,5 @@
 - [Production/share-link plan](../judge-access-plan.md), [recording checklist](../video-capture-list.md), [readiness priorities](../submission-checklist-2026-11-25.md).
 
 - [Local verification record](verification-2026-11-25.json) · [agent answer contracts](agent-answer-quality.md). These do not constitute new live acceptance.
+
+- [New source-only branded MCP/two-person Crew B candidate](../second-crew-demo.md): not deployed and not new live evidence. The genuine prior DEV receipt/capture baseline is unchanged.

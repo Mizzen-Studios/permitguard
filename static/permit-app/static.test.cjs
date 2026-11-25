@@ -199,12 +199,19 @@ test('uncertain save neither echoes opaque exceptions nor retries the write',asy
 });
 
 test('sample roleplay is absent on fresh/real projects and requires a server-owned capability or active own sample',()=>{
- const h=harness();h.run('state={actorId:"human",permit:null,equipment:[],policy:{},board:[],capabilities:{sampleRoleplay:false}};stale=false;render()');assert.doesNotMatch(h.root.innerHTML,/Judge sample roleplay/);
- h.run('state.capabilities.sampleRoleplay=true;render()');assert.match(h.root.innerHTML,/Judge sample roleplay/);assert.equal(h.calls.length,0);
+ const h=harness();h.run('state={actorId:"human",permit:null,equipment:[],policy:{},board:[],capabilities:{sampleRoleplay:false}};stale=false;render()');assert.doesNotMatch(h.root.innerHTML,/Legacy single-person simulation/);
+ h.run('state.capabilities.sampleRoleplay=true;render()');assert.match(h.root.innerHTML,/Legacy single-person simulation/);assert.equal(h.calls.length,0);
 });
 
 test('fresh guidance precedes advanced administration and links to a unique target',()=>{
  const h=harness();h.run('state={actorId:"human",isProjectAdmin:true,permit:null,equipment:[],policy:{},board:[]};stale=false;render()');
  assert.ok(h.root.innerHTML.indexOf('No equipment registered yet')<h.root.innerHTML.indexOf('id="project-administration"'));
  assert.equal((h.root.innerHTML.match(/id="project-administration"/g)||[]).length,1);assert.match(h.root.innerHTML,/href="#project-administration"/);
+});
+
+test('second-crew helper is offered only for empty seeded sample state, separate from legacy simulation',()=>{
+ const h=harness();h.run('state={actorId:"human",revision:8,policy:{mode:"ENFORCE"},permit:null,assets:{source:"SAMPLE"},equipment:[{id:"register:10:EQ-1",name:"Cooling-water pump",isolationPoints:[]}]}');
+ const html=h.run('plan()');assert.match(html,/Second crew — real sample records/);assert.match(html,/Create my Crew B sample permit/);assert.match(html,/different existing signed-in person/);assert.match(html,/does not impersonate anyone or apply a lock automatically/);
+ h.run('state.assets.source="BUILT_IN_REGISTER"');assert.doesNotMatch(h.run('plan()'),/Create my Crew B sample permit/);
+ assert.ok(source.includes("if(action==='create_demo_crew_b')"));assert.ok(source.includes('No lock or verification is created automatically.'));
 });

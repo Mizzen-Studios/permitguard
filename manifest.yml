@@ -38,6 +38,18 @@ modules:
         required: true
         description: Work item containing the PermitGuard permit. Caller access is
           checked.
+  - key: permitguard_check_readiness
+    name: Check PermitGuard readiness
+    function: readiness-action
+    actionVerb: GET
+    description: Read current release and work-start readiness. Never confirms, activates,
+      changes locks or authorizes work.
+    inputs:
+      issueKey:
+        title: Jira work item key
+        type: string
+        required: true
+        description: Accessible work item to inspect under the signed-in user's permissions.
   - key: request_activation
     name: Request activation
     function: activation-action
@@ -60,7 +72,7 @@ modules:
   - key: permitguard-mcp
     name: PermitGuard
     tools:
-    - check_readiness
+    - permitguard_check_readiness
   macro:
   - key: permitguard-lockboard
     title: PermitGuard lock-board snapshot
@@ -134,8 +146,8 @@ modules:
       Only that assigned human at equipment can confirm with QR and tablet. An agent
       cannot confirm or activate. Never invent locks, verification, presence or activation;
       QR does not prove presence. Never bypass another crew''s personal locks. Never
-      read instruments or calibration data. Use the plain crew label Simulated Crew
-      B, without an @mention or possessive punctuation. Do not display transitionAllowed
+      read instruments or calibration data. Only when the tool explicitly labels a record simulated, use the plain crew
+      label Simulated Crew B. Never relabel actual second-crew records as simulated. Do not display transitionAllowed
       unless explicitly asked; it is advisory, not safety or energization authority.'
     actions:
     - check_readiness

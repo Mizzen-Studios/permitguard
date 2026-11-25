@@ -6,7 +6,7 @@ const need = (ok, code) => { if (!ok) throw new Error(code); };
 const object = value => value && typeof value === 'object' && !Array.isArray(value);
 const capabilities = Object.freeze({ archiveConfig: false });
 const ruleKeys = ['permitguard-start-validator', 'permitguard-release-validator', 'permitguard-probe-validator'];
-const operations = new Set(['get_state', 'check_readiness', 'list_equipment', 'import_assets', 'connect_assets', 'load_sample', 'set_policy', 'register_equipment', 'create_permit', 'begin_lock', 'begin_verify', 'begin_release', 'close_permit', 'apply_lock', 'qr_challenge', 'verify_point', 'request_activation', 'confirm_activation', 'remove_lock', 'play_crew_b', 'remove_sample_lock']);
+const operations = new Set(['get_state', 'check_readiness', 'list_equipment', 'import_assets', 'connect_assets', 'load_sample', 'set_policy', 'register_equipment', 'create_permit', 'create_demo_crew_b', 'begin_lock', 'begin_verify', 'begin_release', 'close_permit', 'apply_lock', 'qr_challenge', 'verify_point', 'request_activation', 'confirm_activation', 'remove_lock', 'play_crew_b', 'remove_sample_lock']);
 const aliases = { list_rules: 'list_rules', list_own_rules: 'list_rules', disable_rule: 'disable_rule', disable_own_rule: 'disable_rule', delete_rule: 'delete_rule', delete_own_rule: 'delete_rule', dry_run: 'dry_run', dry_run_transition: 'dry_run' };
 
 // Only explicit adapter errors cross the boundary. SDK/domain exceptions can contain private data.
@@ -23,6 +23,8 @@ const validationErrors = {
  'NOT CLEARED: resolve readiness issues; advisory policy does not authorize activation':'Isolation checks are incomplete. Resolve the displayed lock, photo and verification requirements before activation.'
 };
 const recoveryErrors = {
+ DEMO_SECOND_CREW_POLICY_REQUIRED:['DEMO_SECOND_CREW_POLICY_REQUIRED','The second-crew sample path requires Enforce and fail-closed in the marked synthetic project. Ask its project administrator to review the policy; this operation did not change settings.'],
+ DEMO_SECOND_CREW_UNAVAILABLE:['DEMO_SECOND_CREW_UNAVAILABLE','Use a different existing signed-in person and a new issue in the dedicated sample project. Crew A must already have its own recorded lock on the sample Cooling-water pump. No permit or lock was created by this rejection.'],
  AUTHENTICATED_ACTOR_REQUIRED:['AUTHENTICATED_ACTOR_REQUIRED','Sign in to Atlassian and reopen the work item or reconnect the approved client. Never share an API token.'],
  ISSUE_CONTEXT_REQUIRED:['ISSUE_CONTEXT_REQUIRED','Provide a Jira work-item key you can access, or open its PermitGuard panel. Do not guess an issue or create a permit automatically.'],
  INVALID_ISSUE:['INVALID_ISSUE','Use a valid Jira work-item key such as PROJECT-123; confirm which work item you mean.'],
