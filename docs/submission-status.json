@@ -91,12 +91,14 @@
   "distributionForm": {
     "ownerWillComplete": true,
     "ownerReportedOwnConsoleSignedIn": true,
-    "privacyPolicyUrl": null,
-    "termsUrl": null,
+    "privacyPolicyUrl": "https://mizzen-studios.github.io/permitguard/privacy.html",
+    "termsUrl": "https://mizzen-studios.github.io/permitguard/terms.html",
     "personalDataStored": true,
     "externalAppStorage": false,
     "personalDataReportingImplemented": false,
-    "newLegalPolicyPublished": false,
-    "worksheet": "distribution-handoff-2026-11-26.md"
+    "newLegalPolicyPublished": true,
+    "worksheet": "distribution-handoff-2026-11-26.md",
+    "legalPublicationEvidence": "evidence/2026-11-26-legal-pages.json",
+    "currentBlocker": "OWNER_FORM_ENTRY_AND_UNIMPLEMENTED_PRIVACY_HANDLING"
   }
 }

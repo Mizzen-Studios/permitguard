@@ -1,0 +1,48 @@
+{
+  "classification": "PUBLISHED_HTTP_200",
+  "approval": {
+    "ownerApproved": true,
+    "requestUtc": "2026-11-26T09:43:00Z",
+    "scope": "Publish PermitGuard privacy and simple terms from existing public repo using approved vendor/contact; zero spend, no billing change"
+  },
+  "verifiedAt": "2026-11-26T09:46:09.472006+00:00",
+  "pages": [
+    {
+      "url": "https://mizzen-studios.github.io/permitguard/privacy.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "5dfe95b5cd091d58c8cc2ccde7502172d366cdc3a7f84bf6d88dddc5eede1ca6",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://mizzen-studios.github.io/permitguard/terms.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "d96cc68d4ae85bf4e23d6331ad15921548bdc55719ab87d4beddbd9cc8e3d55d",
+      "matchesLocal": true
+    }
+  ],
+  "sourceCommit": "c080a33a89e4d2d3829e78b3b54e5ce4f70ed1b9",
+  "hosting": {
+    "provider": "GitHub Pages",
+    "publicRepository": true,
+    "sourceBranch": "main",
+    "sourcePath": "/docs",
+    "httpsEnforced": true,
+    "buildStatus": "built",
+    "costGBP": 0,
+    "billingChanged": false,
+    "customDomainAdded": false
+  },
+  "limits": {
+    "personalDataStoredInForge": true,
+    "vendorExternalOperationalStorage": false,
+    "optionalRovo": true,
+    "automaticEraseFlowImplemented": false,
+    "personalDataReportingImplemented": false,
+    "privacyComplianceCertified": false,
+    "marketplaceChanged": false,
+    "mcpExposureChanged": false,
+    "forgeProductionChanged": false
+  }
+}
