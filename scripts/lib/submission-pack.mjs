@@ -21,7 +21,7 @@ export function loadPack(root) {
     try { return JSON.parse(text); } catch { throw new Error(name + ': invalid JSON (content not echoed)'); }
   };
   const shots = json('docs/demo-shot-list.json'), status = json('docs/submission-status.json');
-  const allowedReceipts = ['evidence/2026-11-25-production-deployment.json', 'evidence/2026-11-26-production-deployment.json', 'evidence/2026-11-26-production-discoverability.json'];
+  const allowedReceipts = ['evidence/2026-11-25-production-deployment.json', 'evidence/2026-11-26-production-deployment.json', 'evidence/2026-11-26-production-discoverability.json', 'evidence/2026-11-26-production-empty-demo.json'];
   const evidence = status.production?.evidence;
   return { files, documents, ownerRehearsal: files.has('docs/evidence/2026-11-26-owner-fresh-site-rehearsal.json') ? json('docs/evidence/2026-11-26-owner-fresh-site-rehearsal.json') : null, legalPublication: files.has('docs/evidence/2026-11-26-legal-pages.json') ? json('docs/evidence/2026-11-26-legal-pages.json') : null, legalSourceHashes: Object.fromEntries(['privacy','terms'].filter(n=>files.has('docs/'+n+'.html')).map(n=>[n,createHash('sha256').update(readFileSync(join(root,'docs',n+'.html'))).digest('hex')])), shots, capture: json('docs/capture-log.json'), receipt: json('docs/evidence/2026-11-24-mcp-owner-receipt.json'), status, production: allowedReceipts.includes(evidence) && files.has('docs/' + evidence) ? json('docs/' + evidence) : null };
 }

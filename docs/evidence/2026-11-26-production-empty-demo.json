@@ -1,0 +1,117 @@
+{
+  "classification": "DEPLOYMENT_WITH_OWNER_REPORTED_PRIOR_INSTALL",
+  "approval": {
+    "source": "Owner 26-Nov21:05 explicitly approved public repository code/docs push bd1d397 and clean Production deployment; preserve Sharing. No promotion, social, Marketplace changes or Devpost.",
+    "productionDeploy": true,
+    "privateJiraDistribution": true,
+    "marketplace": false,
+    "mcpExposure": false,
+    "billing": false
+  },
+  "appId": "60f4bdda-1062-4e5b-aab6-1d9a9cf53a90",
+  "sourceCommit": "bd1d3977a97de6650b34b31bc1d11f85b11fb974",
+  "uiSource": "bd1d3977a97d",
+  "environment": "production",
+  "version": "2.3.0",
+  "deployedAt": "2026-11-26T21:06:24.324Z",
+  "deploymentStatus": "Success",
+  "verification": {
+    "normalDeployVerification": true,
+    "normalForgeLint": "No issues found",
+    "lockedInstallAuditVulnerabilities": 0,
+    "backendTests": 176,
+    "uiContracts": 53,
+    "pythonTests": 3,
+    "totalTests": 232,
+    "sdkBootstrap": "PASS; included in backend suite and separately rerun",
+    "knownSecretSourceArtifactScan": "PASS",
+    "artifactHashes": {
+      "static/permit-app/dist/app.js": "1a5d261eabe6837ff6c2a351b724e922098b42b0e511b6bf397aee9eba06605d",
+      "static/permit-app/dist/index.html": "d36fbeedcab05e098fa2c365daec5152d2cac53c4a541013a094647de92ad719",
+      "static/permit-entry/index.html": "d0d886be035ff5676f4fe383ff80dd2b34cf20e6f53973fd14ec3df13889c3c2"
+    },
+    "remoteArtifactByteReadback": false,
+    "storageIndex": "Schema unchanged; not re-probed this task",
+    "remoteMajorMetadata": {
+      "major": 2,
+      "majorCreationDate": "2026-11-25T21:42:33.468Z",
+      "note": "forge version list shows major creation timestamp, not latest minor deployment timestamp; deployment list and receipt establish 2.1.0",
+      "actions": 3,
+      "mcpModules": 1,
+      "rovoAgents": 1,
+      "functions": 5,
+      "scopes": 12,
+      "egresses": [],
+      "remotes": 0,
+      "services": 0,
+      "requiresLicense": false,
+      "issueContexts": 1
+    },
+    "productionInstallationsObserved": 1,
+    "developmentJiraInstallation": "major 5 Up-to-date; unchanged",
+    "productionJiraInstallation": "major2 Up-to-date; authorized judge site, hostname and installation ID not republished"
+  },
+  "distribution": {
+    "status": "OWNER_REPORTED_INSTALL_ONLY",
+    "ownerRehearsalEvidence": "evidence/2026-11-26-owner-fresh-site-rehearsal.json",
+    "installationLinkCreated": false,
+    "privateLinkSuppliedToAgent": false,
+    "configurationChanged": false,
+    "sharingLinkRotated": false,
+    "jiraOnlyRequested": true,
+    "existingPublicPolicyFound": true,
+    "privacyPolicyUrl": "https://mizzen-studios.github.io/permitguard/privacy.html",
+    "termsUrl": "https://mizzen-studios.github.io/permitguard/terms.html",
+    "sharingConfigurationChanged": false
+  },
+  "dataHandling": {
+    "personalDataStored": true,
+    "storage": "Forge-hosted CES/KVS; derived Jira issue property; optional Confluence archive code not configured",
+    "externalAppStorage": false,
+    "personalDataReportingImplemented": false,
+    "automaticAppRetentionEraseFlowImplemented": false,
+    "privacyComplianceClaimed": false,
+    "newLegalPolicyPublished": false
+  },
+  "acceptance": {
+    "freshSiteInstall": "OWNER_REPORTED_PASS_PREVIOUS_VERSION",
+    "realSecondCrew": "NOT_RUN",
+    "nativeAgentOnProduction": "NOT_RUN",
+    "mcpDiscoveredProductionName": "NOT_RUN",
+    "mcpClientInvoked": false,
+    "mcpExposureChanged": false,
+    "billingChanged": false,
+    "marketplaceListingCreated": false,
+    "postUpdateVisualMarkerAndContext": "NOT_RUN",
+    "emptyProjectSeedOnNativeSite": "NOT_RUN",
+    "production2_2Marker": "OWNER_REPORTED_PASS, evidence/2026-11-26-owner-2.2-visual-pass.json",
+    "current2_3MarkerAndSeed": "NOT_RUN"
+  },
+  "limitations": [
+    "Normal deployment/local tests/CLI Up-to-date are not native seed-flow acceptance.",
+    "Owner pre-update2.2 header/footer/clean-panel PASS is recorded separately; not transferred to2.3.",
+    "No actual private link supplied; no generate/rotate/configuration operation attempted.",
+    "No site register seeded or customer state reset by this release.",
+    "No invitations, paid seats, billing, Marketplace/promotion, MCP exposure or Devpost actions."
+  ],
+  "changes": [
+    "Admin-confirmed entirely empty-project seed of six synthetic equipment items, Warn-only/fail-closed",
+    "No permit/worker/verifier/lock/photo/activation/workflow seeding",
+    "Server no-overwrite guards for any project permit history, register or Assets connection; no Enforce on synthetic seed",
+    "Issue-level judge navigation; site sidebar Apps is not the route"
+  ],
+  "scopesDecision": {
+    "count": 12,
+    "removed": 0,
+    "confluenceScopesRetained": 4,
+    "reason": "Removing scopes is a Forge major upgrade and shipped macro/archive still depends on these; keep compatible minor2.2 and existing installation/link configuration"
+  },
+  "postLedgerVerification": {
+    "backend": 176,
+    "uiPreflight": 53,
+    "pythonPreflight": 3,
+    "total": 232,
+    "localReferences": 272,
+    "nativeSeedAcceptance": "NOT_RUN"
+  }
+}
