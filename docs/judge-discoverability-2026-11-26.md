@@ -15,3 +15,7 @@ The four Confluence scopes are unused by this Jira-only rehearsal but used by th
 Use supported [issueContext](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-issue-context/) for a tiny guide, not a legacy glance or duplicate editor in a narrow sidebar. Existing [issuePanel](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-issue-panel/) remains the full app. No new scope, egress, resolver, model call, schedule, workflow or guide storage write.
 
 No link generation/rotation, Marketplace, billing, MCP exposure, Dev deployment, Confluence install or site-data mutation. After the minor Production update, refresh/reopen KAN-1 and check version/environment/header and context placement. Post-update owner browser acceptance remains NOT_RUN until reported.
+
+## Deployment result
+
+Normal validation deployed **Production2.2.0** from clean b5df804cbdf14497b07de72e31e8b6c15927666b / UI b5df804cbdf1, deployment-list12:54:04.110UTC. CLI shows one Production Jira major2 installation Up-to-date and unchanged Dev major5. **214 local tests** (159backend52UI3Python), build, real SDKbootstrap, normalForgeLint and known-secret scan PASS. [Deployment receipt](evidence/2026-11-26-production-discoverability.json). No link configuration touched; private URL not supplied or independently re-tested. Reload KAN-1; actual2.2 visual acceptance remains NOT_RUN.

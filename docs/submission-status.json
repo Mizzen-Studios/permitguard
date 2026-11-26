@@ -4,7 +4,7 @@
   "publicActionsAuthorized": false,
   "installationLink": null,
   "productionDeployed": true,
-  "judgeBrowserRehearsal": "NOT_RUN",
+  "judgeBrowserRehearsal": "OWNER_REPORTED_PARTIAL",
   "currentDemo": {
     "environment": "development",
     "version": "5.16.0",
@@ -18,15 +18,15 @@
   "gates": [
     {
       "id": "production-and-distribution",
-      "status": "AWAITING_OWNER_FORM_AND_POLICY_URL",
+      "status": "OWNER_REPORTED_INSTALL_ONLY",
       "owner": "Olly",
-      "evidence": "evidence/2026-11-26-production-deployment.json"
+      "evidence": "evidence/2026-11-26-production-discoverability.json"
     },
     {
       "id": "judge-install-browser-rehearsal",
-      "status": "NOT_RUN",
+      "status": "OWNER_REPORTED_PARTIAL",
       "owner": "approved site administrator",
-      "evidence": null
+      "evidence": "evidence/2026-11-26-owner-fresh-site-rehearsal.json"
     },
     {
       "id": "raw-footage",
@@ -67,15 +67,15 @@
     "notes": "Production deployed from clean 713eadc; DEV capture baseline unchanged. Distribution is approved but blocked by actual console sign-in; no installation link exists."
   },
   "production": {
-    "version": "2.1.0",
-    "uiSource": "d69b66fe6384",
-    "sourceCommit": "d69b66fe6384a9a1c238d6a01f70e7d71ea491e9",
-    "evidence": "evidence/2026-11-26-production-deployment.json",
-    "privateDistribution": "AWAITING_OWNER_FORM_AND_POLICY_URL",
+    "version": "2.2.0",
+    "uiSource": "b5df804cbdf1",
+    "sourceCommit": "b5df804cbdf14497b07de72e31e8b6c15927666b",
+    "evidence": "evidence/2026-11-26-production-discoverability.json",
+    "privateDistribution": "OWNER_REPORTED_INSTALL_ONLY",
     "installLinkCreated": false
   },
   "followUpCandidate": {
-    "status": "DEPLOYED_PRODUCTION_2.1.0_NOT_LIVE_ACCEPTED",
+    "status": "DEPLOYED_PRODUCTION_2.2.0_NOT_FULLY_LIVE_ACCEPTED",
     "mcpBaseActionKey": "permitguard_check_readiness",
     "mcpTools": 1,
     "mcpActionVerb": "GET",
@@ -84,9 +84,9 @@
     "liveDataWritten": false,
     "guide": "second-crew-demo.md",
     "sourceCommit": "2638662cf82801bfa3e163767d916e2823282007",
-    "uiSource": "d69b66fe6384",
-    "verification": "evidence/2026-11-26-production-deployment.json",
-    "deployedFrom": "d69b66fe6384a9a1c238d6a01f70e7d71ea491e9"
+    "uiSource": "b5df804cbdf1",
+    "verification": "evidence/2026-11-26-production-discoverability.json",
+    "deployedFrom": "b5df804cbdf14497b07de72e31e8b6c15927666b"
   },
   "distributionForm": {
     "ownerWillComplete": true,
@@ -99,6 +99,13 @@
     "newLegalPolicyPublished": true,
     "worksheet": "distribution-handoff-2026-11-26.md",
     "legalPublicationEvidence": "evidence/2026-11-26-legal-pages.json",
-    "currentBlocker": "OWNER_FORM_ENTRY_AND_UNIMPLEMENTED_PRIVACY_HANDLING"
+    "currentBlocker": "UNIMPLEMENTED_PRIVACY_HANDLING; owner fresh-site install reported; actual private link not supplied"
+  },
+  "ownerFreshSiteRehearsal": {
+    "evidence": "evidence/2026-11-26-owner-fresh-site-rehearsal.json",
+    "version": "2.1.0",
+    "independentlyInspected": false,
+    "postUpdateVersion": "2.2.0",
+    "postUpdateVisualAcceptance": "NOT_RUN"
   }
 }

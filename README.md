@@ -1,6 +1,8 @@
+> **Latest release, 26 Nov 12:54 UTC:** **Production 2.2.0 · UI b5df804cbdf1**, compatible major2 update. Build/environment is shown near the header and in the footer; **Open PermitGuard** in the right-side context is a static opening guide. Reload/reopen the Jira issue to fetch the new resource. [Change/evidence notes](docs/judge-discoverability-2026-11-26.md). Owner reported the prior fresh-site install/panel connected; post-update visual, full lifecycle and two-browser acceptance remain unverified. Earlier dated versions below are historical.
+
 > **Production 2.1.0 deployed** from exact d69b66f (UI d69b66fe6384). Owner will complete private Jira-only Distribution; valid privacy policy URL/handling remains unresolved, no link created here, fresh-site acceptance NOT_RUN. DEV 5.16.0 unchanged. [Current deployment and Distribution worksheet](docs/distribution-handoff-2026-11-26.md).
 
-> **First run:** open a Jira issue, click the **apps icon under the title** (sometimes labelled **View app actions**), then choose **PermitGuard**. A right-side **Open PermitGuard** context guide is included in the next Production update; it explains navigation only. The issue panel remains the editable surface.
+> **First run:** open a Jira issue, click the **apps icon under the title** (sometimes labelled **View app actions**), then choose **PermitGuard**. A right-side **Open PermitGuard** context guide is included in Production **2.2.0**; it explains navigation only. The issue panel remains the editable surface.
 
 
 > **25 November readiness handoff:** [judge production/share-link plan](docs/judge-access-plan.md) · [exact owner 180-second capture checklist](docs/video-capture-list.md) · [prioritised remaining work / owner inputs](docs/submission-checklist-2026-11-25.md). Planning only: no production/link/exposure changes.

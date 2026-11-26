@@ -1,6 +1,8 @@
+> **Latest release, 26 Nov 12:54 UTC:** **Production 2.2.0 · UI b5df804cbdf1**, compatible major2 update. Build/environment is shown near the header and in the footer; **Open PermitGuard** in the right-side context is a static opening guide. Reload/reopen the Jira issue to fetch the new resource. [Change/evidence notes](../judge-discoverability-2026-11-26.md). Owner reported the prior fresh-site install/panel connected; post-update visual, full lifecycle and two-browser acceptance remain unverified. Earlier dated versions below are historical.
+
 > **26-Nov current release:** Production **2.1.0** from d69b66f; candidate code deployed, not fresh-site/two-person accepted. Owner handles private Jira-only form; valid privacy URL/handling unresolved. [Current handoff](../distribution-handoff-2026-11-26.md). Legacy source-only and 2.0.0 records below remain historical; DEV capture evidence untouched.
 
-> **First run:** open a Jira issue, click the **apps icon under the title** (sometimes labelled **View app actions**), then choose **PermitGuard**. A right-side **Open PermitGuard** context guide is included in the next Production update; it explains navigation only. The issue panel remains the editable surface.
+> **First run:** open a Jira issue, click the **apps icon under the title** (sometimes labelled **View app actions**), then choose **PermitGuard**. A right-side **Open PermitGuard** context guide is included in Production **2.2.0**; it explains navigation only. The issue panel remains the editable surface.
 
 
 # Submission working pack

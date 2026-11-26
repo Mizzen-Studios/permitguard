@@ -1,0 +1,111 @@
+{
+  "classification": "DEPLOYMENT_WITH_OWNER_REPORTED_PRIOR_INSTALL",
+  "approval": {
+    "source": "Owner request 26 November 2026 12:48 UTC: cheap judge friction fixes, consider discoverability/scopes, deploy Production",
+    "productionDeploy": true,
+    "privateJiraDistribution": true,
+    "marketplace": false,
+    "mcpExposure": false,
+    "billing": false
+  },
+  "appId": "60f4bdda-1062-4e5b-aab6-1d9a9cf53a90",
+  "sourceCommit": "b5df804cbdf14497b07de72e31e8b6c15927666b",
+  "uiSource": "b5df804cbdf1",
+  "environment": "production",
+  "version": "2.2.0",
+  "deployedAt": "2026-11-26T12:54:04.110Z",
+  "deploymentStatus": "Success",
+  "verification": {
+    "normalDeployVerification": true,
+    "normalForgeLint": "No issues found",
+    "lockedInstallAuditVulnerabilities": "Previous pinned-lock audit0; no dependencies changed, not re-run",
+    "backendTests": 159,
+    "uiContracts": 52,
+    "pythonTests": 3,
+    "totalTests": 214,
+    "sdkBootstrap": "PASS; included in backend suite and separately rerun",
+    "knownSecretSourceArtifactScan": "PASS",
+    "artifactHashes": {
+      "static/permit-app/dist/app.js": "ce14c216d093d2be3fb5636b8ad40d6c51261fce9348ca8e8d3a3bff29247db3",
+      "static/permit-app/dist/index.html": "d36fbeedcab05e098fa2c365daec5152d2cac53c4a541013a094647de92ad719",
+      "static/permit-entry/index.html": "d0d886be035ff5676f4fe383ff80dd2b34cf20e6f53973fd14ec3df13889c3c2"
+    },
+    "remoteArtifactByteReadback": false,
+    "storageIndex": "Unchanged schema; previous ACTIVE observation not re-probed by this task",
+    "remoteMajorMetadata": {
+      "major": 2,
+      "majorCreationDate": "2026-11-25T21:42:33.468Z",
+      "note": "forge version list shows major creation timestamp, not latest minor deployment timestamp; deployment list and receipt establish 2.1.0",
+      "actions": 3,
+      "mcpModules": 1,
+      "rovoAgents": 1,
+      "functions": 5,
+      "scopes": 12,
+      "egresses": [],
+      "remotes": 0,
+      "services": 0,
+      "requiresLicense": false,
+      "issueContexts": 1
+    },
+    "productionInstallationsObserved": 1,
+    "developmentJiraInstallation": "major 5 Up-to-date; unchanged",
+    "productionJiraInstallation": "major2 Up-to-date; site hostname and installation ID withheld"
+  },
+  "distribution": {
+    "status": "OWNER_REPORTED_INSTALL_ONLY",
+    "ownerRehearsalEvidence": "evidence/2026-11-26-owner-fresh-site-rehearsal.json",
+    "installationLinkCreated": false,
+    "privateLinkSuppliedToAgent": false,
+    "configurationChanged": false,
+    "sharingLinkRotated": false,
+    "jiraOnlyRequested": true,
+    "existingPublicPolicyFound": true,
+    "privacyPolicyUrl": "https://mizzen-studios.github.io/permitguard/privacy.html",
+    "termsUrl": "https://mizzen-studios.github.io/permitguard/terms.html"
+  },
+  "dataHandling": {
+    "personalDataStored": true,
+    "storage": "Forge-hosted CES/KVS; derived Jira issue property; optional Confluence archive code not configured",
+    "externalAppStorage": false,
+    "personalDataReportingImplemented": false,
+    "automaticAppRetentionEraseFlowImplemented": false,
+    "privacyComplianceClaimed": false,
+    "newLegalPolicyPublished": false
+  },
+  "acceptance": {
+    "freshSiteInstall": "OWNER_REPORTED_PASS_PREVIOUS_VERSION",
+    "realSecondCrew": "NOT_RUN",
+    "nativeAgentOnProduction": "NOT_RUN",
+    "mcpDiscoveredProductionName": "NOT_RUN",
+    "mcpClientInvoked": false,
+    "mcpExposureChanged": false,
+    "billingChanged": false,
+    "marketplaceListingCreated": false,
+    "postUpdateVisualMarkerAndContext": "NOT_RUN"
+  },
+  "limitations": [
+    "Production deployment is not installation, two-person, photo/QR, Realtime, Rovo model or workflow execution acceptance.",
+    "Human-only browser/media/access checks remain with owner; no footage or legal attestation invented.",
+    "Only technical deployment/declaration evidence published; no privacy policy/terms or private contact email published.",
+    "Owner fresh-site report applies to pre-update2.1; CLI Up-to-date after2.2 is not a visual marker/context acceptance."
+  ],
+  "changes": [
+    "Actual version/environment/UI identity mirrored beside header and in footer, pending/unknown stays explicit",
+    "Static jira:issueContext navigation guide without resolver or readiness status",
+    "README and judge first-run Apps icon steps"
+  ],
+  "scopesDecision": {
+    "count": 12,
+    "removed": 0,
+    "confluenceScopesRetained": 4,
+    "reason": "Removing scopes is a Forge major upgrade and shipped macro/archive still depends on these; keep compatible minor2.2 and existing installation/link configuration"
+  },
+  "postLedgerVerification": {
+    "backend": 162,
+    "ui": 52,
+    "pythonPreflight": 3,
+    "total": 217,
+    "localReferences": 267,
+    "note": "Owner-partial gate transition regression fixed and full suites rerun PASS; no runtime changes after deploy."
+  }
+}
