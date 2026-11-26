@@ -215,3 +215,12 @@ test('second-crew helper is offered only for empty seeded sample state, separate
  h.run('state.assets.source="BUILT_IN_REGISTER"');assert.doesNotMatch(h.run('plan()'),/Create my Crew B sample permit/);
  assert.ok(source.includes("if(action==='create_demo_crew_b')"));assert.ok(source.includes('No lock or verification is created automatically.'));
 });
+
+test('build marker is above the fold and footer includes truthful environment without hardcoded release',()=>{
+ const h=harness({__PERMITGUARD_BUILD__:'judge-build'});
+ for(const [version,environment,label] of [['2.2.0','PRODUCTION','Production'],['5.16.0','development','Development'],['2','STAGING','Staging']]){
+  h.run('state={actorId:"human",permit:null,revision:1,policy:{},equipment:[],board:[],buildInfo:'+JSON.stringify({version,environment})+'};stale=false;render()');
+  const expected=version+' · '+label+' · UI judge-build';assert.ok(h.root.innerHTML.includes(expected));assert.ok(h.root.innerHTML.indexOf(expected)<h.root.innerHTML.indexOf('Release NOT CLEARED'));assert.ok(h.run('buildFooter()').includes(expected));
+ }
+ h.run('state.buildInfo={version:"<bad>",environment:"<script>"};render()');assert.match(h.root.innerHTML,/version unavailable · environment unconfirmed/);assert.doesNotMatch(h.root.innerHTML,/<script>|<bad>/);
+});

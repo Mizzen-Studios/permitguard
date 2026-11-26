@@ -9,3 +9,7 @@
 
 /* First-run guidance is descriptive, never an implicit setup or clearance action. */
 .empty-setup,.connection-help{border:1px solid var(--line);border-left:4px solid var(--blue);padding:16px;background:white;overflow-wrap:anywhere}.empty-setup h3{font-size:1.05rem}.connection-help h2{font-size:1.15rem}.connection-help li{margin-block:10px}.connection-help ol{padding-left:24px}
+
+/* Build identity is mirrored above the fold; no fixed overlay can hide permit controls. */
+.build-marker{display:block;font-size:.72rem;font-weight:normal;overflow-wrap:anywhere;margin-top:3px}.prototype{max-width:24rem}.build-footer>small{display:block;font-weight:bold;color:var(--ink)}
+@media(max-width:680px){.masthead{flex-wrap:wrap}.prototype{max-width:100%;font-size:.75rem}.build-marker{font-size:.7rem}}

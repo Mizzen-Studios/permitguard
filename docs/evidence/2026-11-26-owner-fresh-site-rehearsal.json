@@ -1,0 +1,33 @@
+{
+  "classification": "OWNER_REPORTED_FRESH_SITE_ACCEPTANCE",
+  "reportedAt": "2026-11-26T12:48:00Z",
+  "source": "Direct owner report; no independent browser/screenshot or timing-file inspection",
+  "productionBeforeUpdate": "2.1.0",
+  "freshSite": true,
+  "issueKey": "KAN-1",
+  "installation": {
+    "success": true,
+    "ownerApproximateSeconds": 40
+  },
+  "panel": {
+    "loaded": true,
+    "ownerApproximateSecondsRange": [
+      5,
+      10
+    ],
+    "observedText": "Release NOT CLEARED — no permit",
+    "liveUpdatesConnected": true,
+    "errorsReported": false
+  },
+  "ownerFriction": [
+    "No visible version/build marker",
+    "Panel behind apps icon",
+    "Four unused Confluence scopes in Jira-only rehearsal"
+  ],
+  "limitations": [
+    "No independent visual/timing inspection",
+    "Connected is not two-browser delivery acceptance",
+    "No camera/QR, real second crew, activation or workflow execution inferred",
+    "Private install URL and hostname not supplied or guessed"
+  ]
+}

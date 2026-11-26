@@ -1,5 +1,8 @@
 > **Production 2.1.0 deployed** from exact d69b66f (UI d69b66fe6384). Owner will complete private Jira-only Distribution; valid privacy policy URL/handling remains unresolved, no link created here, fresh-site acceptance NOT_RUN. DEV 5.16.0 unchanged. [Current deployment and Distribution worksheet](docs/distribution-handoff-2026-11-26.md).
 
+> **First run:** open a Jira issue, click the **apps icon under the title** (sometimes labelled **View app actions**), then choose **PermitGuard**. A right-side **Open PermitGuard** context guide is included in the next Production update; it explains navigation only. The issue panel remains the editable surface.
+
+
 > **25 November readiness handoff:** [judge production/share-link plan](docs/judge-access-plan.md) · [exact owner 180-second capture checklist](docs/video-capture-list.md) · [prioritised remaining work / owner inputs](docs/submission-checklist-2026-11-25.md). Planning only: no production/link/exposure changes.
 
 > **Deployed, not live-accepted:** branded GET-only MCP key **permitguard_check_readiness** and guarded distinct-person Crew B normal-record path are included in Production 2.1.0. No live second-crew record seeded or relabeled. [Setup and boundaries](docs/second-crew-demo.md).

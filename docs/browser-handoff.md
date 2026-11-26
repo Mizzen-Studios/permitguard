@@ -1,5 +1,8 @@
 > **Current deployment: 5.16.0 · UI 5f92b0c1b926** — approved GET-only MCP change deployed and metadata/install verified. Native proposal action retained; UI behavior unchanged, new clean source marker. Prior 5.15.0 acceptance is historical. Fresh browser acceptance and authenticated MCP proof remain owner-run. [Deployment receipt](mcp-get-deployment-2026-11-24.md) · [Linux commands and cleanup](mcp-linux-owner-proof.md). Do not toggle exposure or mutate state from this guide.
 
+> **First run:** open a Jira issue, click the **apps icon under the title** (sometimes labelled **View app actions**), then choose **PermitGuard**. A right-side **Open PermitGuard** context guide is included in the next Production update; it explains navigation only. The issue panel remains the editable surface.
+
+
 > **Current 5.15.0:** [release-first wording, fewer bootstrap dependencies and honest clock scopes](release-first-timing-2026-11-22.md). Owner accepted 5.14.0 footer/one agent/single caveat, but stopwatch showed ~17 s preview / ~30 s live from navigation. The old 4.0 s figure was panel-only, not page load. No sample reset.
 
 > **Latest 5.14.0 / 99c1ebc:** [canonical message, footer build ID and preview diagnostics](preview-and-rovo-2026-11-22.md). Reuse PGSAMPLE-2; no reset. On 5.13.0 the owner passed the top release strip and one-agent picker, measured ~5–6 s total cold load, saw no preview and still saw a duplicate Rovo caveat. New prose is not accepted until retest.

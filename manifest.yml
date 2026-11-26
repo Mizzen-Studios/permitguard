@@ -7,6 +7,11 @@ modules:
     viewportSize: large
     title: PermitGuard
     icon: resource:capability-probe;icon.svg
+  jira:issueContext:
+  - key: permitguard-open-guide
+    resource: permit-entry
+    title: PermitGuard
+    label: Open PermitGuard
   jira:adminPage:
   - key: permitguard-admin
     resource: permit-app
@@ -153,6 +158,8 @@ modules:
     - check_readiness
     - request_activation
 resources:
+- key: permit-entry
+  path: static/permit-entry
 - key: capability-probe
   path: static/capability-probe/dist
 - key: permit-app
