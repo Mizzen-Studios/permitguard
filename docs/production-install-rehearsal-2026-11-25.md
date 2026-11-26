@@ -1,3 +1,5 @@
+> **Current 26-Nov state:** Production **2.1.0 / UI d69b66fe6384**, deployed from exact d69b66f. Owner will fill Distribution on their reported signed-in box; policy URL/privacy handling are unresolved, link not created here. [Current handoff](distribution-handoff-2026-11-26.md). Prior versions/approval/source-only statements below are dated history, not a new permission or current deployment status. Fresh-site/native/two-person acceptance remains NOT_RUN.
+
 # Production installation handoff - 25 November 2026
 
 ## Actual result

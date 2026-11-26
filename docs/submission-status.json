@@ -1,5 +1,5 @@
 {
-  "updatedDate": "2026-11-25",
+  "updatedDate": "2026-11-26",
   "mode": "PRODUCTION_REHEARSAL_APPROVED",
   "publicActionsAuthorized": false,
   "installationLink": null,
@@ -18,9 +18,9 @@
   "gates": [
     {
       "id": "production-and-distribution",
-      "status": "BLOCKED_CONSOLE_LOGIN",
+      "status": "AWAITING_OWNER_FORM_AND_POLICY_URL",
       "owner": "Olly",
-      "evidence": "evidence/2026-11-25-production-deployment.json"
+      "evidence": "evidence/2026-11-26-production-deployment.json"
     },
     {
       "id": "judge-install-browser-rehearsal",
@@ -67,15 +67,15 @@
     "notes": "Production deployed from clean 713eadc; DEV capture baseline unchanged. Distribution is approved but blocked by actual console sign-in; no installation link exists."
   },
   "production": {
-    "version": "2.0.0",
-    "uiSource": "713eadc3dfbc",
-    "sourceCommit": "713eadc3dfbccd2458453f0c0c02ebcfab9bb721",
-    "evidence": "evidence/2026-11-25-production-deployment.json",
-    "privateDistribution": "BLOCKED_CONSOLE_LOGIN",
+    "version": "2.1.0",
+    "uiSource": "d69b66fe6384",
+    "sourceCommit": "d69b66fe6384a9a1c238d6a01f70e7d71ea491e9",
+    "evidence": "evidence/2026-11-26-production-deployment.json",
+    "privateDistribution": "AWAITING_OWNER_FORM_AND_POLICY_URL",
     "installLinkCreated": false
   },
   "followUpCandidate": {
-    "status": "SOURCE_ONLY_NOT_DEPLOYED",
+    "status": "DEPLOYED_PRODUCTION_2.1.0_NOT_LIVE_ACCEPTED",
     "mcpBaseActionKey": "permitguard_check_readiness",
     "mcpTools": 1,
     "mcpActionVerb": "GET",
@@ -84,7 +84,19 @@
     "liveDataWritten": false,
     "guide": "second-crew-demo.md",
     "sourceCommit": "2638662cf82801bfa3e163767d916e2823282007",
-    "uiSource": "2638662cf828",
-    "verification": "evidence/2026-11-25-second-crew-candidate.json"
+    "uiSource": "d69b66fe6384",
+    "verification": "evidence/2026-11-26-production-deployment.json",
+    "deployedFrom": "d69b66fe6384a9a1c238d6a01f70e7d71ea491e9"
+  },
+  "distributionForm": {
+    "ownerWillComplete": true,
+    "ownerReportedOwnConsoleSignedIn": true,
+    "privacyPolicyUrl": null,
+    "termsUrl": null,
+    "personalDataStored": true,
+    "externalAppStorage": false,
+    "personalDataReportingImplemented": false,
+    "newLegalPolicyPublished": false,
+    "worksheet": "distribution-handoff-2026-11-26.md"
   }
 }

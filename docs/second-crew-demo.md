@@ -1,3 +1,5 @@
+> **26 November update:** this candidate is deployed as **Production 2.1.0 / UI d69b66fe6384**, exact d69b66f. [Current deployment/declaration handoff](distribution-handoff-2026-11-26.md). Earlier source-only statements below describe the prior 25-Nov stage, not current release status. Live two-person acceptance still NOT_RUN; no record was seeded by deployment. Owner handles Distribution; valid policy URL/privacy handling remain unresolved.
+
 # Two-person shared-lock demo — source candidate, 25 November 2026
 
 **SOURCE_ONLY / NOT_DEPLOYED.** Production remains 2.0.0 / UI 713eadc3dfbc; DEV remains the prior 5.16.0 recording baseline. Private Jira-only install link is still **BLOCKED_CONSOLE_LOGIN**, not created. No site records were written by this coding task. Live two-person acceptance is **NOT_RUN**. This does not revise the historical owner MCP receipt or substitute a mocked call for runtime evidence.

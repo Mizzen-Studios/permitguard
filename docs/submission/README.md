@@ -1,3 +1,5 @@
+> **26-Nov current release:** Production **2.1.0** from d69b66f; candidate code deployed, not fresh-site/two-person accepted. Owner handles private Jira-only form; valid privacy URL/handling unresolved. [Current handoff](../distribution-handoff-2026-11-26.md). Legacy source-only and 2.0.0 records below remain historical; DEV capture evidence untouched.
+
 # Submission working pack
 
 **Production 2.0.0 now deployed under the 21:39 approval.** Private Jira-only distribution is approved but **BLOCKED_CONSOLE_LOGIN**; no install link exists and no fresh-site acceptance is claimed. [Current handoff](../production-install-rehearsal-2026-11-25.md). Development 5.16.0 / UI 5f92b0c1b926 and its capture checklist remain unchanged. No MCP/Marketplace/billing/publication approval.

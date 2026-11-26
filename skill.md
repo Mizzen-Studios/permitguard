@@ -4,9 +4,9 @@
 
 Modules: rovo:agent + action + Preview rovo:mcp. Atlassian-hosted MCP endpoint pattern: https://mcp.atlassian.com/forge/<registered-app-UUID>. Registered app UUID (shared across its environments): 60f4bdda-1062-4e5b-aab6-1d9a9cf53a90. Another site's separately registered clone uses its own UUID. Studio/custom-agent and external-client acceptance remain owner browser tests, not claimed passed.
 
-## permitguard_check_readiness — candidate MCP GET / read-only
+## permitguard_check_readiness — Production 2.1.0 MCP GET / read-only
 
-**SOURCE_ONLY / NOT_DEPLOYED:** this branded base key replaces only the MCP binding in the new candidate; the native GET remains check_readiness. Production 2.0.0 and the historical DEV receipt still use the prior base key. Discover actual installed tool names only after separately approved exposure; never hardcode the historical _development suffix for Production. Private distribution installs the same registered UUID; judges do not register a clone. [Two-person candidate guide](docs/second-crew-demo.md).
+**DEPLOYED / LIVE DISCOVERY NOT_RUN:** Production 2.1.0 from d69b66f uses this branded sole MCP binding; the native GET remains check_readiness. The historical DEV receipt retains its actual older discovery name. Discover actual installed tool names only after separately approved exposure; never hardcode the historical _development suffix for Production. Private distribution installs the same registered UUID; judges do not register a clone. [Two-person guide; live acceptance pending](docs/second-crew-demo.md).
 
 Input: {"issueKey":"PGSAMPLE-1"}. Caller identity comes from the trusted Forge principal; issue access is independently checked as that caller. No actor/project override inputs.
 

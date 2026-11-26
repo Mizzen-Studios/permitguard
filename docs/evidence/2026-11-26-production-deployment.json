@@ -1,0 +1,101 @@
+{
+  "classification": "DEPLOYMENT_ONLY_DISTRIBUTION_PENDING_OWNER_FORM",
+  "approval": {
+    "source": "Owner request 26 November 2026 08:58 UTC: deploy exact d69b66f; owner fills Distribution on own signed-in box",
+    "productionDeploy": true,
+    "privateJiraDistribution": true,
+    "marketplace": false,
+    "mcpExposure": false,
+    "billing": false
+  },
+  "appId": "60f4bdda-1062-4e5b-aab6-1d9a9cf53a90",
+  "sourceCommit": "d69b66fe6384a9a1c238d6a01f70e7d71ea491e9",
+  "uiSource": "d69b66fe6384",
+  "environment": "production",
+  "version": "2.1.0",
+  "deployedAt": "2026-11-26T09:00:08.162Z",
+  "deploymentStatus": "Success",
+  "verification": {
+    "normalDeployVerification": true,
+    "normalForgeLint": "No issues found",
+    "lockedInstallAuditVulnerabilities": 0,
+    "backendTests": 150,
+    "uiContracts": 51,
+    "pythonTests": 3,
+    "totalTests": 204,
+    "sdkBootstrap": "PASS; included in backend suite and separately rerun",
+    "knownSecretSourceArtifactScan": "PASS",
+    "artifactHashes": {
+      "static/permit-app/dist/app.js": "797a4777fe7a62ba4216528d2e7512154e39a3501598fdeae6f3cbb36fa99c5e",
+      "static/permit-app/dist/index.html": "d36fbeedcab05e098fa2c365daec5152d2cac53c4a541013a094647de92ad719",
+      "static/capability-probe/dist/app.js": "a059e6240de8ba52761bed1e24cb588bb24585e0f5ff861284893efd196769f5"
+    },
+    "remoteArtifactByteReadback": false,
+    "storageIndex": "permitguard-site/by-key ACTIVE",
+    "remoteMajorMetadata": {
+      "major": 2,
+      "majorCreationDate": "2026-11-25T21:42:33.468Z",
+      "note": "forge version list shows major creation timestamp, not latest minor deployment timestamp; deployment list and receipt establish 2.1.0",
+      "actions": 3,
+      "mcpModules": 1,
+      "rovoAgents": 1,
+      "functions": 5,
+      "scopes": 12,
+      "egresses": [],
+      "remotes": 0,
+      "services": 0,
+      "requiresLicense": false
+    },
+    "productionInstallationsObserved": 0,
+    "developmentJiraInstallation": "major 5 Up-to-date; unchanged"
+  },
+  "distribution": {
+    "status": "AWAITING_OWNER_FORM_AND_POLICY_URL",
+    "ownerReportedOwnConsoleSignedIn": true,
+    "ownerWillCompleteForm": true,
+    "installationLinkCreated": false,
+    "configurationChanged": false,
+    "sharingMode": "Sharing requested, not applied by this task",
+    "jiraOnlyRequested": true,
+    "privacyPolicyUrl": null,
+    "termsUrl": null,
+    "existingPublicPolicyFound": false
+  },
+  "dataHandling": {
+    "personalDataStored": true,
+    "storage": "Forge-hosted CES/KVS; derived Jira issue property; optional Confluence archive code not configured",
+    "externalAppStorage": false,
+    "personalDataReportingImplemented": false,
+    "automaticAppRetentionEraseFlowImplemented": false,
+    "privacyComplianceClaimed": false,
+    "newLegalPolicyPublished": false
+  },
+  "acceptance": {
+    "freshSiteInstall": "NOT_RUN",
+    "realSecondCrew": "NOT_RUN",
+    "nativeAgentOnProduction": "NOT_RUN",
+    "mcpDiscoveredProductionName": "NOT_RUN",
+    "mcpClientInvoked": false,
+    "mcpExposureChanged": false,
+    "billingChanged": false,
+    "marketplaceListingCreated": false
+  },
+  "limitations": [
+    "Production deployment is not installation, two-person, photo/QR, Realtime, Rovo model or workflow execution acceptance.",
+    "Human-only browser/media/access checks remain with owner; no footage or legal attestation invented.",
+    "Only technical deployment/declaration evidence published; no privacy policy/terms or private contact email published."
+  ],
+  "postDeploymentLedgerChecks": {
+    "backend": 154,
+    "uiPreflight": 51,
+    "pythonPreflight": 3,
+    "total": 208,
+    "newNegativeGuards": [
+      "Source commit mismatch",
+      "Fabricated policy URL",
+      "Concealed personal data",
+      "Unimplemented personal reporting claimed complete"
+    ],
+    "localReferences": 259
+  }
+}

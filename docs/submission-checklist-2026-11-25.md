@@ -1,3 +1,5 @@
+> **Current 26-Nov state:** Production **2.1.0 / UI d69b66fe6384**, deployed from exact d69b66f. Owner will fill Distribution on their reported signed-in box; policy URL/privacy handling are unresolved, link not created here. [Current handoff](distribution-handoff-2026-11-26.md). Prior versions/approval/source-only statements below are dated history, not a new permission or current deployment status. Fresh-site/native/two-person acceptance remains NOT_RUN.
+
 > **21:39 approval follow-up:** Production **2.0.0** has now deployed from 713eadc. Private Jira-only distribution is approved but **BLOCKED_CONSOLE_LOGIN**; install link NOT_CREATED, fresh-site NOT_RUN. Earlier source/preparation-only statements below are historical, not the current deployment status. [Current handoff](production-install-rehearsal-2026-11-25.md).
 
 # Submission readiness — priority order, 25 November 2026
