@@ -50,7 +50,8 @@ export function createService({ store, challenges, authorize, projectIsSample, v
       // Site-wide locks are checked, but details from unreadable other issues never leave server.
       return { ...checked, reasons: checked.reasons.map(r => r.code === 'LOCK_REMAINS' && !(project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner === actorId && r.crewId === 'Crew B (SIMULATED)') ? { code: 'LOCK_REMAINS', message: 'A personal lock remains on shared equipment; check the site lock board.' } : (r.code==='LOCK_REMAINS'&&r.crewId==='Crew B (SIMULATED)'?{...r,message:'Simulated Crew B lock '+r.lockId+' remains on isolation point '+r.pointId+'.'}:r)) };
     };
-    const result = () => ({ issueKey:auth.issueKey||null, projectName:auth.projectName||null, projectKey:auth.projectKey||null, permit, sampleCrewB: project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner===actorId ? { exists:true, active:site.permits['sample-crew-b:'+issueId].locks.some(l=>!l.removedAt), locks:site.permits['sample-crew-b:'+issueId].locks.filter(l=>!l.removedAt).map(l=>({...l,simulated:true,name:'Crew B (simulated)'})) } : {exists:false}, policy: project.policy, equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus, source: project.source || 'BUILT_IN_REGISTER' }, realtime: { channel: 'permitguard' }, capabilities: { assetsImport: true, sampleRoleplay: project.sample === true && Boolean(permit) && permit.state !== 'CLOSED' }, actorId, actorDisplayName: auth.displayName || permit?.locks.find(l=>l.actorId===actorId&&l.name&&l.name!==actorId)?.name || 'You', isProjectAdmin: auth.isProjectAdmin === true, readiness: readiness(), isolationReadiness: isolationReadiness(), release: release(), revision: row.revision,
+    const canSeedEmptyDemo = () => auth.isProjectAdmin === true && auth.canEdit === true && !project.equipment.length && !project.assetsConfig && !project.sample && (!project.source || project.source === 'BUILT_IN_REGISTER') && project.policy.mode === 'WARN_ONLY' && project.policy.failMode === 'FAIL_CLOSED' && !all().some(p => p.projectId === projectId);
+    const result = () => ({ issueKey:auth.issueKey||null, projectName:auth.projectName||null, projectKey:auth.projectKey||null, permit, sampleCrewB: project.sample && site.permits['sample-crew-b:'+issueId]?.sampleOwner===actorId ? { exists:true, active:site.permits['sample-crew-b:'+issueId].locks.some(l=>!l.removedAt), locks:site.permits['sample-crew-b:'+issueId].locks.filter(l=>!l.removedAt).map(l=>({...l,simulated:true,name:'Crew B (simulated)'})) } : {exists:false}, policy: project.policy, equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus, source: project.source || 'BUILT_IN_REGISTER' }, realtime: { channel: 'permitguard' }, syntheticDemoRegister: project.syntheticDemoRegister === true, capabilities: { seedEmptyDemo: canSeedEmptyDemo(), assetsImport: true, sampleRoleplay: project.sample === true && Boolean(permit) && permit.state !== 'CLOSED' }, actorId, actorDisplayName: auth.displayName || permit?.locks.find(l=>l.actorId===actorId&&l.name&&l.name!==actorId)?.name || 'You', isProjectAdmin: auth.isProjectAdmin === true, readiness: readiness(), isolationReadiness: isolationReadiness(), release: release(), revision: row.revision,
       // Never leak another issue/project, actor or crew through the site-wide aggregate.
       board: permit ? permit.equipment.map(e => ({ equipmentId: e.id, activeLockCount: all().reduce((count, p) => count + p.locks.filter(l => !l.removedAt && p.equipment.some(pe => pe.id === e.id && pe.isolationPoints.some(pt => pt.id === l.pointId))).length, 0) })) : [],
       limitations: ['Decision support only; site procedure authoritative.', 'QR challenge and human attestation are not independent proof of physical presence.', ...(project.source === 'ASSETS' ? [registerAvailable ? 'Assets checked as connected user; metadata is not physical isolation evidence.' : 'Assets unavailable or changed: reimport required; no clearance authority.'] : ['Built-in register only; no Assets authority; external changes are not detected.'])] });
@@ -93,16 +94,23 @@ export function createService({ store, challenges, authorize, projectIsSample, v
         need(!all().some(p => p.projectId === projectId && p.state !== 'CLOSED'), 'Assets import blocked while permits open');
         need(readAssets, 'ASSETS_UNAVAILABLE');
         const assetsConfig = validateAssetsConfig(payload.config);
-        project.equipment = await readAssets(assetsConfig); project.assetsConfig = assetsConfig; project.source = 'ASSETS'; project.sample = false;
+        project.equipment = await readAssets(assetsConfig); project.assetsConfig = assetsConfig; project.source = 'ASSETS'; project.sample = false; project.syntheticDemoRegister = false;
         registerAvailable = true; assetsStatus = 'CONNECTED_AS_USER'; break;
+      case 'seed_empty_demo_register':
+        need(auth.isProjectAdmin && payload.confirmed === true, 'Project administrator and explicit confirmation required');
+        if (project.syntheticDemoRegister === true) return result(); // Read-only replay; never replace existing demo/permit records.
+        need(canSeedEmptyDemo(), 'EMPTY_DEMO_PROJECT_REQUIRED');
+        project.equipment = sampleEquipment(projectId); project.source = 'BUILT_IN_REGISTER'; project.sample = false; project.syntheticDemoRegister = true;
+        break;
       case 'set_policy':
         need(auth.isProjectAdmin, 'Project administrator required');
+        need(!project.syntheticDemoRegister || (payload.mode ?? project.policy.mode) === 'WARN_ONLY', 'SYNTHETIC_DEMO_WARN_ONLY');
         project.policy = domain.configurePolicy(project.policy, { mode: payload.mode ?? project.policy.mode, failMode: payload.failMode ?? project.policy.failMode }, auth); break;
       case 'load_sample':
         need(auth.isProjectAdmin && payload.confirmed === true, 'Project administrator and explicit confirmation required');
         need(await projectIsSample(projectId), 'Verified dedicated sample project required');
         need(!Object.values(site.permits).some(p => p.projectId === projectId && p.state !== 'CLOSED'), 'Sample reload blocked while permits open');
-        project.equipment = sampleEquipment(projectId); project.sample = true; project.source = 'SAMPLE';
+        project.equipment = sampleEquipment(projectId); project.sample = true; project.source = 'SAMPLE'; project.syntheticDemoRegister = false;
         project.policy = domain.configurePolicy(project.policy, { mode: 'ENFORCE', failMode: 'FAIL_CLOSED' }, auth);
         registerAvailable = true; assetsStatus = 'NOT_CONNECTED';
         // Confirmed admin enables Enforce only after both dedicated sample markers.
@@ -113,7 +121,7 @@ export function createService({ store, challenges, authorize, projectIsSample, v
         need(!all().some(p => p.projectId === projectId && p.state !== 'CLOSED'), 'Register edit blocked while permits open');
         const equipment = payload.equipment.map(e => ({ id: 'register:' + projectId + ':' + str(e.id, 80), name: str(e.name), isolationPoints: e.isolationPoints?.map(p => ({ id: str(p.id, 80), energyType: str(p.energyType, 80), highEnergy: p.highEnergy })) }));
         domain.createPermit({ id: 'validation', projectId, equipment, workers: [actorId], verifierIds: [actorId], crewId: 'validation' });
-        project.equipment = equipment; project.source = 'BUILT_IN_REGISTER'; project.sample = false; registerAvailable = true; assetsStatus = 'NOT_CONNECTED'; break;
+        project.equipment = equipment; project.source = 'BUILT_IN_REGISTER'; project.sample = false; project.syntheticDemoRegister = false; registerAvailable = true; assetsStatus = 'NOT_CONNECTED'; break;
       }
       case 'create_demo_crew_b':
       case 'create_permit': {

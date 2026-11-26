@@ -178,7 +178,7 @@ test('fresh empty register gives role-specific guidance without an inert create 
   const h=harness();h.run('state={actorId:"human",isProjectAdmin:'+admin+',permit:null,equipment:[],policy:{},board:[],assets:{status:"NOT_CONNECTED"}};stale=false;render()');
   assert.match(h.root.innerHTML,/Release NOT CLEARED — no permit/);assert.match(h.root.innerHTML,/No equipment registered yet/);
   assert.doesNotMatch(h.root.innerHTML,/data-operation="create_permit"/);assert.equal(h.calls.length,0);
-  assert.match(h.root.innerHTML,admin?/new synthetic demo only/:/Ask a project administrator/);
+  assert.match(h.root.innerHTML,admin?/entirely empty synthetic demo project/:/Ask a project administrator/);
  }
 });
 test('connected register outage is not presented as an empty sample setup opportunity',()=>{
@@ -224,3 +224,5 @@ test('build marker is above the fold and footer includes truthful environment wi
  }
  h.run('state.buildInfo={version:"<bad>",environment:"<script>"};render()');assert.match(h.root.innerHTML,/version unavailable · environment unconfirmed/);assert.doesNotMatch(h.root.innerHTML,/<script>|<bad>/);
 });
+
+test('empty demo button uses admin/server capability and cannot replace an unavailable register',()=>{const h=harness();h.run('state={actorId:"alice",isProjectAdmin:true,equipment:[],assets:{status:"NOT_CONNECTED"},capabilities:{seedEmptyDemo:true}}');assert.match(h.run('emptySetup()'),/Load six demo equipment items \(Warn-only\)/);h.run('state.capabilities.seedEmptyDemo=false;state.assets.status="UNAVAILABLE"');assert.doesNotMatch(h.run('emptySetup()'),/data-action="seed_empty_demo_register"/);h.run('state.capabilities.seedEmptyDemo=true;state.isProjectAdmin=false');assert.doesNotMatch(h.run('emptySetup()'),/data-action="seed_empty_demo_register"/);});

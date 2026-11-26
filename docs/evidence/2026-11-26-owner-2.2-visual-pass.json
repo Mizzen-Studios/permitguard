@@ -1,0 +1,20 @@
+{
+  "classification": "OWNER_REPORTED_VISUAL_PASS",
+  "reportedAt": "2026-11-26T17:04:00Z",
+  "version": "2.2.0",
+  "issueKey": "KAN-1",
+  "header": "2.2.0 · Production · UI b5df804cbdf1",
+  "footerMatches": true,
+  "panelLoadsCleanly": true,
+  "releaseText": "Release NOT CLEARED — no permit",
+  "registerText": "No equipment registered yet",
+  "siteSidebarAppsResult": "404 — do not use as judge navigation",
+  "preferredNavigation": "Issue PermitGuard section or issue apps icon under the title → PermitGuard",
+  "independentlyInspected": false,
+  "postUpdateEmptyDemoSeedAccepted": false,
+  "limitations": [
+    "Owner-reported text, not independently inspected screenshot",
+    "Not full lifecycle/camera/two-browser acceptance",
+    "New empty-project seed is local-only candidate; no site mutation or deployment occurred"
+  ]
+}

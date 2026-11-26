@@ -106,6 +106,17 @@
     "version": "2.1.0",
     "independentlyInspected": false,
     "postUpdateVersion": "2.2.0",
-    "postUpdateVisualAcceptance": "NOT_RUN"
+    "postUpdateVisualAcceptance": "OWNER_REPORTED_PASS",
+    "postUpdateVisualEvidence": "evidence/2026-11-26-owner-2.2-visual-pass.json",
+    "siteSidebarApps": "OWNER_REPORTED_404_DO_NOT_USE"
+  },
+  "localFollowUp": {
+    "status": "LOCAL_ONLY_NOT_DEPLOYED_OR_PUSHED",
+    "reason": "Latest nothing-public instruction conflicts with requested push to public repo; awaiting clarification",
+    "changes": [
+      "Issue-level judge navigation only",
+      "Confirmed empty-project Warn-only demo-register seed, no automatic permits/locks or Enforce"
+    ],
+    "actualSiteDataWritten": false
   }
 }

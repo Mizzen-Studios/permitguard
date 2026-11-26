@@ -1,3 +1,5 @@
+> **17:04 owner check — Production 2.2.0 PASS:** header **2.2.0 · Production · UI b5df804cbdf1**, matching footer, clean empty panel. The site-wide sidebar **Apps** entry returned **404** on the rehearsal site: **do not use it for judge navigation**. Open the issue’s PermitGuard section, or the **apps icon under the issue title → PermitGuard**. This is owner-reported, not independent screenshot inspection or full-lifecycle acceptance.
+
 # Judge discoverability — 26 November 2026
 
 [Owner report](evidence/2026-11-26-owner-fresh-site-rehearsal.json): fresh-site install about 40s; KAN-1 panel 5–10s, Release NOT CLEARED — no permit, live updates connected, no errors. Owner-reported, not independently inspected or full-lifecycle/two-browser acceptance.
