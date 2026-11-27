@@ -97,3 +97,11 @@ test('invalid JSON diagnostic never echoes file contents', () => {
     assert.throws(() => loadPack(scratch), e => e.message.includes('invalid JSON (content not echoed)') && !e.message.includes(canary));
   } finally { unlinkSync(file); rmdirSync(dir); rmdirSync(scratch); }
 });
+
+test("historical seed PASS cannot be promoted to a different Production build", () => {
+ const p=structuredClone(baseline);
+ p.status.ownerFreshSiteRehearsal.postUpdateVisualAcceptance="OWNER_REPORTED_PASS";
+ p.status.production.version="2.5.0";
+ p.status.production.uiSource="7ceb1ff0f253";
+ assert.equal(validatePack(p).localConsistency,"FAIL");
+});

@@ -4,7 +4,7 @@
 
 ## Current state — 27 November 2026
 
-- **Production2.4.0 · UI e8b95c053254**, deployed from [e8b95c0](https://github.com/Mizzen-Studios/permitguard/commit/e8b95c053254bed5bd2f2ec6a28ff8162a80e3fd). [Deployment receipt](docs/evidence/2026-11-27-production-seed-capability-fix.json).
+- **Production2.5.0 · UI 7ceb1ff0f253**, deployed from [7ceb1ff](https://github.com/Mizzen-Studios/permitguard/commit/7ceb1ff0f253ce7200caae24dc5cc032ba896bc1). [Deployment receipt](docs/evidence/2026-11-27-production-core.json). Native2.5 acceptance pending; historical Production2.4.0 seed PASS below does not transfer automatically.
 - **Fresh-site onboarding/seed: OWNER-REPORTED PASS**,27-Nov09:01. Issue panel/header/footer/live connection; Cancel leaves zero; Confirm creates six synthetic Equipment records (EQ-1–EQ-6), Warn-only, no permit/locks; reload preserves exactly six/no duplicates/seed button gone. [Exact receipt and limits](docs/evidence/2026-11-27-owner-2.4-seed-pass.json). No screenshots/video received or independently reviewed. “A few seconds” is one observation, not an SLA.
 - **Broader fresh-site lifecycle remains NOT_RUN**: Plan/locks/verification/PENDING/QR/activation/release, real second crew, two-browser automatic invalidation, workflow/JQL and archive are not established by onboarding.
 - **Preparation only / NOT_SUBMITTED.** Repository code/docs pushes are authorized. No Marketplace form/listing change, public promotion/social post, video upload, Devpost submission, Sharing change or MCP exposure is authorized by this pack.
@@ -14,7 +14,7 @@
 
 1. Site admin uses the **existing private Production/Jira-only Sharing link**, reviews the actual12 scopes and selects an already-entitled Jira site. The link is not reproduced in this public repo and was not generated/rotated by these updates. No repository clone, Forge CLI/token or Confluence install is required for a judge. Never add a card or buy seats/features to complete this rehearsal.
 2. Open an accessible Jira issue. Use its inline **PermitGuard** section, or **apps icon under the issue title → PermitGuard** (sometimes labelled View app actions). **Do not rely on the site's sidebar Apps entry**: it returned404 in the owner rehearsal. Optional right-side Open PermitGuard is a navigation guide, not live readiness or a second editor.
-3. Check header/footer **2.4.0 · Production · UI e8b95c053254**, live state and no errors. Fresh empty storage must say **Release NOT CLEARED — no permit**. An empty register is not clearance.
+3. Check header/footer **2.5.0 · Production · UI 7ceb1ff0f253**, live state and no errors. Fresh empty storage must say **Release NOT CLEARED — no permit**. An empty register is not clearance.
 4. For a completely empty synthetic demo project, a project/site admin with Edit Issues may click **Load six demo equipment items (Warn-only)** and explicitly confirm. Existing register/Assets connections, any PermitGuard permit history, unsafe policy and stale revisions are rejected. Ordinary Jira issues alone do not block setup. This creates equipment only: no permits, workers, locks, verification, activation or workflow rules. Enforce is not available on this synthetic register. [Accepted seed flow](docs/empty-project-demo-seed.md).
 5. Stop at this accepted onboarding checkpoint unless following the [next bounded browser checks](docs/remaining-browser-checks-2026-11-27.md). Do not click Load confirmed sample as a substitute. The advanced Enforce loader is a separate verified **PGSAMPLE** key+description-marker path, not a requirement for ordinary Warn-only onboarding.
 
@@ -67,9 +67,9 @@ npm run check:submission
 
 Default tests include domain, native authorization/response adapter, UI contracts, SDK bootstrap and claim/timing checks. Local Jira transports/synthetic UI are not customer browser acceptance. Before any authorized release, pin clean source, scan generated artifacts for secrets and verify actual deployment/install metadata. [Developer setup](docs/setup.md) · [root cause lesson](docs/seed-capability-fix-2026-11-27.md).
 
-## Source candidate — not a new deployment
+## Deployed core mitigation — native acceptance pending
 
-The current readiness branch adds conservative lifecycle byte admission headroom and aligns projected START reporting with confirmed ACTIVE. This does not raise storage limits, erase evidence/locks, weaken actor/QR gates or recover legacy-full rows. Only already-authorized legacy drain writes that reduce the reserve deficit and remain below the unchanged hard cap may proceed. [Audit and mitigation](docs/core-audit-2026-11-27.md). Production remains2.4.0; local tests are not a new native release/acceptance.
+The current readiness branch adds conservative lifecycle byte admission headroom and aligns projected START reporting with confirmed ACTIVE. This does not raise storage limits, erase evidence/locks, weaken actor/QR gates or recover legacy-full rows. Only already-authorized legacy drain writes that reduce the reserve deficit and remain below the unchanged hard cap may proceed. [Audit and mitigation](docs/core-audit-2026-11-27.md). Production2.5.0 contains this mitigation; deployment/tests are not native lifecycle acceptance.
 
 ## Privacy, scopes, costs and honest limits
 

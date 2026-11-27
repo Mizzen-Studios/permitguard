@@ -1,6 +1,6 @@
 # Submission readiness —27November2026
 
-**PREPARATION ONLY / NOT_SUBMITTED / NO LISTING CHANGES.** Repo code/docs pushes authorized; no promotion/social, Marketplace form edit/submission, Devpost, Sharing/MCP/billing change. Current native installation **Production2.4.0/UIe8b95c053254**; owner09:01 accepted seed flow. Full lifecycle is not established by ALL PASS for onboarding. [Typed status](submission-status.json).
+**PREPARATION ONLY / NOT_SUBMITTED / NO LISTING CHANGES.** Repo code/docs pushes authorized; no promotion/social, Marketplace form edit/submission, Devpost, Sharing/MCP/billing change. Current deployment **Production2.5.0/UI7ceb1ff0f253**; native2.5 checks pending. Previous installation **Production2.4.0/UIe8b95c053254**; owner09:01 accepted seed flow. Full lifecycle is not established by ALL PASS for onboarding. [Typed status](submission-status.json).
 
 ## Completed in this preparation milestone
 
@@ -12,7 +12,7 @@
 
 ## Core candidate versus deployed code
 
-These readiness source changes are **not a new Forge deployment**. Production remains2.4.0; the fresh-site accepted data is not reset/reseeded. Before any later deployment: clean commit/build/SDKbootstrap/lint/secret scan, normal validation, actual version/install receipt; preserve Sharing. This avoids implying that listing/video preparation silently changes a working judge installation. Headroom is admission prevention, not legacy recovery or complete production qualification.
+Owner27-Nov13:04 authorized exact7ceb1ff deployment. Production **2.5.0/UI7ceb1ff0f253** deployed successfully13:07:19.543UTC after253tests/build/SDKbootstrap/lint/known-secret scan. Judge installation is Up-to-date; Sharing/scopes unchanged; no site data reset/reseed. [Deployment receipt](evidence/2026-11-27-production-core.json). Native2.5 acceptance pending. Headroom is admission prevention, not legacy recovery or complete qualification.
 
 ## Remaining gates, priority order
 
@@ -22,7 +22,7 @@ These readiness source changes are **not a new Forge deployment**. Production re
 | P0 | Current full core/two-human/photo/QR/release | Agree dedicated Enforce synthetic fixture and two existing entitled people; prove own/foreign-lock boundaries, PENDING→assigned-human activation, shared B lock release block; no invitations/roleplay substitution |
 | P0 | Genuine raw screenshots/clips, rights/privacy review | Private uncropped originals and take log, not text PASS as media; no fake UI fills missing slots |
 | P0 for Marketplace | Personal-data reporting/erase/refresh/retention design | Owner/maintainer review implementation/legal obligations; never let erasure count a remaining physical lock removed. Published policy is not compliance |
-| P0 before any Marketplace submission | Identity/distribution decision | Official guide says once submitted for listing, same Forge app cannot be shared by installation link. Decide listed vs rehearsal identity/contest implications separately; do not jeopardize current Sharing/link |
+| P0 before any Marketplace submission | Identity/distribution decision | Official guide says once submitted for listing, same Forge app cannot be shared by installation link. Owner13:04 decided current ID stays Sharing for judges, separate future listing app ID planned, free tier/no card. No second registration authorized; contest implications still need review |
 | P1 | Real automatic two-browser invalidation | One agreed synthetic mutation, passive B observation, actual timestamps/revisions; manual Refresh labelled fallback |
 | P1 | Workflow/JQL, optional archive/Assets/Studio | Dedicated approved fixtures and real platform evidence; no attaching gates to operational workflows, no archive space guessed. Not necessary for minimal accepted setup |
 | P1 | Entrant/entity/security/support/legal declarations and judge MCP window | Actual owner review/account facts; no fabricated company controls, paid plan, exposure or OAuth. Historical DEV MCP receipt is technical evidence, not current Production judge access |
@@ -37,4 +37,4 @@ No automatic publication/exposure/job is scheduled. A local PASS report is not s
 
 ## Source verification receipt
 
-Clean candidate **9efc689**:253tests(191backend59UI3Python),80draftassetchecks,273localrefs,build/realSDKbootstrap/normalForgeLint/knownsecretscanPASS. Production dependency-only npm audit found0knownvulnerabilities, not a penetration/privacy certificate. Old b5955a1 service/projection fail the new boundary regressions in a private temporary source copy; cleaned afterward. [Typed receipt](evidence/2026-11-27-readiness-source.json). No new Forge deployment:2.4 remains accepted onboarding build; later deployment is a separate decision before broader photo lifecycle.
+Clean candidate **9efc689**:253tests(191backend59UI3Python),80draftassetchecks,273localrefs,build/realSDKbootstrap/normalForgeLint/knownsecretscanPASS. Production dependency-only npm audit found0knownvulnerabilities, not a penetration/privacy certificate. Old b5955a1 service/projection fail the new boundary regressions in a private temporary source copy; cleaned afterward. [Typed receipt](evidence/2026-11-27-readiness-source.json). Subsequently owner authorized core7ceb1ff deployment: Production2.5 now live, native2.5 acceptance pending; prior2.4 remains the last owner-accepted onboarding build.

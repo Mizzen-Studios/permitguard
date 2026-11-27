@@ -20,7 +20,7 @@
       "id": "production-and-distribution",
       "status": "OWNER_REPORTED_INSTALL_ONLY",
       "owner": "Olly",
-      "evidence": "evidence/2026-11-27-production-seed-capability-fix.json"
+      "evidence": "evidence/2026-11-27-production-core.json"
     },
     {
       "id": "judge-install-browser-rehearsal",
@@ -65,10 +65,10 @@
     "notes": "Current Production2.4 and owner seed acceptance above supersede pre-sharing2.0 notes; no new app deployment in readiness preparation"
   },
   "production": {
-    "version": "2.4.0",
-    "uiSource": "e8b95c053254",
-    "sourceCommit": "e8b95c053254bed5bd2f2ec6a28ff8162a80e3fd",
-    "evidence": "evidence/2026-11-27-production-seed-capability-fix.json",
+    "version": "2.5.0",
+    "uiSource": "7ceb1ff0f253",
+    "sourceCommit": "7ceb1ff0f253ce7200caae24dc5cc032ba896bc1",
+    "evidence": "evidence/2026-11-27-production-core.json",
     "privateDistribution": "OWNER_REPORTED_INSTALL_ONLY",
     "installLinkCreated": false
   },
@@ -103,8 +103,8 @@
     "evidence": "evidence/2026-11-26-owner-fresh-site-rehearsal.json",
     "version": "2.1.0",
     "independentlyInspected": false,
-    "postUpdateVersion": "2.4.0",
-    "postUpdateVisualAcceptance": "OWNER_REPORTED_PASS",
+    "postUpdateVersion": "2.5.0",
+    "postUpdateVisualAcceptance": "NOT_RUN",
     "siteSidebarApps": "OWNER_REPORTED_404_DO_NOT_USE",
     "lastOwnerVerifiedVersion": "2.4.0",
     "lastOwnerVisualEvidence": "evidence/2026-11-27-owner-2.4-seed-pass.json",
@@ -129,20 +129,26 @@
     "sharingChanged": false,
     "marketplaceDraftPack": "marketplace/README.md",
     "marketplaceScreenshotsMissing": 6,
-    "sourceCandidateDeployed": false,
+    "sourceCandidateDeployed": true,
     "demoVideoDraftSeconds": 180
   },
   "sourceReadinessCandidate": {
-    "status": "SOURCE_ONLY_NOT_DEPLOYED",
+    "status": "DEPLOYED_PRODUCTION_NATIVE_ACCEPTANCE_PENDING",
     "fixes": [
       "Conservative own-lock/release/close byte reserve for new admissions",
       "Legacy authorized drain only if under hard cap and reserve deficit decreases",
       "Projected START is ACTIVE, remains nonauthoritative"
     ],
-    "productionUnchanged": "2.4.0",
     "nativeAcceptance": "NOT_RUN_FOR_SOURCE_CANDIDATE",
     "sharingChanged": false,
-    "sourceCommit": "9efc689f464eb8d269611f07de996fabffca06f8",
-    "verification": "evidence/2026-11-27-readiness-source.json"
+    "sourceCommit": "7ceb1ff0f253ce7200caae24dc5cc032ba896bc1",
+    "verification": "evidence/2026-11-27-production-core.json"
+  },
+  "marketplaceIdentityPlan": {
+    "ownerDecisionAt": "2026-11-27T13:04:00Z",
+    "judgeApp": "KEEP_CURRENT_ID_ON_SHARING",
+    "futureListing": "SEPARATE_APP_ID_PLANNED_NOT_REGISTERED",
+    "freeTierOnly": true,
+    "cardAuthorized": false
   }
 }

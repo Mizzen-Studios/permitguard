@@ -1,10 +1,10 @@
 # Next owner browser checks — after accepted2.4 seed
 
-**Do not rerun/reset the seed.** Production2.4.0 / UIe8b95c053254 onboarding is owner-reported PASS27-Nov09:01. No runtime release/change is implied by these prep docs. Use existing entitled accounts only, no invitations, seats, cards, new client consent or MCP switch. Issue route: inline PermitGuard or apps icon under title → PermitGuard; not the site sidebar Apps404.
+**Do not rerun/reset the seed.** Production2.4.0 / UIe8b95c053254 onboarding is owner-reported PASS27-Nov09:01. Core7ceb1ff is now deployed as Production2.5.0/UI7ceb1ff0f253; native2.5 acceptance NOT_RUN. Correct issue: **https://mizzen-judge-test.atlassian.net/browse/KAN-1**. one-atlas-xitr is the separate Development tenant. Use existing entitled accounts only, no invitations, seats, cards, new client consent or MCP switch. Issue route: inline PermitGuard or apps icon under title → PermitGuard; not the site sidebar Apps404.
 
 ## A — minimal next check on existing KAN-1 (one synthetic permit write)
 
-1. Reload KAN-1. Verify2.4 marker, exactly six items, Warn-only/synthetic notice and no permit/locks. Stop on any changed/unexpected state; no reset.
+1. Open https://mizzen-judge-test.atlassian.net/browse/KAN-1 and reload. Verify **2.5.0 · Production · UI 7ceb1ff0f253** marker, exactly six items, Warn-only/synthetic notice and no permit/locks. Stop on any changed/unexpected state; no reset.
 2. In Plan an isolation permit select **Cooling-water pump / EQ-1 only**. Set Crew name to Judge demo. Keep worker and named-verifier fields to **your actual prefilled signed-in account ID**. Do not invent another worker/verifier or select high-energy equipment. Click **Create permit** once.
 3. Expect **PLAN**, correct selected pump, **Release NOT CLEARED**, no locks. Reload and expect same permit/phase, not duplicate creation. Send actual phase, release/work-start wording, policy, errors and approximate create/reload time. If save outcome is uncertain, read/refresh first; never resubmit blindly.
 4. If Rovo is already available: open intended **PermitGuard Judge**, New chat, ask **Is KAN-1 cleared?** once. Capture the actual tool-backed response. Expect release NOT CLEARED and scope/phase consistency with panel; no positive safety/activation authority. Do not request activation. If no Rovo/agent or duplicate indistinguishable entries, report/skip; do not upgrade, delete agents or enable MCP.
@@ -12,7 +12,7 @@
 
 ## B — later full lifecycle / real second crew: needs participants and fixture choice first
 
-The capacity-admission/reporting fixes are source-only. Agree a clean candidate deployment before broad multi-photo testing; do not stress the current2.4 store or try to fill its180KB limit in the browser.
+Capacity-admission/START projection fixes are deployed in2.5. Do not stress/fill the180KB store in the browser; admission prevention is not legacy-full recovery. Participants/fixture gates below still apply.
 
 Keep KAN's synthetic register Warn-only; do not convert it to Enforce. Use a separate verified dedicated PGSAMPLE project/key+description marker and explicit confirmed Enforce sample setup only after owner chooses that fixture. Need **two distinct already-entitled people**, separate logins, Browse/Edit/assignability, same real registered low-energy pump, separate issues; no manufactured identity or legacy roleplay as two-person proof. Follow [Crew B guide](second-crew-demo.md). Use synthetic demonstration evidence only, never real plant photos. Physical procedure remains authoritative.
 

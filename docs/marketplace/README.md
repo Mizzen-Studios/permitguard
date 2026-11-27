@@ -16,7 +16,7 @@ Current authorized app is the existing manifest identity; no new identity create
 
 ## Hard stops before any future submission
 1. Obtain separate explicit publication/agreement/account authorization. Current authority covers repo code/docs only, not listing actions.
-2. Decide listed versus rehearsal identity first: submission of this same Forge app can remove installation-link eligibility **before approval/go-live**. Preserve current Sharing/link; do not experiment on it.
+2. Owner27-Nov13:04 resolved the strategy: current app stays Sharing for judges; plan a separate app ID for any listing, free tier only/no card. No second registration authorized. Preserve this decision: submission of this same Forge app can remove installation-link eligibility **before approval/go-live**. Preserve current Sharing/link; do not experiment on it.
 3. Resolve personal-data reporting/erase/refresh/retention gaps and operating/legal/security declarations; a public privacy URL is not implementation compliance.
 4. Capture genuine authorized UI originals and derivatives with privacy/rights review; all screenshot slots remain missing. Accept remaining native workflows independently.
 5. Owner verifies actual signed-in fields, company controls, KYC/KYB, pricing/billing and agreements. No legal entity, SLA, certification, training policy or no-cost guarantee invented here.

@@ -1,0 +1,77 @@
+{
+  "classification": "DEPLOYMENT_WITH_OWNER_REPORTED_PRIOR_INSTALL",
+  "approval": {
+    "source": "Owner27-Nov13:04 explicitly deploy core7ceb1ff to Production; Sharing unchanged; repository pushes allowed; no promotion/listing/submission",
+    "productionDeploy": true,
+    "privateJiraDistribution": true,
+    "marketplace": false,
+    "mcpExposure": false,
+    "billing": false
+  },
+  "appId": "60f4bdda-1062-4e5b-aab6-1d9a9cf53a90",
+  "sourceCommit": "7ceb1ff0f253ce7200caae24dc5cc032ba896bc1",
+  "uiSource": "7ceb1ff0f253",
+  "environment": "production",
+  "version": "2.5.0",
+  "deployedAt": "2026-11-27T13:07:19.543Z",
+  "deploymentStatus": "Success",
+  "verification": {
+    "normalDeployVerification": true,
+    "normalForgeLint": "No issues found",
+    "backendTests": 191,
+    "uiContracts": 59,
+    "pythonTests": 3,
+    "totalTests": 253,
+    "sdkBootstrap": "PASS in backend tests",
+    "knownSecretSourceArtifactScan": "PASS",
+    "remoteArtifactByteReadback": false,
+    "appJsSha256": "9f7ffae3d6b66b8c4e8ce3adbdb849bfa0d2a2ae351291e06aca4a0f43171a9c"
+  },
+  "distribution": {
+    "status": "OWNER_REPORTED_INSTALL_ONLY",
+    "ownerRehearsalEvidence": "evidence/2026-11-26-owner-fresh-site-rehearsal.json",
+    "installationLinkCreated": false,
+    "privateLinkSuppliedToAgent": false,
+    "configurationChanged": false,
+    "sharingLinkRotated": false,
+    "jiraOnlyRequested": true,
+    "existingPublicPolicyFound": true,
+    "privacyPolicyUrl": "https://mizzen-studios.github.io/permitguard/privacy.html",
+    "termsUrl": "https://mizzen-studios.github.io/permitguard/terms.html",
+    "sharingConfigurationChanged": false
+  },
+  "dataHandling": {
+    "personalDataStored": true,
+    "storage": "Forge-hosted CES/KVS; derived Jira issue property; optional Confluence archive code not configured",
+    "externalAppStorage": false,
+    "personalDataReportingImplemented": false,
+    "automaticAppRetentionEraseFlowImplemented": false,
+    "privacyComplianceClaimed": false,
+    "newLegalPolicyPublished": false
+  },
+  "acceptance": {
+    "freshSiteInstall": "OWNER_REPORTED_PASS_PREVIOUS_VERSION",
+    "postUpdateVisualMarkerAndContext": "NOT_RUN",
+    "current2_5NativeLifecycle": "NOT_RUN",
+    "prior2_4Seed": "OWNER_REPORTED_PASS; evidence/2026-11-27-owner-2.4-seed-pass.json",
+    "sharingChanged": false,
+    "billingChanged": false
+  },
+  "limitations": [
+    "No native2.5 browser acceptance yet",
+    "No legacy-full recovery, capacity-limit raise or evidence/lock erasure",
+    "Sharing/scopes/manifest unchanged; no promotion/listing/submission/MCP/billing",
+    "CLI Production installation mizzen-judge-test.atlassian.net Up-to-date; no site data writes"
+  ],
+  "changes": [
+    "Conservative lifecycle byte headroom admission",
+    "Authorized legacy drain only under hard cap and reducing deficit",
+    "Projected START expects confirmed ACTIVE; projection remains nonauthoritative"
+  ],
+  "scopesDecision": {
+    "count": 12,
+    "removed": 0,
+    "confluenceScopesRetained": 4,
+    "reason": "Removing scopes is a Forge major upgrade and shipped macro/archive still depends on these; keep compatible minor2.2 and existing installation/link configuration"
+  }
+}
