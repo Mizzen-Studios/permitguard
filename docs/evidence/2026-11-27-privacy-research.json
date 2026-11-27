@@ -1,0 +1,12 @@
+{
+  "source": "https://developer.atlassian.com/platform/forge/user-privacy-guidelines/",
+  "retrievedAt": "2026-11-27T13:12:44.347569+00:00",
+  "httpStatus": 200,
+  "sha256": "1306ddcd3f1d27785fd7ff779d0c7143ae55aa6486bdbc704a431cb3625e4e2b",
+  "bytes": 522398,
+  "sourceLastUpdated": "2024-10-30",
+  "sdkVersion": "@forge/api 8.5.0",
+  "sdkPrivacyModuleSha256": "dda3bb68ae16b007e62908db5c738d32313fdd0f8fb01fb6f3aefecc1fe9f7c1",
+  "livePersonalDataReporting": "NOT_RUN",
+  "runtimeActivation": false
+}
