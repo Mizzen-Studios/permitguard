@@ -45,7 +45,7 @@ function qrForm(h,op,qr){
 }
 test('point/equipment QR hints are explicit; wrong point QR cannot invoke activation or advance revision',async()=>{
  const h=harness();h.run('state={actorId:"human",actorDisplayName:"Olly",revision:9,policy:{},permit:{state:"VERIFY",equipment:[{id:"register:10202:EQ-1",name:"EQ-1",isolationPoints:[{id:"V-3"}]}],activations:[{id:"a1",status:"PENDING",verifierId:"human"}],verifications:[]},board:[]};stale=false;render()');
- assert.match(h.root.innerHTML,/expected: permitguard:V-3/);assert.match(h.root.innerHTML,/expected: permitguard:register:10202:EQ-1/);assert.match(h.root.innerHTML,/Assigned to Olly/);
+ assert.match(h.root.innerHTML,/expected: permitguard:V-3/);assert.match(h.root.innerHTML,/expected: permitguard:register:10202:EQ-1/);assert.match(h.root.innerHTML,/Assigned to You/);
  await h.handlers.submit({preventDefault(){},target:qrForm(h,'confirm_activation','permitguard:V-3')});assert.equal(h.calls.length,0);assert.equal(h.run('state.revision'),9);assert.match(h.root.innerHTML,/Wrong equipment QR/);assert.equal(h.run('stale'),false);
 });
 test('valid activation uses only challenge + mutation with unchanged site revision; no preliminary refresh',async()=>{
@@ -249,3 +249,36 @@ for(const setup of [{role:'member'},{role:'site-admin',canEdit:false},{role:'pro
 });
 
 test('missing or false eligibility never promises a nonexistent demo button',()=>{const h=harness();h.run('state={isProjectAdmin:true,equipment:[],capabilities:{},assets:{status:"NOT_CONNECTED"}}');assert.match(h.run('emptySetup()'),/eligibility.*was not returned/);assert.doesNotMatch(h.run('emptySetup()'),/use the button below/);h.run('state.capabilities.seedEmptyDemo=false');assert.match(h.run('emptySetup()'),/not eligible/);assert.match(h.run('emptySetup()'),/Ordinary Jira issues alone do not block it/);});
+
+test('every permit has uppercase phase badge and matching active step, absent permit has neither',()=>{
+ const h=harness();
+ for(const stage of ['PLAN','LOCK','VERIFY','ACTIVE','RELEASE','CLOSED']){
+  h.run('state={actorId:"human",revision:1,policy:{},permit:{state:'+JSON.stringify(stage)+',equipment:[],locks:[],activations:[],verifications:[],audit:[]},board:[]};stale=false;render()');
+  assert.ok(h.root.innerHTML.includes('Current phase: <strong>'+stage+'</strong>'));
+  assert.equal((h.root.innerHTML.match(/aria-current="step"/g)||[]).length,1);
+  assert.ok(h.root.innerHTML.includes('<li aria-current="step"><span>'+(['PLAN','LOCK','VERIFY','ACTIVE','RELEASE','CLOSED'].indexOf(stage)+1)+'</span>'+stage+'</li>'));
+ }
+ h.run('stale=true;render()');assert.match(h.root.innerHTML,/Last recorded phase: <strong>CLOSED/);assert.doesNotMatch(h.root.innerHTML,/Current phase:/);
+ for(const equipment of [[],[{id:'EQ',name:'Pump'}]]){
+  h.run('state.permit=null;state.equipment='+JSON.stringify(equipment)+';stale=false;render()');
+  assert.match(h.root.innerHTML,/No permit created/);assert.match(h.root.innerHTML,/no current permit phase/);
+  assert.doesNotMatch(h.root.innerHTML,/aria-current="step"|Current phase:/);assert.match(h.root.innerHTML,/Release NOT CLEARED — no permit/);
+ }
+ assert.equal(h.calls.length,0);
+});
+test('current workers and verifiers stay You across DTO reload without profile reads or identity changes',async()=>{
+ const h=harness();
+ const permit={state:'PLAN',equipment:[],workers:['human','other'],verifierIds:['human','other'],locks:[{actorId:'other',name:'Other worker <named>',lockId:'L-2',pointId:'V-3',crewId:'B'},{actorId:'human',name:'My personal-lock name',lockId:'L-1',pointId:'V-3',crewId:'A'}]};
+ const dto={actorId:'human',revision:1,permit,policy:{},board:[]};
+ h.run('state='+JSON.stringify(dto)+';stale=false;render()');
+ for(const name of [undefined,'Authenticated display name']){
+  h.context.invoke=async(_m,args)=>{assert.equal(args.operation,'get_state');return {...dto,actorDisplayName:name};};
+  await h.run('refresh()');
+  assert.ok(h.root.innerHTML.includes('<b>Workers:</b> You, Other worker &lt;named&gt;'));
+  assert.ok(h.root.innerHTML.includes('<b>Verifiers:</b> You, Other worker &lt;named&gt;'));
+  assert.match(h.root.innerHTML,/My personal-lock name/);assert.match(h.root.innerHTML,/Other worker &lt;named&gt;/);
+  assert.equal(h.run('state.actorId'),'human');assert.equal(h.run('state.permit.workers[0]'),'human');
+ }
+ h.run('state.permit=null;state.equipment=[{id:"EQ",name:"Pump"}];render()');
+ assert.match(h.root.innerHTML,/id="workers" name="workers" value="human"/);assert.match(h.root.innerHTML,/id="verifierIds" name="verifierIds" value="human"/);
+});
