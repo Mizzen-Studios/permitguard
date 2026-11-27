@@ -57,8 +57,10 @@
     "personalDataReportingImplemented": false,
     "automaticAppRetentionEraseFlowImplemented": false,
     "privacyComplianceClaimed": false,
-    "newLegalPolicyPublished": true,
-    "privacyGroundwork": "INACTIVE; further features paused by owner17:02"
+    "newLegalPolicyPublished": false,
+    "privacyGroundwork": "INACTIVE; further features paused by owner17:02",
+    "existingPolicyEvidence": "evidence/2026-11-27-retention-policy-publication.json",
+    "policyPublicationNote": "No new policy was published by this app deployment; the separately authorized17:02policy publication remains current."
   },
   "acceptance": {
     "freshSiteInstall": "OWNER_REPORTED_PASS_PREVIOUS_VERSION",
