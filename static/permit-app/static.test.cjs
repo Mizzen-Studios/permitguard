@@ -282,3 +282,27 @@ test('current workers and verifiers stay You across DTO reload without profile r
  h.run('state.permit=null;state.equipment=[{id:"EQ",name:"Pump"}];render()');
  assert.match(h.root.innerHTML,/id="workers" name="workers" value="human"/);assert.match(h.root.innerHTML,/id="verifierIds" name="verifierIds" value="human"/);
 });
+
+
+test('create immediately shows pending, preserves uncreated state and prevents duplicate submits',async()=>{
+ let now=1000,resolve,calls=0;const h=harness({Date:class extends Date{static now(){return now;}}});
+ h.context.invoke=()=>{calls++;return new Promise(r=>resolve=r);};
+ h.run('state={actorId:"human",revision:0,policy:{},permit:null,equipment:[],board:[]};stale=false;render()');
+ const pending=h.run('mutate("create_permit")');
+ assert.equal(h.run('busy'),true);assert.equal(h.run('state.permit'),null);
+ assert.match(h.root.innerHTML,/Creating permit… Awaiting server confirmation. Not saved yet/);
+ assert.doesNotMatch(h.root.innerHTML,/Permit created./);
+ await h.run('mutate("create_permit")');assert.equal(calls,1);
+ now=4300;resolve({actorId:'human',revision:1,policy:{},permit:{state:'PLAN',equipment:[],locks:[],workers:['human'],verifierIds:['human']},equipment:[],board:[]});
+ await pending;assert.equal(h.run('busy'),false);assert.equal(h.run('state.revision'),1);
+ assert.match(h.root.innerHTML,/Permit created./);assert.match(h.root.innerHTML,/Last save attempt: 3.3 s panel round-trip/);
+ assert.match(h.root.innerHTML,/Current phase: <strong>PLAN/);assert.equal(calls,1);
+});
+test('uncertain create clears pending copy, never creates local permit or automatically retries',async()=>{
+ const h=harness();let reject,calls=0;h.context.invoke=()=>{calls++;return new Promise((_r,j)=>reject=j);};
+ h.run('state={actorId:"human",revision:0,policy:{},permit:null,equipment:[],board:[]};stale=false');
+ const pending=h.run('mutate("create_permit")');reject(new Error('transport uncertain'));await pending;
+ assert.equal(calls,1);assert.equal(h.run('state.permit'),null);assert.equal(h.run('stale'),true);
+ assert.doesNotMatch(h.root.innerHTML,/Creating permit…/);assert.match(h.root.innerHTML,/Refresh before retrying/);
+ assert.match(h.root.innerHTML,/outcome unconfirmed/);
+});

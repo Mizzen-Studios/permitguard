@@ -1,0 +1,17 @@
+# CheckA feedback fixes —27November2026
+
+Owner Production2.5 PLAN/create report is preserved in [typed receipt](evidence/2026-11-27-owner-2.5-plan-pass.json). This is owner text, not received media or independently observed site acceptance. KAN-1 remains PLAN/revision1; no maintainer site mutation/reset/reseed.
+
+## Create delay
+The reported21.6seconds is a single owner observation, not a benchmark. Earlier native logs had no segment timings; cold-start/platform/storage/Jira contributions cannot be assigned retrospectively. The normal one-person create path previously made6Jira requests (issue, permissions, profile, duplicate issue-to-key, assignable person, property PUT); it now makes4. No profile is needed for creating a plan. Fresh issue/permission checks remain; the key is reused only via a WeakMap capability minted by the same authorization adapter, never client input or cross-request caching. Exact active/assignable checks remain, deduplicated and bounded to4concurrent calls for larger crews. CAS, admission headroom, property publication and Realtime invalidation are still awaited. No background safety write, unconfirmed success or retry shortcut.
+
+Pending feedback appears immediately: Creating permit / awaiting server confirmation / not saved yet. Inputs disable, elapsed seconds update, double submissions are ignored. A permit and PLAN appear only after the authenticated server response. An uncertain outcome clears pending copy and requires read/refresh before retry; no local permit is fabricated. Footer reports observed panel round-trip only; compact server timing logs contain operation and duration numbers, no actor/issue/permit IDs, names, photos or request payload. No actual post-fix latency result yet.
+
+## Phase and identity
+Explicit Current phase: PLAN badge and uppercase active progress step; all6phases covered. Absent permit has no active phase; stale state says last-recorded. Current actor displays You consistently in workers/verifiers before/after reload. Persisted identity, actual other-person names and personal lock attribution are unchanged.
+
+## Verification
+217backend +63UI +3Python =283testsPASS. Chromium local synthetic responsive QA:32cases across320/390/768/1280, no overflow, no page errors,44pxrefresh target/keyboard skip; existingPLAN badge, active step and both You labels asserted.320/1280PLAN screenshots privately inspected; no overlap. These are synthetic fixtures, not native acceptance or video media. Full pack/80Marketplace draft checksPASS. No privacy tooling activated; no manifest/scopes/Sharing/paid-resource/publication changes.
+
+## Rovo recommendation
+Use the existing Development installation on https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2 for the separate Rovo demo, only if the existing PermitGuard Judge agent is already available to the owner. Re-read live fixture before recording; label environment/build explicitly. Do not represent it as Production2.5/newer or fresh-site Rovo acceptance. Historical nativeRovo acceptance is recorded in evidence/2026-11-22-submission-pack.json; current availability needs owner recheck. Fresh judge tenant has no visible Rovo per owner; absence does not distinguish rollout, permission or entitlement. Free eligibility/enabling was not verified (official support routes returned404; licensing content not available in text extraction). Do not enable/trial/upgrade/add seats/cards to get footage. If the existing agent is absent, stop and report, not activate Studio publication or MCP.

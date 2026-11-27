@@ -1,0 +1,47 @@
+{
+  "classification": "OWNER_REPORTED_PLAN_CREATE_PASS_WITH_FEEDBACK",
+  "source": "Owner message27-Nov17:05; observed approximately17:03UK",
+  "site": "mizzen-judge-test.atlassian.net",
+  "issue": "KAN-1",
+  "version": "2.5.0",
+  "uiSource": "7ceb1ff0f253",
+  "initial": {
+    "equipmentCount": 6,
+    "mode": "WARN_ONLY",
+    "syntheticNotice": true,
+    "permit": null,
+    "revision": 0
+  },
+  "create": {
+    "clicks": 1,
+    "equipmentId": "register:10001:EQ-1",
+    "crew": "Judge demo",
+    "participants": "Actual prefilled own worker/verifier identity",
+    "result": "Permit created.",
+    "heading": "Review the isolation plan",
+    "phase": "PLAN_INFERRED_FROM_HEADING_AND_BEGIN_LOCKING",
+    "revision": 1,
+    "pointId": "V-3",
+    "energy": "HYDRAULIC",
+    "release": "NOT CLEARED",
+    "reason": "Permit must be in Release",
+    "personalLocks": 0,
+    "observedSeconds": 21.6
+  },
+  "reload": {
+    "samePermit": true,
+    "revision": 1,
+    "duplicates": 0,
+    "errors": false
+  },
+  "stoppedAt": "PLAN; no further action",
+  "feedback": [
+    "21.6s create delay",
+    "No explicit PLAN/active phase label visible",
+    "Worker/Verifier Olly before reload, You afterwards",
+    "Rovo not visible on fresh tenant; no chat run"
+  ],
+  "nativeRovo": "NOT_RUN_NOT_VISIBLE",
+  "independentlyInspected": false,
+  "screenshotsOrVideoReceived": false
+}

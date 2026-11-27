@@ -41,7 +41,7 @@ test('create commits once; profile omitted; fresh participant checks; timings co
  const f=native(),timings=[];let row={revision:null,data:emptySite()},writes=0,tick=0;
  const dispatch=createService({...f.adapter,store:{atomic:true,read:async()=>structuredClone(row),commit:async(expected,data)=>{assert.equal(expected,row.revision);row={revision:expected===null?0:expected+1,data:structuredClone(data)};writes++;return row.revision;}},clock:()=>tick+=3,observeTiming:t=>timings.push(t),now:()=> '2026-11-27T21:00:00Z'});
  const c={accountId:'alice',issueId:'1'};
- // Seed uses profile normally; supply the fixture's explicit native profile response for seed only.
+ // Preconfigured synthetic register; this test never contacts an actual site.
  row={revision:0,data:emptySite()};row.data.projects['10']={policy:{mode:'WARN_ONLY',failMode:'FAIL_CLOSED'},equipment:[{id:'EQ-1',name:'Pump',isolationPoints:[{id:'V-3',highEnergy:false,energyType:'HYDRAULIC'}]}],syntheticDemoRegister:true};
  const result=await dispatch('create_permit',{equipmentIds:['EQ-1'],workers:['alice'],verifierIds:['alice'],crewName:'Judge demo',expectedRevision:0},c);
  assert.equal(result.permit.state,'PLAN');assert.equal(result.revision,1);assert.equal(writes,1);

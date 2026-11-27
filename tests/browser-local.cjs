@@ -15,11 +15,12 @@ const css=fs.readFileSync(root+'/static/permit-app/styles.css','utf8');
  page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
  await page.setViewportSize({width,height:900});await page.setContent('<html lang="en"><head><style>'+css+'</style></head><body><p>LOCAL SYNTHETIC FIXTURE — not Jira/site acceptance</p><a class="skip" href="#work">Skip to permit</a><div id="app"></div></body></html>');
  await page.addScriptTag({content:'window.__calls=[];window.invoke=async(_m,a)=>{__calls.push(a);return state;};window.realtime={};window.view={};'+source});
- for(const scenario of ['emptyAdmin','emptyWorker','assetsOutage','readFailure','configuredPlan','active','staleActive']){
+ for(const scenario of ['emptyAdmin','emptyWorker','assetsOutage','readFailure','configuredPlan','existingPlan','active','staleActive']){
  await page.evaluate(s=>{state={actorId:'local-human',actorDisplayName:'Synthetic reviewer',revision:1,projectName:'Synthetic project',issueKey:'LOCAL-1',permit:null,equipment:[],board:[],policy:{mode:'WARN_ONLY',failMode:'FAIL_CLOSED'},capabilities:{sampleRoleplay:false},assets:{status:'NOT_CONNECTED'}};stale=false;initializing=false;error='';preview=null;
  if(s==='emptyAdmin'||s==='assetsOutage')state.isProjectAdmin=true;
  if(s==='assetsOutage')state.assets.status='UNAVAILABLE';
  if(s==='configuredPlan')state.equipment=[{id:'EQ',name:'Synthetic pump',isolationPoints:[]}];
+ if(s==='existingPlan'){state.permit={state:'PLAN',workers:['local-human'],verifierIds:['local-human'],equipment:[{id:'EQ',name:'Synthetic pump',isolationPoints:[{id:'V-3',energyType:'HYDRAULIC'}]}],locks:[],activations:[],verifications:[]};state.release={status:'NOT CLEARED',reasons:[]};}
  if(s==='active'||s==='staleActive'){state.permit={state:'ACTIVE',equipment:[{id:'EQ',name:'Synthetic pump',isolationPoints:[]}],locks:[]};state.release={status:'NOT CLEARED',reasons:[]};}
  if(s==='staleActive')stale=true;
  if(s==='readFailure'){state=null;stale=true;error='Cannot confirm current app state.';}
@@ -28,6 +29,7 @@ const css=fs.readFileSync(root+'/static/permit-app/styles.css','utf8');
  const refresh=page.locator('button[data-action="refresh"]').first();assert.ok((await refresh.boundingBox()).height>=44);
  if(scenario.startsWith('empty')||scenario==='assetsOutage'){assert.equal(await page.locator('form[data-operation="create_permit"]').count(),0);assert.equal(await page.getByText('Judge sample roleplay',{exact:true}).count(),0);}
  if(scenario==='configuredPlan')assert.equal(await page.locator('form[data-operation="create_permit"]').count(),1);
+ if(scenario==='existingPlan'){assert.equal(await page.getByText('Current phase: PLAN',{exact:true}).count(),1);assert.equal(await page.locator('.steps [aria-current="step"]').textContent(),'1PLAN');assert.equal(await page.getByText('Workers: You',{exact:true}).count(),1);assert.equal(await page.getByText('Verifiers: You',{exact:true}).count(),1);}
  if(scenario==='readFailure')assert.equal(await page.getByRole('heading',{name:'Reconnect safely'}).count(),1);
  await page.screenshot({path:path.join(output,'pg-ux-'+width+'-'+scenario+'.png'),fullPage:true});report.push({width,scenario,overflow,touchTarget:true});
  }
