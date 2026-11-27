@@ -1,0 +1,21 @@
+{
+  "classification": "OWNER_REPORTED_SEED_FLOW_BLOCKED",
+  "reportedAt": "2026-11-27T00:15:00Z",
+  "version": "2.3.0",
+  "uiSource": "bd1d3977a97d",
+  "issueKey": "KAN-1",
+  "route": "PASS inline issue panel",
+  "headerFooter": "PASS matching version/environment/source",
+  "liveUpdates": "Connected",
+  "loadApproximateSeconds": 8,
+  "errorsShown": false,
+  "registerEmpty": true,
+  "release": "NOT CLEARED — no permit",
+  "seedButtonVisible": false,
+  "ownerSeedStepsVerdict": "FAIL steps3–5: blocked by missing control; cancel/confirm/persistence not executed",
+  "sampleLoaderClicked": false,
+  "independentlyInspected": false,
+  "rootCause": "Forge resolver rebuilt capabilities using assetsImport/sampleRoleplay only, dropping service seedEmptyDemo",
+  "ordinaryJiraIssueCountIsEligibilityInput": false,
+  "newFixNativeAcceptance": "NOT_RUN"
+}

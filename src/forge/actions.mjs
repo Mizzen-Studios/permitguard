@@ -114,7 +114,7 @@ export function createForgeWiring({ dispatch, requestJira, archive, now = () => 
     need(trustedIssue(context), 'ISSUE_CONTEXT_REQUIRED');
     const result = await dispatch(operation, payload, context);
     if (archive && operation==='close_permit') { try { result.archive=await archive.appendClosed(result.permit,context); } catch { result.archive={status:'PENDING_ADMIN_ARCHIVE',message:'Permit closed in Forge. A configured restricted space and an authorized administrator are required to publish the monthly register.'}; } }
-    return { ...result, capabilities: { ...activeCapabilities, assetsImport:result.capabilities?.assetsImport===true, sampleRoleplay:result.capabilities?.sampleRoleplay===true }, realtime: { channel: 'permitguard' } };
+    return { ...result, capabilities: { ...activeCapabilities, seedEmptyDemo:result.capabilities?.seedEmptyDemo===true, assetsImport:result.capabilities?.assetsImport===true, sampleRoleplay:result.capabilities?.sampleRoleplay===true }, realtime: { channel: 'permitguard' } };
   });
   function action(operation) {
     const run = guard(async (event = {}, context = {}) => {

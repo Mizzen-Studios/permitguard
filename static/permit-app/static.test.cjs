@@ -226,3 +226,26 @@ test('build marker is above the fold and footer includes truthful environment wi
 });
 
 test('empty demo button uses admin/server capability and cannot replace an unavailable register',()=>{const h=harness();h.run('state={actorId:"alice",isProjectAdmin:true,equipment:[],assets:{status:"NOT_CONNECTED"},capabilities:{seedEmptyDemo:true}}');assert.match(h.run('emptySetup()'),/Load six demo equipment items \(Warn-only\)/);h.run('state.capabilities.seedEmptyDemo=false;state.assets.status="UNAVAILABLE"');assert.doesNotMatch(h.run('emptySetup()'),/data-action="seed_empty_demo_register"/);h.run('state.capabilities.seedEmptyDemo=true;state.isProjectAdmin=false');assert.doesNotMatch(h.run('emptySetup()'),/data-action="seed_empty_demo_register"/);});
+
+async function seedBridgeFixture({role='project-admin',canEdit=true,history=false}={}){
+ const {createService}=await import('../../src/server/service.mjs');const {emptySite}=await import('../../src/server/store.mjs');const {jiraAdapters}=await import('../../src/server/jira.mjs');const {createForgeWiring}=await import('../../src/forge/actions.mjs');
+ let row={revision:null,data:emptySite()},writes=0;const calls=[];
+ if(history)row.data.permits.other={id:'other',projectId:'20',state:'CLOSED',locks:[]};
+ const route=(strings,...values)=>strings.reduce((s,x,i)=>s+x+(i<values.length?values[i]:''),'');
+ const api={asUser:()=>({requestJira:async url=>{calls.push(url);let data;if(url.startsWith('/rest/api/3/issue/'))data={id:'10001',key:'KAN-1',fields:{project:{id:'20',key:'KAN',name:'Synthetic fixture'}}};else if(url.startsWith('/rest/api/3/mypermissions?'))data={permissions:{ADMINISTER_PROJECTS:{havePermission:role==='project-admin'},ADMINISTER:{havePermission:role==='site-admin'},EDIT_ISSUES:{havePermission:canEdit}}};else if(url==='/rest/api/3/myself')data={accountId:'fixture-person',displayName:'Fixture only'};else throw Error('Unexpected API route: '+url);return {ok:true,status:200,json:async()=>data};}})};
+ const adapters=jiraAdapters(api,route),store={atomic:true,read:async()=>structuredClone(row),commit:async(expected,data)=>{assert.equal(expected,row.revision);row={revision:(row.revision??-1)+1,data:structuredClone(data)};writes++;return row.revision;}};
+ const dispatch=createService({store,...adapters});const wiring=createForgeWiring({dispatch,requestJira:async()=>{throw Error('Unexpected workflow API')}});const context={accountId:'fixture-person',extension:{issue:{id:'10001'}}};
+ const invoke=async(_method,args)=>wiring.resolver({context,payload:args});return {invoke,calls,get writes(){return writes},get row(){return structuredClone(row)}};
+}
+for(const role of ['project-admin','site-admin'])test('real native permission adapter → service → Forge resolver → UI renders seed for '+role,async()=>{
+ const fixture=await seedBridgeFixture({role}),h=harness({invoke:fixture.invoke});await h.run('refresh()');assert.equal(h.run('state.isProjectAdmin'),true);assert.equal(h.run('state.capabilities.seedEmptyDemo'),true);assert.match(h.root.innerHTML,/data-action="seed_empty_demo_register"/);assert.equal(fixture.writes,0);
+ const target={dataset:{action:'seed_empty_demo_register'}};const click=()=>h.handlers.click({target:{closest:()=>target}});
+ h.context.window.confirm=()=>false;await click();assert.equal(fixture.writes,0);assert.equal(h.run('state.equipment.length'),0);
+ h.context.window.confirm=()=>true;await click();assert.equal(fixture.writes,1);assert.equal(h.run('state.equipment.length'),6);assert.equal(h.run('state.policy.mode'),'WARN_ONLY');assert.equal(h.run('state.permit'),null);assert.equal(h.run('state.capabilities.seedEmptyDemo'),false);assert.doesNotMatch(h.root.innerHTML,/data-action="seed_empty_demo_register"/);assert.match(h.root.innerHTML,/Synthetic demo equipment only/);
+ await h.run('refresh()');assert.equal(fixture.writes,1);assert.equal(h.run('state.equipment.length'),6);assert.equal(h.run('state.release.status'),'NOT CLEARED');assert.deepEqual(fixture.row.data.permits,{});assert.ok(!fixture.calls.some(url=>url.includes('/search')),'ordinary Jira issues are never enumerated');
+});
+for(const setup of [{role:'member'},{role:'site-admin',canEdit:false},{role:'project-admin',history:true}])test('real resolver keeps demo seed hidden and nonwriting for '+JSON.stringify(setup),async()=>{
+ const fixture=await seedBridgeFixture(setup),h=harness({invoke:fixture.invoke});await h.run('refresh()');assert.equal(h.run('state.capabilities.seedEmptyDemo'),false);assert.doesNotMatch(h.root.innerHTML,/data-action="seed_empty_demo_register"/);assert.equal(fixture.writes,0);
+});
+
+test('missing or false eligibility never promises a nonexistent demo button',()=>{const h=harness();h.run('state={isProjectAdmin:true,equipment:[],capabilities:{},assets:{status:"NOT_CONNECTED"}}');assert.match(h.run('emptySetup()'),/eligibility.*was not returned/);assert.doesNotMatch(h.run('emptySetup()'),/use the button below/);h.run('state.capabilities.seedEmptyDemo=false');assert.match(h.run('emptySetup()'),/not eligible/);assert.match(h.run('emptySetup()'),/Ordinary Jira issues alone do not block it/);});

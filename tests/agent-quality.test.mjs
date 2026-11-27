@@ -40,7 +40,7 @@ test('known permissions/conflicts are actionable but unknown failures remain red
 });
 test('resolver preserves known sample capability but never replaces authoritative archive capability',async()=>{
  const h=harness({reply:{permit:null,actorId:'actual-human',capabilities:{sampleRoleplay:true,assetsImport:true,archiveConfig:true,privateDebug:'no'}}});
- const r=await h.resolver({context:{accountId:'actual-human',extension:{issue:{id:'10001'}}},payload:{operation:'get_state'}});assert.deepEqual(r.capabilities,{archiveConfig:false,sampleRoleplay:true,assetsImport:true});
+ const r=await h.resolver({context:{accountId:'actual-human',extension:{issue:{id:'10001'}}},payload:{operation:'get_state'}});assert.deepEqual(r.capabilities,{archiveConfig:false,sampleRoleplay:true,assetsImport:true,seedEmptyDemo:false});
 });
 test('fresh empty reply gives a concrete next step and never writes storage',async()=>{
  const dispatch=createService({store:{atomic:true,read:async()=>({revision:null,data:emptySite()}),commit:async()=>assert.fail('read cannot write')},authorize:async()=>({actorId:'actual-human',issueId:'10001',projectId:'10'})});
