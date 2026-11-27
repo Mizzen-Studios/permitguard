@@ -1,0 +1,48 @@
+{
+  "classification": "OWNER_REPORTED_SEED_FLOW_PASS",
+  "reportedAt": "2026-11-27T09:01:00Z",
+  "version": "2.4.0",
+  "uiSource": "e8b95c053254",
+  "issueKey": "KAN-1",
+  "route": "PASS inline PermitGuard issue panel",
+  "markerHeader": "2.4.0 · Production · UI e8b95c053254",
+  "footerMatches": true,
+  "connectedApproximate": "few seconds, owner observation not benchmark",
+  "cancel": {
+    "registerEmpty": true
+  },
+  "confirm": {
+    "equipmentCount": 6,
+    "keys": [
+      "EQ-1",
+      "EQ-2",
+      "EQ-3",
+      "EQ-4",
+      "EQ-5",
+      "EQ-6"
+    ],
+    "names": [
+      "Cooling-water pump",
+      "Conveyor drive",
+      "Air receiver",
+      "Mixer",
+      "Steam line",
+      "Gravity-fed hopper"
+    ],
+    "mode": "WARN_ONLY",
+    "release": "NOT CLEARED — no permit",
+    "locks": 0
+  },
+  "reload": {
+    "equipmentCount": 6,
+    "duplicates": 0,
+    "seedButtonVisible": false
+  },
+  "independentlyInspected": false,
+  "screenshotsOrVideoReceived": false,
+  "limitations": [
+    "Owner report, not independently inspected visual media",
+    "No permit lifecycle, named verification, camera/QR, two-browser delivery, workflow, JQL or archive acceptance implied",
+    "No production safety/privacy compliance certification; no Marketplace/submission approval"
+  ]
+}

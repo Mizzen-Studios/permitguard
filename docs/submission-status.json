@@ -61,10 +61,8 @@
   ],
   "note": "Local consistency checks cannot grant approval, create access or certify contest eligibility. No actions are scheduled.",
   "localSourceCandidate": {
-    "status": "DEPLOYED_PRODUCTION_2.0.0_NOT_FRESH_SITE_ACCEPTED",
-    "sourceBuildCommit": "bc800397bc17",
-    "verification": "submission/verification-2026-11-25.json",
-    "notes": "Production deployed from clean 713eadc; DEV capture baseline unchanged. Distribution is approved but blocked by actual console sign-in; no installation link exists."
+    "status": "HISTORICAL_PRODUCTION_2.0_CANDIDATE_SUPERSEDED",
+    "notes": "Current Production2.4 and owner seed acceptance above supersede pre-sharing2.0 notes; no new app deployment in readiness preparation"
   },
   "production": {
     "version": "2.4.0",
@@ -75,7 +73,7 @@
     "installLinkCreated": false
   },
   "followUpCandidate": {
-    "status": "DEPLOYED_PRODUCTION_2.4.0_NATIVE_SEED_ACCEPTANCE_NOT_RUN",
+    "status": "PRODUCTION_2.4_SEED_ACCEPTED_BROADER_LIFECYCLE_NOT_RUN",
     "mcpBaseActionKey": "permitguard_check_readiness",
     "mcpTools": 1,
     "mcpActionVerb": "GET",
@@ -106,17 +104,39 @@
     "version": "2.1.0",
     "independentlyInspected": false,
     "postUpdateVersion": "2.4.0",
-    "postUpdateVisualAcceptance": "NOT_RUN",
+    "postUpdateVisualAcceptance": "OWNER_REPORTED_PASS",
     "siteSidebarApps": "OWNER_REPORTED_404_DO_NOT_USE",
-    "lastOwnerVerifiedVersion": "2.3.0",
-    "lastOwnerVisualEvidence": "evidence/2026-11-27-owner-2.3-seed-blocked.json",
-    "lastOwnerSeedResult": "FAIL_MISSING_CONTROL"
+    "lastOwnerVerifiedVersion": "2.4.0",
+    "lastOwnerVisualEvidence": "evidence/2026-11-27-owner-2.4-seed-pass.json",
+    "lastOwnerSeedResult": "OWNER_REPORTED_PASS"
   },
   "localFollowUp": {
-    "status": "DEPLOYED_PRODUCTION_2.4.0_AWAITING_NATIVE_SEED_RERUN",
-    "reason": "Fixed response capability omission, no guard relaxation",
+    "status": "OWNER_REPORTED_PRODUCTION_2.4_SEED_PASS",
+    "reason": "Owner09:01 verified Cancel0/Confirm6/WarnOnly/noPermit/noLocks/reload6/noDuplicates/noSeedButton",
     "sourceCommit": "e8b95c053254bed5bd2f2ec6a28ff8162a80e3fd",
     "actualSiteDataWritten": false,
-    "ownerBrowserChecklist": "empty-project-demo-seed.md"
+    "ownerBrowserChecklist": "remaining-browser-checks-2026-11-27.md"
+  },
+  "currentReadiness": {
+    "updatedAt": "2026-11-27T09:01:00Z",
+    "scope": "Preparation only, repository pushes authorized; no listing form changes/promotion/social/submission",
+    "nativeSeedEvidence": "evidence/2026-11-27-owner-2.4-seed-pass.json",
+    "coreLifecycleNative": "NOT_RUN_ON_FRESH_PRODUCTION_SITE",
+    "marketplaceReady": false,
+    "marketplacePersonalDataReportingImplemented": false,
+    "videoRecorded": false,
+    "marketplaceListingChanged": false,
+    "sharingChanged": false
+  },
+  "sourceReadinessCandidate": {
+    "status": "SOURCE_ONLY_NOT_DEPLOYED",
+    "fixes": [
+      "Conservative own-lock/release/close byte reserve for new admissions",
+      "Legacy authorized drain only if under hard cap and reserve deficit decreases",
+      "Projected START is ACTIVE, remains nonauthoritative"
+    ],
+    "productionUnchanged": "2.4.0",
+    "nativeAcceptance": "NOT_RUN_FOR_SOURCE_CANDIDATE",
+    "sharingChanged": false
   }
 }

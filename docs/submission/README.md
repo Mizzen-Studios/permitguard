@@ -1,26 +1,12 @@
-> **Latest: Production2.4.0 · UI e8b95c053254** (27-Nov00:19UTC). Fixed seed capability forwarding through Forge response; prior2.3 owner seed check FAILED (no button), not accepted. [Rerun checklist](../empty-project-demo-seed.md). Sharing and safety guards unchanged; latest native seed acceptance NOT_RUN. Older dated release notes below are history.
+# Submission working pack —27November2026
 
-> **Current release 26-Nov21:06 UTC: Production 2.3.0 · UI bd1d3977a97d.** Confirmed empty-project Warn-only demo seed is deployed, not yet owner-browser accepted. Use the issue PermitGuard section/apps icon, never the reported-broken site sidebar. Sharing unchanged. [Exact seed acceptance checklist](../empty-project-demo-seed.md). Prior dated2.2/hold statements below are historical; owner21:05 resolved public-code/docs push authority.
+**Draft repository pack, not a Marketplace/Devpost submission or public media upload.** Public code/docs pushes authorized; Sharing and MCP exposure stay unchanged. Native **Production2.4.0/UIe8b95c053254** seed owner PASS27Nov09:01; full fresh-site lifecycle not accepted. [Current readiness](../readiness-2026-11-27.md) · [typed status](../submission-status.json).
 
-> **17:04 owner check — Production 2.2.0 PASS:** header **2.2.0 · Production · UI b5df804cbdf1**, matching footer, clean empty panel. The site-wide sidebar **Apps** entry returned **404** on the rehearsal site: **do not use it for judge navigation**. Open the issue’s PermitGuard section, or the **apps icon under the issue title → PermitGuard**. This is owner-reported, not independent screenshot inspection or full-lifecycle acceptance.
+- [Marketplace copy and original draft artwork](../marketplace/README.md): missing real screenshot slots, privacy/security blocks and same-ID Sharing consequence explicit.
+- [Devpost write-up](devpost-writeup.md) and [bonus evidence matrix](bonus-targets.md): drafts, not entrant/organizer signoff.
+- [180-second script](../demo-video-script.md), [timed shots](../demo-shot-list.json), [exact recording clicks](../video-capture-list.md), [private footage intake](../footage-handoff.md). No clips/screenshots/export received; DEV ACTIVE and historical MCP stay labelled, not Production footage.
+- [Next owner browser checks](../remaining-browser-checks-2026-11-27.md): EQ-1 PLAN/reload + read-only Judge first; two-human/device/Realtime later with participants/fixture.
+- [Core audit](../core-audit-2026-11-27.md), [source candidate headroom/reporting work](../readiness-2026-11-27.md): not a silent new Forge deployment or full capacity recovery.
+- [Historical verification](verification-2026-11-25.json), [UX notes](unreleased-polish.md), [agent answer contracts](agent-answer-quality.md), [Crew B scenario](../second-crew-demo.md). Dated source-only/deployment statements in historical docs are not current authority/status.
 
-> **Latest release, 26 Nov 12:54 UTC:** **Production 2.2.0 · UI b5df804cbdf1**, compatible major2 update. Build/environment is shown near the header and in the footer; **Open PermitGuard** in the right-side context is a static opening guide. Reload/reopen the Jira issue to fetch the new resource. [Change/evidence notes](../judge-discoverability-2026-11-26.md). Owner reported the prior fresh-site install/panel connected; post-update visual, full lifecycle and two-browser acceptance remain unverified. Earlier dated versions below are historical.
-
-> **26-Nov current release:** Production **2.1.0** from d69b66f; candidate code deployed, not fresh-site/two-person accepted. Owner handles private Jira-only form; valid privacy URL/handling unresolved. [Current handoff](../distribution-handoff-2026-11-26.md). Legacy source-only and 2.0.0 records below remain historical; DEV capture evidence untouched.
-
-> **First run:** open a Jira issue, click the **apps icon under the title** (sometimes labelled **View app actions**), then choose **PermitGuard**. A right-side **Open PermitGuard** context guide is included in Production **2.2.0**; it explains navigation only. The issue panel remains the editable surface.
-
-
-# Submission working pack
-
-**Production 2.0.0 now deployed under the 21:39 approval.** Private Jira-only distribution is approved but **BLOCKED_CONSOLE_LOGIN**; no install link exists and no fresh-site acceptance is claimed. [Current handoff](../production-install-rehearsal-2026-11-25.md). Development 5.16.0 / UI 5f92b0c1b926 and its capture checklist remain unchanged. No MCP/Marketplace/billing/publication approval.
-
-- [Unreleased UX and verification notes](unreleased-polish.md)
-- [Devpost working write-up](devpost-writeup.md): what it does, how it is built, limitations and intended bonus.
-- [Bonus target/evidence matrix](bonus-targets.md): MCP primary; no new bonus selection or stacked-award claim.
-- [Legacy draft/background](../devpost-draft.md).
-- [Production/share-link plan](../judge-access-plan.md), [recording checklist](../video-capture-list.md), [readiness priorities](../submission-checklist-2026-11-25.md).
-
-- [Local verification record](verification-2026-11-25.json) · [agent answer contracts](agent-answer-quality.md). These do not constitute new live acceptance.
-
-- [New source-only branded MCP/two-person Crew B candidate](../second-crew-demo.md): not deployed and not new live evidence. The genuine prior DEV receipt/capture baseline is unchanged.
+Owner2.4 seed PASS is not footage or full lifecycle; no candidate deployment, listing form, registration, billing, Publishing, external client consent or Devpost action is executed by this preparation pack.

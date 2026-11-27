@@ -1,6 +1,6 @@
 # PermitGuard — Devpost working draft
 
-**Repository draft only. Not saved to a Devpost form, published or submitted.** Actual form limits/entrant declarations still need checking. Intended category: **Apps for Specialized Industries**. Production 2.1.0 now contains the UX/agent polish; new-site install/browser acceptance is NOT_RUN and private link awaits the owner form and a valid policy URL/privacy handling. Existing owner demo evidence remains Development 5.16.0. [Readiness and evidence](README.md).
+**Repository draft only. Not saved to a Devpost form, published or submitted.** Actual form limits/entrant declarations still need checking. Intended category: Apps for Specialized Industries. Current Production2.4.0/UIe8b95c053254 fresh-site route/seed/cancel/confirm/persistence owner PASS27Nov09:01; no permit/locks or full lifecycle inferred. DEV5.16 remains separate historical ACTIVE/MCP evidence. Existing Sharing stays unchanged; privacy URLs are published but personal-data reporting/erasure is incomplete. [Readiness and evidence](README.md).
 
 ## Tagline
 
@@ -38,7 +38,7 @@ Platform discovery also mattered. MCP's console switch was app-wide rather than 
 
 The owner-run MCP receipt supplies real authenticated-path evidence, separately from native Rovo and local fixtures. The observed ACTIVE response preserved blocked release and operational:false, and the owner confirmed unchanged visible site revision/locks before disabling exposure again. Before/after permit revision was not displayed in the panel; returned 6 is not a fabricated 6→6 comparison.
 
-Local tests exercise stale writes, identity/permission boundaries, named verification, QR challenge binding, shared-equipment lock blocking, read-only readiness and truthful submission-pack claims. New first-run/error polish makes empty, unavailable and uncertain-save states actionable without silently retrying writes. It has local synthetic-browser coverage, not new live production acceptance.
+Local tests exercise stale writes, identity/permission boundaries, named verification, QR challenge binding, shared-equipment lock blocking, read-only readiness and truthful submission-pack claims. New first-run/error polish makes empty, unavailable and uncertain-save states actionable without silently retrying writes. Native Production2.4 onboarding now has a bounded owner PASS; complete lifecycle/two-human/device acceptance remains pending. Local synthetic-browser coverage is separate.
 
 ## What we learned
 
@@ -46,7 +46,7 @@ A trustworthy answer is more useful than an optimistic one. Putting release stat
 
 ## What's next
 
-The owner is recording the existing 180-second demo plan. Production deploy and a private Jira-only link were approved in the owner request at 21:39 UTC. Production 2.1.0 from exact d69b66f is deployed; owner reports their own console signed in and will fill Distribution, with policy URL/privacy handling unresolved. The next gates are that private link and clean-site browser rehearsal, footage review, entrant/media-rights attestations and a separately agreed judge MCP window. Marketplace, MCP exposure, billing and publication remain unapproved.
+The180-second script is prepared, not recorded/exported/uploaded. Production2.4 fresh-site seed is owner-reported PASS, with six synthetic items/Warn-only/no permit/locks after reload. Remaining gates are broader native lifecycle and participant/device evidence, actual screenshots/raw footage/review, privacy reporting/erase/retention work, entrant/media-rights attestations and a separately approved judge MCP access window. Marketplace submission on the same app can remove install-link eligibility, so identity/Sharing strategy needs a separate decision before any form submit. No listing/publication/MCP/billing changes are authorized.
 
 Recovery/capacity/retention/export and broader live workflow/JQL, automatic Realtime, two-human high-energy and device validation remain separately scoped work before production qualification. Conflict guard and shift-end suspension remain future ideas, not implemented demo claims.
 

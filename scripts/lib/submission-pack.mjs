@@ -23,7 +23,7 @@ export function loadPack(root) {
   const shots = json('docs/demo-shot-list.json'), status = json('docs/submission-status.json');
   const allowedReceipts = ['evidence/2026-11-25-production-deployment.json', 'evidence/2026-11-26-production-deployment.json', 'evidence/2026-11-26-production-discoverability.json', 'evidence/2026-11-26-production-empty-demo.json', 'evidence/2026-11-27-production-seed-capability-fix.json'];
   const evidence = status.production?.evidence;
-  return { files, documents, ownerRehearsal: files.has('docs/evidence/2026-11-26-owner-fresh-site-rehearsal.json') ? json('docs/evidence/2026-11-26-owner-fresh-site-rehearsal.json') : null, legalPublication: files.has('docs/evidence/2026-11-26-legal-pages.json') ? json('docs/evidence/2026-11-26-legal-pages.json') : null, legalSourceHashes: Object.fromEntries(['privacy','terms'].filter(n=>files.has('docs/'+n+'.html')).map(n=>[n,createHash('sha256').update(readFileSync(join(root,'docs',n+'.html'))).digest('hex')])), shots, capture: json('docs/capture-log.json'), receipt: json('docs/evidence/2026-11-24-mcp-owner-receipt.json'), status, production: allowedReceipts.includes(evidence) && files.has('docs/' + evidence) ? json('docs/' + evidence) : null };
+  return { files, documents, ownerSeed: files.has('docs/evidence/2026-11-27-owner-2.4-seed-pass.json') ? json('docs/evidence/2026-11-27-owner-2.4-seed-pass.json') : null, ownerRehearsal: files.has('docs/evidence/2026-11-26-owner-fresh-site-rehearsal.json') ? json('docs/evidence/2026-11-26-owner-fresh-site-rehearsal.json') : null, legalPublication: files.has('docs/evidence/2026-11-26-legal-pages.json') ? json('docs/evidence/2026-11-26-legal-pages.json') : null, legalSourceHashes: Object.fromEntries(['privacy','terms'].filter(n=>files.has('docs/'+n+'.html')).map(n=>[n,createHash('sha256').update(readFileSync(join(root,'docs',n+'.html'))).digest('hex')])), shots, capture: json('docs/capture-log.json'), receipt: json('docs/evidence/2026-11-24-mcp-owner-receipt.json'), status, production: allowedReceipts.includes(evidence) && files.has('docs/' + evidence) ? json('docs/' + evidence) : null };
 }
 
 export function validatePack(pack) {
@@ -31,6 +31,10 @@ export function validatePack(pack) {
   const { shots, capture, receipt, status, documents, files, production } = pack;
   const owner = pack.ownerRehearsal;
   const ownerPartial = owner?.classification==='OWNER_REPORTED_FRESH_SITE_ACCEPTANCE' && owner?.freshSite===true && owner?.installation?.success===true && owner?.panel?.loaded===true && owner?.panel?.liveUpdatesConnected===true && owner?.panel?.errorsReported===false && owner?.productionBeforeUpdate==='2.1.0';
+  if(status.ownerFreshSiteRehearsal?.postUpdateVisualAcceptance==='OWNER_REPORTED_PASS') {
+    const seed=pack.ownerSeed;
+    check(seed?.classification==='OWNER_REPORTED_SEED_FLOW_PASS' && seed?.version===status.production?.version && seed?.uiSource===status.production?.uiSource && seed?.cancel?.registerEmpty===true && seed?.confirm?.equipmentCount===6 && seed?.confirm?.mode==='WARN_ONLY' && seed?.confirm?.locks===0 && seed?.confirm?.release==='NOT CLEARED — no permit' && seed?.reload?.equipmentCount===6 && seed?.reload?.duplicates===0 && seed?.reload?.seedButtonVisible===false && seed?.independentlyInspected===false && seed?.screenshotsOrVideoReceived===false && status.ownerFreshSiteRehearsal.lastOwnerVisualEvidence==='evidence/2026-11-27-owner-2.4-seed-pass.json', 'Owner seed PASS must retain exact build, Cancel/Confirm/reread scope and lack of inspected media');
+  }
   const script = documents['docs/demo-video-script.md'] || '';
   const guide = documents['docs/video-capture-list.md'] || '';
   const list = shots.shots || [];
@@ -45,6 +49,8 @@ export function validatePack(pack) {
     check(Array.isArray(s.captureClicks) && s.captureClicks.length > 0 && s.captureClicks.every(x => typeof x === 'string' && x.length > 0), s.id + ': missing clicks');
     check(typeof s.captureExpected === 'string' && s.captureExpected.length > 0, s.id + ': missing expected result');
     check(typeof s.narration === 'string' && script.includes(s.narration), s.id + ': narration differs from script');
+    const narrationWords=(s.narration||'').match(/\b[\w'-]+\b/g)||[];
+    check(narrationWords.length/(s.end-s.start)*60<=180, s.id+': narration exceeds180words/minute; retime or shorten');
     if (i < 5) check(s.captureUrl === 'https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2' && s.captureIssueKey === 'PGSAMPLE-2', s.id + ': wrong demo issue/site');
   }
   check(cursor === 180 && shots.targetSeconds === 180, 'Edit budget must be exactly 180 seconds');
@@ -59,6 +65,7 @@ export function validatePack(pack) {
   check(receipt.stateComparison.before.permitRevision === null && receipt.stateComparison.after.permitRevision === null, 'Do not invent before/after permit revision');
   check(receipt.cleanup.exposureOffVerifiedAfterReload && receipt.cleanup.inspectorDisconnected && receipt.cleanup.inspectorStopped && receipt.cleanup.newInspectorGrantRemoved, 'Owner cleanup observations must be retained');
   check(shots.coreVersion === capture.coreVersion && shots.uiSource === capture.uiSource && capture.coreVersion === status.currentDemo.version && capture.uiSource === status.currentDemo.uiSource, 'Capture build/source mismatch');
+  check(shots.productionOnboarding?.version==='2.4.0' && shots.productionOnboarding?.uiSource==='e8b95c053254' && shots.productionOnboarding?.classification==='OWNER_REPORTED_PASS_NOT_FOOTAGE' && capture.productionOnboarding?.mediaReceived===false && script.includes('Production2.4.0') && script.includes('Development5.16.0') && JSON.stringify(list[1]).includes('not that installation'), 'Do not conflate Production onboarding with Development ACTIVE footage or received media');
   const ids = new Set();
   for (const asset of capture.assets || []) {
     check(!ids.has(asset.id), 'Duplicate capture asset ID'); ids.add(asset.id);

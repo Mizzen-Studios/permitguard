@@ -1,0 +1,103 @@
+[
+  {
+    "url": "https://developer.atlassian.com/platform/marketplace/building-your-presence-on-marketplace/",
+    "final_url": "https://developer.atlassian.com/platform/marketplace/building-your-presence-on-marketplace/",
+    "retrieved_at": "2026-11-27T09:04:22.825544+00:00",
+    "http_status": 200,
+    "html_sha256": "ed3d8ec405d415b3fdd36c9c890c2b54d65d58e8a2b952c7948b587f76450076",
+    "extracted_article_sha256": "bcc62cc441dd4ae95b7bbfc47d054d55a71c38b0b42c202cc764e274fa2ff094",
+    "method": "stdlib urllib + HTMLParser; scripts/styles excluded; article from Last updated",
+    "private_article_key": "building-your-presence-on-marketplace.txt",
+    "public_source_text": "Not republished; retained privately. See original URL; hashes record retrieval, not independent ongoing availability."
+  },
+  {
+    "url": "https://developer.atlassian.com/platform/marketplace/creating-a-marketplace-listing/",
+    "final_url": "https://developer.atlassian.com/platform/marketplace/creating-a-marketplace-listing/",
+    "retrieved_at": "2026-11-27T09:04:22.877741+00:00",
+    "http_status": 200,
+    "html_sha256": "95ebfbbe1d536b9df33ec75a8aa2349e4c519775bc64a9dde7148d7b2b051ae3",
+    "extracted_article_sha256": "14020fbaacb93f896912ac106006ed9a0dd3ac164b071a5e48439ee24f56abd2",
+    "method": "stdlib urllib + HTMLParser; scripts/styles excluded; article from Last updated",
+    "private_article_key": "creating-a-marketplace-listing.txt",
+    "public_source_text": "Not republished; retained privately. See original URL; hashes record retrieval, not independent ongoing availability."
+  },
+  {
+    "url": "https://developer.atlassian.com/platform/forge/distribute-your-apps/",
+    "final_url": "https://developer.atlassian.com/platform/forge/distribute-your-apps/",
+    "retrieved_at": "2026-11-27T09:04:22.941461+00:00",
+    "http_status": 200,
+    "html_sha256": "0a960378bd03f2952fede3b63896095e1e82c689bb0e9a85e7ed5816df8a6070",
+    "extracted_article_sha256": "d8bbd2f34f0b3a88d8fcedbc329be9f1be96b2bdfc86f9617883978bfabd4aa9",
+    "method": "stdlib urllib + HTMLParser; scripts/styles excluded; article from Last updated",
+    "private_article_key": "distribute-your-apps.txt",
+    "public_source_text": "Not republished; retained privately. See original URL; hashes record retrieval, not independent ongoing availability."
+  },
+  {
+    "url": "https://developer.atlassian.com/platform/marketplace/security-privacy-tab/",
+    "final_url": "https://developer.atlassian.com/platform/marketplace/security-privacy-tab/",
+    "retrieved_at": "2026-11-27T09:04:23.014438+00:00",
+    "http_status": 200,
+    "html_sha256": "5ffb02fe0c33fea4812b2699b36fe42fe06b2eb8ca49c8fc5b4171476a20646b",
+    "extracted_article_sha256": "c6c42c2b0c4ed52ec101648dbbc9f49b4e3826223d60e841b995370904427fd1",
+    "method": "stdlib urllib + HTMLParser; scripts/styles excluded; article from Last updated",
+    "private_article_key": "security-privacy-tab.txt",
+    "public_source_text": "Not republished; retained privately. See original URL; hashes record retrieval, not independent ongoing availability."
+  },
+  {
+    "url": "https://developer.atlassian.com/platform/marketplace/app-security-questionnaires/",
+    "final_url": "https://developer.atlassian.com/platform/marketplace/app-security-questionnaires/",
+    "retrieved_at": "2026-11-27T09:04:23.072451+00:00",
+    "http_status": 200,
+    "html_sha256": "f017387ef1ab7feb87bde922503b7316f9e22ccccd2dba75f83e3325cec3393c",
+    "extracted_article_sha256": "6f780cb293dc32169d4bee72a912a854d36d8999f2e8cc2d3ac146a14607aeae",
+    "method": "stdlib urllib + HTMLParser; scripts/styles excluded; article from Last updated",
+    "private_article_key": "app-security-questionnaires.txt",
+    "public_source_text": "Not republished; retained privately. See original URL; hashes record retrieval, not independent ongoing availability."
+  },
+  {
+    "url": "https://developer.atlassian.com/platform/marketplace/partner-security-questionnaire/",
+    "final_url": "https://developer.atlassian.com/platform/marketplace/partner-security-questionnaire/",
+    "retrieved_at": "2026-11-27T09:04:23.139775+00:00",
+    "http_status": 200,
+    "html_sha256": "4325e755a90752af7db86b39124f482dce1ff15da770814e64d5f82a7edb2f25",
+    "extracted_article_sha256": "4ff8cbb1eeb6f723e48c3656f49c8b5f0b2a8d7198f8248ce21d80c7e59748ea",
+    "method": "stdlib urllib + HTMLParser; scripts/styles excluded; article from Last updated",
+    "private_article_key": "partner-security-questionnaire.txt",
+    "public_source_text": "Not republished; retained privately. See original URL; hashes record retrieval, not independent ongoing availability."
+  },
+  {
+    "url": "https://developer.atlassian.com/platform/forge/user-privacy-guidelines/",
+    "final_url": "https://developer.atlassian.com/platform/forge/user-privacy-guidelines/",
+    "retrieved_at": "2026-11-27T09:04:23.324866+00:00",
+    "http_status": 200,
+    "html_sha256": "b7a82d9f247fb9e04207e9966d977071985ee7e5ed7d8dd38cc873f301a7969d",
+    "extracted_article_sha256": "59dd2775590b1212d061844548db35e763464afa8f4214e6348684d9adf96beb",
+    "method": "stdlib urllib + HTMLParser; scripts/styles excluded; article from Last updated",
+    "private_article_key": "user-privacy-guidelines.txt",
+    "public_source_text": "Not republished; retained privately. See original URL; hashes record retrieval, not independent ongoing availability."
+  },
+  {
+    "url": "https://mizzen-studios.github.io/permitguard/privacy.html",
+    "final_url": "https://mizzen-studios.github.io/permitguard/privacy.html",
+    "retrieved_at": "2026-11-27T09:08:31.058739+00:00",
+    "http_status": 200,
+    "html_sha256": "5dfe95b5cd091d58c8cc2ccde7502172d366cdc3a7f84bf6d88dddc5eede1ca6",
+    "method": "stdlib urllib GET; endpoint status check, not legal adequacy or account check"
+  },
+  {
+    "url": "https://mizzen-studios.github.io/permitguard/terms.html",
+    "final_url": "https://mizzen-studios.github.io/permitguard/terms.html",
+    "retrieved_at": "2026-11-27T09:08:31.243048+00:00",
+    "http_status": 200,
+    "html_sha256": "d96cc68d4ae85bf4e23d6331ad15921548bdc55719ab87d4beddbd9cc8e3d55d",
+    "method": "stdlib urllib GET; endpoint status check, not legal adequacy or account check"
+  },
+  {
+    "url": "https://github.com/Mizzen-Studios/permitguard/issues",
+    "final_url": "https://github.com/Mizzen-Studios/permitguard/issues",
+    "retrieved_at": "2026-11-27T09:08:31.654145+00:00",
+    "http_status": 200,
+    "html_sha256": "8b4fa51669cd3925bbe18f159cea2a2be200e9e8651728e9929d6663a2b46a48",
+    "method": "stdlib urllib GET; endpoint status check, not legal adequacy or account check"
+  }
+]

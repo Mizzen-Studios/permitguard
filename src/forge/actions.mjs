@@ -23,6 +23,7 @@ const validationErrors = {
  'NOT CLEARED: resolve readiness issues; advisory policy does not authorize activation':'Isolation checks are incomplete. Resolve the displayed lock, photo and verification requirements before activation.'
 };
 const recoveryErrors = {
+ LIFECYCLE_CAPACITY_RESERVED:['LIFECYCLE_CAPACITY_RESERVED','No changes saved. Storage capacity is reserved for existing lock-removal/close-out records. Do not reset or delete evidence; ask the maintainer to review capacity before adding more records. Read/refresh before another attempt.'],
  EMPTY_DEMO_PROJECT_REQUIRED:['EMPTY_DEMO_PROJECT_REQUIRED','Demo setup requires an entirely empty, unconnected Warn-only/fail-closed project with no permit history. Existing registers, connections or records are never replaced.'],
  SYNTHETIC_DEMO_WARN_ONLY:['SYNTHETIC_DEMO_WARN_ONLY','This synthetic demo register stays Warn-only. Replace it explicitly with a site-approved register before enabling Enforce; a demo seed is not operational authority.'],
  DEMO_SECOND_CREW_POLICY_REQUIRED:['DEMO_SECOND_CREW_POLICY_REQUIRED','The second-crew sample path requires Enforce and fail-closed in the marked synthetic project. Ask its project administrator to review the policy; this operation did not change settings.'],

@@ -1,0 +1,170 @@
+{
+  "status": "UNSUBMITTED_DRAFT",
+  "all_actual_screenshots": "MISSING_NOT_CAPTURED",
+  "slots": [
+    {
+      "slot": "H1_highlight_full",
+      "status": "MISSING_NOT_CAPTURED",
+      "required": true,
+      "kind": "highlight_full",
+      "topic": "Separate release and work-start status",
+      "target_pixels": [
+        1840,
+        900
+      ],
+      "accepted_standard_pixels": [
+        920,
+        450
+      ],
+      "file": null,
+      "original_file": null,
+      "sha256": null,
+      "capture_timestamp": null,
+      "actual_url": null,
+      "actual_issue_key": null,
+      "environment": null,
+      "build": null,
+      "visual_review": null,
+      "rights_privacy_approval": null,
+      "notes": "No native browser opened or tenant UI captured. Do not substitute concept brand art or mock UI."
+    },
+    {
+      "slot": "H1_highlight_crop",
+      "status": "MISSING_NOT_CAPTURED",
+      "required": true,
+      "kind": "highlight_crop",
+      "topic": "Separate release and work-start status",
+      "target_pixels": [
+        580,
+        330
+      ],
+      "accepted_standard_pixels": null,
+      "file": null,
+      "original_file": null,
+      "sha256": null,
+      "capture_timestamp": null,
+      "actual_url": null,
+      "actual_issue_key": null,
+      "environment": null,
+      "build": null,
+      "visual_review": null,
+      "rights_privacy_approval": null,
+      "notes": "No native browser opened or tenant UI captured. Do not substitute concept brand art or mock UI."
+    },
+    {
+      "slot": "H2_highlight_full",
+      "status": "MISSING_NOT_CAPTURED",
+      "required": true,
+      "kind": "highlight_full",
+      "topic": "Attributable personal locks and named-human confirmation",
+      "target_pixels": [
+        1840,
+        900
+      ],
+      "accepted_standard_pixels": [
+        920,
+        450
+      ],
+      "file": null,
+      "original_file": null,
+      "sha256": null,
+      "capture_timestamp": null,
+      "actual_url": null,
+      "actual_issue_key": null,
+      "environment": null,
+      "build": null,
+      "visual_review": null,
+      "rights_privacy_approval": null,
+      "notes": "No native browser opened or tenant UI captured. Do not substitute concept brand art or mock UI."
+    },
+    {
+      "slot": "H2_highlight_crop",
+      "status": "MISSING_NOT_CAPTURED",
+      "required": true,
+      "kind": "highlight_crop",
+      "topic": "Attributable personal locks and named-human confirmation",
+      "target_pixels": [
+        580,
+        330
+      ],
+      "accepted_standard_pixels": null,
+      "file": null,
+      "original_file": null,
+      "sha256": null,
+      "capture_timestamp": null,
+      "actual_url": null,
+      "actual_issue_key": null,
+      "environment": null,
+      "build": null,
+      "visual_review": null,
+      "rights_privacy_approval": null,
+      "notes": "No native browser opened or tenant UI captured. Do not substitute concept brand art or mock UI."
+    },
+    {
+      "slot": "H3_highlight_full",
+      "status": "MISSING_NOT_CAPTURED",
+      "required": true,
+      "kind": "highlight_full",
+      "topic": "Six synthetic equipment items in Warn-only",
+      "target_pixels": [
+        1840,
+        900
+      ],
+      "accepted_standard_pixels": [
+        920,
+        450
+      ],
+      "file": null,
+      "original_file": null,
+      "sha256": null,
+      "capture_timestamp": null,
+      "actual_url": null,
+      "actual_issue_key": null,
+      "environment": null,
+      "build": null,
+      "visual_review": null,
+      "rights_privacy_approval": null,
+      "notes": "No native browser opened or tenant UI captured. Do not substitute concept brand art or mock UI."
+    },
+    {
+      "slot": "H3_highlight_crop",
+      "status": "MISSING_NOT_CAPTURED",
+      "required": true,
+      "kind": "highlight_crop",
+      "topic": "Six synthetic equipment items in Warn-only",
+      "target_pixels": [
+        580,
+        330
+      ],
+      "accepted_standard_pixels": null,
+      "file": null,
+      "original_file": null,
+      "sha256": null,
+      "capture_timestamp": null,
+      "actual_url": null,
+      "actual_issue_key": null,
+      "environment": null,
+      "build": null,
+      "visual_review": null,
+      "rights_privacy_approval": null,
+      "notes": "No native browser opened or tenant UI captured. Do not substitute concept brand art or mock UI."
+    },
+    {
+      "slot": "additional_gallery",
+      "status": "MISSING_NOT_CAPTURED",
+      "required": false,
+      "file": null,
+      "notes": "Optional; no file supplied, no original or publication rights verified."
+    },
+    {
+      "slot": "demo_video",
+      "status": "MISSING_NOT_CAPTURED",
+      "required": false,
+      "file": null,
+      "notes": "Optional; no file supplied, no original or publication rights verified."
+    }
+  ],
+  "capture_gate": "Separate authorization for native browser/tenant and any state-changing rehearsal. Preserve uncropped originals, exact actual URL/issue privately, timestamp/environment/build, hash/dimensions, edits/redactions and owner privacy/rights approval. Publish only approved redacted metadata; no private tenant identifiers in this public pack.",
+  "navigation": "Open actual Jira issue \u2192 PermitGuard section or apps icon under issue title \u2192 PermitGuard. Do not use reported-broken site-wide Apps sidebar.",
+  "limitations": "H1/H2 full lifecycle and two-human native acceptance not yet complete. H3 seed UI is owner-reported PASS only, not accessible image bytes. No capture clicks or tenant IDs invented."
+}

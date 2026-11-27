@@ -5,7 +5,7 @@ import { checkRestrictedSpace, createConfluenceArchive, closedPermitEntry, lockB
 const at = '2026-11-19T18:00:00.000Z', now = Date.parse(at);
 const ok = value => ({ ok: true, status: 200, json: async () => structuredClone(value) });
 const admin = { permissions: { ADMINISTER: { havePermission: true } } };
-const projection = { schemaVersion: 1, revision: 1, permitId: 'P1', state: 'VERIFY', mode: 'ENFORCE', failMode: 'FAIL_CLOSED', updatedAt: at, start: { cleared: true }, release: { cleared: false } };
+const projection = { schemaVersion: 1, revision: 1, permitId: 'P1', state: 'ACTIVE', mode: 'ENFORCE', failMode: 'FAIL_CLOSED', updatedAt: at, start: { cleared: true }, release: { cleared: false } };
 test('projection fails closed on absent, malformed, stale, future, unknown action/policy; explicit Warn-only stays NOT CLEARED', () => {
   for (const p of [null, {}, { ...projection, updatedAt: 'bad' }, { ...projection, updatedAt: '2026-11-18' }, { ...projection, updatedAt: '2026-11-20' }, { ...projection, mode: null }, { ...projection, revision: -1 }]) assert.equal(evaluateProjection(p, 'START', { now }).allowed, false);
   assert.equal(evaluateProjection(projection, 'INVALID', { now }).allowed, false);
@@ -90,3 +90,5 @@ test('archive escaping and snapshot contract label timestamp state never live', 
   const s = lockBoardSnapshot({ permits: [{ id: 'P1', state: 'CLOSED', revision: 2 }], capturedAt: at, now: now + 600001, connected: true });
   assert.equal(s.live, false); assert.equal(s.stale, true); assert.match(s.label, /not live/); assert.equal(s.permits[0].state, 'CLOSED'); assert.equal(s.capturedAt, at);
 });
+
+test('projected START matches confirmed ACTIVE semantics, never treats VERIFY/PENDING as work-start clearance',()=>{const active=evaluateProjection(projection,'START',{now});assert.equal(active.status,'CLEARED');assert.equal(active.authoritative,false);assert.equal(active.dryRun,true);for(const p of [{...projection,state:'VERIFY'},{...projection,state:'VERIFY',activationPending:true},{...projection,start:{cleared:false}}]){const checked=evaluateProjection(p,'START',{now});assert.equal(checked.wouldBlock,true);assert.equal(checked.status,'NOT CLEARED');}});

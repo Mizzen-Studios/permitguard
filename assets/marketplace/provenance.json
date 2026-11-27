@@ -1,0 +1,33 @@
+{
+  "created_date": "2026-11-27",
+  "creator": "PermitGuard draft-pack assistant, original local SVG geometry",
+  "status": "UNSUBMITTED_DRAFT",
+  "renderer": "Already installed librsvg-2.so.2 + libcairo.so.2 via Python stdlib ctypes; DejaVu Sans system font",
+  "visual_review": "2026-11-27 both PNGs viewed: legible, no clipping, no UI/safety badge claim",
+  "files": [
+    {
+      "file": "icon.svg",
+      "bytes": 925,
+      "sha256": "0909c1be613be7f27e0ba1e64650153b15981455813c73bc94618055f4108158",
+      "kind": "ORIGINAL_CONCEPT_BRAND_ART_NOT_SCREENSHOT"
+    },
+    {
+      "file": "icon.png",
+      "bytes": 3453,
+      "sha256": "57b240f83ed3d18950649d03fb04b38aae910dfece12771819d53b337ec90c61",
+      "kind": "ORIGINAL_CONCEPT_BRAND_ART_NOT_SCREENSHOT"
+    },
+    {
+      "file": "banner.svg",
+      "bytes": 1714,
+      "sha256": "f44e3b865f1302e991a4a9821681e13161efe29ff620abd278614aa2a289ee4f",
+      "kind": "ORIGINAL_CONCEPT_BRAND_ART_NOT_SCREENSHOT"
+    },
+    {
+      "file": "banner.png",
+      "bytes": 55718,
+      "sha256": "947ab1419510584b8e23acae4b493c73a808c66552e85f8568831644baf01d46",
+      "kind": "ORIGINAL_CONCEPT_BRAND_ART_NOT_SCREENSHOT"
+    }
+  ]
+}

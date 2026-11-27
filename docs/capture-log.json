@@ -1,5 +1,5 @@
 {
-  "updatedDate": "2026-11-25",
+  "updatedDate": "2026-11-27",
   "status": "PLAN_ONLY_NO_ASSETS_CAPTURED",
   "coreVersion": "5.16.0",
   "uiSource": "5f92b0c1b926",
@@ -156,11 +156,33 @@
       "sha256": null,
       "privacyReview": "NOT_REVIEWED",
       "sharingAuthorized": false
+    },
+    {
+      "id": "C10",
+      "proposedFilename": "10-production-seed-owner-receipt.png",
+      "subject": "Dated owner text PASS for Production2.4 onboarding, not a captured native UI",
+      "sourceClass": "Owner text receipt; planned source insert, not recorded",
+      "shot": "S02",
+      "requiredForCore": false,
+      "status": "NOT_CAPTURED",
+      "sourceDocument": "evidence/2026-11-27-owner-2.4-seed-pass.json",
+      "actualPath": null,
+      "capturedUtc": null,
+      "sha256": null,
+      "privacyReview": "NOT_REVIEWED",
+      "sharingAuthorized": false
     }
   ],
   "ownerAdminObservation": "See evidence/2026-11-24-admin-exposure.json; external screenshot reported, not imported into this capture plan",
   "deploymentReceipt": "mcp-get-deployment-2026-11-24.md",
   "previousOwnerAcceptedBaseline": "5.15.0 full-core owner acceptance 22 Nov; 5.16 footer/panel plus MCP owner observations 24 Nov; full 5.16 browser regression NOT_RERUN",
   "mcpReceiptSource": "evidence/mcp-owner-receipt-2026-11-24.md",
-  "actualInspectorScreenshotsOrVideo": 0
+  "actualInspectorScreenshotsOrVideo": 0,
+  "productionOnboarding": {
+    "version": "2.4.0",
+    "uiSource": "e8b95c053254",
+    "ownerTextEvidence": "evidence/2026-11-27-owner-2.4-seed-pass.json",
+    "mediaReceived": false
+  },
+  "productionStageLabel": "Production onboarding receipt is source text only; main ACTIVE footage remains labelled Development5.16"
 }

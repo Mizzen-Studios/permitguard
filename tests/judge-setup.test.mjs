@@ -52,11 +52,8 @@ test('fresh judge minimal quickstart gives PLAN, not inherited ACTIVE clearance'
   await assert.rejects(call('load_sample', { confirmed: true }), /permits open/);
 });
 
-test('README quickstart labels match current source controls, not a filmed browser test', () => {
-  const source = readFileSync(new URL('../static/permit-app/app.js', import.meta.url), 'utf8');
-  const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
-  for (const label of ['Project administration', 'Load a dedicated sample plant', 'Load confirmed sample', 'Plan an isolation permit', 'Crew name', 'Worker account IDs', 'Named verifier account IDs', 'Create permit']) {
-    assert.ok(source.includes(label), label); assert.ok(readme.includes(label), label);
-  }
-  assert.ok(readme.includes('fresh-site browser rehearsal NOT_RUN'));
+test('README primary quickstart matches accepted Warn-only seed, distinct from advanced sample setup',()=>{
+ const source=readFileSync(new URL('../static/permit-app/app.js',import.meta.url),'utf8');const readme=readFileSync(new URL('../README.md',import.meta.url),'utf8');
+ assert.ok(source.includes('Load six demo equipment items (Warn-only)'));assert.ok(readme.includes('Load six demo equipment items (Warn-only)'));
+ assert.ok(readme.includes('apps icon under the issue title'));assert.ok(readme.includes('Do not rely on'));assert.ok(readme.includes('OWNER-REPORTED PASS'));assert.ok(readme.includes('Production2.4.0'));assert.ok(readme.includes('Broader fresh-site lifecycle remains NOT_RUN'));assert.ok(readme.includes('separate verified **PGSAMPLE**'));assert.ok(readme.includes('not a requirement for ordinary Warn-only onboarding'));
 });

@@ -58,7 +58,7 @@ export function evaluateProjection(property, action, { now = Date.now(), maxAgeM
   if (!['WARN_ONLY', 'ENFORCE'].includes(property?.mode) || !['FAIL_CLOSED', 'FAIL_OPEN_WITH_ALERT'].includes(property?.failMode)) reasons.push('INVALID_POLICY');
   const structurallyValid = reasons.length === 0;
   const gate = action === 'START' ? property?.start : property?.release;
-  const expectedState = action === 'START' ? 'VERIFY' : 'RELEASE';
+  const expectedState = action === 'START' ? 'ACTIVE' : 'RELEASE';
   const cleared = structurallyValid && property.state === expectedState && gate?.cleared === true;
   if (!cleared) reasons.push('NOT_CLEARED');
   // Fail-open is never inferred from outage text or a client-supplied flag.

@@ -1,150 +1,92 @@
-> **Latest: Production2.4.0 · UI e8b95c053254** (27-Nov00:19UTC). Fixed seed capability forwarding through Forge response; prior2.3 owner seed check FAILED (no button), not accepted. [Rerun checklist](docs/empty-project-demo-seed.md). Sharing and safety guards unchanged; latest native seed acceptance NOT_RUN. Older dated release notes below are history.
-
-> **Current release 26-Nov21:06 UTC: Production 2.3.0 · UI bd1d3977a97d.** Confirmed empty-project Warn-only demo seed is deployed, not yet owner-browser accepted. Use the issue PermitGuard section/apps icon, never the reported-broken site sidebar. Sharing unchanged. [Exact seed acceptance checklist](docs/empty-project-demo-seed.md). Prior dated2.2/hold statements below are historical; owner21:05 resolved public-code/docs push authority.
-
-> **17:04 owner check — Production 2.2.0 PASS:** header **2.2.0 · Production · UI b5df804cbdf1**, matching footer, clean empty panel. The site-wide sidebar **Apps** entry returned **404** on the rehearsal site: **do not use it for judge navigation**. Open the issue’s PermitGuard section, or the **apps icon under the issue title → PermitGuard**. This is owner-reported, not independent screenshot inspection or full-lifecycle acceptance.
-
-> **Latest release, 26 Nov 12:54 UTC:** **Production 2.2.0 · UI b5df804cbdf1**, compatible major2 update. Build/environment is shown near the header and in the footer; **Open PermitGuard** in the right-side context is a static opening guide. Reload/reopen the Jira issue to fetch the new resource. [Change/evidence notes](docs/judge-discoverability-2026-11-26.md). Owner reported the prior fresh-site install/panel connected; post-update visual, full lifecycle and two-browser acceptance remain unverified. Earlier dated versions below are historical.
-
-> **Production 2.1.0 deployed** from exact d69b66f (UI d69b66fe6384). Owner will complete private Jira-only Distribution; valid privacy policy URL/handling remains unresolved, no link created here, fresh-site acceptance NOT_RUN. DEV 5.16.0 unchanged. [Current deployment and Distribution worksheet](docs/distribution-handoff-2026-11-26.md).
-
-> **First run:** open a Jira issue, click the **apps icon under the title** (sometimes labelled **View app actions**), then choose **PermitGuard**. A right-side **Open PermitGuard** context guide is included in Production **2.2.0**; it explains navigation only. The issue panel remains the editable surface.
-
-
-> **25 November readiness handoff:** [judge production/share-link plan](docs/judge-access-plan.md) · [exact owner 180-second capture checklist](docs/video-capture-list.md) · [prioritised remaining work / owner inputs](docs/submission-checklist-2026-11-25.md). Planning only: no production/link/exposure changes.
-
-> **Deployed, not live-accepted:** branded GET-only MCP key **permitguard_check_readiness** and guarded distinct-person Crew B normal-record path are included in Production 2.1.0. No live second-crew record seeded or relabeled. [Setup and boundaries](docs/second-crew-demo.md).
-
-> **MCP owner receipt classified PASS; exposure stays OFF.** Official Rules require a Forge app exposing tools via the Atlassian MCP server using rovo:mcp, matching the deployed interface plus genuine owner-run call. This is technical evidence, not full submission/award signoff. [Rules/source hashes and **Olly’s OK** pre-submission exposure/judge-access gates](docs/codegeist-rules-alignment-2026-11-24.md).
-
-> **24 November 16:57 approval:** MCP narrowed to **check_readiness GET only**; native proposal action retained. **Deployed/verified Development 5.16.0 · UI 5f92b0c1b926**. Deployment/readback: [GET-only development receipt](docs/mcp-get-deployment-2026-11-24.md). [Owner Linux Inspector/OAuth/single-call/OFF/revoke runbook](docs/mcp-linux-owner-proof.md). No exposure or OAuth is performed by the maintainer.
-
 # PermitGuard
 
-**Human-confirmed lockout/tagout permit decision support in Jira.** The site's LOTO procedure remains authoritative; this app is not safety certification, a physical interlock or permission to energize.
+**Release-first lockout/tagout (LOTO) decision support inside Jira.** Named people retain control of personal-lock records and equipment confirmation. **The site procedure remains authoritative: this app is not a safety certification, physical interlock or authorization to energize.**
 
-**Accepted development core:** Forge **5.15.0**, UI source **4e3335fb30f9**. Owner retest reported 22 November 2026 at 21:00 UTC: one PermitGuard Judge, readable iframe/panel clocks, preview ~2.7 s and live ~4.3 s by reload stopwatch, and release-first scoped Rovo output. These are one observed run, not an SLA or controlled benchmark. [Current pack/readiness](docs/submission-pack-2026-11-24.md).
+## Current state — 27 November 2026
 
-**Submission status:** repository drafts only. Intended Codegeist 2026 category: Specialized Industries. **MCP technical runtime evidence: PASS (owner receipt, 24 November 21:06:40 UTC).** On Development 5.16.0, Inspector discovered exactly **check_readiness_development** and made one authenticated read returning **ACTIVE / WORK_START / release NOT CLEARED / siteRevision 22 / permitRevision 6 / operational:false**. Native proposal remains outside the GET-only MCP list. OAuth worked with sharing OFF; consent still said **Read, Write, and Search**—this is not a read-only OAuth grant. Owner restored **exposure OFF**, stopped/disconnected Inspector and removed its grant. [Redacted receipt/classification](docs/evidence/mcp-owner-receipt-2026-11-24.md).
+- **Production2.4.0 · UI e8b95c053254**, deployed from [e8b95c0](https://github.com/Mizzen-Studios/permitguard/commit/e8b95c053254bed5bd2f2ec6a28ff8162a80e3fd). [Deployment receipt](docs/evidence/2026-11-27-production-seed-capability-fix.json).
+- **Fresh-site onboarding/seed: OWNER-REPORTED PASS**,27-Nov09:01. Issue panel/header/footer/live connection; Cancel leaves zero; Confirm creates six synthetic Equipment records (EQ-1–EQ-6), Warn-only, no permit/locks; reload preserves exactly six/no duplicates/seed button gone. [Exact receipt and limits](docs/evidence/2026-11-27-owner-2.4-seed-pass.json). No screenshots/video received or independently reviewed. “A few seconds” is one observation, not an SLA.
+- **Broader fresh-site lifecycle remains NOT_RUN**: Plan/locks/verification/PENDING/QR/activation/release, real second crew, two-browser automatic invalidation, workflow/JQL and archive are not established by onboarding.
+- **Preparation only / NOT_SUBMITTED.** Repository code/docs pushes are authorized. No Marketplace form/listing change, public promotion/social post, video upload, Devpost submission, Sharing change or MCP exposure is authorized by this pack.
+- Development5.16.0 / UI5f92b0c1b926 remains a separate historical ACTIVE-fixture and MCP evidence baseline. Do not represent it as the Production build. [Evidence index](docs/submission-readiness-2026-11-22.md).
 
-## What judges can see
+## Judge: install and open the app
 
-- A Plan → Lock → Verify → Active → Release → Closed clipboard, attributable personal locks and human-only equipment confirmation.
-- Separate work-start and release decisions. The accepted ACTIVE sample says:
-  > Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE.
-- A remaining shared-equipment personal lock blocks release/closure, even after the current worker removes their own lock. The legacy single-person Crew B roleplay is explicitly simulated. The new Production 2.1.0 path uses a different authenticated person and normal separate-issue lock records; live two-person acceptance is NOT_RUN.
-- Native Rovo reads the same deterministic service; an activation action can propose **PENDING**, never confirm or activate it. Real native proposal execution and two-person high-energy acceptance remain outside the accepted read-only core.
+1. Site admin uses the **existing private Production/Jira-only Sharing link**, reviews the actual12 scopes and selects an already-entitled Jira site. The link is not reproduced in this public repo and was not generated/rotated by these updates. No repository clone, Forge CLI/token or Confluence install is required for a judge. Never add a card or buy seats/features to complete this rehearsal.
+2. Open an accessible Jira issue. Use its inline **PermitGuard** section, or **apps icon under the issue title → PermitGuard** (sometimes labelled View app actions). **Do not rely on the site's sidebar Apps entry**: it returned404 in the owner rehearsal. Optional right-side Open PermitGuard is a navigation guide, not live readiness or a second editor.
+3. Check header/footer **2.4.0 · Production · UI e8b95c053254**, live state and no errors. Fresh empty storage must say **Release NOT CLEARED — no permit**. An empty register is not clearance.
+4. For a completely empty synthetic demo project, a project/site admin with Edit Issues may click **Load six demo equipment items (Warn-only)** and explicitly confirm. Existing register/Assets connections, any PermitGuard permit history, unsafe policy and stale revisions are rejected. Ordinary Jira issues alone do not block setup. This creates equipment only: no permits, workers, locks, verification, activation or workflow rules. Enforce is not available on this synthetic register. [Accepted seed flow](docs/empty-project-demo-seed.md).
+5. Stop at this accepted onboarding checkpoint unless following the [next bounded browser checks](docs/remaining-browser-checks-2026-11-27.md). Do not click Load confirmed sample as a substitute. The advanced Enforce loader is a separate verified **PGSAMPLE** key+description-marker path, not a requirement for ordinary Warn-only onboarding.
 
-Demo: [PGSAMPLE-2](https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2). Existing authorized users only; this is not a public anonymous app. Panel: **View app actions → PermitGuard** if not already inline. Do not reset the active sample. Demo site expires 13 February 2027.
+If setup is ineligible, read the displayed reason/permissions/policy and report it; never reset data, overwrite an Assets connection or bypass history guards.
 
-## Run locally
+## Implemented, and what evidence supports it
 
-Node **22+**; Forge runtime is nodejs22.x. CLI **15.1.0** was checked for this pack. Atlassian account, a site with suitable Jira/Rovo entitlement and administrator install permission are required for connected testing. Local tests do not establish live platform capability.
+| Area | Connected implementation | Native acceptance boundary |
+| --- | --- | --- |
+| Plan → Lock → Verify → Active → Release → Closed | Authenticated Custom UI, named workers/verifiers, per-worker lock ownership | Earlier DEV core observations; fresh Production full lifecycle pending |
+| Release first | Separate work-start versus release decisions; remaining shared-equipment locks block release/closure | Native DEV read accepted; fresh seeded Production has no permit, so NOT CLEARED |
+| Human-only activation | Native agent can propose PENDING only; assigned person QR/tablet confirms; two distinct verifiers for high-energy points | Model/UI/adapter tests; full two-person/device/native proposal acceptance pending |
+| Registers | Built-in synthetic setup and explicitly configured Assets Equipment/Isolation points; changed/unavailable connected register fails closed | Production built-in seed PASS; historical Assets asApp read, not all customer Assets configuration |
+| Concurrency/Realtime | Conditional site-revision writes; invalidation hints trigger authorized reread | Storage stale-write live probe; connected subscription is not two-browser delivery proof |
+| Workflow/JQL | Preview validators/dry-run, own-rule list/disable, derived issue property/JQL aliases | Own-rule list/disable live; actual transitions/indexing/uninstall pending; delete unsupported/manual |
+| Optional Confluence | Restricted-space config, bounded idempotent closed-register append, timestamped snapshot macro | Not installed/configured/accepted on the Jira-only judge site |
+
+Never read instruments/calibration, graph:connector or Teamwork Graph. QR/photo/checkbox evidence does not independently establish physical presence or zero energy. Conflict guard and shift-end suspension are future ideas, not implemented video claims.
+
+## Native Rovo and GET-only MCP
+
+**PermitGuard Judge** uses the same deterministic service as the panel. check_readiness returns a release-first scoped result. Native request_activation can propose **PENDING**, never complete activation. No agent confirmation, verification, lock-removal or activation-completion tool is declared.
+
+Production's declared MCP base key is **permitguard_check_readiness**, GET only. Do not guess its remotely discovered name. The genuine owner-run24-Nov Development receipt discovered **check_readiness_development**, made one scoped read returning ACTIVE / WORK_START / release NOT CLEARED / siteRevision22 / permitRevision6 / operational:false, then restored exposure OFF and removed the grant. It is historical text evidence, not Inspector video or current Production transport acceptance. OAuth consent said **Read, Write, and Search**, not read-only. [Receipt](docs/evidence/mcp-owner-receipt-2026-11-24.md) · [caller contract](skill.md) · [judge MCP approval gate](docs/judge-access-plan.md#mcp--needs-olly-ok-at-submission--before-judge-testing).
+
+No new exposure/client/OAuth call is part of readiness preparation. Optional Rovo must already be entitled; do not upgrade plans to complete a check.
+
+## Architecture and developer checks
+
+~~~text
+Custom UI / native Judge / GET MCP
+             ↓ authenticated principal + fresh Jira permissions
+      deterministic bounded service + revision guards
+             ↓ Forge Custom Entity Store/KVS
+   scoped invalidation hints → authorized server reread
+   derived Jira property → nonauthoritative history/JQL
+~~~
+
+Node22+; Forge runtime nodejs22.x. Developer clone needs its **own app registration**; never deploy a clone to the maintainer UUID. Credentials stay outside Git in a private environment file.
 
 ~~~sh
-git clone https://github.com/Mizzen-Studios/permitguard.git
-cd permitguard
 npm ci
 npm test
 npm run test:contracts
 python3 -m unittest discover -s tests -p '*_test.py'
 npm run build
 forge lint
+npm run check:submission
 ~~~
 
-The accepted core has **131 passing tests**: 85 backend/integration/bootstrap, 43 UI contracts, 3 Python checker tests. Python is for optional evidence/admin scripts, not app runtime. No public endpoint, static-only server or offline mode substitutes for a Forge install.
+Default tests include domain, native authorization/response adapter, UI contracts, SDK bootstrap and claim/timing checks. Local Jira transports/synthetic UI are not customer browser acceptance. Before any authorized release, pin clean source, scan generated artifacts for secrets and verify actual deployment/install metadata. [Developer setup](docs/setup.md) · [root cause lesson](docs/seed-capability-fix-2026-11-27.md).
 
-### Install your own development clone
+## Source candidate — not a new deployment
 
-1. Authenticate Forge through supported CLI/environment authentication; keep credentials outside the repository in a private chmod-600 secrets file. Never paste tokens into source, screenshots or issue comments.
-2. Run **forge register** in your own clone and select your own authorized developer space. It replaces app.id: **do not deploy to the maintainer's registered UUID**. Review the manifest and all scopes first.
-3. Build/lint, then deploy/install only to your explicitly authorized development site:
+The current readiness branch adds conservative lifecycle byte admission headroom and aligns projected START reporting with confirmed ACTIVE. This does not raise storage limits, erase evidence/locks, weaken actor/QR gates or recover legacy-full rows. Only already-authorized legacy drain writes that reduce the reserve deficit and remain below the unchanged hard cap may proceed. [Audit and mitigation](docs/core-audit-2026-11-27.md). Production remains2.4.0; local tests are not a new native release/acceptance.
 
-~~~sh
-forge deploy -e development
-forge install -e development -s YOUR-SITE.atlassian.net -p Jira
-forge install list
-~~~
+## Privacy, scopes, costs and honest limits
 
-4. Open a company-managed Jira work item and its PermitGuard panel. Start Warn-only. Site/project administrators configure policy and the Equipment/Isolation points register; ordinary workers cannot change policy. Enforce is explicit opt-in, fail-closed by default. Do not attach Preview workflow gates automatically.
-5. The existing demo register/sample loader is guarded for the dedicated PGSAMPLE project/description marker. A new installation starts with separate empty storage; it does not inherit the maintainer's fixtures. Follow [setup and demo preflight](docs/setup.md) rather than changing IDs or seeding over an open permit.
+Vendor **Mizzen Studios**. [Privacy policy](https://mizzen-studios.github.io/permitguard/privacy.html) · [Terms](https://mizzen-studios.github.io/permitguard/terms.html) · Support [GitHub Issues](https://github.com/Mizzen-Studios/permitguard/issues) (no personal data/tokens); private contact is on the policy.
 
-**Jira only is the accepted topology.** Jira hosts the JSM agent work-item panel, not a customer-portal companion. Confluence is optional/uninstalled; installing it can register another native agent. Do not add Confluence simply to get Rovo/MCP. Do not accept new billing terms, add a card or select paid resources without separate authorization. Accepted usage terms are not a spending cap.
+Personal data, attributable locks and photos are stored in Forge; derived data can be stored in Jira, optional archives in Confluence. No vendor external operational store, external runtime egress, Forge SQL/LLM API/Containers or scheduled jobs. Optional consented MCP clients receive authorized results under their own policies. Hosting/email-provider handling is described separately in the policy. **Automatic personal-data reporting/refresh/erasure, capacity recovery/export/retention and production qualification are incomplete. Published policies are not implementation or compliance certification.**
 
-## Architecture
+Exact12 scopes in [manifest](manifest.yml): read:jira-work, write:jira-work, read:jira-user, read:servicedesk-request, read:cmdb-object:jira, read:cmdb-type:jira, manage:jira-configuration, storage:app; optional Confluence read:space:confluence, read:space.permission:confluence, read:page:confluence, write:page:confluence. The four Confluence scopes remain because the macro/archive is shipped; scope removal triggers a major upgrade, not a transparent fix. No scope changes in2.4. Broad management permission is additionally app/site-admin guarded.
 
-~~~text
-Jira Custom UI ── authorized resolver ── fresh Jira permissions/issue + register checks
-                                           │
-Native PermitGuard Judge ── action ─────────┤ deterministic service + revision guard
-                                           │
-rovo:mcp ── same action keys ────────────────┘ Forge Custom Entity Store
-  Studio / OAuth client: NOT YET VERIFIED       │
-                                     scoped invalidations → authorized reread
-                                     derived Jira property → historical preview / JQL
-~~~
+Connection required; no offline authority. Aggregate store cap180KB/60permits; photos64,000data-URL characters each. Free allowances are not a spending cap; accepted terms are not a new billing/card authorization. Jira hosts the JSM **agent** work-item panel, not a customer portal app. Before uninstall, list/disable/verify/manually remove workflow gates so fail-closed rules are not stranded. Properties/rules/pages may survive uninstall; Forge storage follows platform lifecycle, not promised instant erasure.
 
-- **Authority:** trusted invoking principal and current user-authorized issue access, not payload actor IDs, browser preview or writable Jira properties. Fresh register checks and conditional revision writes protect mutations/shared-lock release checks.
-- **Human control:** personal locks stay attributable; QR and attestation are not presence proof. Two named verifiers are required by the model for high-energy points; a real two-person demonstration is still pending.
-- **UI/data:** bounded photo evidence, in-memory nonactionable preview, no offline cache/authority. Realtime carries invalidation hints, not permit content or permission to proceed. Clock scopes are labelled; panel time is not total Jira navigation.
-- **Integration scope:** built-in Equipment/Isolation points register in the demo; configurable Assets adapter/API metadata checks exist. Never instruments/calibration, graph:connector or Teamwork Graph.
+## Preparation pack
 
-## Rovo and the candidate MCP integration
+- [Current priorities and owner inputs](docs/readiness-2026-11-27.md) · [browser checks](docs/remaining-browser-checks-2026-11-27.md) · [machine ledger](docs/submission-status.json)
+- [Marketplace draft pack](docs/marketplace/README.md) — drafts/assets only; no listing change or submission
+- [180-second demo script](docs/demo-video-script.md) · [shot list](docs/demo-shot-list.json) · [recording checklist](docs/video-capture-list.md) · [footage intake](docs/footage-handoff.md)
+- [Devpost draft](docs/submission/devpost-writeup.md) · [Rules/eligibility evidence](docs/codegeist-rules-alignment-2026-11-24.md)
+- [Two-person shared-lock scenario](docs/second-crew-demo.md) — distinct existing accounts, dedicated synthetic project, not roleplay/live-accepted
 
-**Native Rovo — accepted:** rovo:agent permitguard-judge-v2 calls Forge **action** handlers. check_readiness is GET and returns one release-first canonical message; request_activation is CREATE and only proposes PENDING for an assigned named human. There is no agent confirm tool. Native action use is **not** MCP transport proof.
-
-**Rovo MCP — declared, runtime proof outstanding:** Production 2.1.0 exposes only the **permitguard_check_readiness (GET)** binding with the fixed read handler; DEV/historical receipt retains the previous discovery name; the native Judge still has both actions. It supports Studio custom agents or consented MCP clients. The Atlassian-hosted endpoint pattern is `https://mcp.atlassian.com/forge/<registered-app-UUID>`. Another developer's clone uses its own UUID. Per-installation external exposure is disabled by default; a site/org admin enables app-wide exposure in the observed Forge UI (not per-tool selection), and external clients use OAuth 2.1 with the user's own site permissions. No grants or external-client connections were created for this documentation task.
-
-Intended bonus evidence: show legitimate tool discovery and a **read-only check_readiness** invocation for the synthetic issue, then the same release-blocked result. A native Judge screenshot, manifest, endpoint string or unauthenticated 401 does not prove this. External-client use is optional in the platform docs; the owner-supplied prize clause targets a Forge app exposing an MCP server using rovo:mcp. A different upstream/coding-assistance MCP server is not a substitute for this exposed Forge tool. [Observed exposure OFF and current safety assessment](docs/mcp-exposure-assessment-2026-11-24.md). [MCP audit](docs/mcp-bonus-readiness.md) · [caller contract](skill.md).
-
-## Submission pack
-
-- [Historical 5.15 exposure assessment; superseded by 5.16 GET-only receipt](docs/mcp-exposure-assessment-2026-11-24.md)
-- [MCP owner receipt — redacted, genuine DEV invocation](docs/evidence/mcp-owner-receipt-2026-11-24.md) · [Official Rules alignment / pre-submission gates](docs/codegeist-rules-alignment-2026-11-24.md)
-- [Current pack status](docs/submission-pack-2026-11-24.md) · [Screenshot list](docs/screenshots-list.md) · [Capture log](docs/capture-log.json)
-- [Optional browser-only catalog discovery — no client/Publish](docs/mcp-browser-discovery-2026-11-24.md)
-- [180-second read-only core demo script and shot list](docs/demo-video-script.md) · [machine-readable shots](docs/demo-shot-list.json)
-- [Devpost write-up drafts](docs/devpost-draft.md)
-- [Acceptance/readiness and evidence index](docs/submission-readiness-2026-11-22.md)
-- [MCP bonus requirements/proof audit](docs/mcp-bonus-readiness.md)
-- [Production plan — NOT executed](docs/production-deploy-plan.md)
-- [Implementation inventory/limits](docs/implementation-notes.md) · [current source/deployment evidence](docs/release-first-timing-2026-11-22.md)
-
-## Permissions, costs and limits
-
-Exact [manifest](manifest.yml) consent controls access. Declared scopes: read:jira-work, write:jira-work, read:jira-user, read:servicedesk-request, read:cmdb-object:jira, read:cmdb-type:jira, manage:jira-configuration, storage:app; optional Confluence read:space:confluence, read:space.permission:confluence, read:page:confluence, write:page:confluence. manage:jira-configuration is broad; own-rule handlers are additionally site-admin-gated. Optional Confluence scopes remain declared even though its installation is absent.
-
-No app external runtime/egress, SQL, Forge LLM API, Containers or schedules. Native Rovo has separate plan/credit limits; free allowances are not hard spending caps. A future consented external MCP client receives its authorized tool results; this is a separate data-sharing decision, not a claim that no data ever leaves Atlassian.
-
-Connection required. Aggregate state is bounded to 180 KB/60 permits, photos to 64,000 data-URL characters each. Capacity/recovery/retention and production qualification remain incomplete. Preview workflow execution/uninstall behavior and JQL indexing still need live acceptance. Own-rule disable is tested; Forge deletion is unsupported/manual. Confluence restricted archive is not configured/verified. Conflict guard and shift-end suspension are future work, not video claims.
-
-Before uninstall, list/disable/verify and manually remove installed workflow gates; don't leave fail-closed validators behind. Jira properties, fixtures, rules/pages may survive uninstall; follow the site's retention procedure. [Detailed limits](docs/implementation-notes.md).
-
-MIT · [LICENSE](LICENSE) · Maintainer contact: [GitHub Issues](https://github.com/Mizzen-Studios/permitguard/issues). Site procedures remain authoritative; no OSHA compliance certification is claimed.
-
-
-## Judge installation and quickstart
-
-**Production 2.1.0 DEPLOYED; private link not created here, awaiting owner form and valid policy URL; fresh-site browser rehearsal NOT_RUN.** See the [current handoff](docs/distribution-handoff-2026-11-26.md). [Exact distribution plan](docs/judge-access-plan.md). Setup guards/sequence are locally contract-tested, not a completed production installation test. Existing DEV MCP has a separate real owner receipt. Do not treat those as equivalent.
-
-1. **Once the private console-generated installation link is available:** site administrator selects an already-entitled Jira site and installs **production, Jira only** after reviewing actual scopes. No Forge CLI/API token, repository clone, forge register, Confluence install or payment is needed by a judge. Production is 2.1.0 / UI d69b66fe6384; do not expect the demo's 5.16.0 footer or its records.
-2. Jira administrator creates a **new dedicated synthetic project with key PGSAMPLE** and description containing the exact marker **[PermitGuard dedicated sample project]** (Project settings → Details). Use no real plant/personnel data. If PGSAMPLE already exists for real work or has open permits, stop; do not relabel it or reset it. This exact key+marker restriction is intentional.
-3. Create a task/work item there, record its actual key **PGSAMPLE-N**, and open it. The judge must have Browse/Edit Issues, be active/assignable on that issue, and have project-admin permission for sample loading. In the issue choose **View app actions → PermitGuard** if not already inline. Allow normal first-run app consent; no credential sharing. Wait for live authenticated state, not historical preview. Verify intended production footer and exactly one intended native Judge.
-4. Fresh installation: no equipment/permit, policy **Warn only / block if register unavailable**. Expand **Project administration → Load a dedicated sample plant**. Read and explicitly tick the confirmation, then **Load confirmed sample**. This creates six Equipment records and Isolation points and enables **Enforce / fail-closed only in this verified synthetic project**. No Assets subscription, external service, workflow rule, archive space or paid resource is required for this built-in sample path.
-5. Under **Plan an isolation permit**, tick **Cooling-water pump** only (EQ-1, namespaced to this project; low energy). Enter **Crew name** as **Judge demo**. Keep **Worker account IDs** and **Named verifier account IDs** prefilled with your actual authenticated ID; do not enter another person's ID. Click **Create permit**. Expect **PLAN**, review of the isolation plan, **Release NOT CLEARED**. Do not expect ACTIVE or revision 22: storage is fresh. One user cannot demonstrate the distinct-two-human high-energy case.
-6. Read-only checkpoint: choose **Refresh**, inspect the equipment and release strip. In **Rovo/Chat → agent picker**, find the one intended production **PermitGuard Judge**, start a **new chat**, ask **Is PGSAMPLE-N cleared?** using the actual key. Expect **Release: NOT CLEARED**, **Work start only: NOT CLEARED**, **Phase: PLAN** and site-procedure caveat. If Rovo is unavailable under the existing plan, record the limitation; do not upgrade/buy access or substitute a mocked response.
-7. **Stop here for the minimal judge quickstart.** Begin locking/Record my lock/verification/activation/release are writes and not needed to prove initial installation. A fuller synthetic lifecycle needs explicitly agreed data/participants and photo/QR assertions; it never proves physical safety. Never remove others' locks or seed over an existing permit.
-8. **MCP — NEEDS OLLY OK AT SUBMISSION / BEFORE JUDGE TESTS.** Exposure stays OFF now. With separate approval, the administrator enables the intended installed app, judge uses an approved MCP client/normal OAuth, discovers the actual environment-named readiness tool and reads the actual PGSAMPLE-N once. The historical name check_readiness_development is not a promised production name. Consent may say **Read, Write, and Search** despite the GET-only MCP interface. See [exposure/window/cleanup steps](docs/judge-access-plan.md#mcp--needs-olly-ok-at-submission--before-judge-testing).
-
-**Rehearsal record required before calling this fully tested:** generated-link install by intended admin, production version/source, fresh project marker/issue, actual footer/one agent, PLAN response, role/permission checks, optional approved MCP response and cleanup, errors/elapsed times. No raw tokens or personal identifiers in published evidence. We will replace NOT_RUN only with that real acceptance record. [Exact owner recording checklist](docs/video-capture-list.md).
-
-
-### Local submission-pack consistency check
-
-Run **npm run check:submission** (or **npm run check:submission -- --json**) without credentials. It only reads local documentation/JSON; it validates timing, capture URLs/fields, narration, local file links and owner-receipt/scope/approval boundaries. A PASS is **not** production/browser/media acceptance or permission to submit. Pending human gates stay explicit in [submission status](docs/submission-status.json). No network, browser, site write or public action is performed. [Private footage handoff](docs/footage-handoff.md).
-
-**Privacy declaration:** personal data is stored in Forge (including names/attributable records/photos); owner-approved privacy and terms are now published on GitHub Pages (links below). Personal-data reporting/erase/refresh and retention handling are not implemented. No privacy-compliance attestation is implied by deployment or no external egress. [Field values, scope purposes and gaps](docs/distribution-handoff-2026-11-26.md).
-
-## Privacy policy and terms
-
-Owner-approved [Privacy policy](https://mizzen-studios.github.io/permitguard/privacy.html) and [Terms of use](https://mizzen-studios.github.io/permitguard/terms.html) are published on free GitHub Pages (26 November 2026), HTTP200 verified. They disclose Forge personal-data storage, optional Rovo, no vendor external operational storage and incomplete automatic erase/reporting/retention. Publication does not resolve those gaps or authorize app sharing, Marketplace, MCP exposure or billing changes.
+MIT · [LICENSE](LICENSE). No Marketplace/Devpost publication or award eligibility is established by this repository.

@@ -26,25 +26,26 @@
     {
       "id": "S02",
       "start": 15,
-      "end": 35,
-      "title": "Identify the deployed build",
-      "screen": "PGSAMPLE-2 ACTIVE panel; footer 5.16.0 / UI 5f92b0c1b926; own-lock rail and top release strip",
-      "narration": "Here is the deployed development build and our synthetic active permit. Work-start readiness and release readiness are separate. The release blocker stays visible at the top. Historical preview is labelled; actions wait for current authorization.",
-      "evidence": "5.16 footer/panel observed by owner 24 Nov; prior broad core acceptance was 5.15 on 22 Nov",
+      "end": 40,
+      "title": "Two evidence baselines — Production setup versus Development ACTIVE",
+      "screen": "Actual Development5.16.0 ACTIVE panel plus clearly labelled owner-reported Production2.4 setup receipt, never a manufactured Production UI screenshot",
+      "narration": "The separate Production two-point-four rehearsal passed fresh setup: six synthetic items, Warn-only, no permit or locks, persisted after reload. This screen is the Development five-point-sixteen active fixture, not that installation. Work-start and release readiness remain separate, with release blocked.",
+      "evidence": "Production2.4 owner seed PASS is text evidence; Development ACTIVE fixture must be reread before recording; no Production footage received",
       "captureUrl": "https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2",
       "captureIssueKey": "PGSAMPLE-2",
       "captureClicks": [
         "Start a navigation stopwatch, then reload this issue once.",
         "Open PermitGuard through View app actions if needed; let live state finish loading.",
-        "Scroll to footer: capture actual Forge version and UI marker. Scroll back to release strip and ACTIVE phase; expand Startup details only to distinguish clocks, not to imply its timer measures all Jira navigation."
+        "Scroll to footer: capture actual Forge version and UI marker. Scroll back to release strip and ACTIVE phase; expand Startup details only to distinguish clocks, not to imply its timer measures all Jira navigation.",
+        "For a source insert open the committed docs/evidence/2026-11-27-owner-2.4-seed-pass.json. Label Owner-reported Production2.4 onboarding ·27Nov · not captured UI/footage. Keep the Development5.16 label visible on its actual ACTIVE panel. Do not repeat the seed or reset the production register."
       ],
-      "captureExpected": "Expected baseline 5.16.0 / UI 5f92b0c1b926, ACTIVE, Release NOT CLEARED, lock L-A1. Historical preview, if shown, is explicitly not live/actionable. Current state must be checked; last owner observation was 24 Nov, not a new live assertion.",
-      "captureDurationSeconds": 20
+      "captureExpected": "Expected baseline 5.16.0 / UI 5f92b0c1b926, ACTIVE, Release NOT CLEARED, lock L-A1. Historical preview, if shown, is explicitly not live/actionable. Current state must be checked; last owner observation was 24 Nov, not a new live assertion. Separate owner receipt: Production2.4 EQ-1–EQ-6 Warn-only/no permit/locks/persisted6; no copied tenant image or Inspector UI. Never label the DEV ACTIVE view Production.",
+      "captureDurationSeconds": 25
     },
     {
       "id": "S03",
-      "start": 35,
-      "end": 60,
+      "start": 40,
+      "end": 65,
       "title": "Native Rovo, release first",
       "screen": "One PermitGuard Judge; new chat: Is PGSAMPLE-2 cleared?; actual tool response",
       "narration": "Ask the native Judge whether this work item is cleared. It leads with release not cleared, then gives the narrower work-start result. It reads the same deterministic service as the panel, rather than granting safety authority.",
@@ -61,8 +62,8 @@
     },
     {
       "id": "S04",
-      "start": 60,
-      "end": 100,
+      "start": 65,
+      "end": 105,
       "title": "Personal-lock barrier — read-only walkthrough",
       "screen": "Inspect current personal-lock records and top release result; source-labelled shared-lock guard inset if needed. No seeding, phase change, lock removal or close attempt.",
       "narration": "Personal-lock records remain attributable. A worker removing their own lock does not clear someone else’s remaining record. The shared service enforces that barrier. Here we inspect the current record and the rule without changing locks or pretending a simulated crew is another real person.",
@@ -79,7 +80,7 @@
     },
     {
       "id": "S05",
-      "start": 100,
+      "start": 105,
       "end": 120,
       "title": "Authorized reread in another tab",
       "screen": "Two read-only views of the same issue, explicitly labelled manual Refresh; show automatic invalidation only if genuinely recorded",
@@ -93,7 +94,7 @@
         "Keep an explicit Manual Refresh — no state change label. Record current phase/release/lock state; return to tab A."
       ],
       "captureExpected": "Both authorized views agree after reread. This does NOT demonstrate automatic Realtime delivery or a state-change race. No cross-tab mutation is needed.",
-      "captureDurationSeconds": 20
+      "captureDurationSeconds": 15
     },
     {
       "id": "S06",
@@ -137,7 +138,7 @@
       "end": 180,
       "title": "Architecture and close",
       "screen": "README architecture, public MIT repository and remaining release blocker",
-      "narration": "Forge stores bounded records and checks revisions before writes. Jira access remains user-authorized. No external app runtime or SQL is needed. Named humans and the site procedure remain in control.",
+      "narration": "Forge holds bounded records with authenticated permissions and conditional writes. There is no external app runtime or SQL. Privacy erasure and broader live acceptance remain unfinished. PermitGuard supports decisions; named humans and the site procedure remain authoritative.",
       "evidence": "Source architecture, not production qualification",
       "captureUrl": "https://github.com/Mizzen-Studios/permitguard",
       "captureIssueKey": null,
@@ -150,7 +151,13 @@
       "captureDurationSeconds": 15
     }
   ],
-  "updatedDate": "2026-11-24",
+  "updatedDate": "2026-11-27",
   "recordingMode": "READ_ONLY_CORE_DEFAULT",
-  "mcpMedia": "Redacted historical textual receipt insert; no Inspector screenshot/video exists"
+  "mcpMedia": "Redacted historical textual receipt insert; no Inspector screenshot/video exists",
+  "productionOnboarding": {
+    "version": "2.4.0",
+    "uiSource": "e8b95c053254",
+    "evidence": "evidence/2026-11-27-owner-2.4-seed-pass.json",
+    "classification": "OWNER_REPORTED_PASS_NOT_FOOTAGE"
+  }
 }

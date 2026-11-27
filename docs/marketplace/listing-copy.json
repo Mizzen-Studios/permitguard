@@ -1,0 +1,20 @@
+{
+  "status": "UNSUBMITTED_DRAFT_NOT_APPROVED_FOR_LISTING",
+  "name": "PermitGuard",
+  "vendor": "Mizzen Studios",
+  "tagline": "Human-confirmed lockout/tagout permit decision support in Jira. Site procedures remain authoritative.",
+  "legacy_summary": "Review permit phases, attributable personal locks and separate work-start and release blockers in Jira. Synthetic evaluation only: not safety certification, a physical interlock or permission to energize.",
+  "more_details": "PermitGuard brings lockout/tagout permit decision support to a Jira issue panel. Review Plan, Lock, Verify, Active, Release and Closed phases, equipment isolation points, personal locks and separate work-start and release decisions. Named humans retain confirmation authority; native Rovo can read readiness or propose PENDING, never confirm activation. New projects default to Warn-only. Administrators can explicitly load six synthetic equipment items into an eligible empty demo register. Connection and appropriate Jira permissions are required. Evaluation only: full production lifecycle, distinct-two-human and cross-browser Realtime acceptance remain pending. Site procedures remain authoritative; this is not safety certification, a physical interlock or permission to energize. Personal-data reporting, erase/refresh and retention handling remain incomplete; use synthetic content only.",
+  "highlights": [
+    {"id": "H1", "title": "Separate work-start from release", "summary": "Review distinct readiness decisions and permit blockers in the Jira issue panel. A work-start result is not release clearance or permission to energize.", "caption_draft": "Planned capture: actual Jira panel showing separate work-start and release decisions, with its site-procedure caveat. No screenshot captured."},
+    {"id": "H2", "title": "Keep confirmation with named humans", "summary": "The model attributes personal locks and reserves confirmation for named people. Rovo can propose PENDING, not activate. Full distinct-two-human browser acceptance remains pending.", "caption_draft": "Planned capture: actual attributable lock and named-human confirmation state. Requires an authorized lifecycle rehearsal; no screenshot captured."},
+    {"id": "H3", "title": "Start with a Warn-only demo register", "summary": "An eligible empty project can explicitly load six synthetic equipment items. Owner-reported Production 2.4.0 checks passed: Cancel writes nothing; reload keeps six without duplicates.", "caption_draft": "Planned capture: six synthetic EQ-1 to EQ-6 items in Warn-only after explicit confirmation, with no permit or locks. No screenshot captured."}
+  ],
+  "release_summary": "Evaluation draft: guarded empty-project synthetic register",
+  "release_notes": "Production 2.4.0 / UI e8b95c053254: seed capability forwarding fix. Owner reported 27 November 2026 09:01 UTC all seed UI checks passed: Cancel 0 writes, Confirm 6 synthetic EQ-1 to EQ-6 items, Warn-only, no permit or locks, reload six without duplicates and no seed button. This is owner-reported acceptance, not screenshot evidence or full lifecycle/two-human/Realtime acceptance. No Marketplace release submitted.",
+  "privacy_url": "https://mizzen-studios.github.io/permitguard/privacy.html",
+  "terms_url": "https://mizzen-studios.github.io/permitguard/terms.html",
+  "support_url": "https://github.com/Mizzen-Studios/permitguard/issues",
+  "public_contact_email": "ollymcbride4@gmail.com",
+  "pricing": "UNDECIDED_NOT_CONFIGURED"
+}

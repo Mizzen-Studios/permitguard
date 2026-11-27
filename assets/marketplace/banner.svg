@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="548" viewBox="0 0 1120 548" role="img" aria-labelledby="title desc">
+<title id="title">PermitGuard concept Marketplace banner</title>
+<desc id="desc">Original geometric lock and permit artwork. Explicitly labelled concept brand art, not a screenshot or safety certification.</desc>
+<rect width="1120" height="548" fill="#102d35"/>
+<path d="M855 0 615 548M1000 0 760 548M1145 0 905 548" stroke="#24454b" stroke-width="2"/>
+<circle cx="914" cy="268" r="153" fill="#173b42"/>
+<path d="M852 154h89l42 42v161a12 12 0 0 1-12 12H852a12 12 0 0 1-12-12V166a12 12 0 0 1 12-12Z" fill="#f5f0df"/>
+<path d="M941 154v42h42" fill="#c7d2c8"/>
+<path d="M863 203h46M863 229h46M863 255h29" stroke="#47646b" stroke-width="8" stroke-linecap="round"/>
+<path d="M921 298v-23a23 23 0 0 1 46 0v23" fill="none" stroke="#102d35" stroke-width="10"/>
+<rect x="902" y="291" width="84" height="58" rx="12" fill="#e2aa50"/>
+<circle cx="944" cy="315" r="7" fill="#102d35"/><path d="M944 319v13" stroke="#102d35" stroke-width="6"/>
+<g font-family="DejaVu Sans, sans-serif">
+<text x="64" y="88" font-size="18" letter-spacing="4" fill="#e2aa50">MIZZEN STUDIOS</text>
+<text x="60" y="216" font-size="70" font-weight="bold" fill="#f5f0df">PermitGuard</text>
+<text x="64" y="279" font-size="27" fill="#d6e0d8">Human-confirmed permit</text>
+<text x="64" y="318" font-size="27" fill="#d6e0d8">decision support in Jira.</text>
+<path d="M64 358h68" stroke="#e2aa50" stroke-width="4"/>
+<text x="64" y="401" font-size="18" fill="#d6e0d8">Site procedures remain authoritative.</text>
+<text x="64" y="487" font-size="14" fill="#a9bdbb">CONCEPT BRAND ART / NOT A PRODUCT SCREENSHOT</text>
+</g>
+</svg>

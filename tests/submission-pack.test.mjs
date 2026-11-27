@@ -17,6 +17,14 @@ test('local pack is consistent but explicitly not submission-ready or authorized
 });
 
 const regressions = [
+  ['seed report missing',p=>p.ownerSeed=null],
+  ['seed report wrong version',p=>p.ownerSeed.version='99.0.0'],
+  ['seed evidence inflated to inspected media',p=>p.ownerSeed.independentlyInspected=true],
+  ['seed duplicates concealed',p=>p.ownerSeed.reload.duplicates=1],
+  ['seed lock creation concealed',p=>p.ownerSeed.confirm.locks=1],
+  ['narration too fast',p=>{p.shots.shots[0].narration='word '.repeat(100);p.documents['docs/demo-video-script.md']+=p.shots.shots[0].narration}],
+  ['Production text receipt promoted to received footage',p=>p.capture.productionOnboarding.mediaReceived=true],
+  ['mixed build label omitted',p=>p.shots.productionOnboarding.classification='LIVE_PRODUCTION_FULL_CORE'],
   ['timeline gap', p => p.shots.shots[2].start++],
   ['duration drift', p => p.shots.shots[0].captureDurationSeconds++],
   ['missing clicks', p => p.shots.shots[0].captureClicks = []],

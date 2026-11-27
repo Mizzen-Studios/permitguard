@@ -1,3 +1,4 @@
+import { requireLifecycleCapacity, lifecycleCapacity } from './store.mjs';
 import { validateAssetsConfig } from './assets.mjs';
 import { evaluateGate } from '../forge/gate.mjs';
 import * as domain from '../domain/permit.mjs';
@@ -74,6 +75,8 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     need(auth.canEdit === true, 'EDIT_ISSUES permission required');
     if (payload.expectedRevision !== undefined) need(payload.expectedRevision === row.revision, 'CONFLICT: refresh before retrying');
     const at = now();
+    const drainingCapacity = ['remove_lock','remove_sample_lock','begin_release','close_permit'].includes(operation);
+    const previousBudget = drainingCapacity ? lifecycleCapacity(site) : null;
     const requirePermit = () => need(permit, 'Create permit first');
     const consumeQR = async target => {
       need(payload.confirmedAtEquipment===true,'AT_EQUIPMENT_CONFIRMATION_REQUIRED');
@@ -188,6 +191,7 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     site.projects[projectId] = project;
     if (permit) site.permits[issueId] = permit;
     // No retry after uncertain commit; return error and require refresh. Domain changes only persist here.
+    requireLifecycleCapacity(site,{previousBudget,allowDraining:drainingCapacity});
     const revision = await store.commit(row.revision, site);
     const response = { ...result(), revision, projection: { status: 'NOT_ATTEMPTED' } };
     // Independent non-authoritative side effects run together, only AFTER the atomic commit.

@@ -3,6 +3,32 @@ import { createHash } from 'node:crypto';
 export const ENTITY = 'permitguard-site';
 export const SITE_KEY = 'site-v1';
 export const MAX_BYTES = 180000;
+/** Conservative byte allowance, not stored data or erasure. Every growth write must
+ * leave room for each currently outstanding own-lock removal, ACTIVE->RELEASE and
+ * close-out. Does not guarantee all future photos/verifications or recover legacy-full rows.
+ * Timestamp reserve64bytes covers trusted ISO timestamps; revision allowance32bytes
+ * exceeds serialized safe-integer growth. Known actor/lock IDs are measured as UTF-8.
+ */
+const bytes = value => Buffer.byteLength(JSON.stringify(value), 'utf8');
+const STAMP_RESERVE = '0'.repeat(64);
+export function lifecycleCapacity(data) {
+  let reservedBytes = 0;
+  const auditSize = (actorId, action, details={}) => bytes({actorId,at:STAMP_RESERVE,action,...details}) + 1 + 32;
+  const largestAudit = (people,action) => Math.max(0,...(people||[]).map(actor=>auditSize(actor,action)));
+  for (const permit of Object.values(data.permits||{})) {
+    if(permit.state==='CLOSED') continue;
+    for(const lock of permit.locks||[]) if(!lock.removedAt) reservedBytes += auditSize(lock.actorId,'PERSONAL_LOCK_REMOVED',{lockId:lock.lockId}) + bytes(STAMP_RESERVE); // null -> string, conservatively do not subtract null
+    if(permit.state==='ACTIVE') reservedBytes += largestAudit(permit.workers,'RELEASE_REQUESTED') + 16;
+    reservedBytes += largestAudit(permit.verifierIds,'PERMIT_ARCHIVED') + bytes({closedAt:STAMP_RESERVE}) + 32;
+  }
+  const usedBytes=bytes(data);
+  return {usedBytes,reservedBytes,remainingBytes:MAX_BYTES-usedBytes-reservedBytes,limitBytes:MAX_BYTES};
+}
+export function requireLifecycleCapacity(data, {previousBudget=null,allowDraining=false}={}) {
+ const budget=lifecycleCapacity(data);
+ if(budget.remainingBytes<0 && !(allowDraining===true && previousBudget?.remainingBytes<0 && budget.usedBytes<=MAX_BYTES && budget.remainingBytes>previousBudget.remainingBytes)) throw new Error('LIFECYCLE_CAPACITY_RESERVED: no records changed; new evidence or planning must leave room for recorded lock removal and close-out');
+ return budget;
+}
 export const emptySite = () => ({ schemaVersion: 1, permits: {}, projects: {}, evidence: {}, challenges: {} });
 export function forgeStore({ kvs, Filter, FilterConditions }) {
   if (!kvs?.transact || !Filter || !FilterConditions?.notExists || !FilterConditions?.equalTo) throw new Error('ATOMIC_STORAGE_UNAVAILABLE');
