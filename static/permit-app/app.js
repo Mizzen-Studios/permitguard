@@ -9,7 +9,7 @@ const iframeNavigationAt=typeof performance!=='undefined'&&Number.isFinite(perfo
 let liveRequestStartedAt=0,liveRequestFinishedAt=0,contextReceivedAt=0;
 let previewStatus='Waiting for issue context',previewReceivedAt=0,previewShownAt=0,liveLoadedAt=0;
 let preview = null;
-let state = null, busy = false, stale = true, error = '', notice = '', sync = 'Not subscribed; use Refresh', subscription, refreshing, adminResult = null, rules = [], playingCrewB = false, snapshotIssue = '', pendingInvalidation = false, pendingRevision = null, initializing = true, saveStartedAt = 0, saveStage = '', saveTimer = null;
+let state = null, busy = false, stale = true, error = '', notice = '', sync = 'Not subscribed; use Refresh', subscription, refreshing, adminResult = null, rules = [], playingCrewB = false, snapshotIssue = '', pendingInvalidation = false, pendingRevision = null, initializing = true, saveStartedAt = 0, saveStage = '', saveTimer = null, lastSaveTiming = null;
 const call = (operation, payload = {}) => invoke('permitguard', {operation, payload});
 const button = (label, action, primary = false, attrs = '') => '<button type="button" class="'+(primary?'primary':'secondary')+'" data-action="'+action+'" '+(busy||stale?'disabled ':'')+attrs+'>'+escape(label)+'</button>';
 const field = (id, label, value = '', attrs = '') => '<label for="'+id+'">'+label+'</label><input id="'+id+'" name="'+id+'" value="'+escape(value)+'" '+attrs+'>';
@@ -82,7 +82,7 @@ function updateSavingProgress(){
  if(detail)detail.textContent=saveStage+'. Keep this panel open; do not resubmit.';
 }
 function startSaving(stage){busy=true;saveStage=stage;saveStartedAt=Date.now();if(saveTimer!==null)clearInterval(saveTimer);saveTimer=setInterval(updateSavingProgress,1000);render();}
-function stopSaving(){busy=false;if(saveTimer!==null)clearInterval(saveTimer);saveTimer=null;saveStartedAt=0;saveStage='';}
+function stopSaving(){if(saveStartedAt)lastSaveTiming={elapsedMs:Math.max(0,Date.now()-saveStartedAt),confirmed:!error};busy=false;if(saveTimer!==null)clearInterval(saveTimer);saveTimer=null;saveStartedAt=0;saveStage='';}
 function specialView() {
  if(state?.kind==='ADMINISTRATION') return '<h1>PermitGuard administration</h1><p role="status">Administration loaded. No live permit subscription is required on this page.</p><p>Open a Jira work item to manage its permit and project policy.</p><h2>What this app touches</h2>'+permissionsSummary(state.scopes)+'<h2>Before uninstall</h2><p>'+escape(state.uninstall?.instructions)+'</p>'+button('List app-owned workflow rules','list_rules')+(adminResult?'<pre>'+escape(JSON.stringify(adminResult,null,2))+'</pre>':'');
  if(state?.kind==='PERMITGUARD_LOCK_BOARD_SNAPSHOT') return '<h1>Lock-board snapshot</h1><p>'+escape(state.label)+'</p><p>Not live. Choose a work item you can access; no other issue records are disclosed.</p><label for="snapshotIssue">Jira work item key</label><input id="snapshotIssue" value="'+escape(snapshotIssue)+'"><button data-action="load_snapshot">Load authorized snapshot</button><pre>'+escape(JSON.stringify(state.permits || [],null,2))+'</pre>';
@@ -109,8 +109,9 @@ function buildMarker(){
 function buildFooter(){
  const timing=(at,origin=startupStartedAt)=>at&&origin?((at-origin)/1000).toFixed(1)+' s':'not recorded';
  const iframeLive=iframeNavigationAt?timing(liveLoadedAt,iframeNavigationAt):'unavailable';
- return '<footer class="build-footer"><small>PermitGuard '+buildMarker()+'</small><details><summary>Startup details — not total Jira navigation time</summary><p><strong>Jira navigation → live: not measured here. Use the navigation stopwatch.</strong></p><p>Iframe document navigation → panel code: '+timing(startupStartedAt,iframeNavigationAt)+'. Iframe document navigation → live: '+iframeLive+'. This iframe clock still excludes Jira waiting to create or navigate the frame.</p><p>Panel-code clock only: context received '+timing(contextReceivedAt)+'; snapshot received '+timing(previewReceivedAt)+'; first historical preview '+timing(previewShownAt)+'; first live state '+timing(liveLoadedAt)+'. First state-request round trip (including a failed attempt): '+(liveRequestFinishedAt&&liveRequestStartedAt?((liveRequestFinishedAt-liveRequestStartedAt)/1000).toFixed(1)+' s':'not recorded')+'.</p><p>Preview: '+escape(previewStatus)+'. Do not compare panel-only seconds with a Jira-navigation stopwatch. Preview is optional and never actionable; live state is never delayed to display it.</p></details></footer>';
+ return '<footer class="build-footer"><small>PermitGuard '+buildMarker()+'</small><details><summary>Startup details — not total Jira navigation time</summary><p><strong>Jira navigation → live: not measured here. Use the navigation stopwatch.</strong></p><p>Iframe document navigation → panel code: '+timing(startupStartedAt,iframeNavigationAt)+'. Iframe document navigation → live: '+iframeLive+'. This iframe clock still excludes Jira waiting to create or navigate the frame.</p><p>Panel-code clock only: context received '+timing(contextReceivedAt)+'; snapshot received '+timing(previewReceivedAt)+'; first historical preview '+timing(previewShownAt)+'; first live state '+timing(liveLoadedAt)+'. First state-request round trip (including a failed attempt): '+(liveRequestFinishedAt&&liveRequestStartedAt?((liveRequestFinishedAt-liveRequestStartedAt)/1000).toFixed(1)+' s':'not recorded')+'.</p>'+saveTimingDetails()+'<p>Preview: '+escape(previewStatus)+'. Do not compare panel-only seconds with a Jira-navigation stopwatch. Preview is optional and never actionable; live state is never delayed to display it.</p></details></footer>';
 }
+function saveTimingDetails(){return lastSaveTiming?'<p>Last save attempt: '+(lastSaveTiming.elapsedMs/1000).toFixed(1)+' s panel round-trip · '+(lastSaveTiming.confirmed?'server response received':'outcome unconfirmed')+'. Not total Jira navigation time; no speed guarantee.</p>':'';}
 function updateBuildFooter(){const footer=root.querySelector('.build-footer');if(footer)footer.outerHTML=buildFooter();}
 async function loadPreview(context){
  const issue=context?.extension?.issue||{},ref=String(issue.id||issue.key||'');
@@ -135,6 +136,7 @@ function render() {
  const connection=root.querySelector('#connection-status'),feedback=root.querySelector('#feedback');
  if(busy&&connection&&feedback){
   updateSavingProgress();
+  const work=root.querySelector('#work');if(work?.setAttribute)work.setAttribute('aria-busy','true');
   feedback.innerHTML=error?'<div class="blocked">'+escape(error)+'</div>':notice?'<div class="notice">'+escape(notice)+'</div>':'';
   root.querySelectorAll('input,select,textarea,button').forEach(el=>{el.disabled=true;});
   return;
@@ -179,7 +181,7 @@ async function initialize() {
 }
 async function mutate(operation,payload={}) {
  if(busy || stale) return; const revision=state.revision ?? state.permit?.revision;
- error='';notice='';startSaving('Waiting for Forge to check permissions, save records and update connected views');
+ error='';notice=['create_permit','create_demo_crew_b'].includes(operation)?'Creating permit… Awaiting server confirmation. Not saved yet; do not submit again.':'';startSaving('Checking permissions, saving and updating connected views');
  try { const result=await call(operation,{...payload,expectedRevision:Object.hasOwn(payload,'expectedRevision')?payload.expectedRevision:revision ?? null}); if(result?.error || result?.ok===false || result?.status==='DENIED' || result?.status==='ERROR') {const e=new Error(result.message || result.error || result.code || 'Operation denied.');e.requiresRefresh=result.requiresRefresh!==false;e.safeResponse=true;throw e;}
  if(['dry_run','list_rules','disable_rule','set_archive_config','archive_closed'].includes(operation)) adminResult=result;
  if(operation==='list_rules') rules=(Array.isArray(result)?result:(result?.rules || result?.values || [])).flatMap(w => w.validators ? w.validators.map(r=>({...r,workflowName:w.workflowId?.name,ruleId:r.id})) : [w]);
@@ -190,7 +192,7 @@ async function mutate(operation,payload={}) {
   if(pendingInvalidation&&Number.isSafeInteger(pendingRevision)&&pendingRevision<=result.revision){pendingInvalidation=false;pendingRevision=null;}
   if(sync==='Update received; checking saved state…')sync='Live updates connected';
  }else await refresh();
- }catch(e){error=(e.safeResponse?String(e.message):'The operation result could not be confirmed; it may already have completed.')+ ' Refresh before retrying; no operation was automatically resubmitted.';stale=e.requiresRefresh!==false||pendingInvalidation;} finally{stopSaving();if(pendingInvalidation){pendingInvalidation=false;pendingRevision=null;if(!error)await refresh();}render();}
+ }catch(e){notice='';error=(e.safeResponse?String(e.message):'The operation result could not be confirmed; it may already have completed.')+ ' Refresh before retrying; no operation was automatically resubmitted.';stale=e.requiresRefresh!==false||pendingInvalidation;} finally{stopSaving();if(pendingInvalidation){pendingInvalidation=false;pendingRevision=null;if(!error)await refresh();}render();}
 }
 async function photoData(file) {
  if(!file || !file.size) return null;

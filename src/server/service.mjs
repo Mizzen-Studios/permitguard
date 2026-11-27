@@ -15,14 +15,16 @@ function sampleEquipment(projectId) {
 function projection(p, readiness, release, policy) {
   return { ...domain.permitEntityProperty(p), activeLockCount:p.locks.filter(l => !l.removedAt).length, mode: policy.mode, failMode: policy.failMode, start: { cleared: readiness.status === 'CLEARED' }, release: { cleared: release.status === 'CLEARED' }, dryRun: { startBlocked: readiness.status !== 'CLEARED', releaseBlocked: release.status !== 'CLEARED' }, authoritative: false };
 }
-export function createService({ store, challenges, authorize, projectIsSample, validatePeople, projectProperty, publish, readAssets, now = () => new Date().toISOString(), uuid = randomUUID }) {
+export function createService({ store, challenges, authorize, projectIsSample, validatePeople, projectProperty, publish, readAssets, now = () => new Date().toISOString(), uuid = randomUUID, clock = Date.now, observeTiming = () => {} }) {
   need(store?.atomic === true, 'ATOMIC_STORAGE_UNAVAILABLE');
   return async function dispatch(operation, payload = {}, context = {}) {
-    const auth = await authorize(context,{includeProfile:!['get_state','check_readiness','list_equipment'].includes(operation)});
+    const started = clock(), timings = {};
+    const measured = async (name, fn) => {const at=clock();try{return await fn();}finally{timings[name]=Math.max(0,Math.round(clock()-at));}};
+    const auth = await measured('authorizationMs',()=>authorize(context,{includeProfile:!['get_state','check_readiness','list_equipment','create_permit','create_demo_crew_b'].includes(operation)}));
     const actorId = str(auth.actorId), issueId = str(auth.issueId), projectId = str(auth.projectId);
     need(payload && typeof payload === 'object' && !Array.isArray(payload), 'Payload object required');
     need(Buffer.byteLength(JSON.stringify(payload)) <= 90000, 'Payload too large');
-    const row = await store.read(), site = row.data;
+    const row = await measured('storageReadMs',()=>store.read()), site = row.data;
     const project = site.projects[projectId] || projectDefault();
     let permit = site.permits[issueId] || null;
     if (permit) need(permit.projectId === projectId, 'Issue moved: supervisor reconciliation required');
@@ -142,13 +144,13 @@ export function createService({ store, challenges, authorize, projectIsSample, v
           need(source, 'DEMO_SECOND_CREW_UNAVAILABLE');
           // A historical placeholder ID is not a second real principal. Verify it
           // against native active/assignable people, without disclosing it to the client.
-          await validatePeople([otherLock(source).actorId], issueId);
+          await measured('sourceParticipantMs',()=>validatePeople([otherLock(source).actorId], issueId, auth));
           plan = { crewId: 'Crew B', equipmentIds: [pumpId], workers: [actorId], verifierIds: [actorId] };
         }
         need(registerAvailable, 'ASSETS_UNAVAILABLE: cannot plan from stale equipment'); need(!permit, 'Permit already exists'); need(all().length < 60, 'SITE_CAPACITY_REACHED');
         const workers = ids(plan.workers || [actorId]), verifierIds = ids(plan.verifierIds || [actorId]);
         need(workers.includes(actorId), 'Creator must be assigned worker');
-        await validatePeople([...new Set([...workers, ...verifierIds])], issueId);
+        await measured('participantsMs',()=>validatePeople([...new Set([...workers, ...verifierIds])], issueId, auth));
         const selected = plan.equipmentIds || project.equipment.slice(0, 1).map(e => e.id);
         need(Array.isArray(selected) && selected.length && selected.length <= 6, 'Select registered equipment');
         const equipment = selected.map(id => { const e = project.equipment.find(e => e.id === id); need(e, 'Unknown equipment; register it first'); return e; });
@@ -192,14 +194,16 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     if (permit) site.permits[issueId] = permit;
     // No retry after uncertain commit; return error and require refresh. Domain changes only persist here.
     requireLifecycleCapacity(site,{previousBudget,allowDraining:drainingCapacity});
-    const revision = await store.commit(row.revision, site);
+    const revision = await measured('commitMs',()=>store.commit(row.revision, site));
     const response = { ...result(), revision, projection: { status: 'NOT_ATTEMPTED' } };
     // Independent non-authoritative side effects run together, only AFTER the atomic commit.
     // Both settle before replying; neither is a detached task or a reason to retry a mutation.
-    await Promise.all([
+    await measured('sideEffectsMs',()=>Promise.all([
       permit&&projectProperty ? Promise.resolve().then(()=>projectProperty(issueId,projection(permit,readiness(),release(),project.policy))).then(()=>{response.projection.status='UPDATED';},()=>{response.projection.status='FAILED_NONAUTHORITATIVE';}) : Promise.resolve(),
       publish ? Promise.resolve().then(()=>publish({revision})).catch(()=>{response.realtime='UNAVAILABLE';}) : Promise.resolve()
-    ]);
+    ]));
+    // Bounded operation/timing diagnostics only; no issue/account/content/identifiers.
+    try{observeTiming({operation,...timings,totalMs:Math.max(0,Math.round(clock()-started))});}catch{}
     return response;
   };
 }
