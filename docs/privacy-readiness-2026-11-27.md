@@ -43,3 +43,9 @@ Integrated as32caa55 after Production2.5 deployment. Parent reran **212backend +
 
 ### Owner decision needed before erasure/retention activation
 Specify the approved retention period(s) for closed permits, audit, photos, QR records and Confluence copies, and accountable person/process for subject-rights requests. Recommendation: manual reviewed requests while policy is unresolved; never scheduled deletion or anonymisation of active attributable locks. This is a proposal, not a compliance determination or permission to retain indefinitely. Safety/evidence conflict requires explicit legal/operational reconciliation; a timer must never clear a permit.
+
+## Owner decision27-Nov2026 17:02UTC — scope frozen
+
+Retention policy agreed: customer-site operational storage only; closed permits/audits/archive copies and synthetic-only hackathon photos remain until site-admin-arranged deletion or uninstall. Forge removal follows the standard Atlassian retention lifecycle, not immediate permanent deletion; Jira/Confluence artifacts may require separate admin cleanup. No automatic deletion/anonymisation; never alter active lock ownership. Site admin handles human-reviewed erasure in-site; Mizzen support only routes requests and holds no operational copies (email correspondence is separate).
+
+**Do not build more privacy features now.** Keep all groundwork inactive, no new scopes/scheduler/admin endpoints. Previous engineering gaps remain known and deferred, not resolved or compliance-certified by this policy decision. Priority is core judge path and demo quality; owner will perform CheckA on existing mizzen-judge-test/KAN-1. No reset/reseed or new runtime release to prepare this wording update.

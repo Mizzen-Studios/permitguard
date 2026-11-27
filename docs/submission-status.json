@@ -152,7 +152,7 @@
     "cardAuthorized": false
   },
   "privacyReadiness": {
-    "status": "SOURCE_CANDIDATE_INACTIVE_RUNTIME_INCOMPLETE",
+    "status": "DEFERRED_BY_OWNER_GROUNDWORK_INACTIVE",
     "sourceCommit": "32caa55",
     "documentation": "privacy-readiness-2026-11-27.md",
     "reportingActive": false,
@@ -162,8 +162,18 @@
       "Supported success Cycle-Period response contract",
       "Reliable oldest retrieval dates; complete QR/archive/free-text/photo-subject inventory",
       "Durable resumable reporting/action ledger and safe reconciliation",
-      "Owner-approved retention/erasure operating policy",
       "Reviewed runtime integration and native acceptance"
-    ]
+    ],
+    "ownerDecisionAt": "2026-11-27T17:02:00Z",
+    "policy": {
+      "retention": "UNTIL_SITE_ADMIN_DELETION_OR_UNINSTALL_PLATFORM_LIFECYCLE",
+      "automaticDeletion": false,
+      "automaticAnonymisation": false,
+      "activeLockOwnershipUntouched": true,
+      "photos": "SYNTHETIC_HACKATHON_DEMO_ONLY",
+      "erasure": "HUMAN_REVIEW_BY_CUSTOMER_SITE_ADMIN",
+      "support": "ROUTES_REQUESTS_NO_OPERATIONAL_COPIES",
+      "additionalPrivacyFeatures": "PAUSED_BY_OWNER"
+    }
   }
 }
