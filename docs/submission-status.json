@@ -1,5 +1,5 @@
 {
-  "updatedDate": "2026-11-26",
+  "updatedDate": "2026-11-27",
   "mode": "PRODUCTION_REHEARSAL_APPROVED",
   "publicActionsAuthorized": false,
   "installationLink": null,
@@ -20,7 +20,7 @@
       "id": "production-and-distribution",
       "status": "OWNER_REPORTED_INSTALL_ONLY",
       "owner": "Olly",
-      "evidence": "evidence/2026-11-26-production-empty-demo.json"
+      "evidence": "evidence/2026-11-27-production-seed-capability-fix.json"
     },
     {
       "id": "judge-install-browser-rehearsal",
@@ -67,15 +67,15 @@
     "notes": "Production deployed from clean 713eadc; DEV capture baseline unchanged. Distribution is approved but blocked by actual console sign-in; no installation link exists."
   },
   "production": {
-    "version": "2.3.0",
-    "uiSource": "bd1d3977a97d",
-    "sourceCommit": "bd1d3977a97de6650b34b31bc1d11f85b11fb974",
-    "evidence": "evidence/2026-11-26-production-empty-demo.json",
+    "version": "2.4.0",
+    "uiSource": "e8b95c053254",
+    "sourceCommit": "e8b95c053254bed5bd2f2ec6a28ff8162a80e3fd",
+    "evidence": "evidence/2026-11-27-production-seed-capability-fix.json",
     "privateDistribution": "OWNER_REPORTED_INSTALL_ONLY",
     "installLinkCreated": false
   },
   "followUpCandidate": {
-    "status": "DEPLOYED_PRODUCTION_2.3.0_NATIVE_SEED_ACCEPTANCE_NOT_RUN",
+    "status": "DEPLOYED_PRODUCTION_2.4.0_NATIVE_SEED_ACCEPTANCE_NOT_RUN",
     "mcpBaseActionKey": "permitguard_check_readiness",
     "mcpTools": 1,
     "mcpActionVerb": "GET",
@@ -84,9 +84,9 @@
     "liveDataWritten": false,
     "guide": "second-crew-demo.md",
     "sourceCommit": "2638662cf82801bfa3e163767d916e2823282007",
-    "uiSource": "bd1d3977a97d",
-    "verification": "evidence/2026-11-26-production-empty-demo.json",
-    "deployedFrom": "bd1d3977a97de6650b34b31bc1d11f85b11fb974"
+    "uiSource": "e8b95c053254",
+    "verification": "evidence/2026-11-27-production-seed-capability-fix.json",
+    "deployedFrom": "e8b95c053254bed5bd2f2ec6a28ff8162a80e3fd"
   },
   "distributionForm": {
     "ownerWillComplete": true,
@@ -105,16 +105,17 @@
     "evidence": "evidence/2026-11-26-owner-fresh-site-rehearsal.json",
     "version": "2.1.0",
     "independentlyInspected": false,
-    "postUpdateVersion": "2.3.0",
+    "postUpdateVersion": "2.4.0",
     "postUpdateVisualAcceptance": "NOT_RUN",
     "siteSidebarApps": "OWNER_REPORTED_404_DO_NOT_USE",
-    "lastOwnerVerifiedVersion": "2.2.0",
-    "lastOwnerVisualEvidence": "evidence/2026-11-26-owner-2.2-visual-pass.json"
+    "lastOwnerVerifiedVersion": "2.3.0",
+    "lastOwnerVisualEvidence": "evidence/2026-11-27-owner-2.3-seed-blocked.json",
+    "lastOwnerSeedResult": "FAIL_MISSING_CONTROL"
   },
   "localFollowUp": {
-    "status": "DEPLOYED_PRODUCTION_2.3.0_AWAITING_OWNER_SEED_ACCEPTANCE",
-    "reason": "Owner21:05 clarified public code/docs pushes authorized; no promotion/listing/submission",
-    "sourceCommit": "bd1d3977a97de6650b34b31bc1d11f85b11fb974",
+    "status": "DEPLOYED_PRODUCTION_2.4.0_AWAITING_NATIVE_SEED_RERUN",
+    "reason": "Fixed response capability omission, no guard relaxation",
+    "sourceCommit": "e8b95c053254bed5bd2f2ec6a28ff8162a80e3fd",
     "actualSiteDataWritten": false,
     "ownerBrowserChecklist": "empty-project-demo-seed.md"
   }

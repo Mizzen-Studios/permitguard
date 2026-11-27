@@ -1,4 +1,6 @@
-# Empty-project demo seed — Production2.3.0
+> **27-Nov fix:** Production **2.4.0 · UI e8b95c053254**. Prior2.3 seed button failed in the native owner check because Forge response mapping dropped the eligibility flag. Fixed without weakening guards; [root cause/regressions](seed-capability-fix-2026-11-27.md), [current receipt](evidence/2026-11-27-production-seed-capability-fix.json). Native2.4 rerun remains NOT_RUN. Prior dated deployment statements below are history, not accepted seed results.
+
+# Empty-project demo seed — Production2.4.0
 
 Historical Production2.2 already had confirmed **Load dedicated sample plant**, restricted to verified PGSAMPLE with Enforce. That is not a seed for arbitrary empty KAN projects. Production2.3.0 adds **Load six demo equipment items (Warn-only)** inside an empty issue panel, only when the server reports native project-admin + Edit Issues and safe empty-project eligibility. A native confirmation is required; no action runs on load/refresh.
 
@@ -15,7 +17,7 @@ Owner21:05 approved the existing public-repo code/docs push and Production deplo
 Use an existing project administrator with Edit Issues. Do not reset or overwrite a register, connect new Assets, invite users, create a permit, apply locks or enable Enforce for this check. If the seed button is absent, stop and report current register/policy/warning; do not bypass emptiness checks.
 
 1. Fully reload the existing judge issue. Open its PermitGuard section; if collapsed/absent, use the **apps icon under the issue title → PermitGuard**. Do not use site-sidebar Apps (reported404). The optional right-side Open PermitGuard guide should describe this issue-level route, not show readiness.
-2. Header and footer should match **2.3.0 · Production · UI bd1d3977a97d**. Before setup expect Release NOT CLEARED — no permit, empty-register message, no error, live updates connected. Report approximate load time separately, not a synthetic benchmark.
+2. Header and footer should match **2.4.0 · Production · UI e8b95c053254**. Before setup expect Release NOT CLEARED — no permit, empty-register message, no error, live updates connected. Report approximate load time separately, not a synthetic benchmark.
 3. Click **Load six demo equipment items (Warn-only)**, then **Cancel** the confirmation. Nothing should change: empty register, no permit/locks. Refresh/reopen to confirm no automatic setup.
 4. Click the same button again and confirm. Expect six equipment checkboxes, the explicit synthetic/Warn-only notice, policy Warn-only and success text **Six synthetic demo equipment items loaded. Warn-only; no permits or locks were created.** Release must remain NOT CLEARED — no permit. Do not click Create permit.
 5. Reload/reopen the issue. Expect exactly six items, no duplicates, same synthetic/Warn-only state and no permit/locks. Empty-setup seed button should no longer be offered. If a request fails or is uncertain, read/refresh before another attempt; do not reset to force a retry.
