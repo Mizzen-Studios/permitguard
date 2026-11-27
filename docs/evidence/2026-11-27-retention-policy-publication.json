@@ -1,0 +1,54 @@
+{
+  "classification": "PUBLISHED_HTTP_200",
+  "approval": {
+    "ownerApproved": true,
+    "requestUtc": "2026-11-27T17:02:00Z",
+    "scope": "Update existing privacy.html to agreed admin-controlled retention; keep privacy groundwork inactive; repository pushes authorized; no listing/submission/promotion"
+  },
+  "verifiedAt": "2026-11-27T17:04:41.092960+00:00",
+  "pages": [
+    {
+      "url": "https://mizzen-studios.github.io/permitguard/privacy.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "bf30c6a0429768547b0c33723ec95e9d435b081f5547f41c6f679c844bf72dbd",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://mizzen-studios.github.io/permitguard/terms.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "d96cc68d4ae85bf4e23d6331ad15921548bdc55719ab87d4beddbd9cc8e3d55d",
+      "matchesLocal": true
+    }
+  ],
+  "sourceCommit": "d2e933cd668cf24a82104c72d495bbdc90e92810",
+  "hosting": {
+    "provider": "GitHub Pages",
+    "publicRepository": true,
+    "sourceBranch": "main",
+    "sourcePath": "/docs",
+    "httpsEnforced": true,
+    "buildStatus": "built",
+    "costGBP": 0,
+    "billingChanged": false,
+    "customDomainAdded": false
+  },
+  "limits": {
+    "personalDataStoredInForge": true,
+    "vendorExternalOperationalStorage": false,
+    "optionalRovo": true,
+    "automaticEraseFlowImplemented": false,
+    "personalDataReportingImplemented": false,
+    "privacyComplianceCertified": false,
+    "marketplaceChanged": false,
+    "mcpExposureChanged": false,
+    "forgeProductionChanged": false
+  },
+  "supersedes": "2026-11-26-legal-pages.json; historical receipt preserved",
+  "platformSource": {
+    "url": "https://developer.atlassian.com/platform/forge/storage-reference/hosted-storage-data-lifecycle/",
+    "checkedAt": "2026-11-27T17:02:40.056Z",
+    "finding": "Uninstall soft-deletes Forge data under Atlassian retention/recovery lifecycle, not immediate permanent erasure"
+  }
+}
