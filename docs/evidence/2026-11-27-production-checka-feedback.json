@@ -1,0 +1,93 @@
+{
+  "classification": "DEPLOYMENT_WITH_OWNER_REPORTED_PRIOR_INSTALL",
+  "approval": {
+    "source": "Owner27-Nov21:00: fix CheckA feedback, tests, deploy Production if green, push; no publication/submission/card/paid resources",
+    "productionDeploy": true,
+    "privateJiraDistribution": true,
+    "marketplace": false,
+    "mcpExposure": false,
+    "billing": false
+  },
+  "appId": "60f4bdda-1062-4e5b-aab6-1d9a9cf53a90",
+  "sourceCommit": "1edb051058747271abd8b4f8c180fc95f30d903f",
+  "uiSource": "1edb05105874",
+  "environment": "production",
+  "version": "2.6.0",
+  "deployedAt": "2026-11-27T21:05:19.808Z",
+  "deploymentStatus": "Success",
+  "verification": {
+    "normalDeployVerification": true,
+    "normalForgeLint": "No issues found",
+    "backendTests": 217,
+    "uiContracts": 63,
+    "pythonTests": 3,
+    "totalTests": 283,
+    "sdkBootstrap": "PASS in backend tests",
+    "knownSecretSourceArtifactScan": "PASS",
+    "remoteArtifactByteReadback": false,
+    "appJsSha256": "787f7edc90bc4fedb5ed4d93a7f0330b13f40018f37908da25b386d30448575e",
+    "responsiveLocalSyntheticBrowserCases": 32,
+    "responsiveWidths": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "responsivePageErrors": 0,
+    "indexHtmlSha256": "d36fbeedcab05e098fa2c365daec5152d2cac53c4a541013a094647de92ad719",
+    "entryHtmlSha256": "d0d886be035ff5676f4fe383ff80dd2b34cf20e6f53973fd14ec3df13889c3c2"
+  },
+  "distribution": {
+    "status": "OWNER_REPORTED_INSTALL_ONLY",
+    "ownerRehearsalEvidence": "evidence/2026-11-26-owner-fresh-site-rehearsal.json",
+    "installationLinkCreated": false,
+    "privateLinkSuppliedToAgent": false,
+    "configurationChanged": false,
+    "sharingLinkRotated": false,
+    "jiraOnlyRequested": true,
+    "existingPublicPolicyFound": true,
+    "privacyPolicyUrl": "https://mizzen-studios.github.io/permitguard/privacy.html",
+    "termsUrl": "https://mizzen-studios.github.io/permitguard/terms.html",
+    "sharingConfigurationChanged": false
+  },
+  "dataHandling": {
+    "personalDataStored": true,
+    "storage": "Forge-hosted CES/KVS; derived Jira issue property; optional Confluence archive code not configured",
+    "externalAppStorage": false,
+    "personalDataReportingImplemented": false,
+    "automaticAppRetentionEraseFlowImplemented": false,
+    "privacyComplianceClaimed": false,
+    "newLegalPolicyPublished": true,
+    "privacyGroundwork": "INACTIVE; further features paused by owner17:02"
+  },
+  "acceptance": {
+    "freshSiteInstall": "OWNER_REPORTED_PASS_PREVIOUS_VERSION",
+    "postUpdateVisualMarkerAndContext": "NOT_RUN",
+    "current2_6NativeLatencyAndDisplay": "NOT_RUN",
+    "prior2_5Plan": "OWNER_REPORTED_PASS_WITH_FEEDBACK; evidence/2026-11-27-owner-2.5-plan-pass.json",
+    "prior2_4Seed": "OWNER_REPORTED_PASS; evidence/2026-11-27-owner-2.4-seed-pass.json",
+    "sharingChanged": false,
+    "billingChanged": false
+  },
+  "limitations": [
+    "No native2.6 browser or speed improvement acceptance yet",
+    "Actual21.6s create attribution unavailable; request budget reduction verified locally, not a wall-clock guarantee",
+    "No KAN-1 mutation/reset/reseed; owner left PLAN/revision1",
+    "No manifest/scopes/Sharing/paid-resource/MCP/Marketplace/submission/promotion changes",
+    "Production Jira installation Up-to-date; Development installation unchanged"
+  ],
+  "changes": [
+    "One-person create Jira requests6to4; authenticated key capability reuse, no profile fetch for planning",
+    "Participant reads bounded4concurrent with exact active/assignable validation",
+    "Immediate truthful creating/not-saved pending feedback, no duplicate or auto-retry, observed round-trip footer",
+    "Explicit uppercase phase badge/active step; no phase on absent permit; stale marked last-recorded",
+    "Current participant You label stable before/after reload; actual other identities/lock names retained",
+    "Bounded stage timing logs without identities/content"
+  ],
+  "scopesDecision": {
+    "count": 12,
+    "removed": 0,
+    "confluenceScopesRetained": 4,
+    "reason": "No scopes/manifest change in this minor2.6 release; no installation upgrade or distribution change"
+  }
+}

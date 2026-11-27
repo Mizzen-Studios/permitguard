@@ -20,7 +20,7 @@
       "id": "production-and-distribution",
       "status": "OWNER_REPORTED_INSTALL_ONLY",
       "owner": "Olly",
-      "evidence": "evidence/2026-11-27-production-core.json"
+      "evidence": "evidence/2026-11-27-production-checka-feedback.json"
     },
     {
       "id": "judge-install-browser-rehearsal",
@@ -65,10 +65,10 @@
     "notes": "Current Production2.4 and owner seed acceptance above supersede pre-sharing2.0 notes; no new app deployment in readiness preparation"
   },
   "production": {
-    "version": "2.5.0",
-    "uiSource": "7ceb1ff0f253",
-    "sourceCommit": "7ceb1ff0f253ce7200caae24dc5cc032ba896bc1",
-    "evidence": "evidence/2026-11-27-production-core.json",
+    "version": "2.6.0",
+    "uiSource": "1edb05105874",
+    "sourceCommit": "1edb051058747271abd8b4f8c180fc95f30d903f",
+    "evidence": "evidence/2026-11-27-production-checka-feedback.json",
     "privateDistribution": "OWNER_REPORTED_INSTALL_ONLY",
     "installLinkCreated": false
   },
@@ -103,12 +103,14 @@
     "evidence": "evidence/2026-11-26-owner-fresh-site-rehearsal.json",
     "version": "2.1.0",
     "independentlyInspected": false,
-    "postUpdateVersion": "2.5.0",
+    "postUpdateVersion": "2.6.0",
     "postUpdateVisualAcceptance": "NOT_RUN",
     "siteSidebarApps": "OWNER_REPORTED_404_DO_NOT_USE",
     "lastOwnerVerifiedVersion": "2.4.0",
     "lastOwnerVisualEvidence": "evidence/2026-11-27-owner-2.4-seed-pass.json",
-    "lastOwnerSeedResult": "OWNER_REPORTED_PASS"
+    "lastOwnerSeedResult": "OWNER_REPORTED_PASS",
+    "lastOwnerPlanAcceptedVersion": "2.5.0",
+    "lastOwnerPlanEvidence": "evidence/2026-11-27-owner-2.5-plan-pass.json"
   },
   "localFollowUp": {
     "status": "OWNER_REPORTED_PRODUCTION_2.4_SEED_PASS",
@@ -175,5 +177,13 @@
       "support": "ROUTES_REQUESTS_NO_OPERATIONAL_COPIES",
       "additionalPrivacyFeatures": "PAUSED_BY_OWNER"
     }
+  },
+  "checkAFeedbackRelease": {
+    "sourceCommit": "1edb051058747271abd8b4f8c180fc95f30d903f",
+    "evidence": "evidence/2026-11-27-production-checka-feedback.json",
+    "details": "check-a-fixes-2026-11-27.md",
+    "nativeRecheck": "NOT_RUN",
+    "actualSpeedImprovement": "NOT_MEASURED",
+    "existingJudgeIssue": "KAN-1_PLAN_REVISION_1_PRESERVED"
   }
 }

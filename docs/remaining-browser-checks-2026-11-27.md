@@ -1,14 +1,35 @@
-# Next owner browser checks — after accepted2.4 seed
+# Next owner browser checks — Production2.6 feedback fixes
 
-**Do not rerun/reset the seed.** Production2.4.0 / UIe8b95c053254 onboarding is owner-reported PASS27-Nov09:01. Core7ceb1ff is now deployed as Production2.5.0/UI7ceb1ff0f253; native2.5 acceptance NOT_RUN. Correct issue: **https://mizzen-judge-test.atlassian.net/browse/KAN-1**. one-atlas-xitr is the separate Development tenant. Use existing entitled accounts only, no invitations, seats, cards, new client consent or MCP switch. Issue route: inline PermitGuard or apps icon under title → PermitGuard; not the site sidebar Apps404.
+Production **2.6.0 · UI1edb05105874**, deployed from1edb051. [Deployment receipt](evidence/2026-11-27-production-checka-feedback.json). Installation Up-to-date; Sharing unchanged. Owner2.5 PLAN creation/reload PASS is preserved separately;2.6 native speed/display acceptance is NOT_RUN. Use existing entitled accounts only, no card/seats/trial/upgrade/Studio publication/MCP. Route: inline PermitGuard or apps icon under issue title → PermitGuard; not the site-sidebar Apps404.
 
-## A — minimal next check on existing KAN-1 (one synthetic permit write)
+## A — existing PLAN: read-only, do not recreate
 
-1. Open https://mizzen-judge-test.atlassian.net/browse/KAN-1 and reload. Verify **2.5.0 · Production · UI 7ceb1ff0f253** marker, exactly six items, Warn-only/synthetic notice and no permit/locks. Stop on any changed/unexpected state; no reset.
-2. In Plan an isolation permit select **Cooling-water pump / EQ-1 only**. Set Crew name to Judge demo. Keep worker and named-verifier fields to **your actual prefilled signed-in account ID**. Do not invent another worker/verifier or select high-energy equipment. Click **Create permit** once.
-3. Expect **PLAN**, correct selected pump, **Release NOT CLEARED**, no locks. Reload and expect same permit/phase, not duplicate creation. Send actual phase, release/work-start wording, policy, errors and approximate create/reload time. If save outcome is uncertain, read/refresh first; never resubmit blindly.
-4. If Rovo is already available: open intended **PermitGuard Judge**, New chat, ask **Is KAN-1 cleared?** once. Capture the actual tool-backed response. Expect release NOT CLEARED and scope/phase consistency with panel; no positive safety/activation authority. Do not request activation. If no Rovo/agent or duplicate indistinguishable entries, report/skip; do not upgrade, delete agents or enable MCP.
-5. **Stop at PLAN.** No Begin locking, photo/QR/attestation, activation, release, lock removal or Enforce changes for this first checkpoint. This is a distinct write from the completed equipment seed; do not call it a full lifecycle PASS.
+URL: **https://mizzen-judge-test.atlassian.net/browse/KAN-1**
+
+1. Reload/open the inline panel. Header/footer must show **2.6.0 · Production · UI1edb05105874** and connected state without errors.
+2. Expect the same PLAN permit (permit revision1; the site-wide displayed revision can increase after writes on other issues), selected Cooling-water pump/V-3, crew Judge demo, Warn-only, Release NOT CLEARED,0locks. Stop/report if unexpected; no reset/reseed.
+3. Check explicit **Current phase: PLAN** badge and highlighted uppercase PLAN step. Workers/Verifiers should both say **You**; reload once and verify unchanged. Do not click Begin locking or create another permit.
+
+## A2 — optional single new PLAN to measure create delay (one write)
+
+URL: **https://mizzen-judge-test.atlassian.net/browse/KAN-2** — issue existence/read access independently checked via Jira REST200, not app-empty state proof.
+
+1. Open PermitGuard. Verify2.6marker, Warn-only, existing6equipment register and **no permit** on this issue. If any permit exists or the fixture differs, stop/report; never replace it or load/reset a sample.
+2. Select Cooling-water pump/EQ-1 only, crew Judge timing demo, actual prefilled own worker/verifier unchanged. Start stopwatch and click Create permit **once**.
+3. Immediately expect Creating permit/awaiting server confirmation/not saved yet, disabled inputs and running elapsed seconds. No successful PLAN must be claimed before the response. Never resubmit on timeout; refresh/read first.
+4. Record click→Permit created time and footer Startup details → Last save attempt panel round-trip. Expect PLAN, explicit active label, both participants You, release NOT CLEARED,0locks. Reload once: same single permit; no duplicate. Record actual revision rather than assuming1 (site revision spans issues). **Stop at PLAN**, no locking/photos/QR/activation/policy changes.
+
+Real speed improvement is unmeasured until this check;6→4Jira requests and bounded concurrency are local verified request-budget improvements, not a time guarantee.
+
+## A3 — Rovo/demo: existing Development tenant, read-only
+
+URL: **https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2**
+
+1. Open the existing PermitGuard panel; record actual environment/version/phase first. It is the separate Development installation, **not Production2.6**. Do not advance/reset its fixture.
+2. If Rovo and the existing **PermitGuard Judge** are already visible, start a new chat and ask **Use check_readiness for PGSAMPLE-2. Is PGSAMPLE-2 cleared?** Capture actual tool-backed response, phase, work-start and release distinction. No activation request, configuration or MCP exposure.
+3. If unavailable/duplicate indistinguishable agents/upgrade prompts, stop/report. No enablement, trials, seats, card, Studio publication or agent deletion. Recommend filming on this already-established tenant with explicit Development label, not enabling unverified free entitlement on the fresh judge site.
+
+Send back version, phase/You consistency, errors, and A2actual stopwatch/footer times if run. Text reports are not received footage; privately share clips only after privacy review.
 
 ## B — later full lifecycle / real second crew: needs participants and fixture choice first
 

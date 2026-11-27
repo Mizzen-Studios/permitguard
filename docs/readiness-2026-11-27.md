@@ -1,6 +1,6 @@
 # Submission readiness —27November2026
 
-**PREPARATION ONLY / NOT_SUBMITTED / NO LISTING CHANGES.** Repo code/docs pushes authorized; no promotion/social, Marketplace form edit/submission, Devpost, Sharing/MCP/billing change. Current deployment **Production2.5.0/UI7ceb1ff0f253**; native2.5 checks pending. Previous installation **Production2.4.0/UIe8b95c053254**; owner09:01 accepted seed flow. Full lifecycle is not established by ALL PASS for onboarding. [Typed status](submission-status.json).
+**PREPARATION ONLY / NOT_SUBMITTED / NO LISTING CHANGES.** Repo code/docs pushes authorized; no promotion/social, Marketplace form edit/submission, Devpost, Sharing/MCP/billing change. Current deployment **Production2.6.0/UI1edb05105874**; native2.6 checks pending. Owner2.5 PLAN create/reload PASS with21.6s/label/identity feedback. Previous installation **Production2.4.0/UIe8b95c053254**; owner09:01 accepted seed flow. Full lifecycle is not established by ALL PASS for onboarding. [Typed status](submission-status.json).
 
 ## Completed in this preparation milestone
 
@@ -12,7 +12,7 @@
 
 ## Core candidate versus deployed code
 
-Owner27-Nov13:04 authorized exact7ceb1ff deployment. Production **2.5.0/UI7ceb1ff0f253** deployed successfully13:07:19.543UTC after253tests/build/SDKbootstrap/lint/known-secret scan. Judge installation is Up-to-date; Sharing/scopes unchanged; no site data reset/reseed. [Deployment receipt](evidence/2026-11-27-production-core.json). Native2.5 acceptance pending. Headroom is admission prevention, not legacy recovery or complete qualification.
+Owner27-Nov13:04 authorized exact7ceb1ff deployment. Production **2.5.0/UI7ceb1ff0f253** deployed successfully13:07:19.543UTC after253tests/build/SDKbootstrap/lint/known-secret scan. Judge installation is Up-to-date; Sharing/scopes unchanged; no site data reset/reseed. [Deployment receipt](evidence/2026-11-27-production-core.json). Owner later accepted2.5 PLAN/create/reload with feedback; full lifecycle not accepted. Headroom is admission prevention, not legacy recovery or complete qualification.
 
 ## Remaining gates, priority order
 
@@ -37,4 +37,8 @@ No automatic publication/exposure/job is scheduled. A local PASS report is not s
 
 ## Source verification receipt
 
-Clean candidate **9efc689**:253tests(191backend59UI3Python),80draftassetchecks,273localrefs,build/realSDKbootstrap/normalForgeLint/knownsecretscanPASS. Production dependency-only npm audit found0knownvulnerabilities, not a penetration/privacy certificate. Old b5955a1 service/projection fail the new boundary regressions in a private temporary source copy; cleaned afterward. [Typed receipt](evidence/2026-11-27-readiness-source.json). Subsequently owner authorized core7ceb1ff deployment: Production2.5 now live, native2.5 acceptance pending; prior2.4 remains the last owner-accepted onboarding build.
+Clean candidate **9efc689**:253tests(191backend59UI3Python),80draftassetchecks,273localrefs,build/realSDKbootstrap/normalForgeLint/knownsecretscanPASS. Production dependency-only npm audit found0knownvulnerabilities, not a penetration/privacy certificate. Old b5955a1 service/projection fail the new boundary regressions in a private temporary source copy; cleaned afterward. [Typed receipt](evidence/2026-11-27-readiness-source.json). Subsequently owner authorized core7ceb1ff deployment: Production2.5 was deployed13:07 and PLAN owner-accepted17:03 with feedback; current2.6 recheck pending; prior2.4 remains the last owner-accepted onboarding build.
+
+##21:05feedback release
+
+Owner21:00 authorized deployment; Production2.6/UI1edb05105874 deployed21:05:19.808UTC.283tests,32local synthetic Chromium cases and normal build/lint/secret scanPASS. See [feedback fixes](check-a-fixes-2026-11-27.md), [deployment receipt](evidence/2026-11-27-production-checka-feedback.json) and [exact recheck URLs](remaining-browser-checks-2026-11-27.md). KAN-1 left PLAN/revision1; optional KAN-2create check only after confirming no permit. Native latency/display recheck NOT_RUN. Privacy tooling remains inactive and deferred by owner17:02; agreed policy published, no automatic deletion/anonymisation or active-lock changes.
