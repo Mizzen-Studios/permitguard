@@ -34,3 +34,7 @@ These readiness source changes are **not a new Forge deployment**. Production re
 No repeat seed needed. On existing KAN-1 create/reload **one low-energy EQ-1 PLAN** with your own prefilled identity, then one read-only native Judge query if entitled; send actual wording/errors. Before full lifecycle, say whether two existing people/sessions and a dedicated synthetic fixture are available. Footage can be read-only; if capturing current no-permit B-roll, capture before the separate PLAN write and label actual state. Do not enable Enforce on KAN's synthetic register or turn on MCP.
 
 No automatic publication/exposure/job is scheduled. A local PASS report is not safety, privacy or contest certification.
+
+## Source verification receipt
+
+Clean candidate **9efc689**:253tests(191backend59UI3Python),80draftassetchecks,273localrefs,build/realSDKbootstrap/normalForgeLint/knownsecretscanPASS. Production dependency-only npm audit found0knownvulnerabilities, not a penetration/privacy certificate. Old b5955a1 service/projection fail the new boundary regressions in a private temporary source copy; cleaned afterward. [Typed receipt](evidence/2026-11-27-readiness-source.json). No new Forge deployment:2.4 remains accepted onboarding build; later deployment is a separate decision before broader photo lifecycle.

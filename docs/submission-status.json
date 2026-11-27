@@ -126,7 +126,11 @@
     "marketplacePersonalDataReportingImplemented": false,
     "videoRecorded": false,
     "marketplaceListingChanged": false,
-    "sharingChanged": false
+    "sharingChanged": false,
+    "marketplaceDraftPack": "marketplace/README.md",
+    "marketplaceScreenshotsMissing": 6,
+    "sourceCandidateDeployed": false,
+    "demoVideoDraftSeconds": 180
   },
   "sourceReadinessCandidate": {
     "status": "SOURCE_ONLY_NOT_DEPLOYED",
@@ -137,6 +141,8 @@
     ],
     "productionUnchanged": "2.4.0",
     "nativeAcceptance": "NOT_RUN_FOR_SOURCE_CANDIDATE",
-    "sharingChanged": false
+    "sharingChanged": false,
+    "sourceCommit": "9efc689f464eb8d269611f07de996fabffca06f8",
+    "verification": "evidence/2026-11-27-readiness-source.json"
   }
 }

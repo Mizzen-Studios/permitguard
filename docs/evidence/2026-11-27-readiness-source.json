@@ -1,0 +1,74 @@
+{
+  "classification": "LOCAL_SOURCE_READINESS_NOT_DEPLOYED",
+  "sourceCommit": "9efc689f464eb8d269611f07de996fabffca06f8",
+  "productionUnchanged": {
+    "version": "2.4.0",
+    "uiSource": "e8b95c053254",
+    "ownerSeedAcceptance": "evidence/2026-11-27-owner-2.4-seed-pass.json"
+  },
+  "tests": {
+    "backend": 191,
+    "ui": 59,
+    "python": 3,
+    "total": 253,
+    "marketplaceDraftChecks": 80,
+    "localReferences": 273,
+    "build": "PASS clean9efc689",
+    "realSdkBootstrap": "PASS",
+    "normalForgeLint": "PASS",
+    "knownSecretSourceArtifactScan": "PASS",
+    "productionDependencyAudit": {
+      "scope": "npm audit --omit=dev, dependency SCA only; not SAST/DAST/native/security certification",
+      "vulnerabilities": 0
+    }
+  },
+  "beforeFixRegression": {
+    "baseline": "b5955a1 service/projection in private temporary current-source copy",
+    "result": "Expected failures on near-hard-cap evidence rejection and ACTIVE START projection",
+    "temporaryCopyCleaned": true,
+    "rawOutputPrivate": true
+  },
+  "headroomBoundary": {
+    "capBytes": 180000,
+    "newAdmissionPrevention": true,
+    "preservesEvidenceAndOtherLocks": true,
+    "legacyDrainOnlyUnderHardCapWithDecreasingDeficit": true,
+    "repairsAlreadyFullLegacyRows": false,
+    "guaranteesAllFutureLifecycleUploads": false
+  },
+  "assets": {
+    "originalBrandArt": "SVG+PNG icon144x144/banner1120x548",
+    "parentVisualReview": "PASS no clipping or safety/certification claim",
+    "genuineScreenshotDerivativesMissing": 6,
+    "footageReceived": false,
+    "fullThirdPartySourcesRepublished": false,
+    "privateSourceCopies": true
+  },
+  "script": {
+    "shots": 8,
+    "targetSeconds": 180,
+    "maxNarrationWordsPerMinute": 180,
+    "currentProductionOwnerReportNotFootage": true,
+    "developmentActiveFixtureSeparate": true,
+    "historicalMcpReceiptNotInspectorVideo": true
+  },
+  "effects": {
+    "deployed": false,
+    "sharingChanged": false,
+    "marketplaceFormChanged": false,
+    "newRegistration": false,
+    "mcpExposureChanged": false,
+    "billingChanged": false,
+    "siteDataWritten": false,
+    "videoUploaded": false,
+    "publicPromotionalPost": false,
+    "submitted": false
+  },
+  "remaining": [
+    "Native PLAN/lifecycle/Rovo/device/two-person/Realtime/workflow acceptance",
+    "Privacy reporting/erase/refresh/retention and legacy capacity recovery design",
+    "Real screenshots/raw footage/rights and final media review",
+    "Listed-versus-rehearsal identity decision before any Marketplace submit (same-app install-link eligibility changes)",
+    "Entrant/security/legal declarations and separately approved MCP judge window/publication"
+  ]
+}
