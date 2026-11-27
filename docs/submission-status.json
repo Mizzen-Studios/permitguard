@@ -150,5 +150,20 @@
     "futureListing": "SEPARATE_APP_ID_PLANNED_NOT_REGISTERED",
     "freeTierOnly": true,
     "cardAuthorized": false
+  },
+  "privacyReadiness": {
+    "status": "SOURCE_CANDIDATE_INACTIVE_RUNTIME_INCOMPLETE",
+    "sourceCommit": "32caa55",
+    "documentation": "privacy-readiness-2026-11-27.md",
+    "reportingActive": false,
+    "erasureActive": false,
+    "retentionDeletionActive": false,
+    "blockers": [
+      "Supported success Cycle-Period response contract",
+      "Reliable oldest retrieval dates; complete QR/archive/free-text/photo-subject inventory",
+      "Durable resumable reporting/action ledger and safe reconciliation",
+      "Owner-approved retention/erasure operating policy",
+      "Reviewed runtime integration and native acceptance"
+    ]
   }
 }

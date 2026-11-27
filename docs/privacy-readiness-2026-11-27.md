@@ -36,3 +36,10 @@ Installed @forge/api 8.5.0 exposes privacy.reportPersonalData(accounts). Its imp
 ## Verification
 
 Local verification (Node 24.22.1): 20 focused privacy tests, 211 complete backend tests (including those 20), 59 UI contract tests and 3 Python checks passed; 273 combined tests. Build, static syntax checks and diff whitespace checks passed. The real installed SDK privacy module is exercised with fake platform transport, never real account reporting. These are local source/transport tests, NOT native Forge privacy reporting or live erasure evidence. Normal Forge lint was attempted but blocked because this isolated worktree invocation has no Forge login/environment credentials; no login or credential change was made. Repeat normal Forge lint plus release secret scans on any integrated candidate before deployment.
+
+## Parent integration verification
+
+Integrated as32caa55 after Production2.5 deployment. Parent reran **212backend +59UI +3Python =274tests**, normal authenticated Forge lint (PASS), pack consistency (278references), Marketplace draft checks (80PASS), and diff whitespace. No manifest/runtime registration, reporting invocation, erasure, retention deletion or second deployment. Production stays2.5/UI7ceb1ff0f253. Installed SDK8.5.0 independently inspected: successful responses omit headers; current registry latest8.5.1 was observed but not installed. Public requestAtlassian type exists, but no supported privacy route/header contract was verified; do not bypass reporting SDK via guessed/undocumented routes.
+
+### Owner decision needed before erasure/retention activation
+Specify the approved retention period(s) for closed permits, audit, photos, QR records and Confluence copies, and accountable person/process for subject-rights requests. Recommendation: manual reviewed requests while policy is unresolved; never scheduled deletion or anonymisation of active attributable locks. This is a proposal, not a compliance determination or permission to retain indefinitely. Safety/evidence conflict requires explicit legal/operational reconciliation; a timer must never clear a permit.
