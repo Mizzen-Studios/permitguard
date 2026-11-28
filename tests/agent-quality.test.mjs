@@ -6,13 +6,14 @@ import { createService } from '../src/server/service.mjs';
 import { emptySite } from '../src/server/store.mjs';
 const context={principal:{accountId:'actual-human'}};
 const historical=JSON.parse(readFileSync(new URL('../docs/evidence/2026-11-24-mcp-owner-receipt.json',import.meta.url),'utf8')).invocation.result;
-function harness({reply=historical,error,denied=false}={}){
+const current={...historical,message:historical.message.replace('Work start only: CLEARED. This is not release clearance.','Workflow start prerequisites: met. This is not work, safety or energization clearance.')};
+function harness({reply=current,error,denied=false}={}){
  const calls=[];const wiring=createForgeWiring({requestJira:async()=>({ok:!denied,json:async()=>({id:'10001',fields:{project:{id:'10'}}})}),dispatch:async(...a)=>{calls.push(a);if(error)throw new Error(error);return structuredClone(reply);}});
  return {...wiring,calls};
 }
-test('known ACTIVE business response remains byte-for-byte the historical scoped message',async()=>{
+test('ACTIVE response leads release denial; secondary prerequisites never claim clearance',async()=>{
  const h=harness(),r=await h.checkReadiness({issueKey:'PGSAMPLE-2'},context);
- assert.equal(r.message,historical.message);assert.equal(r.releaseStatus,'NOT CLEARED');assert.equal(r.scope,'WORK_START');assert.equal(r.operational,false);assert.deepEqual(h.calls[0].slice(0,2),['check_readiness',{}]);
+ assert.equal(r.message,current.message);assert.match(r.message,/^Release: NOT CLEARED\. Workflow start prerequisites: met\./);assert.doesNotMatch(r.message.slice(r.message.indexOf('Workflow')),/CLEARED/);for(const key of ['status','transitionAllowed','humanConfirmationRequired','phase','siteRevision','permitRevision'])assert.equal(r[key],historical[key],key);assert.equal(r.releaseStatus,'NOT CLEARED');assert.equal(r.scope,'WORK_START');assert.equal(r.operational,false);assert.deepEqual(h.calls[0].slice(0,2),['check_readiness',{}]);
 });
 test('missing issue asks for a key without dispatching or inventing demo data',async()=>{
  const h=harness(),r=await h.checkReadiness({},context);assert.equal(h.calls.length,0);assert.equal(r.code,'ISSUE_CONTEXT_REQUIRED');assert.match(r.message,/^NOT CLEARED:/);assert.match(r.message,/work-item key/);assert.doesNotMatch(r.message,/PGSAMPLE-2/);assert.equal(r.activationAuthority,false);
@@ -55,3 +56,5 @@ test('contradictory release status cannot be rendered as a cleared release messa
  const h=harness({reply:{...historical,scope:'RELEASE',status:'CLEARED',releaseStatus:'NOT CLEARED',message:'Release records are CLEARED. This is not permission to energize equipment.'}});
  const r=await h.checkReadiness({issueKey:'PG-1'},context);assert.equal(r.ok,false);assert.equal(r.code,'READINESS_RESPONSE_UNCONFIRMED');assert.match(r.message,/^NOT CLEARED:/);
 });
+
+test('legacy secondary CLEARED phrasing is rejected as current readiness',async()=>{const h=harness({reply:historical});const r=await h.checkReadiness({issueKey:'PG-1'},context);assert.equal(r.code,'READINESS_RESPONSE_UNCONFIRMED');assert.equal(r.operational,false);});

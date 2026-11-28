@@ -48,7 +48,7 @@ test('fresh judge minimal quickstart gives PLAN, not inherited ACTIVE clearance'
   const before = structuredClone(row), result = await call('check_readiness');
   assert.equal(result.phase, 'PLAN'); assert.equal(result.scope, 'WORK_START');
   assert.equal(result.status, 'NOT CLEARED'); assert.equal(result.releaseStatus, 'NOT CLEARED'); assert.equal(result.operational, false);
-  assert.match(result.message, /Work start only: NOT CLEARED/); assert.deepEqual(row, before);
+  assert.match(result.message, /Workflow start prerequisites: not met/); assert.deepEqual(row, before);
   await assert.rejects(call('load_sample', { confirmed: true }), /permits open/);
 });
 
