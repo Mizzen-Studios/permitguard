@@ -1,5 +1,5 @@
 {
-  "updatedDate": "2026-11-27",
+  "updatedDate": "2026-11-28",
   "mode": "PRODUCTION_REHEARSAL_APPROVED",
   "publicActionsAuthorized": false,
   "installationLink": null,
@@ -185,5 +185,12 @@
     "nativeRecheck": "NOT_RUN",
     "actualSpeedImprovement": "NOT_MEASURED",
     "existingJudgeIssue": "KAN-1_PLAN_REVISION_1_PRESERVED"
+  },
+  "currentProduction": {
+    "environment": "production",
+    "version": "2.7.0",
+    "uiSource": "7aee7ab2f32c",
+    "nativeAcceptance": "NOT_RUN",
+    "evidence": "evidence/2026-11-28-production-2.7.json"
   }
 }

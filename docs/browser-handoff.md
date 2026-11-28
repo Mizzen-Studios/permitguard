@@ -1,3 +1,5 @@
+> **Current Production: 2.7.0 · UI 7aee7ab2f32c (28 November).** [Use these read-only rechecks](recheck-2026-11-28.md). Right-side Open PermitGuard is now the real editor. Development remains 5.16.0. Older release notes below are historical.
+
 > **Latest: Production2.4.0 · UI e8b95c053254** (27-Nov00:19UTC). Fixed seed capability forwarding through Forge response; prior2.3 owner seed check FAILED (no button), not accepted. [Rerun checklist](empty-project-demo-seed.md). Sharing and safety guards unchanged; latest native seed acceptance NOT_RUN. Older dated release notes below are history.
 
 > **Current release 26-Nov21:06 UTC: Production 2.3.0 · UI bd1d3977a97d.** Confirmed empty-project Warn-only demo seed is deployed, not yet owner-browser accepted. Use the issue PermitGuard section/apps icon, never the reported-broken site sidebar. Sharing unchanged. [Exact seed acceptance checklist](empty-project-demo-seed.md). Prior dated2.2/hold statements below are historical; owner21:05 resolved public-code/docs push authority.

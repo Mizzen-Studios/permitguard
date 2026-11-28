@@ -1,0 +1,44 @@
+{
+  "sourceCommit": "7aee7ab2f32c3b861a8d232a4f103f5b5530399b",
+  "uiSource": "7aee7ab2f32c",
+  "clean": true,
+  "knownSecretScan": "PASS",
+  "artifactSha256": {
+    "static/permit-app/dist/app.js": "be2cb4997d183fb2dd8e079d6c2f485f0b1c42663d10f63a0473050962814976",
+    "static/permit-app/dist/index.html": "cbf184181e0df844fc3c288e439e1e94514b7a2643a964f02cfcbf4f380e9229",
+    "static/permit-app/dist/styles.css": "ecf736ae584e236b91a207bc7824f00400290fd05d8f3dd25cda93fe73701b5c"
+  },
+  "environment": "production",
+  "version": "2.7.0",
+  "deployedAt": "2026-11-28T09:16:38.010Z",
+  "deploymentStatus": "Success",
+  "installation": {
+    "site": "mizzen-judge-test.atlassian.net",
+    "product": "Jira",
+    "status": "Up-to-date"
+  },
+  "verification": {
+    "backendTests": 222,
+    "uiContracts": 71,
+    "pythonTests": 3,
+    "totalTests": 296,
+    "localSyntheticBrowserCases": 32,
+    "forgeLint": "PASS",
+    "remoteArtifactByteReadback": false
+  },
+  "nativeAcceptance": "NOT_RUN for 2.7.0",
+  "development": "Unchanged: 5.16.0 / UI 5f92b0c1b926",
+  "limitations": [
+    "Cold-start navigation improvement requires native timing; earlier useful content is not live clearance",
+    "Eight owner console errors remain unidentified; redacted text/source URLs needed",
+    "Jira administrator controls inline visibility; app cannot force Show for all work items",
+    "Legacy untimestamped previews can remain unavailable; authenticated live state is independent"
+  ],
+  "unchanged": [
+    "KAN-1 and KAN-2 permit state",
+    "Sharing",
+    "MCP exposure",
+    "billing",
+    "Marketplace and Devpost"
+  ]
+}
