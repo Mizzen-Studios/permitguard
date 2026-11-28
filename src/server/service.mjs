@@ -12,8 +12,8 @@ const projectDefault = () => ({ policy: { ...domain.DEFAULT_POLICY }, equipment:
 function sampleEquipment(projectId) {
   return SAMPLE_EQUIPMENT.map(e => ({ ...structuredClone(e), id: 'register:' + projectId + ':' + e.id }));
 }
-function projection(p, readiness, release, policy) {
-  return { ...domain.permitEntityProperty(p), activeLockCount:p.locks.filter(l => !l.removedAt).length, mode: policy.mode, failMode: policy.failMode, start: { cleared: readiness.status === 'CLEARED' }, release: { cleared: release.status === 'CLEARED' }, dryRun: { startBlocked: readiness.status !== 'CLEARED', releaseBlocked: release.status !== 'CLEARED' }, authoritative: false };
+function projection(p, readiness, release, policy, projectedAt, siteRevision) {
+  return { ...domain.permitEntityProperty(p), updatedAt:projectedAt, projectedAt, lastAuditAt:p.audit.at(-1)?.at??null, timestampSource:'POST_COMMIT_PROJECTION', siteRevision, activeLockCount:p.locks.filter(l => !l.removedAt).length, mode: policy.mode, failMode: policy.failMode, start: { cleared: readiness.status === 'CLEARED' }, release: { cleared: release.status === 'CLEARED' }, dryRun: { startBlocked: readiness.status !== 'CLEARED', releaseBlocked: release.status !== 'CLEARED' }, authoritative: false };
 }
 export function createService({ store, challenges, authorize, projectIsSample, validatePeople, projectProperty, publish, readAssets, now = () => new Date().toISOString(), uuid = randomUUID, clock = Date.now, observeTiming = () => {} }) {
   need(store?.atomic === true, 'ATOMIC_STORAGE_UNAVAILABLE');
@@ -32,7 +32,7 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     if (project.source === 'ASSETS') {
       try {
         need(readAssets, 'ASSETS_UNAVAILABLE');
-        const fresh = await readAssets(project.assetsConfig);
+        const fresh = await measured('assetsMs',()=>readAssets(project.assetsConfig));
         need(JSON.stringify(fresh) === JSON.stringify(project.equipment), 'ASSETS_REGISTER_CHANGED');
         assetsStatus = 'CONNECTED_AS_USER';
       } catch { registerAvailable = false; }
@@ -63,7 +63,12 @@ export function createService({ store, challenges, authorize, projectIsSample, v
       return { dryRun:true, authoritativeSnapshot:true, observedAt:now(), issueId, actions:['START','RELEASE'].map(action=>{const gate=evaluateGate({data:site,issueId,projectId,action});const outageBlocks=project.policy.mode==='ENFORCE'&&!registerAvailable&&project.policy.failMode!=='FAIL_OPEN_WITH_ALERT';return {action,wouldBlock:!gate.result||outageBlocks,alertRequired:!registerAvailable,registerAvailable,reason:gate.errorMessage || 'Warn-only advisory transition; not activation authority.'};}) };
     }
     if (operation === 'list_equipment') return { equipment: registerAvailable ? project.equipment : [], assets: { status: assetsStatus }, operational: false };
-    if (operation === 'get_state') return result();
+    if (operation === 'get_state') {
+      const response=result();
+      const serverTiming={authorizationMs:timings.authorizationMs,storageReadMs:timings.storageReadMs,assetsMs:timings.assetsMs??0,totalMs:Math.max(0,Math.round(clock()-started))};
+      try{observeTiming({operation,...serverTiming});}catch{}
+      return {...response,serverTiming};
+    }
     if (operation === 'check_readiness') {
       const scope=permit?.state==='RELEASE'?'RELEASE':'WORK_START',checked=scope==='RELEASE'?release():readiness();
       checked.reasons=checked.reasons.map(r=>({...r,message:r.message&&r.message!==r.code?r.message:({NO_PERMIT:'No permit has been created for this work item. Open its PermitGuard panel; if no equipment is available, ask a project administrator to configure the register.',REGISTER_UNAVAILABLE:'The equipment register could not be confirmed.'}[r.code]||'Recorded prerequisites are incomplete; inspect the permit panel.')}));
@@ -199,7 +204,7 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     // Independent non-authoritative side effects run together, only AFTER the atomic commit.
     // Both settle before replying; neither is a detached task or a reason to retry a mutation.
     await measured('sideEffectsMs',()=>Promise.all([
-      permit&&projectProperty ? Promise.resolve().then(()=>projectProperty(issueId,projection(permit,readiness(),release(),project.policy))).then(()=>{response.projection.status='UPDATED';},()=>{response.projection.status='FAILED_NONAUTHORITATIVE';}) : Promise.resolve(),
+      permit&&projectProperty ? Promise.resolve().then(()=>projectProperty(issueId,projection(permit,readiness(),release(),project.policy,at,revision))).then(()=>{response.projection.status='UPDATED';},()=>{response.projection.status='FAILED_NONAUTHORITATIVE';}) : Promise.resolve(),
       publish ? Promise.resolve().then(()=>publish({revision})).catch(()=>{response.realtime='UNAVAILABLE';}) : Promise.resolve()
     ]));
     // Bounded operation/timing diagnostics only; no issue/account/content/identifiers.
