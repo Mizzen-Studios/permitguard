@@ -27,19 +27,19 @@
       "id": "S02",
       "start": 15,
       "end": 40,
-      "title": "Production PLAN — after current-build recheck",
-      "screen": "Actual current Production KAN-1 PLAN panel after owner read-only recheck; record version/UI, Warn-only, release and zero locks",
+      "title": "Production PLAN — accepted 2.7.0",
+      "screen": "Production KAN-1 inline editor, 2.7.0 / UI 7aee7ab2f32c; PLAN, Warn-only, release NOT CLEARED, zero locks",
       "narration": "This is the separate Production planning record, not an active permit. PLAN and Warn-only are explicit, release is not cleared, and no locks are recorded. We reread the existing record without recreating it. Next, Development shows the narrower work-start distinction.",
-      "evidence": "28 Nov09:05 owner2.6 text PASS, not footage or acceptance of a later release",
+      "evidence": "28 Nov ~13:00 owner 2.7 read-only recheck PASS; typed receipt, not footage or full lifecycle acceptance",
       "captureUrl": "https://mizzen-judge-test.atlassian.net/browse/KAN-1",
       "captureIssueKey": "KAN-1",
       "captureClicks": [
-        "Complete owner read-only recheck of current Production before filming. A later minor deployment has no native acceptance until owner checks it; stop on unexpected state.",
-        "Open inline issue panel / View app actions → PermitGuard, not sidebar Apps. Record actual version/UI and navigation stopwatch separately from panel timers.",
-        "Show existing PLAN/Warn-only/Release NOT CLEARED/0 locks/You–You. Read/reload only; never Create permit, reseed, reset or Begin locking.",
-        "Any timing insert must say Owner text ·28Nov09:05 ·Production2.6/UI1edb05105874 ·not footage. KAN-2 once-only create2.3s click-to-success versus footer1.4s is not current-release timing or first-live latency."
+        "Open KAN-1 in the existing signed-in browser. Verify 2.7.0 / Production / UI 7aee7ab2f32c and expected state at the start of the take; unchanged 2.7.0 already passed owner read-only recheck.",
+        "Frame the inline PermitGuard editor. Show for all work items is already enabled; do not toggle it back. Record navigation stopwatch separately from iframe timers if filming a load.",
+        "Show existing PLAN / Warn-only / Release NOT CLEARED / zero locks / Workers and Verifiers You / displayed revision 2. Read/reload only; never Create permit, reset or Begin locking. Stop on unexpected state.",
+        "If using a timing insert, label Owner text · 28 Nov ~13:00 UK · Production 2.7.0 · not footage: navigation-to-live KAN-2 ~3.5 s, KAN-1 ~3.6 s. Do not mix in historical 2.6 creation timings."
       ],
-      "captureExpected": "Current Production PLAN after owner recheck, actual version/UI recorded, release NOT CLEARED/0 locks. Owner2.6 KAN-1 read/reload PASS and KAN-2 single PLAN/siteRevision2 are text evidence only. Development ACTIVE is not that installation. No writes for footage.",
+      "captureExpected": "Accepted Production 2.7.0 PLAN in the real inline editor; no repeat acceptance round required before capture of unchanged build. Receipt is not footage. Development ACTIVE is not that installation. No writes for footage.",
       "captureDurationSeconds": 25
     },
     {
@@ -54,11 +54,11 @@
       "captureIssueKey": "PGSAMPLE-2",
       "captureClicks": [
         "Reread preserved Development5.16/UI5f92b0c1b926 ACTIVE/Enforce; keep Development label visible. Stop if changed; never reset or propose activation.",
-        "Open Jira Rovo/Chat in the top navigation; open its agent picker.",
-        "Search PermitGuard Judge; select the one intended live Jira DEV agent. If multiple indistinguishable agents appear, stop rather than deleting/selecting at random.",
+        "Open Jira Rovo/Chat in the Development site top navigation, then its agent picker. Click the chat input before typing; do not send shortcuts or search keystrokes to the Jira issue behind it.",
+        "Search PermitGuard Judge in the focused picker. If missing, ambiguous or unresponsive, stop this take and log picker unavailable. Do not use /rovo/agents on the judge site, change assignment, enable trials or select an unknown agent.",
         "Choose New chat, enter exactly: Is PGSAMPLE-2 cleared? Send once. Wait for the actual reply/tool-backed result."
       ],
-      "captureExpected": "Owner28Nov09:05 native Judge under15s: Release NOT CLEARED / Work start only CLEARED / one caveat. Film actual readable reply, not reconstructed future wording. No prompt update accepted until deployed and natively checked; no footage received.",
+      "captureExpected": "Owner28Nov09:05 native Judge under15s: Release NOT CLEARED / Work start only CLEARED / one caveat. Film actual readable reply, not reconstructed future wording. No prompt update accepted until deployed and natively checked; no footage received. At ~13:00 picker prevented capture; no new PASS. If still blocked, use a visibly labelled historical owner text insert (~09:00, not current footage), or leave the shot outstanding; never reconstruct a live reply.",
       "captureDurationSeconds": 25
     },
     {
@@ -162,10 +162,11 @@
     "classification": "OWNER_REPORTED_PASS_NOT_FOOTAGE"
   },
   "productionPlan": {
-    "versionAtOwnerObservation": "2.6.0",
-    "uiSourceAtOwnerObservation": "1edb05105874",
+    "versionAtOwnerObservation": "2.7.0",
+    "uiSourceAtOwnerObservation": "7aee7ab2f32c",
     "classification": "OWNER_REPORTED_PASS_NOT_FOOTAGE",
-    "captureRequires": "CURRENT_PRODUCTION_READ_ONLY_RECHECK",
-    "mediaReceived": false
+    "captureRequires": "VERIFY_ACCEPTED_BUILD_AND_STATE_AT_TAKE",
+    "mediaReceived": false,
+    "evidence": "evidence/2026-11-28-owner-2.7-browser-pass.json"
   }
 }

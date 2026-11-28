@@ -1,5 +1,5 @@
 {
-  "updatedDate": "2026-11-27",
+  "updatedDate": "2026-11-28",
   "status": "PLAN_ONLY_NO_ASSETS_CAPTURED",
   "coreVersion": "5.16.0",
   "uiSource": "5f92b0c1b926",
@@ -184,5 +184,13 @@
     "ownerTextEvidence": "evidence/2026-11-27-owner-2.4-seed-pass.json",
     "mediaReceived": false
   },
-  "productionStageLabel": "Production onboarding receipt is source text only; main ACTIVE footage remains labelled Development5.16"
+  "productionStageLabel": "Production onboarding receipt is source text only; main ACTIVE footage remains labelled Development5.16",
+  "productionPlan": {
+    "versionAtOwnerObservation": "2.7.0",
+    "uiSourceAtOwnerObservation": "7aee7ab2f32c",
+    "classification": "OWNER_REPORTED_PASS_NOT_FOOTAGE",
+    "captureRequires": "VERIFY_ACCEPTED_BUILD_AND_STATE_AT_TAKE",
+    "mediaReceived": false,
+    "evidence": "evidence/2026-11-28-owner-2.7-browser-pass.json"
+  }
 }

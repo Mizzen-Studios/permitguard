@@ -1,6 +1,6 @@
 # Submission working pack —28November2026
 
-**Draft repository pack, not a Marketplace/Devpost submission or public media upload.** Public code/docs pushes authorized; Sharing and MCP exposure stay unchanged. Current owner28Nov09:05 Production2.6 PLAN/native Development Judge PASS is text only; a later release requires new owner recheck before capture. Full lifecycle and external gates remain open. [Current readiness](../readiness-2026-11-27.md) · [typed status](../submission-status.json).
+**Draft repository pack, not a Marketplace/Devpost submission or public media upload.** Public code/docs pushes authorized; Sharing and MCP exposure stay unchanged. Current owner 28 Nov ~13:00 Production 2.7 read-only PLAN PASS is text only, not footage; unchanged 2.7 is ready for capture. Development Rovo last passed ~09:00; picker blocked the 13:00 capture. Full lifecycle and external gates remain open. [Current readiness](../readiness-2026-11-27.md) · [typed status](../submission-status.json).
 
 - [Marketplace copy and original draft artwork](../marketplace/README.md): missing real screenshot slots, privacy/security blocks and same-ID Sharing consequence explicit.
 - [Devpost write-up](devpost-writeup.md) and [bonus evidence matrix](bonus-targets.md): drafts, not entrant/organizer signoff.
@@ -9,6 +9,6 @@
 - [Core audit](../core-audit-2026-11-27.md), [source candidate headroom/reporting work](../readiness-2026-11-27.md): not a silent new Forge deployment or full capacity recovery.
 - [Historical verification](verification-2026-11-25.json), [UX notes](unreleased-polish.md), [agent answer contracts](agent-answer-quality.md), [Crew B scenario](../second-crew-demo.md). Dated source-only/deployment statements in historical docs are not current authority/status.
 
-Owner2.6 PLAN PASS is not footage or full lifecycle; no candidate deployment, listing form, registration, billing, Publishing, external client consent or Devpost action is executed by this preparation pack.
+Owner 2.7 read-only PLAN PASS is not footage or full lifecycle; no candidate deployment, listing form, registration, billing, Publishing, external client consent or Devpost action is executed by this preparation pack.
 
 **Start here:** [remaining essential gates28Nov](remaining-2026-11-28.md). Existing owner-private Production installation link stays secret; prior judge-install rehearsal is PARTIAL, not NOT_RUN. Reporting/erasure groundwork inactive; owner retention agreed, not full compliance.

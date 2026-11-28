@@ -2,15 +2,15 @@
 
 **DRAFT / NOT RECORDED / NOT EXPORTED / NOT UPLOADED —28November2026.** Eight contiguous shots, **180seconds**; this fits the supplied Rules under-five-minute budget, not proof of finished media. [Machine shot list](demo-shot-list.json) · [exact capture checklist](video-capture-list.md) · [remaining owner checks](remaining-browser-checks-2026-11-27.md).
 
-## Current evidence —28 November09:05 owner text, not footage
+## Current evidence — 28 November, approximately 13:00 UK
 
-Production2.6.0/UI1edb05105874: KAN-1 read/reload PASS, explicit PLAN/Warn-only/Release NOT CLEARED/0 locks/You–You. KAN-2 once-only EQ-1 create, crew Judge timing demo: pending visible, click-to-success2.3s/footer1.4s; reload single PLAN/siteRevision2/no locks. First live10–14s remains unsatisfactory. Sidebar guide only; preview HTTP404/eight unknown console messages unresolved. Typed receipt maintained separately.
+**Production 2.7.0 / UI 7aee7ab2f32c: owner-reported read-only PASS, not footage.** KAN-1 and KAN-2 show the real editor inline, PLAN / Warn-only / Release NOT CLEARED / You–You / zero locks / displayed site revision 2. Navigation→shell: KAN-2 ~2.5 s, KAN-1 ~2.7 s; navigation→live: ~3.5 / ~3.6 s. Iframe→live: 1.1 / 1.0 s; server: 0.260 / 0.238 s. These are two owner observations, not a controlled cold-start benchmark. Preview absence is neutral with no 404. The owner enabled **Show for all work items**; menu now says **Hide from all work items**. All reported eight errors and one warning are Jira-host entries, not PermitGuard errors. [Exact receipt](evidence/2026-11-28-owner-2.7-browser-pass.json).
 
-S02 films actual current Production only AFTER new owner read-only recheck; a next-minor deployment is not natively accepted until owner checks it. Record actual version/UI; no carrying2.6 timings forward. [Production2.4.0 seed receipt](evidence/2026-11-27-owner-2.4-seed-pass.json) is historical onboarding, not current empty state.
+S02 can now capture this accepted Production build. Check its version/state at the start of the take; another acceptance round is not required for unchanged 2.7.0. Production2.4.0 onboarding and 2.6 once-only creation (2.3 s click-to-success, 1.4 s panel round-trip) remain historical evidence, not new creation timings.
 
-Development5.16.0/UI5f92b0c1b926 PGSAMPLE-2 ACTIVE/Enforce: owner native Judge under15s PASS, Release NOT CLEARED / Work start only CLEARED / one caveat. Agreed Rovo filming is Development-labelled. No footage, stable-Development/new-feature or future-agent-text claim; reread and stop if changed, never reset.
+Development5.16.0 / UI5f92b0c1b926 PGSAMPLE-2 remains the separate Rovo filming target. Last owner native Judge PASS was ~09:00, under 15 s; **no new Rovo check or capture at 13:00** because of the picker issue. No PermitGuard Judge was available on the judge site; do not use its dead `/rovo/agents` route or enable an entitlement. The tester accidentally unassigned PGSAMPLE-2, then immediately restored Olly; owner reports no other save, with the blip visible in history. Do not claim an untouched native issue history. Verify the existing assignee/state before filming; never repair/reset data for a take.
 
-MCP: historical24Nov21:06:40UTC Inspector2.16.0; one DEV check_readiness_development read, sharing OFF; broad Read, Write, and Search consent; WORK_START/ACTIVE/release NOT CLEARED/siteRevision22/returned permitRevision6/operational:false. Exposure OFF/grant cleanup. No6→6 comparison, new call or Inspector footage.
+MCP remains historical 24 Nov 21:06:40 UTC Inspector 2.16.0 owner text evidence: one `check_readiness_development` read, broad Read, Write, and Search consent, WORK_START / ACTIVE / release NOT CLEARED / siteRevision 22 / returned permitRevision 6 / operational:false. Exposure OFF and grant cleanup were owner-reported. No new call or Inspector footage.
 
 ## Recording rules
 
@@ -21,7 +21,7 @@ Read-only default: no new permit, lock, agent proposal, QR/attestation, activati
 | Shot | Time | Budget | Focus |
 | --- | --- | --- | --- |
 | S01 | 00:00–00:15 | 15s | Problem and boundary |
-| S02 | 00:15–00:40 | 25s | Production PLAN — after current-build recheck |
+| S02 | 00:15–00:40 | 25s | Production PLAN — accepted 2.7.0 |
 | S03 | 00:40–01:05 | 25s | Native Rovo on Development — release first |
 | S04 | 01:05–01:45 | 40s | Personal-lock barrier — read-only walkthrough |
 | S05 | 01:45–02:00 | 15s | Authorized reread in another tab |
@@ -37,13 +37,13 @@ Read-only default: no new permit, lock, agent proposal, QR/attestation, activati
 
 **Evidence boundary:** Accepted core; decision support only
 
-## S02 — Production PLAN — after current-build recheck
+## S02 — Production PLAN — accepted 2.7.0
 
-**Screen:** Actual current Production KAN-1 PLAN panel after owner read-only recheck; record version/UI, Warn-only, release and zero locks
+**Screen:** Production KAN-1 inline editor, 2.7.0 / UI 7aee7ab2f32c; PLAN, Warn-only, release NOT CLEARED, zero locks
 
 **Say:** “This is the separate Production planning record, not an active permit. PLAN and Warn-only are explicit, release is not cleared, and no locks are recorded. We reread the existing record without recreating it. Next, Development shows the narrower work-start distinction.”
 
-**Evidence boundary:** 28 Nov09:05 owner2.6 text PASS, not footage or acceptance of a later release
+**Evidence boundary:** 28 Nov ~13:00 owner 2.7 read-only recheck PASS; typed receipt, not footage or full lifecycle acceptance
 
 ## S03 — Native Rovo on Development — release first
 
@@ -95,4 +95,4 @@ Read-only default: no new permit, lock, agent proposal, QR/attestation, activati
 
 ## Finish gate
 
-No raw footage/private export/audio/privacy review or owner rights/publication approval yet. Complete [take log](footage-take-log.template.json) and [essential remaining gates](submission/remaining-2026-11-28.md). No external gate completed.
+No raw footage/private export/audio/privacy review received. Complete [take log](footage-take-log.template.json) and [essential remaining gates](submission/remaining-2026-11-28.md). Current-build read-only acceptance is complete; recording, rights/access and submission gates remain.

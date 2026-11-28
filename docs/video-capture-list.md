@@ -4,15 +4,15 @@
 
 Existing signed-in recorder/entitlements only. Preserve raw originals/UTC/dimensions/browser/version and genuine waits in take log. Label shortened waits with actual elapsed time. No new permit, seed/reset, lock, activation, proposal or close for footage. No Inspector/OAuth/MCP/exposure/Sharing changes. Privacy review removes private menus/names/plant data/bearer links, not evidence labels. Existing private Production install link stays owner-controlled; never film/reproduce it.
 
-## Current evidence —28 November09:05 owner text, not footage
+## Current evidence — 28 November, approximately 13:00 UK
 
-Production2.6.0/UI1edb05105874: KAN-1 read/reload PASS, explicit PLAN/Warn-only/Release NOT CLEARED/0 locks/You–You. KAN-2 once-only EQ-1 create, crew Judge timing demo: pending visible, click-to-success2.3s/footer1.4s; reload single PLAN/siteRevision2/no locks. First live10–14s remains unsatisfactory. Sidebar guide only; preview HTTP404/eight unknown console messages unresolved. Typed receipt maintained separately.
+**Production 2.7.0 / UI 7aee7ab2f32c: owner-reported read-only PASS, not footage.** KAN-1 and KAN-2 show the real editor inline, PLAN / Warn-only / Release NOT CLEARED / You–You / zero locks / displayed site revision 2. Navigation→shell: KAN-2 ~2.5 s, KAN-1 ~2.7 s; navigation→live: ~3.5 / ~3.6 s. Iframe→live: 1.1 / 1.0 s; server: 0.260 / 0.238 s. These are two owner observations, not a controlled cold-start benchmark. Preview absence is neutral with no 404. The owner enabled **Show for all work items**; menu now says **Hide from all work items**. All reported eight errors and one warning are Jira-host entries, not PermitGuard errors. [Exact receipt](evidence/2026-11-28-owner-2.7-browser-pass.json).
 
-S02 films actual current Production only AFTER new owner read-only recheck; a next-minor deployment is not natively accepted until owner checks it. Record actual version/UI; no carrying2.6 timings forward. [Production2.4.0 seed receipt](evidence/2026-11-27-owner-2.4-seed-pass.json) is historical onboarding, not current empty state.
+S02 can now capture this accepted Production build. Check its version/state at the start of the take; another acceptance round is not required for unchanged 2.7.0. Production2.4.0 onboarding and 2.6 once-only creation (2.3 s click-to-success, 1.4 s panel round-trip) remain historical evidence, not new creation timings.
 
-Development5.16.0/UI5f92b0c1b926 PGSAMPLE-2 ACTIVE/Enforce: owner native Judge under15s PASS, Release NOT CLEARED / Work start only CLEARED / one caveat. Agreed Rovo filming is Development-labelled. No footage, stable-Development/new-feature or future-agent-text claim; reread and stop if changed, never reset.
+Development5.16.0 / UI5f92b0c1b926 PGSAMPLE-2 remains the separate Rovo filming target. Last owner native Judge PASS was ~09:00, under 15 s; **no new Rovo check or capture at 13:00** because of the picker issue. No PermitGuard Judge was available on the judge site; do not use its dead `/rovo/agents` route or enable an entitlement. The tester accidentally unassigned PGSAMPLE-2, then immediately restored Olly; owner reports no other save, with the blip visible in history. Do not claim an untouched native issue history. Verify the existing assignee/state before filming; never repair/reset data for a take.
 
-MCP: historical24Nov21:06:40UTC Inspector2.16.0; one DEV check_readiness_development read, sharing OFF; broad Read, Write, and Search consent; WORK_START/ACTIVE/release NOT CLEARED/siteRevision22/returned permitRevision6/operational:false. Exposure OFF/grant cleanup. No6→6 comparison, new call or Inspector footage.
+MCP remains historical 24 Nov 21:06:40 UTC Inspector 2.16.0 owner text evidence: one `check_readiness_development` read, broad Read, Write, and Search consent, WORK_START / ACTIVE / release NOT CLEARED / siteRevision 22 / returned permitRevision 6 / operational:false. Exposure OFF and grant cleanup were owner-reported. No new call or Inspector footage.
 
 ## S01 · 00:00–00:15 · 15s — Problem and boundary
 
@@ -28,18 +28,18 @@ MCP: historical24Nov21:06:40UTC Inspector2.16.0; one DEV check_readiness_develop
 
 **Narration:** S01 in script. Raw filename S01-take-01; edit budget is not a load deadline.
 
-## S02 · 00:15–00:40 · 25s — Production PLAN — after current-build recheck
+## S02 · 00:15–00:40 · 25s — Production PLAN — accepted 2.7.0
 
 **URL:** https://mizzen-judge-test.atlassian.net/browse/KAN-1
 
 **Issue:** KAN-1
 
-1. Complete owner read-only recheck of current Production before filming. A later minor deployment has no native acceptance until owner checks it; stop on unexpected state.
-2. Open inline issue panel / View app actions → PermitGuard, not sidebar Apps. Record actual version/UI and navigation stopwatch separately from panel timers.
-3. Show existing PLAN/Warn-only/Release NOT CLEARED/0 locks/You–You. Read/reload only; never Create permit, reseed, reset or Begin locking.
-4. Any timing insert must say Owner text ·28Nov09:05 ·Production2.6/UI1edb05105874 ·not footage. KAN-2 once-only create2.3s click-to-success versus footer1.4s is not current-release timing or first-live latency.
+1. Open KAN-1 in the existing signed-in browser. Verify 2.7.0 / Production / UI 7aee7ab2f32c and expected state at the start of the take; unchanged 2.7.0 already passed owner read-only recheck.
+2. Frame the inline PermitGuard editor. Show for all work items is already enabled; do not toggle it back. Record navigation stopwatch separately from iframe timers if filming a load.
+3. Show existing PLAN / Warn-only / Release NOT CLEARED / zero locks / Workers and Verifiers You / displayed revision 2. Read/reload only; never Create permit, reset or Begin locking. Stop on unexpected state.
+4. If using a timing insert, label Owner text · 28 Nov ~13:00 UK · Production 2.7.0 · not footage: navigation-to-live KAN-2 ~3.5 s, KAN-1 ~3.6 s. Do not mix in historical 2.6 creation timings.
 
-**Expected:** Current Production PLAN after owner recheck, actual version/UI recorded, release NOT CLEARED/0 locks. Owner2.6 KAN-1 read/reload PASS and KAN-2 single PLAN/siteRevision2 are text evidence only. Development ACTIVE is not that installation. No writes for footage.
+**Expected:** Accepted Production 2.7.0 PLAN in the real inline editor; no repeat acceptance round required before capture of unchanged build. Receipt is not footage. Development ACTIVE is not that installation. No writes for footage.
 
 **Narration:** S02 in script. Raw filename S02-take-01; edit budget is not a load deadline.
 
@@ -50,11 +50,11 @@ MCP: historical24Nov21:06:40UTC Inspector2.16.0; one DEV check_readiness_develop
 **Issue:** PGSAMPLE-2
 
 1. Reread preserved Development5.16/UI5f92b0c1b926 ACTIVE/Enforce; keep Development label visible. Stop if changed; never reset or propose activation.
-2. Open Jira Rovo/Chat in the top navigation; open its agent picker.
-3. Search PermitGuard Judge; select the one intended live Jira DEV agent. If multiple indistinguishable agents appear, stop rather than deleting/selecting at random.
+2. Open Jira Rovo/Chat in the Development site top navigation, then its agent picker. Click the chat input before typing; do not send shortcuts or search keystrokes to the Jira issue behind it.
+3. Search PermitGuard Judge in the focused picker. If missing, ambiguous or unresponsive, stop this take and log picker unavailable. Do not use /rovo/agents on the judge site, change assignment, enable trials or select an unknown agent.
 4. Choose New chat, enter exactly: Is PGSAMPLE-2 cleared? Send once. Wait for the actual reply/tool-backed result.
 
-**Expected:** Owner28Nov09:05 native Judge under15s: Release NOT CLEARED / Work start only CLEARED / one caveat. Film actual readable reply, not reconstructed future wording. No prompt update accepted until deployed and natively checked; no footage received.
+**Expected:** Owner28Nov09:05 native Judge under15s: Release NOT CLEARED / Work start only CLEARED / one caveat. Film actual readable reply, not reconstructed future wording. No prompt update accepted until deployed and natively checked; no footage received. At ~13:00 picker prevented capture; no new PASS. If still blocked, use a visibly labelled historical owner text insert (~09:00, not current footage), or leave the shot outstanding; never reconstruct a live reply.
 
 **Narration:** S03 in script. Raw filename S03-take-01; edit budget is not a load deadline.
 

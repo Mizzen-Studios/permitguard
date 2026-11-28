@@ -1,0 +1,111 @@
+{
+  "classification": "OWNER_REPORTED_READ_ONLY_BROWSER_PASS",
+  "observedAtApprox": "2026-11-28T13:00:00Z",
+  "timePrecision": "Approximate; owner said ~13:00 UK",
+  "version": "2.7.0",
+  "uiSource": "7aee7ab2f32c",
+  "environment": "production",
+  "site": "mizzen-judge-test.atlassian.net",
+  "independentlyInspected": false,
+  "screenshotsOrVideoReceived": false,
+  "commonState": {
+    "phase": "PLAN",
+    "mode": "WARN_ONLY",
+    "release": "NOT CLEARED",
+    "workers": "You",
+    "verifiers": "You",
+    "locks": 0,
+    "displayedSiteRevision": 2
+  },
+  "issues": {
+    "KAN-2": {
+      "navigationToShellSeconds": 2.5,
+      "navigationToLiveSeconds": 3.5,
+      "iframeToPanelSeconds": 0.1,
+      "iframeFcpSeconds": 0.2,
+      "iframeToLiveSeconds": 1.1,
+      "snapshotSeconds": 0.7,
+      "serverTotalSeconds": 0.26,
+      "serverAuthSeconds": 0.216,
+      "serverStorageSeconds": 0.043
+    },
+    "KAN-1": {
+      "navigationToShellSeconds": 2.7,
+      "navigationToLiveSeconds": 3.6,
+      "iframeToLiveSeconds": 1.0,
+      "serverTotalSeconds": 0.238
+    }
+  },
+  "panel": {
+    "realEditorInlineByDefault": true,
+    "showForAllWorkItemsClicked": true,
+    "menuAfter": "Hide from all work items",
+    "remainsVisible": true
+  },
+  "preview": {
+    "message": "No dated historical preview…",
+    "http404Observed": false,
+    "liveStatePassed": true
+  },
+  "console": {
+    "errors": 8,
+    "warnings": 1,
+    "classification": "JIRA_HOST_NOISE_OWNER_REPORTED",
+    "permitguardAttributedEntries": 0,
+    "entries": [
+      {
+        "status": 404,
+        "source": "user/properties",
+        "keys": [
+          "jpd-roadmaps-upsell.dismissed",
+          "loom-quick-add-ad-control-dismissed",
+          "autoHighlightingEnabled"
+        ]
+      },
+      {
+        "status": 404,
+        "source": "mypreferences",
+        "key": "standard-to-premium-ea-pill.dismissed"
+      },
+      {
+        "status": 401,
+        "source": "jsd escalator has-opsgenie-access"
+      },
+      {
+        "status": 404,
+        "source": "issue/KAN-1/properties/recurrence-config"
+      },
+      {
+        "count": 2,
+        "message": "Permissions policy violation: unload is not allowed",
+        "source": "jira-fe shared~commons~ar.eb04889e.js:15"
+      },
+      {
+        "level": "warning",
+        "message": "Deprecated API for given entry type",
+        "source": "react-ufo"
+      }
+    ]
+  },
+  "rovo": {
+    "judgeSiteAgentAvailable": false,
+    "judgeSiteRoute": "/rovo/agents dead link",
+    "developmentRetestedThisRound": false,
+    "developmentCapture": "NOT_DONE_PICKER_ISSUE",
+    "lastOwnerPassApprox": "2026-11-28T09:00:00Z",
+    "lastOwnerResponseSeconds": "<15",
+    "productionWordingNativeAccepted": false
+  },
+  "developmentIncident": {
+    "issue": "PGSAMPLE-2",
+    "description": "Tester keystrokes accidentally unassigned issue; immediately reassigned to Olly. Owner reports nothing else saved and issue history records the blip.",
+    "source": "OWNER_REPORTED",
+    "independentlyVerified": false
+  },
+  "limits": [
+    "Typed report, not received footage or independent browser inspection",
+    "Two observations, not a controlled cold-start benchmark or percentile",
+    "No lifecycle writes or new creation performance acceptance",
+    "Host attribution applies to listed entries, not all future console errors"
+  ]
+}

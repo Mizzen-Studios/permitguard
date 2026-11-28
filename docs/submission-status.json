@@ -70,7 +70,8 @@
     "sourceCommit": "1edb051058747271abd8b4f8c180fc95f30d903f",
     "evidence": "evidence/2026-11-27-production-checka-feedback.json",
     "privateDistribution": "OWNER_REPORTED_INSTALL_ONLY",
-    "installLinkCreated": false
+    "installLinkCreated": false,
+    "role": "HISTORICAL_2.6_DEPLOYMENT_AND_DISTRIBUTION_RECEIPT; currentProduction is authoritative for current runtime"
   },
   "followUpCandidate": {
     "status": "PRODUCTION_2.4_SEED_ACCEPTED_BROADER_LIFECYCLE_NOT_RUN",
@@ -182,15 +183,18 @@
     "sourceCommit": "1edb051058747271abd8b4f8c180fc95f30d903f",
     "evidence": "evidence/2026-11-27-production-checka-feedback.json",
     "details": "check-a-fixes-2026-11-27.md",
-    "nativeRecheck": "NOT_RUN",
-    "actualSpeedImprovement": "NOT_MEASURED",
+    "nativeRecheck": "OWNER_REPORTED_2.6_PASS_2026_11_28_0900",
+    "actualSpeedImprovement": "OWNER_REPORTED_CREATE_2.3_SECONDS; not a 2.7 create measurement",
     "existingJudgeIssue": "KAN-1_PLAN_REVISION_1_PRESERVED"
   },
   "currentProduction": {
     "environment": "production",
     "version": "2.7.0",
     "uiSource": "7aee7ab2f32c",
-    "nativeAcceptance": "NOT_RUN",
-    "evidence": "evidence/2026-11-28-production-2.7.json"
+    "nativeAcceptance": "OWNER_REPORTED_READ_ONLY_PASS",
+    "evidence": "evidence/2026-11-28-production-2.7.json",
+    "nativeEvidence": "evidence/2026-11-28-owner-2.7-browser-pass.json",
+    "fullLifecycleAcceptance": "NOT_RUN",
+    "mediaReceived": false
   }
 }
