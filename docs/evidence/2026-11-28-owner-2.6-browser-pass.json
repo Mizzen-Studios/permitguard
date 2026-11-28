@@ -1,0 +1,69 @@
+{
+  "classification": "OWNER_REPORTED_BROWSER_PASS_WITH_OPEN_FEEDBACK",
+  "observedAtApprox": "2026-11-28T09:00:00Z",
+  "receivedAt": "2026-11-28T09:05:00Z",
+  "production": {
+    "site": "mizzen-judge-test.atlassian.net",
+    "version": "2.6.0",
+    "uiSource": "1edb05105874",
+    "KAN1": {
+      "result": "PASS",
+      "phase": "PLAN",
+      "phaseBadge": true,
+      "mode": "WARN_ONLY",
+      "release": "NOT CLEARED",
+      "locks": 0,
+      "workersLabel": "You",
+      "verifiersLabel": "You",
+      "displayedSiteRevision": 1,
+      "reloadSame": true,
+      "observedNavigationToLiveSecondsApprox": 14
+    },
+    "KAN2": {
+      "result": "PASS",
+      "createdExactlyOnce": true,
+      "equipment": "EQ-1",
+      "crew": "Judge timing demo",
+      "pendingCopy": true,
+      "savingElapsedVisible": true,
+      "clickToSuccessSecondsApprox": 2.3,
+      "panelRoundTripSeconds": 1.4,
+      "phase": "PLAN",
+      "displayedSiteRevision": 2,
+      "locks": 0,
+      "workersLabel": "You",
+      "verifiersLabel": "You",
+      "reloadSinglePermit": true,
+      "stoppedAt": "PLAN",
+      "inlinePanel": false,
+      "entry": "View app actions → PermitGuard"
+    }
+  },
+  "development": {
+    "site": "one-atlas-xitr.atlassian.net",
+    "issue": "PGSAMPLE-2",
+    "uiSource": "5f92b0c1b926",
+    "phase": "ACTIVE",
+    "policy": "ENFORCE",
+    "nativeRovo": "OWNER_REPORTED_PASS",
+    "replySecondsLessThan": 15,
+    "reply": "Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE. Follow the site procedure.",
+    "filmingDecision": "Use existing Development tenant with explicit environment label"
+  },
+  "openFeedback": [
+    "KAN2 app-actions only; issueContext Open PermitGuard is navigation guide",
+    "10–14second first live view",
+    "Preview Snapshot unavailableHTTP404",
+    "KAN1eightconsoleerrors; messages/sourceURLs not supplied",
+    "Rovo work-start CLEARED secondary can confuse release answer"
+  ],
+  "evidenceLimits": {
+    "textReportOnly": true,
+    "screenshotsReceived": false,
+    "consoleMessagesReceived": false,
+    "independentBrowserObservation": false,
+    "controlledBenchmark": false,
+    "ownerStartPointAndPanelTimingDifferent": true,
+    "newMcpProof": false
+  }
+}

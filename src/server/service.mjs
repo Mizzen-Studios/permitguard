@@ -204,7 +204,7 @@ export function createService({ store, challenges, authorize, projectIsSample, v
     // Independent non-authoritative side effects run together, only AFTER the atomic commit.
     // Both settle before replying; neither is a detached task or a reason to retry a mutation.
     await measured('sideEffectsMs',()=>Promise.all([
-      permit&&projectProperty ? Promise.resolve().then(()=>projectProperty(issueId,projection(permit,readiness(),release(),project.policy,at,revision))).then(()=>{response.projection.status='UPDATED';},()=>{response.projection.status='FAILED_NONAUTHORITATIVE';}) : Promise.resolve(),
+      permit&&projectProperty ? Promise.resolve().then(()=>projectProperty(issueId,projection(permit,readiness(),release(),project.policy,now(),revision))).then(()=>{response.projection.status='UPDATED';},()=>{response.projection.status='FAILED_NONAUTHORITATIVE';}) : Promise.resolve(),
       publish ? Promise.resolve().then(()=>publish({revision})).catch(()=>{response.realtime='UNAVAILABLE';}) : Promise.resolve()
     ]));
     // Bounded operation/timing diagnostics only; no issue/account/content/identifiers.
