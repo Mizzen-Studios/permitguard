@@ -20,3 +20,7 @@
 - Rules **290**: Official Rules prevail. Hashes/canonical URLs are in the linked alignment record; this is not an independent fresh retrieval of Devpost pages.
 
 Only the original owner's DEV MCP run is a real external-client receipt here. Its **_development** suffix and broad **Read, Write, and Search** consent remain explicit. Interface read-only is not consent read-only. Current exposure remains owner-observed OFF; **Olly OK at submission/before judge tests** remains required for intended installations and availability window.
+
+## 28November preparation clarification
+
+Historical Inspector **2.16.0**, one DEV **check_readiness_development** read only; sharing OFF, exposure restored OFF, grant removed, broad **Read, Write, and Search** consent. No new call or Inspector footage. Existing owner-private Jira Production installation link was previously used; keep secret, never reproduce or recreate it. Judge-install rehearsal is **OWNER_REPORTED_PARTIAL**, not NOT_RUN or full judge-access acceptance. Olly must explicitly approve intended judge installation/access and MCP window. Intended main Specialized Industries + MCP bonus only. No new native acceptance for future agent text before its deployment/native check. [Remaining gates](remaining-2026-11-28.md).

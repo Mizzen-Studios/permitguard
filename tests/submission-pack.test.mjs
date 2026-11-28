@@ -17,6 +17,10 @@ test('local pack is consistent but explicitly not submission-ready or authorized
 });
 
 const regressions = [
+  ['Production PLAN capture silently changed back to DEV',p=>p.shots.shots[1].captureUrl='https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2'],
+  ['Production PLAN receipt inflated to footage',p=>p.shots.productionPlan.mediaReceived=true],
+  ['Production PLAN recheck waived',p=>p.shots.productionPlan.captureRequires='ACCEPTED_WITHOUT_RECHECK'],
+  ['Production PLAN owner build drift',p=>p.shots.productionPlan.versionAtOwnerObservation='2.7.0'],
   ['seed report missing',p=>p.ownerSeed=null],
   ['seed report wrong version',p=>p.ownerSeed.version='99.0.0'],
   ['seed evidence inflated to inspected media',p=>p.ownerSeed.independentlyInspected=true],
@@ -67,6 +71,15 @@ for (const [name, mutate] of regressions) test('pack rejects ' + name, () => {
   const r = validatePack(changed);
   assert.equal(r.localConsistency, 'FAIL'); assert.ok(r.errors.length > 0);
   assert.equal(r.submissionReady, false); assert.equal(r.publicActionsAuthorized, false);
+});
+
+test('remaining ledger preserves private link, partial rehearsal and owner approval gates', () => {
+  const draft = baseline.documents['docs/submission/devpost-writeup.md'];
+  const remaining = baseline.documents['docs/submission/remaining-2026-11-28.md'];
+  assert.ok(!draft.includes('NOT_CREATED'));
+  for (const value of ['OWNER_REPORTED_PARTIAL', 'inactive', '22 December2026 20:00UTC', 'YouTube', 'explicit Olly approval', 'No new client/tool call']) {
+    assert.ok((draft + remaining).toLowerCase().includes(value.toLowerCase()), value);
+  }
 });
 
 test('read-only CLI emits structured local results and pending gates', () => {

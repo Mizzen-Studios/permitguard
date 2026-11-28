@@ -27,37 +27,38 @@
       "id": "S02",
       "start": 15,
       "end": 40,
-      "title": "Two evidence baselines — Production setup versus Development ACTIVE",
-      "screen": "Actual Development5.16.0 ACTIVE panel plus clearly labelled owner-reported Production2.4 setup receipt, never a manufactured Production UI screenshot",
-      "narration": "The separate Production two-point-four rehearsal passed fresh setup: six synthetic items, Warn-only, no permit or locks, persisted after reload. This screen is the Development five-point-sixteen active fixture, not that installation. Work-start and release readiness remain separate, with release blocked.",
-      "evidence": "Production2.4 owner seed PASS is text evidence; Development ACTIVE fixture must be reread before recording; no Production footage received",
-      "captureUrl": "https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2",
-      "captureIssueKey": "PGSAMPLE-2",
+      "title": "Production PLAN — after current-build recheck",
+      "screen": "Actual current Production KAN-1 PLAN panel after owner read-only recheck; record version/UI, Warn-only, release and zero locks",
+      "narration": "This is the separate Production planning record, not an active permit. PLAN and Warn-only are explicit, release is not cleared, and no locks are recorded. We reread the existing record without recreating it. Next, Development shows the narrower work-start distinction.",
+      "evidence": "28 Nov09:05 owner2.6 text PASS, not footage or acceptance of a later release",
+      "captureUrl": "https://mizzen-judge-test.atlassian.net/browse/KAN-1",
+      "captureIssueKey": "KAN-1",
       "captureClicks": [
-        "Start a navigation stopwatch, then reload this issue once.",
-        "Open PermitGuard through View app actions if needed; let live state finish loading.",
-        "Scroll to footer: capture actual Forge version and UI marker. Scroll back to release strip and ACTIVE phase; expand Startup details only to distinguish clocks, not to imply its timer measures all Jira navigation.",
-        "For a source insert open the committed docs/evidence/2026-11-27-owner-2.4-seed-pass.json. Label Owner-reported Production2.4 onboarding ·27Nov · not captured UI/footage. Keep the Development5.16 label visible on its actual ACTIVE panel. Do not repeat the seed or reset the production register."
+        "Complete owner read-only recheck of current Production before filming. A later minor deployment has no native acceptance until owner checks it; stop on unexpected state.",
+        "Open inline issue panel / View app actions → PermitGuard, not sidebar Apps. Record actual version/UI and navigation stopwatch separately from panel timers.",
+        "Show existing PLAN/Warn-only/Release NOT CLEARED/0 locks/You–You. Read/reload only; never Create permit, reseed, reset or Begin locking.",
+        "Any timing insert must say Owner text ·28Nov09:05 ·Production2.6/UI1edb05105874 ·not footage. KAN-2 once-only create2.3s click-to-success versus footer1.4s is not current-release timing or first-live latency."
       ],
-      "captureExpected": "Expected baseline 5.16.0 / UI 5f92b0c1b926, ACTIVE, Release NOT CLEARED, lock L-A1. Historical preview, if shown, is explicitly not live/actionable. Current state must be checked; last owner observation was 24 Nov, not a new live assertion. Separate owner receipt: Production2.4 EQ-1–EQ-6 Warn-only/no permit/locks/persisted6; no copied tenant image or Inspector UI. Never label the DEV ACTIVE view Production.",
+      "captureExpected": "Current Production PLAN after owner recheck, actual version/UI recorded, release NOT CLEARED/0 locks. Owner2.6 KAN-1 read/reload PASS and KAN-2 single PLAN/siteRevision2 are text evidence only. Development ACTIVE is not that installation. No writes for footage.",
       "captureDurationSeconds": 25
     },
     {
       "id": "S03",
       "start": 40,
       "end": 65,
-      "title": "Native Rovo, release first",
-      "screen": "One PermitGuard Judge; new chat: Is PGSAMPLE-2 cleared?; actual tool response",
-      "narration": "Ask the native Judge whether this work item is cleared. It leads with release not cleared, then gives the narrower work-start result. It reads the same deterministic service as the panel, rather than granting safety authority.",
-      "evidence": "Native action path accepted; not MCP transport proof",
+      "title": "Native Rovo on Development — release first",
+      "screen": "Development-labelled PGSAMPLE-2 ACTIVE/Enforce and actual native Judge reply",
+      "narration": "On the separate Development fixture, ask the native Judge whether this work item is cleared. Read release not cleared first, then the narrower work-start-only clearance and caveat. This is the actual native reply, not MCP transport proof or permission to energize.",
+      "evidence": "Owner28Nov09:05 native DEV Judge PASS under15s; no received footage or future-prompt acceptance",
       "captureUrl": "https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2",
       "captureIssueKey": "PGSAMPLE-2",
       "captureClicks": [
+        "Reread preserved Development5.16/UI5f92b0c1b926 ACTIVE/Enforce; keep Development label visible. Stop if changed; never reset or propose activation.",
         "Open Jira Rovo/Chat in the top navigation; open its agent picker.",
         "Search PermitGuard Judge; select the one intended live Jira DEV agent. If multiple indistinguishable agents appear, stop rather than deleting/selecting at random.",
         "Choose New chat, enter exactly: Is PGSAMPLE-2 cleared? Send once. Wait for the actual reply/tool-backed result."
       ],
-      "captureExpected": "On the preserved ACTIVE baseline: Release: NOT CLEARED. Work start only: CLEARED. This is not release clearance. Phase: ACTIVE. Follow the site procedure. Capture actual text; do not type/reconstruct it as model output. No activation proposal.",
+      "captureExpected": "Owner28Nov09:05 native Judge under15s: Release NOT CLEARED / Work start only CLEARED / one caveat. Film actual readable reply, not reconstructed future wording. No prompt update accepted until deployed and natively checked; no footage received.",
       "captureDurationSeconds": 25
     },
     {
@@ -138,7 +139,7 @@
       "end": 180,
       "title": "Architecture and close",
       "screen": "README architecture, public MIT repository and remaining release blocker",
-      "narration": "Forge holds bounded records with authenticated permissions and conditional writes. There is no external app runtime or SQL. Privacy erasure and broader live acceptance remain unfinished. PermitGuard supports decisions; named humans and the site procedure remain authoritative.",
+      "narration": "Forge holds bounded records with authenticated permissions and conditional writes. There is no external app runtime or SQL. Reporting and erasure automation remain inactive; broader live qualification is pending. PermitGuard supports decisions; named humans and the site procedure remain authoritative.",
       "evidence": "Source architecture, not production qualification",
       "captureUrl": "https://github.com/Mizzen-Studios/permitguard",
       "captureIssueKey": null,
@@ -151,7 +152,7 @@
       "captureDurationSeconds": 15
     }
   ],
-  "updatedDate": "2026-11-27",
+  "updatedDate": "2026-11-28",
   "recordingMode": "READ_ONLY_CORE_DEFAULT",
   "mcpMedia": "Redacted historical textual receipt insert; no Inspector screenshot/video exists",
   "productionOnboarding": {
@@ -159,5 +160,12 @@
     "uiSource": "e8b95c053254",
     "evidence": "evidence/2026-11-27-owner-2.4-seed-pass.json",
     "classification": "OWNER_REPORTED_PASS_NOT_FOOTAGE"
+  },
+  "productionPlan": {
+    "versionAtOwnerObservation": "2.6.0",
+    "uiSourceAtOwnerObservation": "1edb05105874",
+    "classification": "OWNER_REPORTED_PASS_NOT_FOOTAGE",
+    "captureRequires": "CURRENT_PRODUCTION_READ_ONLY_RECHECK",
+    "mediaReceived": false
   }
 }

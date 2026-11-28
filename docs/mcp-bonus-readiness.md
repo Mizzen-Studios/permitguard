@@ -14,7 +14,7 @@ Updated after the owner-run receipt, 24 November 2026. **PASS_OWNER_RECEIPT** fo
 | Operational no-change observation | Panel siteRevision 22 and lock L-A1 unchanged; permitRevision not displayed before/after | Supported to this stated limit |
 | Native Rovo proposal retained | Source and remote agent/actions metadata; proposal not in MCP tools | RETAINED; no new proposal call |
 | Governing MCP technical clause | Actual private Rules export lines 101/240 plus overview 98, hashes recorded | TECHNICAL_MATCH |
-| Judge installability/access/exposure window | Installation link and approved judge configuration not established | NOT_READY; Olly's OK required |
+| Judge installability/access/exposure window | Existing owner-private Production installation link; intended judge access/configuration still unaccepted | NOT_READY; Olly's OK required |
 | Full entrant eligibility / publication / submission | Not attested, no finished video/public YouTube or form submission | NOT_COMPLETED |
 
 ## What this proves and does not
@@ -37,3 +37,7 @@ This documentation task does not toggle exposure, replay the tool, change code/d
 - 24 November 13:03: owner observed broad app-wide OFF switch, no per-tool selector. Selective-checkbox instructions withdrawn; GET+CREATE exposure was not read-only-only.
 - 16:57 approval → normal **5.16.0** GET-only MCP deployment from **5f92b0c1b926**; native proposal retained, 134 local tests. [Deployment receipt](mcp-get-deployment-2026-11-24.md).
 - 21:06:40: actual owner read; 21:10 private receipt delivered and then classified. OFF cleanup preserved. Rules exports read; technical claim updated, other submission gates retained.
+
+## 28November preparation clarification
+
+Historical Inspector **2.16.0**, one DEV **check_readiness_development** read only; sharing OFF, exposure restored OFF, grant removed, broad **Read, Write, and Search** consent. No new call or Inspector footage. Existing owner-private Jira Production installation link was previously used; keep secret, never reproduce or recreate it. Judge-install rehearsal is **OWNER_REPORTED_PARTIAL**, not NOT_RUN or full judge-access acceptance. Olly must explicitly approve intended judge installation/access and MCP window. Intended main Specialized Industries + MCP bonus only. No new native acceptance for future agent text before its deployment/native check. [Remaining gates](submission/remaining-2026-11-28.md).

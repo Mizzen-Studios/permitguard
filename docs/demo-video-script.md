@@ -1,24 +1,28 @@
 # Three-minute PermitGuard demo — current evidence, honest boundaries
 
-**DRAFT / NOT RECORDED / NOT EXPORTED / NOT UPLOADED —27November2026.** Eight contiguous shots, **180seconds**; this fits the supplied Rules under-five-minute budget, not proof of finished media. [Machine shot list](demo-shot-list.json) · [exact capture checklist](video-capture-list.md) · [remaining owner checks](remaining-browser-checks-2026-11-27.md).
+**DRAFT / NOT RECORDED / NOT EXPORTED / NOT UPLOADED —28November2026.** Eight contiguous shots, **180seconds**; this fits the supplied Rules under-five-minute budget, not proof of finished media. [Machine shot list](demo-shot-list.json) · [exact capture checklist](video-capture-list.md) · [remaining owner checks](remaining-browser-checks-2026-11-27.md).
 
-## Two builds, explicitly separated
+## Current evidence —28 November09:05 owner text, not footage
 
-- **Production2.4.0 / UIe8b95c053254:** fresh-site route/header/footer/Cancel/Confirm six synthetic equipment/Warn-only/no permit/locks/reload6 PASS per owner27Nov09:01. [Receipt](evidence/2026-11-27-owner-2.4-seed-pass.json). No screenshot/raw video bytes received. Do not invent a filmed install or replay the seed over persisted data.
-- **Development5.16.0 / UI5f92b0c1b926:** separately preserved ACTIVE PGSAMPLE-2 fixture for the read-only lifecycle explanation. Latest owner fixture/MCP evidence is dated24Nov, not a fresh inspection. Before recording, reread actual state; if changed, stop and adapt from evidence, never force/reset it. Show the Development environment label throughout those shots.
-- **MCP S07:** Historical owner receipt ·24Nov21:06:40UTC · **not live Inspector footage**. One genuine discovery/read with tool **check_readiness_development**, broad **Read, Write, and Search** consent, WORK_START/ACTIVE/release NOT CLEARED/siteRevision22/returned permitRevision6/operational:false, owner OFF/grant cleanup. No Inspector images exist; no6→6 before/after permit-revision claim. Exposure stays OFF; no new OAuth/client/tool call.
+Production2.6.0/UI1edb05105874: KAN-1 read/reload PASS, explicit PLAN/Warn-only/Release NOT CLEARED/0 locks/You–You. KAN-2 once-only EQ-1 create, crew Judge timing demo: pending visible, click-to-success2.3s/footer1.4s; reload single PLAN/siteRevision2/no locks. First live10–14s remains unsatisfactory. Sidebar guide only; preview HTTP404/eight unknown console messages unresolved. Typed receipt maintained separately.
+
+S02 films actual current Production only AFTER new owner read-only recheck; a next-minor deployment is not natively accepted until owner checks it. Record actual version/UI; no carrying2.6 timings forward. [Production2.4.0 seed receipt](evidence/2026-11-27-owner-2.4-seed-pass.json) is historical onboarding, not current empty state.
+
+Development5.16.0/UI5f92b0c1b926 PGSAMPLE-2 ACTIVE/Enforce: owner native Judge under15s PASS, Release NOT CLEARED / Work start only CLEARED / one caveat. Agreed Rovo filming is Development-labelled. No footage, stable-Development/new-feature or future-agent-text claim; reread and stop if changed, never reset.
+
+MCP: historical24Nov21:06:40UTC Inspector2.16.0; one DEV check_readiness_development read, sharing OFF; broad Read, Write, and Search consent; WORK_START/ACTIVE/release NOT CLEARED/siteRevision22/returned permitRevision6/operational:false. Exposure OFF/grant cleanup. No6→6 comparison, new call or Inspector footage.
 
 ## Recording rules
 
-Read-only default: no new permit, lock, agent proposal, QR/attestation, activation, removal or close for footage. Source-rule diagrams and historical text inserts must stay labelled; no roleplay portrayed as another real person, no connected-as-delivery claim, no safety/OSHA/privacy certification. Current Production seed PASS is not full lifecycle qualification. Capture genuine waits; shorten only with **Wait shortened — actual elapsed [measured]**. Panel/iframe timers are not total Jira navigation. Redact names/account menus/tokens/real plant details, preserve raw originals. Private footage review and owner media-rights approval precede any future public upload. No upload/submission/Sharing/Marketplace/MCP toggle is authorized.
+Read-only default: no new permit, lock, agent proposal, QR/attestation, activation, removal or close for footage. Source-rule diagrams and historical text inserts must stay labelled; no roleplay portrayed as another real person, no connected-as-delivery claim, no safety/OSHA/privacy certification. Current Production PLAN PASS is not full lifecycle qualification. Capture genuine waits; shorten only with **Wait shortened — actual elapsed [measured]**. Panel/iframe timers are not total Jira navigation. Redact names/account menus/tokens/real plant details, preserve raw originals. Private footage review and owner media-rights approval precede any future public upload. No upload/submission/Sharing/Marketplace/MCP toggle is authorized.
 
 ## Locked edit budget
 
 | Shot | Time | Budget | Focus |
 | --- | --- | --- | --- |
 | S01 | 00:00–00:15 | 15s | Problem and boundary |
-| S02 | 00:15–00:40 | 25s | Two evidence baselines — Production setup versus Development ACTIVE |
-| S03 | 00:40–01:05 | 25s | Native Rovo, release first |
+| S02 | 00:15–00:40 | 25s | Production PLAN — after current-build recheck |
+| S03 | 00:40–01:05 | 25s | Native Rovo on Development — release first |
 | S04 | 01:05–01:45 | 40s | Personal-lock barrier — read-only walkthrough |
 | S05 | 01:45–02:00 | 15s | Authorized reread in another tab |
 | S06 | 02:00–02:15 | 15s | Human-only activation boundary |
@@ -33,21 +37,21 @@ Read-only default: no new permit, lock, agent proposal, QR/attestation, activati
 
 **Evidence boundary:** Accepted core; decision support only
 
-## S02 — Two evidence baselines — Production setup versus Development ACTIVE
+## S02 — Production PLAN — after current-build recheck
 
-**Screen:** Actual Development5.16.0 ACTIVE panel plus clearly labelled owner-reported Production2.4 setup receipt, never a manufactured Production UI screenshot
+**Screen:** Actual current Production KAN-1 PLAN panel after owner read-only recheck; record version/UI, Warn-only, release and zero locks
 
-**Say:** “The separate Production two-point-four rehearsal passed fresh setup: six synthetic items, Warn-only, no permit or locks, persisted after reload. This screen is the Development five-point-sixteen active fixture, not that installation. Work-start and release readiness remain separate, with release blocked.”
+**Say:** “This is the separate Production planning record, not an active permit. PLAN and Warn-only are explicit, release is not cleared, and no locks are recorded. We reread the existing record without recreating it. Next, Development shows the narrower work-start distinction.”
 
-**Evidence boundary:** Production2.4 owner seed PASS is text evidence; Development ACTIVE fixture must be reread before recording; no Production footage received
+**Evidence boundary:** 28 Nov09:05 owner2.6 text PASS, not footage or acceptance of a later release
 
-## S03 — Native Rovo, release first
+## S03 — Native Rovo on Development — release first
 
-**Screen:** One PermitGuard Judge; new chat: Is PGSAMPLE-2 cleared?; actual tool response
+**Screen:** Development-labelled PGSAMPLE-2 ACTIVE/Enforce and actual native Judge reply
 
-**Say:** “Ask the native Judge whether this work item is cleared. It leads with release not cleared, then gives the narrower work-start result. It reads the same deterministic service as the panel, rather than granting safety authority.”
+**Say:** “On the separate Development fixture, ask the native Judge whether this work item is cleared. Read release not cleared first, then the narrower work-start-only clearance and caveat. This is the actual native reply, not MCP transport proof or permission to energize.”
 
-**Evidence boundary:** Native action path accepted; not MCP transport proof
+**Evidence boundary:** Owner28Nov09:05 native DEV Judge PASS under15s; no received footage or future-prompt acceptance
 
 ## S04 — Personal-lock barrier — read-only walkthrough
 
@@ -85,10 +89,10 @@ Read-only default: no new permit, lock, agent proposal, QR/attestation, activati
 
 **Screen:** README architecture, public MIT repository and remaining release blocker
 
-**Say:** “Forge holds bounded records with authenticated permissions and conditional writes. There is no external app runtime or SQL. Privacy erasure and broader live acceptance remain unfinished. PermitGuard supports decisions; named humans and the site procedure remain authoritative.”
+**Say:** “Forge holds bounded records with authenticated permissions and conditional writes. There is no external app runtime or SQL. Reporting and erasure automation remain inactive; broader live qualification is pending. PermitGuard supports decisions; named humans and the site procedure remain authoritative.”
 
 **Evidence boundary:** Source architecture, not production qualification
 
 ## Finish gate
 
-No raw clips, private export, independent visual/audio review, exact final duration or publication approval exists yet. Provide the [private take log](footage-take-log.template.json); we measure actual clips before editing. Latest Production screenshots can be read-only B-roll if genuinely captured, labelled and reviewed; they are not currently received assets. Do not silently replace the stable historical/MCP sources with imagined current state.
+No raw footage/private export/audio/privacy review or owner rights/publication approval yet. Complete [take log](footage-take-log.template.json) and [essential remaining gates](submission/remaining-2026-11-28.md). No external gate completed.

@@ -8,6 +8,10 @@ Repository text only. No Devpost form was opened, edited, saved or submitted, an
 
 PermitGuard
 
+**28Nov2026 update — owner09:05 text, not footage:** Production2.6.0/UI1edb05105874 KAN-1 PLAN/read/reload PASS: Warn-only, Release NOT CLEARED,0 locks,You/You. KAN-2 one EQ-1 create (crew Judge timing demo), pending visible,2.3s click-to-success/1.4s footer; reload single PLAN/siteRevision2/no locks. First live10–14s remains poor; sidebar guide/preview HTTP404/eight unknown console messages unresolved. Development5.16/UI5f92b0c1b926 PGSAMPLE-2 ACTIVE/Enforce native Judge under15s PASS, release NOT CLEARED/work-start-only CLEARED/one caveat; film Rovo with Development label. No raw footage received. Any next Production minor needs new owner native recheck before capture; no future-agent-text or new-feature claim before deployment/native check.
+
+Personal-data reporting/erasure groundwork remains **inactive**, not full compliance. Owner retention: customer-site operational data, closed permits/audits/archive copies and synthetic hackathon photos until admin-arranged deletion or uninstall under standard Atlassian lifecycle; no automatic deletion/anonymisation, never alter active lock ownership. Site admin handles human-reviewed in-site erasure; support routes requests, no operational copies. No further privacy engineering in this preparation.
+
 ## Tagline
 
 Personal locks stay personal. Release readiness stays explicit.
@@ -28,7 +32,7 @@ The earlier synthetic Crew B scenario illustrates the shared-equipment rule: rem
 
 We used Forge Custom UI, Node.js, user-authorized Jira APIs and a shared deterministic service. Revision-conditional Custom Entity Store writes serialize mutations and shared-equipment release checks. Realtime sends scoped invalidation hints; clients reread authorized state rather than treating a notification as permission to proceed. A derived Jira property can orient the user with a clearly historical, nonactionable preview while fresh checks load.
 
-The native Rovo agent exposes read-only check_readiness and PENDING-only request_activation. The Forge rovo:mcp interface separately exposes **only check_readiness GET**, preserving the native proposal action without exposing it to MCP clients. In an owner-run Development 5.16.0 test, local Inspector authenticated with sharing OFF, discovered exactly **check_readiness_development**, and made one read with issueKey PGSAMPLE-2. It returned **WORK_START**, **ACTIVE**, **release NOT CLEARED**, **siteRevision 22**, **permitRevision 6** and **operational:false**. This is a real MCP-path result, not a native Rovo reply or mocked call. Consent displayed **Read, Write, and Search**: the MCP interface is read-only, not the app's entire authorization scope. The owner verified unchanged panel site revision/locks, restored exposure OFF, stopped/disconnected the client and removed its grant. The panel did not expose before/after permit revision, so only the returned value 6 is asserted.
+The native Rovo agent exposes read-only check_readiness and PENDING-only request_activation. The Forge rovo:mcp interface separately exposes **only check_readiness GET**, preserving the native proposal action without exposing it to MCP clients. In an owner-run Development 5.16.0 test, Inspector2.16.0 authenticated with sharing OFF, discovered exactly **check_readiness_development**, and made one read with issueKey PGSAMPLE-2. It returned **WORK_START**, **ACTIVE**, **release NOT CLEARED**, **siteRevision 22**, **permitRevision 6** and **operational:false**. This is a real MCP-path result, not a native Rovo reply or mocked call. Consent displayed **Read, Write, and Search**: the MCP interface is read-only, not the app's entire authorization scope. The owner verified unchanged panel site revision/locks, restored exposure OFF, stopped/disconnected the client and removed its grant. The panel did not expose before/after permit revision, so only the returned value 6 is asserted.
 
 The demo uses a built-in Equipment/Isolation points register. An optional bounded Assets adapter supports only those types. There is no app external runtime/egress, SQL, Forge LLM API or Containers. Optional Confluence/archive code is not part of the current Jira-only accepted demonstration.
 
@@ -40,7 +44,7 @@ Startup also needed honest measurement. A panel-only four-second counter had exc
 
 ## Accomplishments we're proud of
 
-The owner accepted development 5.15.0 / UI 4e3335fb30f9 on 22 November: one Judge agent, readable clock scopes and release-first, single-caveat Rovo output. In that reload, preview was about 2.7 seconds and live state about 4.3 seconds by stopwatch. Those are one observed run, not an SLA or a controlled performance claim; previous runs varied.
+Historically, the owner accepted development 5.15.0 / UI 4e3335fb30f9 on 22 November (superseded by the bounded5.16/28Nov evidence above): one Judge agent, readable clock scopes and release-first, single-caveat Rovo output. In that reload, preview was about 2.7 seconds and live state about 4.3 seconds by stopwatch. Those are one observed run, not an SLA or a controlled performance claim; previous runs varied.
 
 The release-barrier scenario and earlier human QR/photo checks have dated evidence. Local tests cover permission/revision failures, preserved-input contracts, fresh judge setup and submission-pack consistency. Counts are reported by the actual test run, not treated as a safety or production certification. We keep these categories separate: local tests, deployment metadata and actual browser acceptance do not prove the same thing.
 
@@ -74,3 +78,5 @@ Atlassian Forge · Custom UI · JavaScript / Node.js 22 runtime · Jira REST API
 - Confirm actual team identities/roles, media rights, dependency attribution and truthful entrant attestations. Do not invent customers, ROI, safety outcomes, certifications or production deployments.
 - Match the final video to its actual build and phase. Label shortened waits/earlier inserts; do not show a native action or a mock as an MCP call.
 - The owner’s documented DEV OAuth/read/cleanup is complete. Future exposure for judge access needs **Olly’s OK** and a supported installation plan; sharing/distribution, production, media publication and Devpost save/submission remain unapproved. This repository preparation opened no Devpost form and performs no new toggle or call.
+
+Current essential gates: [remaining28Nov](submission/remaining-2026-11-28.md). Intended selection remains Specialized Industries + MCP only.

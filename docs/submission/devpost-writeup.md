@@ -1,6 +1,10 @@
 # PermitGuard — Devpost working draft
 
-**Repository draft only. Not saved to a Devpost form, published or submitted.** Actual form limits/entrant declarations still need checking. Intended category: Apps for Specialized Industries. Current Production2.4.0/UIe8b95c053254 fresh-site route/seed/cancel/confirm/persistence owner PASS27Nov09:01; no permit/locks or full lifecycle inferred. DEV5.16 remains separate historical ACTIVE/MCP evidence. Existing Sharing stays unchanged; privacy URLs are published but personal-data reporting/erasure is incomplete. [Readiness and evidence](README.md).
+**Repository draft only. Not saved to a Devpost form, published or submitted.** Actual form limits/entrant declarations still need checking. Intended category: Apps for Specialized Industries. Current bounded owner evidence and inactive privacy groundwork are recorded below; no full lifecycle or compliance acceptance inferred. Existing Sharing stays unchanged. [Readiness and evidence](README.md).
+
+**28Nov2026 update — owner09:05 text, not footage:** Production2.6.0/UI1edb05105874 KAN-1 PLAN/read/reload PASS: Warn-only, Release NOT CLEARED,0 locks,You/You. KAN-2 one EQ-1 create (crew Judge timing demo), pending visible,2.3s click-to-success/1.4s footer; reload single PLAN/siteRevision2/no locks. First live10–14s remains poor; sidebar guide/preview HTTP404/eight unknown console messages unresolved. Development5.16/UI5f92b0c1b926 PGSAMPLE-2 ACTIVE/Enforce native Judge under15s PASS, release NOT CLEARED/work-start-only CLEARED/one caveat; film Rovo with Development label. No raw footage received. Any next Production minor needs new owner native recheck before capture; no future-agent-text or new-feature claim before deployment/native check.
+
+Personal-data reporting/erasure groundwork remains **inactive**, not full compliance. Owner retention: customer-site operational data, closed permits/audits/archive copies and synthetic hackathon photos until admin-arranged deletion or uninstall under standard Atlassian lifecycle; no automatic deletion/anonymisation, never alter active lock ownership. Site admin handles human-reviewed in-site erasure; support routes requests, no operational copies. No further privacy engineering in this preparation.
 
 ## Tagline
 
@@ -16,7 +20,7 @@ PermitGuard puts a connected isolation clipboard into a Jira work item. A team p
 
 The native **PermitGuard Judge** agent reads current readiness. An ACTIVE work item can return **Work start only: CLEARED** while **Release: NOT CLEARED** remains explicit. The native agent can propose **PENDING** activation only when explicitly requested; an assigned named human must confirm at the equipment using the QR/tablet flow. A QR, photo or checkbox is an assertion/evidence record, not independent proof of physical presence or zero energy.
 
-The Forge **rovo:mcp** interface exposes **only the GET readiness tool**, not the proposal. In an owner-run Development test, Inspector discovered exactly **check_readiness_development** and made one authenticated read for PGSAMPLE-2. It returned ACTIVE / WORK_START / release NOT CLEARED / siteRevision 22 / permitRevision 6 / operational:false. The owner restored exposure OFF, disconnected/stopped the client and removed its OAuth grant. Consent still said **Read, Write, and Search**: a read-only MCP interface does not mean a read-only app-wide OAuth grant.
+The Forge **rovo:mcp** interface exposes **only the GET readiness tool**, not the proposal. In the historical24Nov owner-run Development5.16 test with sharing OFF, Inspector2.16.0 discovered exactly **check_readiness_development** and made one authenticated read for PGSAMPLE-2. It returned ACTIVE / WORK_START / release NOT CLEARED / siteRevision 22 / permitRevision 6 / operational:false. The owner restored exposure OFF, disconnected/stopped the client and removed its OAuth grant. Consent still said **Read, Write, and Search**: a read-only MCP interface does not mean a read-only app-wide OAuth grant.
 
 Optional Assets integration reads Equipment and Isolation points, with an explicit built-in register for a synthetic demo. A changed/unavailable connected register must not be silently replaced with samples. The app is decision support, not a safety interlock, physical isolation proof, legal advice or OSHA certification.
 
@@ -38,7 +42,7 @@ Platform discovery also mattered. MCP's console switch was app-wide rather than 
 
 The owner-run MCP receipt supplies real authenticated-path evidence, separately from native Rovo and local fixtures. The observed ACTIVE response preserved blocked release and operational:false, and the owner confirmed unchanged visible site revision/locks before disabling exposure again. Before/after permit revision was not displayed in the panel; returned 6 is not a fabricated 6→6 comparison.
 
-Local tests exercise stale writes, identity/permission boundaries, named verification, QR challenge binding, shared-equipment lock blocking, read-only readiness and truthful submission-pack claims. New first-run/error polish makes empty, unavailable and uncertain-save states actionable without silently retrying writes. Native Production2.4 onboarding now has a bounded owner PASS; complete lifecycle/two-human/device acceptance remains pending. Local synthetic-browser coverage is separate.
+Local tests exercise stale writes, identity/permission boundaries, named verification, QR challenge binding, shared-equipment lock blocking, read-only readiness and truthful submission-pack claims. New first-run/error polish makes empty, unavailable and uncertain-save states actionable without silently retrying writes. Historical Production2.4 onboarding and current2.6 PLAN each have bounded owner PASS; complete lifecycle/two-human/device acceptance remains pending. Local synthetic-browser coverage is separate.
 
 ## What we learned
 
@@ -46,7 +50,7 @@ A trustworthy answer is more useful than an optimistic one. Putting release stat
 
 ## What's next
 
-The180-second script is prepared, not recorded/exported/uploaded. Production2.4 fresh-site seed is owner-reported PASS, with six synthetic items/Warn-only/no permit/locks after reload. Remaining gates are broader native lifecycle and participant/device evidence, actual screenshots/raw footage/review, privacy reporting/erase/retention work, entrant/media-rights attestations and a separately approved judge MCP access window. Marketplace submission on the same app can remove install-link eligibility, so identity/Sharing strategy needs a separate decision before any form submit. No listing/publication/MCP/billing changes are authorized.
+The180-second script is prepared, not recorded/exported/uploaded. Essential gates are current-build read-only recheck, raw footage/take log/private edit/audio/privacy review, owner rights and publication approval, judge installation/access and MCP window, entrant attestations and final Devpost review/submit approval. Broader native lifecycle/participant/device and inactive reporting/erasure work are separate production-qualification limits, not a request for more privacy engineering now. Marketplace submission on the same app can remove install-link eligibility, so identity/Sharing strategy needs a separate decision before any form submit. No listing/publication/MCP/billing changes are authorized.
 
 Recovery/capacity/retention/export and broader live workflow/JQL, automatic Realtime, two-human high-energy and device validation remain separately scoped work before production qualification. Conflict guard and shift-end suspension remain future ideas, not implemented demo claims.
 
@@ -68,6 +72,8 @@ Atlassian Forge; Jira; JavaScript; Custom UI; Forge app storage; Forge Realtime;
 - License: [MIT](../../LICENSE); public [skill.md](../../skill.md).
 - MCP evidence: [redacted owner receipt](../evidence/mcp-owner-receipt-2026-11-24.md), [Rules/hash alignment](../codegeist-rules-alignment-2026-11-24.md).
 - Video: **NOT_RECORDED/NOT_RECEIVED** at this draft milestone; do not invent a public YouTube link.
-- Judge installation link: **NOT_CREATED**; the demo browse URL is not an installation link. [Plan and tested-to-date limits](../judge-access-plan.md).
-- Production/judge-install browser rehearsal: **NOT_RUN**. UX/agent candidate: **DEPLOYED_PRODUCTION_2.1.0**, not yet fresh-site accepted.
+- Judge installation link: **EXISTING_OWNER_PRIVATE_LINK**; previously used for the Production installation. Keep secret; do not reproduce, rotate or create another. The demo browse URL is not an installer. [Plan and tested-to-date limits](../judge-access-plan.md).
+- Production/judge-install browser rehearsal: **OWNER_REPORTED_PARTIAL**. Historical installation and current2.6 PLAN acceptance are bounded evidence, not complete judge access or lifecycle qualification.
 - Entrant names/eligibility, team authority, media rights, app contact/privacy details, exact form field/character limits and final selected bonus/category require the actual owner's verification; none is fabricated.
+
+Current essential gates: [remaining28Nov](remaining-2026-11-28.md). Intended selection remains Specialized Industries + MCP only.

@@ -51,7 +51,10 @@ export function validatePack(pack) {
     check(typeof s.narration === 'string' && script.includes(s.narration), s.id + ': narration differs from script');
     const narrationWords=(s.narration||'').match(/\b[\w'-]+\b/g)||[];
     check(narrationWords.length/(s.end-s.start)*60<=180, s.id+': narration exceeds180words/minute; retime or shorten');
-    if (i < 5) check(s.captureUrl === 'https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2' && s.captureIssueKey === 'PGSAMPLE-2', s.id + ': wrong demo issue/site');
+    if (i < 5) {
+      const isProductionPlan = s.id === 'S02';
+      check(s.captureUrl === (isProductionPlan ? 'https://mizzen-judge-test.atlassian.net/browse/KAN-1' : 'https://one-atlas-xitr.atlassian.net/browse/PGSAMPLE-2') && s.captureIssueKey === (isProductionPlan ? 'KAN-1' : 'PGSAMPLE-2'), s.id + ': wrong demo issue/site');
+    }
   }
   check(cursor === 180 && shots.targetSeconds === 180, 'Edit budget must be exactly 180 seconds');
   check(shots.mcpBonusStatus === 'PASS_OWNER_RECEIPT', 'Do not upgrade owner evidence to independent transport acceptance');
@@ -66,6 +69,7 @@ export function validatePack(pack) {
   check(receipt.cleanup.exposureOffVerifiedAfterReload && receipt.cleanup.inspectorDisconnected && receipt.cleanup.inspectorStopped && receipt.cleanup.newInspectorGrantRemoved, 'Owner cleanup observations must be retained');
   check(shots.coreVersion === capture.coreVersion && shots.uiSource === capture.uiSource && capture.coreVersion === status.currentDemo.version && capture.uiSource === status.currentDemo.uiSource, 'Capture build/source mismatch');
   check(shots.productionOnboarding?.version==='2.4.0' && shots.productionOnboarding?.uiSource==='e8b95c053254' && shots.productionOnboarding?.classification==='OWNER_REPORTED_PASS_NOT_FOOTAGE' && capture.productionOnboarding?.mediaReceived===false && script.includes('Production2.4.0') && script.includes('Development5.16.0') && JSON.stringify(list[1]).includes('not that installation'), 'Do not conflate Production onboarding with Development ACTIVE footage or received media');
+  check(shots.productionPlan?.classification === 'OWNER_REPORTED_PASS_NOT_FOOTAGE' && shots.productionPlan?.mediaReceived === false && shots.productionPlan?.versionAtOwnerObservation === '2.6.0' && shots.productionPlan?.uiSourceAtOwnerObservation === '1edb05105874' && shots.productionPlan?.captureRequires === 'CURRENT_PRODUCTION_READ_ONLY_RECHECK' && JSON.stringify(list[1]).includes('read-only recheck') && JSON.stringify(list[2]).includes('Development') && JSON.stringify(list[2]).includes('deployed and natively checked'), 'Current Production PLAN needs recheck, exact owner provenance and separate Development Rovo boundary');
   const ids = new Set();
   for (const asset of capture.assets || []) {
     check(!ids.has(asset.id), 'Duplicate capture asset ID'); ids.add(asset.id);
