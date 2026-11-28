@@ -306,3 +306,24 @@ test('uncertain create clears pending copy, never creates local permit or automa
  assert.doesNotMatch(h.root.innerHTML,/Creating permit…/);assert.match(h.root.innerHTML,/Refresh before retrying/);
  assert.match(h.root.innerHTML,/outcome unconfirmed/);
 });
+
+
+test('data-free useful orientation and build placeholder exist before any bridge evaluation',()=>{
+ const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
+ for(const copy of ['UI __PERMITGUARD_HTML_BUILD__','version and environment pending','While the authenticated read runs','Every worker controls their own','named human must confirm','No current permit, phase, people or lock counts are known yet'])assert.ok(html.includes(copy),copy);
+ assert.doesNotMatch(html,/<button|<form|aria-current|Current phase:|CLEARED — no permit/);
+ const build=fs.readFileSync(path.join(__dirname,'../../src/ui-build.cjs'),'utf8');assert.ok(build.includes(".replace('__PERMITGUARD_HTML_BUILD__',buildLabel)"));
+});
+test('pending live resolver retains useful orientation; hanging preview never blocks live',async()=>{
+ const h=harness();let finish,previewReads=0;h.context.view={getContext:async()=>previewContext};h.context.requestJira=()=>{previewReads++;return new Promise(()=>{});};h.context.invoke=()=>new Promise(r=>finish=r);
+ const loading=h.run('initialize()');await new Promise(r=>setImmediate(r));assert.equal(previewReads,1);assert.match(h.root.innerHTML,/While the authenticated read runs/);assert.match(h.root.innerHTML,/Release unconfirmed/);assert.equal(h.run('stale'),true);assert.doesNotMatch(h.root.innerHTML,/data-operation=|Current phase:|No permit created/);
+ finish({actorId:'human',permit:null,revision:1,policy:{},equipment:[],board:[]});await loading;assert.equal(h.run('stale'),false);assert.equal(h.run('initializing'),false);assert.doesNotMatch(h.root.innerHTML,/While the authenticated read runs/);
+});
+test('404 optional preview is explicit absence and never a failed live connection',async()=>{
+ const h=harness();h.context.view={getContext:async()=>previewContext};let reads=0;h.context.requestJira=async()=>{reads++;return {ok:false,status:404};};await h.run('initialize()');await new Promise(r=>setImmediate(r));assert.equal(reads,1);assert.equal(h.run('stale'),false);assert.equal(h.run('preview'),null);assert.match(h.run('buildFooter()'),/No historical snapshot available.*live read continues/);assert.equal(h.run('error'),'');
+});
+test('browser first-content timing is independent of live data and unavailable without Paint Timing',()=>{
+ const FakeDate=class extends Date{static now(){return 100000;}};
+ const h=harness({Date:FakeDate,performance:{timeOrigin:74000,getEntriesByName:n=>{assert.equal(n,'first-contentful-paint');return [{startTime:1234}];}}});h.run('liveLoadedAt=104000');const footer=h.run('buildFooter()');assert.match(footer,/first content \(browser FCP\): 1.2 s/);assert.match(footer,/data-free loading shell, not live state/);assert.match(footer,/navigation → live: 30.0 s/);
+ assert.match(harness().run('buildFooter()'),/first content \(browser FCP\): not recorded/);
+});
