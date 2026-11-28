@@ -112,7 +112,12 @@ function buildMarker(){
 function buildFooter(){
  const timing=(at,origin=startupStartedAt)=>at&&origin?((at-origin)/1000).toFixed(1)+' s':'not recorded';
  const iframeLive=iframeNavigationAt?timing(liveLoadedAt,iframeNavigationAt):'unavailable';
- return '<footer class="build-footer"><small>PermitGuard '+buildMarker()+'</small><details><summary>Startup details — not total Jira navigation time</summary><p><strong>Jira navigation → live: not measured here. Use the navigation stopwatch.</strong></p><p>Iframe document navigation → panel code: '+timing(startupStartedAt,iframeNavigationAt)+'. Iframe document navigation → first content (browser FCP): '+timing(iframeFirstContentAt(),iframeNavigationAt)+'. First content can be the data-free loading shell, not live state. Iframe document navigation → live: '+iframeLive+'. This iframe clock still excludes Jira waiting to create or navigate the frame.</p><p>Panel-code clock only: context received '+timing(contextReceivedAt)+'; snapshot received '+timing(previewReceivedAt)+'; first historical preview '+timing(previewShownAt)+'; first live state '+timing(liveLoadedAt)+'. First state-request round trip (including a failed attempt): '+(liveRequestFinishedAt&&liveRequestStartedAt?((liveRequestFinishedAt-liveRequestStartedAt)/1000).toFixed(1)+' s':'not recorded')+'.</p>'+saveTimingDetails()+'<p>Preview: '+escape(previewStatus)+'. Do not compare panel-only seconds with a Jira-navigation stopwatch. Preview is optional and never actionable; live state is never delayed to display it.</p></details></footer>';
+ return '<footer class="build-footer"><small>PermitGuard '+buildMarker()+'</small><details><summary>Startup details — not total Jira navigation time</summary><p><strong>Jira navigation → live: not measured here. Use the navigation stopwatch.</strong></p><p>Iframe document navigation → panel code: '+timing(startupStartedAt,iframeNavigationAt)+'. Iframe document navigation → first content (browser FCP): '+timing(iframeFirstContentAt(),iframeNavigationAt)+'. First content can be the data-free loading shell, not live state. Iframe document navigation → live: '+iframeLive+'. This iframe clock still excludes Jira waiting to create or navigate the frame.</p><p>Panel-code clock only: context received '+timing(contextReceivedAt)+'; snapshot received '+timing(previewReceivedAt)+'; first historical preview '+timing(previewShownAt)+'; first live state '+timing(liveLoadedAt)+'. First state-request round trip (including a failed attempt): '+(liveRequestFinishedAt&&liveRequestStartedAt?((liveRequestFinishedAt-liveRequestStartedAt)/1000).toFixed(1)+' s':'not recorded')+'.</p>'+saveTimingDetails()+serverReadTimingDetails()+'<p>Preview: '+escape(previewStatus)+'. Do not compare panel-only seconds with a Jira-navigation stopwatch. Preview is optional and never actionable; live state is never delayed to display it.</p></details></footer>';
+}
+function serverReadTimingDetails(){
+ const t=state?.serverTiming;
+ const seconds=n=>Number.isSafeInteger(n)&&n>=0&&n<=360000?(n/1000).toFixed(3)+' s':'not recorded';
+ return '<p>Latest server read stages: authorization '+seconds(t?.authorizationMs)+'; storage '+seconds(t?.storageReadMs)+'; Assets '+seconds(t?.assetsMs)+'; total service '+seconds(t?.totalMs)+'. Service timing excludes Forge queue/cold initialization, bridge round-trip and Jira/frame navigation. These stages are not an independent clearance.</p>';
 }
 function saveTimingDetails(){return lastSaveTiming?'<p>Last save attempt: '+(lastSaveTiming.elapsedMs/1000).toFixed(1)+' s panel round-trip · '+(lastSaveTiming.confirmed?'server response received':'outcome unconfirmed')+'. Not total Jira navigation time; no speed guarantee.</p>':'';}
 function updateBuildFooter(){const footer=root.querySelector('.build-footer');if(footer)footer.outerHTML=buildFooter();}
@@ -123,10 +128,14 @@ async function loadPreview(context){
  if(typeof requestJira!=='function'){previewStatus='Snapshot bridge unavailable';updateBuildFooter();return false;}
  previewStatus='Requesting historical snapshot';updateBuildFooter();
  try{
-  const response=await requestJira('/rest/api/3/issue/'+ref+'/properties/permitguard.snapshot');
+  const response=await requestJira('/rest/api/3/issue/'+ref+'?fields=none&properties=permitguard.snapshot');
   if(!response.ok){previewStatus=response.status===404?'No historical snapshot available (HTTP 404; live read continues)':'Snapshot unavailable'+(Number.isInteger(response.status)?' (HTTP '+response.status+')':'');return false;}
-  const p=(await response.json()).value;previewReceivedAt=Date.now();
-  if(p?.schemaVersion!==1||p.authoritative!==false||! /^[1-9][0-9]*$/.test(String(p.permitId||''))||(numeric&&p.permitId!==ref)||!stages.includes(p.state)||!Number.isSafeInteger(p.revision)||p.revision<0||!Number.isSafeInteger(p.activeLockCount)||p.activeLockCount<0||!Number.isFinite(Date.parse(p.updatedAt))||Date.parse(p.updatedAt)>Date.now()+60000){previewStatus='Snapshot metadata rejected';return false;}
+  const record=await response.json();previewReceivedAt=Date.now();
+  if(typeof record?.id!=='string'||! /^[1-9][0-9]*$/.test(record.id)||(numeric&&record.id!==ref)||(key&&record.key!==ref)){previewStatus='Snapshot issue identity rejected';return false;}
+  const p=record.properties?.['permitguard.snapshot'];
+  if(p===undefined){previewStatus='No historical snapshot available; live read continues';return false;}
+  if(p?.schemaVersion===1&&p.authoritative===false&&p.permitId===record.id&&p.updatedAt===null){previewStatus='No dated historical preview for this record; live read continues';return false;}
+  if(p?.schemaVersion!==1||p.authoritative!==false||! /^[1-9][0-9]*$/.test(String(p.permitId||''))||p.permitId!==record.id||!stages.includes(p.state)||!Number.isSafeInteger(p.revision)||p.revision<0||!Number.isSafeInteger(p.activeLockCount)||p.activeLockCount<0||!Number.isFinite(Date.parse(p.updatedAt))||Date.parse(p.updatedAt)>Date.now()+60000){previewStatus='Snapshot metadata rejected';return false;}
   if(state||!initializing){previewStatus='Snapshot arrived after live state or connection attempts; not displayed';return false;}
   // Only bounded metadata from this user's current issue property; never action authority.
   preview={phase:p.state,locks:p.activeLockCount,permitRevision:p.revision,updatedAt:p.updatedAt,releaseBlocked:p.release?.cleared===false};
@@ -168,7 +177,7 @@ async function refresh(contextReady=null) {
    let result;try{result=await call(snapshotIssue?'get_snapshot':'get_state',snapshotIssue?{issueKey:snapshotIssue}:{});}finally{if(!liveRequestFinishedAt)liveRequestFinishedAt=Date.now();}
    // A trusted issue DTO already has server authorization. Frontend context is only
    // needed to reject an early administration fallback, not to gate valid live state.
-   if(result?.kind==='ADMINISTRATION'&&contextReady){const context=await contextReady;if(context?.extension?.issue?.id||context?.moduleKey==='permitguard-panel')throw new Error('Waiting for the issue context to become available.');}
+   if(result?.kind==='ADMINISTRATION'&&contextReady){const context=await contextReady;if(context?.extension?.issue?.id||['permitguard-panel','permitguard-open-guide'].includes(context?.moduleKey))throw new Error('Waiting for the issue context to become available.');}
    if(!result||(!('permit' in result)&&!['ADMINISTRATION','PERMITGUARD_LOCK_BOARD_SNAPSHOT'].includes(result.kind))||(!result.actorId&&result.kind!=='PERMITGUARD_LOCK_BOARD_SNAPSHOT'))throw new Error(result?.message||result?.error||'Server did not return an authenticated app state.');
    state={...result,observedAt:new Date().toISOString()};preview=null;liveLoadedAt=liveLoadedAt||Date.now();stale=false;error='';
    if(subscription&&sync==='Update received; checking saved state…')sync='Live updates connected';

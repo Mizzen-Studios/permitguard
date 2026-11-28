@@ -110,9 +110,10 @@ test('save timer is stopped even after an uncertain mutation failure; no retry i
 });
 
 const previewContext={extension:{issue:{id:'66401'}},moduleKey:'permitguard-panel'};
+const previewRecord=p=>({id:"66401",key:"PGSAMPLE-2",properties:{"permitguard.snapshot":p}});
 const previewValue=()=>({schemaVersion:1,permitId:'66401',state:'ACTIVE',revision:6,activeLockCount:1,updatedAt:'2026-11-21T09:10:00Z',authoritative:false,release:{cleared:false},start:{cleared:true}});
 test('historical preview paints while the authenticated resolver is pending and never enables actions',async()=>{
- const h=harness();let finish;h.context.view={getContext:async()=>previewContext};h.context.requestJira=async path=>{assert.equal(path,'/rest/api/3/issue/66401/properties/permitguard.snapshot');return {ok:true,json:async()=>({value:previewValue()})};};h.context.invoke=()=>new Promise(r=>finish=r);
+ const h=harness();let finish;h.context.view={getContext:async()=>previewContext};h.context.requestJira=async path=>{assert.equal(path,'/rest/api/3/issue/66401?fields=none&properties=permitguard.snapshot');return {ok:true,json:async()=>previewRecord(previewValue())};};h.context.invoke=()=>new Promise(r=>finish=r);
  const loading=h.run('initialize()');await new Promise(r=>setImmediate(r));assert.match(h.root.innerHTML,/Historical preview — not live or actionable/);assert.match(h.root.innerHTML,/Last recorded phase/);assert.match(h.root.innerHTML,/NOT CLEARED/);assert.equal(h.run('state'),null);assert.equal(h.run('stale'),true);await h.run('mutate("begin_release")');assert.equal(h.calls.length,0);
  finish({actorId:'human',permit:{state:'ACTIVE',locks:[],equipment:[]},revision:22,policy:{},release:{status:'NOT CLEARED',reasons:[{message:'A personal lock remains.'}]},equipment:[],board:[]});await loading;assert.equal(h.run('preview'),null);assert.doesNotMatch(h.root.innerHTML,/Historical preview — not live or actionable/);
 });
@@ -124,18 +125,18 @@ test('a hanging realtime connection cannot delay usable authenticated state or i
 });
 test('preview refuses other issues, invalid metadata and denied property access',async()=>{
  for(const patch of [{permitId:'999'},{authoritative:true},{schemaVersion:9},{state:'FAKE'},{revision:-1},{activeLockCount:-1},{updatedAt:'bad'},{updatedAt:'2999-01-01T00:00:00Z'}]){
-  const h=harness();h.run('initializing=true');h.context.requestJira=async()=>({ok:true,json:async()=>({value:{...previewValue(),...patch}})});assert.equal(await h.run('loadPreview('+JSON.stringify(previewContext)+')'),false);assert.equal(h.run('preview'),null);
+  const h=harness();h.run('initializing=true');h.context.requestJira=async()=>({ok:true,json:async()=>previewRecord({...previewValue(),...patch})});assert.equal(await h.run('loadPreview('+JSON.stringify(previewContext)+')'),false);assert.equal(h.run('preview'),null);
  }
  const h=harness();h.run('initializing=true');h.context.requestJira=async()=>({ok:false});assert.equal(await h.run('loadPreview('+JSON.stringify(previewContext)+')'),false);
 });
 test('positive property flags never become live clearance; failed live reads keep actions closed',async()=>{
- const h=harness();h.context.view={getContext:async()=>previewContext};h.context.requestJira=async()=>({ok:true,json:async()=>({value:{...previewValue(),release:{cleared:true}}})});h.context.invoke=async()=>{throw new Error('permission unavailable');};await h.run('initialize()');assert.equal(h.run('stale'),true);assert.equal(h.run('state'),null);assert.doesNotMatch(h.root.innerHTML,/Release records CLEARED/);assert.match(h.root.innerHTML,/no actions or live clearance/);
+ const h=harness();h.context.view={getContext:async()=>previewContext};h.context.requestJira=async()=>({ok:true,json:async()=>previewRecord({...previewValue(),release:{cleared:true}})});h.context.invoke=async()=>{throw new Error('permission unavailable');};await h.run('initialize()');assert.equal(h.run('stale'),true);assert.equal(h.run('state'),null);assert.doesNotMatch(h.root.innerHTML,/Release records CLEARED/);assert.match(h.root.innerHTML,/no actions or live clearance/);
 });
 test('top release blocker precedes permit header and tall work/lock board in live HTML',()=>{
  const h=harness();h.run('state={actorId:"human",revision:22,policy:{},permit:{state:"ACTIVE",equipment:[],locks:[]},release:{status:"NOT CLEARED",reasons:[{message:"A personal lock remains on shared equipment."}]},equipment:[],board:[]};stale=false;render()');assert.ok(h.root.innerHTML.indexOf('Release NOT CLEARED')<h.root.innerHTML.indexOf('class="permit-head"'));assert.match(h.root.innerHTML,/A personal lock remains on shared equipment/);assert.match(fs.readFileSync(path.join(__dirname,'styles.css'),'utf8'),/position:sticky/);
 });
 test('late property response cannot replace already loaded live state',async()=>{
- const h=harness();let finish;h.run('initializing=true');h.context.requestJira=()=>new Promise(r=>finish=r);const pending=h.run('loadPreview('+JSON.stringify(previewContext)+')');await h.run('refresh()');finish({ok:true,json:async()=>({value:previewValue()})});assert.equal(await pending,false);assert.equal(h.run('preview'),null);
+ const h=harness();let finish;h.run('initializing=true');h.context.requestJira=()=>new Promise(r=>finish=r);const pending=h.run('loadPreview('+JSON.stringify(previewContext)+')');await h.run('refresh()');finish({ok:true,json:async()=>previewRecord(previewValue())});assert.equal(await pending,false);assert.equal(h.run('preview'),null);
 });
 
 test('footer identifies UI source while loading and actual Forge version after live confirmation',()=>{
@@ -144,13 +145,13 @@ test('footer identifies UI source while loading and actual Forge version after l
  h.run('state.buildInfo.version="<script>bad</script>";render()');assert.doesNotMatch(h.root.innerHTML,/<script>bad/);
 });
 test('preview timing records a real render instead of forcing a flash after live state',async()=>{
- const h=harness();h.run('initializing=true');h.context.requestJira=async()=>({ok:true,json:async()=>({value:previewValue()})});assert.equal(await h.run('loadPreview('+JSON.stringify(previewContext)+')'),true);assert.ok(h.run('previewShownAt')>0);assert.match(h.run('buildFooter()'),/Historical preview rendered/);
+ const h=harness();h.run('initializing=true');h.context.requestJira=async()=>({ok:true,json:async()=>previewRecord(previewValue())});assert.equal(await h.run('loadPreview('+JSON.stringify(previewContext)+')'),true);assert.ok(h.run('previewShownAt')>0);assert.match(h.run('buildFooter()'),/Historical preview rendered/);
 });
 test('late preview diagnostics update only footer, never rebuild an edited form',async()=>{
- const h=harness();h.run('initializing=true');let finish;h.context.requestJira=()=>new Promise(r=>finish=r);const pending=h.run('loadPreview('+JSON.stringify(previewContext)+')');await h.run('refresh()');const before=h.root.innerHTML;finish({ok:true,json:async()=>({value:previewValue()})});assert.equal(await pending,false);assert.equal(h.root.innerHTML,before);assert.equal(h.run('previewShownAt'),0);assert.match(h.run('buildFooter()'),/arrived after live state/);
+ const h=harness();h.run('initializing=true');let finish;h.context.requestJira=()=>new Promise(r=>finish=r);const pending=h.run('loadPreview('+JSON.stringify(previewContext)+')');await h.run('refresh()');const before=h.root.innerHTML;finish({ok:true,json:async()=>previewRecord(previewValue())});assert.equal(await pending,false);assert.equal(h.root.innerHTML,before);assert.equal(h.run('previewShownAt'),0);assert.match(h.run('buildFooter()'),/arrived after live state/);
 });
 test('preview supports key-only native context and records unavailable/denied results',async()=>{
- const h=harness();h.run('initializing=true');h.context.requestJira=async path=>{assert.equal(path,'/rest/api/3/issue/PGSAMPLE-2/properties/permitguard.snapshot');return {ok:true,json:async()=>({value:previewValue()})};};assert.equal(await h.run('loadPreview({extension:{issue:{key:"PGSAMPLE-2"}}})'),true);
+ const h=harness();h.run('initializing=true');h.context.requestJira=async path=>{assert.equal(path,'/rest/api/3/issue/PGSAMPLE-2?fields=none&properties=permitguard.snapshot');return {ok:true,json:async()=>previewRecord(previewValue())};};assert.equal(await h.run('loadPreview({extension:{issue:{key:"PGSAMPLE-2"}}})'),true);
  const denied=harness();denied.context.requestJira=async()=>({ok:false,status:403});assert.equal(await denied.run('loadPreview('+JSON.stringify(previewContext)+')'),false);assert.match(denied.run('buildFooter()'),/HTTP 403/);
  const missing=harness();await missing.run('loadPreview({})');assert.match(missing.run('buildFooter()'),/No issue reference/);
 });
@@ -326,4 +327,23 @@ test('browser first-content timing is independent of live data and unavailable w
  const FakeDate=class extends Date{static now(){return 100000;}};
  const h=harness({Date:FakeDate,performance:{timeOrigin:74000,getEntriesByName:n=>{assert.equal(n,'first-contentful-paint');return [{startTime:1234}];}}});h.run('liveLoadedAt=104000');const footer=h.run('buildFooter()');assert.match(footer,/first content \(browser FCP\): 1.2 s/);assert.match(footer,/data-free loading shell, not live state/);assert.match(footer,/navigation → live: 30.0 s/);
  assert.match(harness().run('buildFooter()'),/first content \(browser FCP\): not recorded/);
+});
+
+test('bulk property read distinguishes absent/undated preview without expected property404 or writes',async()=>{
+ for(const value of [undefined,{...previewValue(),state:'PLAN',updatedAt:null}]){
+  const h=harness();h.run('initializing=true');let reads=0;h.context.requestJira=async path=>{reads++;assert.equal(path,'/rest/api/3/issue/66401?fields=none&properties=permitguard.snapshot');return {ok:true,json:async()=>previewRecord(value)};};
+  assert.equal(await h.run('loadPreview('+JSON.stringify(previewContext)+')'),false);assert.equal(reads,1);assert.equal(h.run('state'),null);assert.equal(h.run('preview'),null);assert.match(h.run('previewStatus'),/live read continues/);assert.equal(h.calls.length,0);
+ }
+});
+test('bulk preview rejects property bound to another canonical issue for either ID or key context',async()=>{
+ const cases=[{context:previewContext,record:{...previewRecord(previewValue()),id:'999'}},{context:{extension:{issue:{key:'PGSAMPLE-2'}}},record:{...previewRecord(previewValue()),key:'OTHER-1'}},{context:previewContext,record:previewRecord({...previewValue(),permitId:'999'})}];
+ for(const {context,record} of cases){const h=harness();h.run('initializing=true');h.context.requestJira=async()=>({ok:true,json:async()=>record});assert.equal(await h.run('loadPreview('+JSON.stringify(context)+')'),false);assert.equal(h.run('preview'),null);}
+});
+test('server stage diagnostics allow bounded milliseconds only and label excluded cold/platform time',()=>{
+ const h=harness();h.run('state={serverTiming:{authorizationMs:20,storageReadMs:30,assetsMs:0,totalMs:60}}');assert.match(h.run('serverReadTimingDetails()'),/authorization 0.020 s; storage 0.030 s/);
+ h.run('state={serverTiming:{authorizationMs:"<script>secret</script>",storageReadMs:-1,assetsMs:Infinity,totalMs:1000000}}');const text=h.run('serverReadTimingDetails()');assert.doesNotMatch(text,/secret|Infinity|1000000/);assert.equal((text.match(/not recorded/g)||[]).length,4);assert.ok(text.includes('excludes Forge queue/cold initialization'));
+});
+test('issueContext administration fallback is not treated as authenticated issue state',async()=>{
+ const h=harness();h.context.invoke=async()=>({kind:'ADMINISTRATION',actorId:'human'});
+ assert.equal(await h.run('refresh(Promise.resolve({moduleKey:"permitguard-open-guide"}))'),false);assert.equal(h.run('state'),null);assert.equal(h.run('stale'),true);
 });
